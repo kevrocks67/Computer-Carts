@@ -1,12 +1,38 @@
 #:kivy 1.0.9
- 
-<ComputerCartMain>:
-    box: box_test
 
-    canvas:
-        Rectangle:
-            pos: 0, self.height-self.height.top 
-            size: self.width/7, self.height/6
-    BoxT:
-        id: box_test
-        center: self.parent.center
+<ToolbarButton@Button>:
+    font_size: 16
+    color: 0, 0, 0, 1
+    size: 75, 50
+    background_normal: ' '
+    background_color: .88, .88, .88, 1
+<ToolbarGridLayout>:
+    id: toolbar
+    rows:1
+    padding: 10
+    spacing: 10
+
+    BoxLayout:
+        TextInput:
+            id: entry
+            font_size: 32
+            multiline:False
+            
+    BoxLayout:
+        spacing: 10
+        ToolbarButton:
+            text: "Add"
+        ToolbarButton:
+            text: "Remove"
+        ToolbarButton:
+            text: "Edit"
+        ToolbarButton:
+            text: "Unlock"
+        ToolbarButton:
+            text: "Lock"
+        ToolbarButton:
+            text: "Settings"
+        
+
+
+        
