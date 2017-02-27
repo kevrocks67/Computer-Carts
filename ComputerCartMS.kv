@@ -1,11 +1,12 @@
 #:kivy 1.0.9
+ 
+<ComputerCartMain>:
+    box: box_test
 
-<ComputerCartMS>
     canvas:
         Rectangle:
-            pos: self.center, self.center
-            size: 50, 50
-
-        Label:
-            text:'Hello World'
-            pos: self.center, self.center
+            pos: 0, self.height-self.height.top 
+            size: self.width/7, self.height/6
+    BoxT:
+        id: box_test
+        center: self.parent.center

@@ -10,4 +10,9 @@
         ComboBox1.Items.Add("Cart Number")
         ComboBox1.Items.Add("Amount of Computers")
     End Sub
+
+    Private WithEvents Form1BindingSource1_CurrentChanged As ComboBox
+
+
+
 End Class
