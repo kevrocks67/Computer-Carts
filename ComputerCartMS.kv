@@ -1,38 +1,35 @@
-#:kivy 1.0.9
-
-<ToolbarButton@Button>:
-    font_size: 16
-    color: 0, 0, 0, 1
-    size: 75, 50
-    background_normal: ' '
-    background_color: .88, .88, .88, 1
-<ToolbarGridLayout>:
-    id: toolbar
-    rows:1
-    padding: 10
-    spacing: 10
+<MainScreen>:
+    cols: 1
 
     BoxLayout:
-        TextInput:
-            id: entry
-            font_size: 32
-            multiline:False
-            
+        orientation: 'vertical'
+        Button:
+            size_hint_x: 0.4
+            pos_hint: {'x': 0}
+            text: 'pos_hint: x=0'
+
+        Button:
+            size_hint_x: 0.2
+            pos_hint: {'center_x': 0.5}
+            text: 'pos_hint: center_x=0.5'
+
+        Button:
+            size_hint_x: 0.4
+            pos_hint: {'right': 1}
+            text: 'pos_hint: right=1'
+
     BoxLayout:
-        spacing: 10
-        ToolbarButton:
-            text: "Add"
-        ToolbarButton:
-            text: "Remove"
-        ToolbarButton:
-            text: "Edit"
-        ToolbarButton:
-            text: "Unlock"
-        ToolbarButton:
-            text: "Lock"
-        ToolbarButton:
-            text: "Settings"
-        
+        Button:
+            size_hint_y: 0.4
+            pos_hint: {'y': 0}
+            text: 'pos_hint: y=0'
 
+        Button:
+            size_hint_y: 0.2
+            pos_hint: {'center_y': .5}
+            text: 'pos_hint: center_y=0.5'
 
-        
+        Button:
+            size_hint_y: 0.4
+            pos_hint: {'top': 1}
+            text: 'pos_hint: top=1'
