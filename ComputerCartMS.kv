@@ -1,35 +1,32 @@
-<MainScreen>:
-    cols: 1
-
-    BoxLayout:
-        orientation: 'vertical'
-        Button:
-            size_hint_x: 0.4
-            pos_hint: {'x': 0}
-            text: 'pos_hint: x=0'
-
-        Button:
-            size_hint_x: 0.2
-            pos_hint: {'center_x': 0.5}
-            text: 'pos_hint: center_x=0.5'
-
-        Button:
-            size_hint_x: 0.4
-            pos_hint: {'right': 1}
-            text: 'pos_hint: right=1'
-
-    BoxLayout:
-        Button:
-            size_hint_y: 0.4
-            pos_hint: {'y': 0}
-            text: 'pos_hint: y=0'
-
-        Button:
-            size_hint_y: 0.2
-            pos_hint: {'center_y': .5}
-            text: 'pos_hint: center_y=0.5'
-
-        Button:
-            size_hint_y: 0.4
-            pos_hint: {'top': 1}
-            text: 'pos_hint: top=1'
+ActionBar:
+    pos_hint: {'top':1}
+    ActionView:
+        use_separator: True
+        ActionPrevious:
+            title: 'Computer Cart Management Software Alpha'
+            with_previous: False
+        ActionOverflow:
+        ActionButton:
+            text: 'Add'
+            on_release:
+        ActionButton:
+            text: 'Remove'
+        ActionButton:
+            text: 'Edit'
+        ActionGroup:
+            text: 'Unlock/Lock'
+            ActionButton:
+                text: 'Unlock'
+            ActionButton:
+                text: 'Lock'
+        ActionGroup:
+            text: 'Settings'
+            ActionButton:
+                text: 'Settings'
+<CustomPopup>:
+    size_hint: .5, .5
+    auto_dismiss: False
+    title: 'Hello world'
+    Button:
+        text: 'Click me to dismiss'
+        on_press: root.dismiss()

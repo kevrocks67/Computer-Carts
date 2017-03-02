@@ -4,35 +4,26 @@ from kivy.uix.widget import Widget
 from kivy.uix.button import Button
 from kivy.lang import Builder
 from kivy.uix.gridlayout import GridLayout
+from kivy.uix.popup import Popup
 from kivy.base import runTouchApp
-from kivy.uix.stacklayout import StackLayout
-from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.textinput import TextInput
+
 #from sql import *
 #from sql.aggregate import *
 #from sql.conditionals import *
 
-runTouchApp(Builder.load_string('''
-ActionBar:
-    pos_hint: {'top':1}
-    ActionView:
-        use_separator: True
-        ActionPrevious:
-            title: 'Computer Cart Management Software Alpha'
-            with_previous: False
-        ActionOverflow:
-        ActionButton:
-            text: 'Add'
-        ActionButton:
-            text: 'Remove'
-        ActionButton:
-            text: 'Edit'
-        ActionButton:
-            text: 'Unlock'
-        ActionButton:
-            text: 'Lock'
-        ActionGroup:
-            text: 'Group1'
-            ActionButton:
-                text: 'Settings'
-'''))
+class CustomPopup(Popup):
+    pass
+
+class ComputerCartMSApp(App):
+    def build(self):
+        b = Button(on_press=self.show_popup)
+        return b
+
+    def show_popup(self, b):
+        p = CustomPopup()
+        p.open()
+
+app = ComputerCartMSApp()
+app.run()
+
+
