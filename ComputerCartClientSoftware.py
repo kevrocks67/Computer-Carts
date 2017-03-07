@@ -11,17 +11,26 @@ from kivy.base import runTouchApp
 #from sql.aggregate import *
 #from sql.conditionals import *
 
-class CustomPopup(Popup):
+#Popup Classes
+class AddEntryPopup(Popup):
     pass
-
+class EditEntryPopup(Popup):
+    pass
+class SettingsPopup(Popup):
+    pass
 class ComputerCartMSApp(App):
     def build(self):
-        b = Button(on_press=self.show_popup)
-        return b
-
-    def show_popup(self, b):
-        p = CustomPopup()
-        p.open()
+        pass
+#Define the popups
+    def show_popupAdd(self):
+        a = AddEntryPopup()
+        a.open()
+    def show_popupEdit(self):
+        e = EditEntryPopup()
+        e.open()
+    def show_popupSettings(self):
+        s = SettingsPopup()
+        s.open()
 
 app = ComputerCartMSApp()
 app.run()

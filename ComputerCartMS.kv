@@ -8,11 +8,12 @@ ActionBar:
         ActionOverflow:
         ActionButton:
             text: 'Add'
-            on_release:
+            on_release: app.show_popupAdd()
         ActionButton:
             text: 'Remove'
         ActionButton:
             text: 'Edit'
+            on_release: app.show_popupEdit()
         ActionGroup:
             text: 'Unlock/Lock'
             ActionButton:
@@ -23,10 +24,25 @@ ActionBar:
             text: 'Settings'
             ActionButton:
                 text: 'Settings'
-<CustomPopup>:
+                on_release: app.show_popupSettings()
+<AddEntryPopup>:
     size_hint: .5, .5
     auto_dismiss: False
-    title: 'Hello world'
+    title: 'Add Entry'
+    Button:
+        text: 'Click me to dismiss'
+        on_press: root.dismiss()
+<EditEntryPopup>:
+    size_hint: .5, .5
+    auto_dismiss: False
+    title: 'Edit Entry'
+    Button:
+        text: 'Click me to dismiss'
+        on_press: root.dismiss()
+<SettingsPopup>:
+    size_hint: .5, .5
+    auto_dismiss: False
+    title: 'Settings'
     Button:
         text: 'Click me to dismiss'
         on_press: root.dismiss()
