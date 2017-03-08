@@ -1,3 +1,6 @@
+#: import ListAdaptor kivy.adapters.listadapter.ListAdapter
+#: import ListItemButton kivy.uix.listview.ListItemButton
+
 ActionBar:
     pos_hint: {'top':1}
     ActionView:
@@ -29,9 +32,51 @@ ActionBar:
     size_hint: .5, .5
     auto_dismiss: False
     title: 'Add Entry'
-    Button:
-        text: 'Click me to dismiss'
-        on_press: root.dismiss()
+    orientation: "vertical"
+
+    cart_list_text_input: cart_list
+    cart_num_text_input: cart_num
+    cart_stat_text_input: cart_stat
+    cart_type_text_input: cart_type
+    cart_CRM_text_input: cart_CRM
+    cart_CPd_text_input: cart_CPd
+    cart_FRM_text_input: cart_FRM
+    cart_FPd_text_input: cart_FPd
+    addtl_comments_text_input: addtl_comments
+    padding: 10
+    spacing: 10
+
+    BoxLayout:
+        size_hint_y: None
+        height: "40dp"
+
+        Label:
+            text: "Cart Number"
+        Label:
+            text: "Status"
+        TextInput:
+            id: cart_stat
+        Label:
+            text: "Current Room"
+        TextInput:
+            id: cart_CRM
+        Label:
+            text: "Time Req"
+        TextInput:
+            id: cart_CPd
+        Label:
+            text: "Future Room Need"
+        TextInput:
+            id: cart_FRM
+        Label:
+            text: "Future Time Need"
+        TextInput:
+            id: cart_FPd
+        Label:
+            text: "Additional Comments"
+        TextInput:
+            id: addtl_comments
+
 <EditEntryPopup>:
     size_hint: .5, .5
     auto_dismiss: False
