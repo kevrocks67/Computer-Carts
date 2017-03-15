@@ -1,39 +1,38 @@
 #: import ListAdaptor kivy.adapters.listadapter.ListAdapter
 #: import ListItemButton kivy.uix.listview.ListItemButton
+#: import ScreenManager kivy.uix.screenmanager
 
-ActionBar:
-    pos_hint: {'top':1}
-    ActionView:
-        use_separator: True
-        ActionPrevious:
-            title: 'Computer Cart Management Software Alpha'
-            with_previous: False
-        ActionOverflow:
-        ActionButton:
-            text: 'Add'
-            on_release: app.show_popupAdd()
-        ActionButton:
-            text: 'Remove'
-        ActionButton:
-            text: 'Edit'
-            on_release: app.show_popupEdit()
-        ActionGroup:
-            text: 'Unlock/Lock'
+<MainScreen>:
+    ActionBar:
+        pos_hint: {'top':1}
+        ActionView:
+            use_separator: True
+            ActionPrevious:
+                title: 'Computer Cart Management Software Alpha'
+                with_previous: False
+                on_release: root.manager.current = 'Screen0'
+            ActionOverflow:
             ActionButton:
-                text: 'Unlock'
+                text: 'Add'
+                on_release: root.manager.current = 'Screen1'
             ActionButton:
-                text: 'Lock'
-        ActionGroup:
-            text: 'Settings'
+                text: 'Remove'
             ActionButton:
+                text: 'Edit'
+                on_release: root.manager.current = 'Screen2'
+            ActionGroup:
+                text: 'Unlock/Lock'
+                ActionButton:
+                    text: 'Unlock'
+                ActionButton:
+                    text: 'Lock'
+            ActionGroup:
                 text: 'Settings'
-                on_release: app.show_popupSettings()
-<AddEntryPopup>:
-    size_hint: .5, .5
-    auto_dismiss: False
-    title: 'Add Entry'
-    orientation: "vertical"
+                ActionButton:
+                    text: 'Settings'
+                    on_release: app.show_popupSettings()
 
+<cartDB>:
     cart_list_text_input: cart_list
     cart_num_text_input: cart_num
     cart_stat_text_input: cart_stat
@@ -42,48 +41,120 @@ ActionBar:
     cart_CPd_text_input: cart_CPd
     cart_FRM_text_input: cart_FRM
     cart_FPd_text_input: cart_FPd
-    addtl_comments_text_input: addtl_comments
-    padding: 10
-    spacing: 10
+
+<AddEntryScreen>:
+    ActionBar:
+        pos_hint: {'top':1}
+        ActionView:
+            use_separator: True
+            ActionPrevious:
+                title: 'New Entry'
+                with_previous: False
+                on_release: root.manager.current = 'Screen0'
+            ActionOverflow:
+            ActionGroup:
+                ActionButton:
+                    text: 'Save Entry'
 
     BoxLayout:
-        size_hint_y: None
+
         height: "40dp"
+        orientation: 'vertical'
 
         Label:
-            text: "Cart Number"
+            text: "Cart Number:"
         Label:
             text: "Status"
         TextInput:
             id: cart_stat
+            multiline: False
+            font_size: 25
         Label:
             text: "Current Room"
         TextInput:
             id: cart_CRM
+            multiline: False
+            font_size: 25
         Label:
             text: "Time Req"
         TextInput:
             id: cart_CPd
+            multiline: False
+            font_size: 25
         Label:
             text: "Future Room Need"
         TextInput:
             id: cart_FRM
+            multiline: False
+            font_size: 25
         Label:
             text: "Future Time Need"
         TextInput:
             id: cart_FPd
+            multiline: False
+            font_size: 25
         Label:
             text: "Additional Comments"
         TextInput:
             id: addtl_comments
 
-<EditEntryPopup>:
-    size_hint: .5, .5
-    auto_dismiss: False
-    title: 'Edit Entry'
-    Button:
-        text: 'Click me to dismiss'
-        on_press: root.dismiss()
+<EditEntryScreen>:
+    ActionBar:
+        pos_hint: {'top':1}
+        ActionView:
+            use_separator: True
+            ActionPrevious:
+                title: 'Edit Entry'
+                with_previous: False
+                on_release: root.manager.current = 'Screen0'
+            ActionOverflow:
+            ActionGroup:
+                ActionButton:
+                    text: 'Save Entry'
+
+    BoxLayout:
+
+        height: "40dp"
+        orientation: 'vertical'
+
+        Label:
+            text: "Cart Number:"
+        Label:
+            text: "Status"
+        TextInput:
+            id: cart_stat
+            multiline: False
+            font_size: 25
+        Label:
+            text: "Current Room"
+        TextInput:
+            id: cart_CRM
+            multiline: False
+            font_size: 25
+            readonly: True
+        Label:
+            text: "Time Req"
+        TextInput:
+            id: cart_CPd
+            multiline: False
+            font_size: 25
+            readonly: True
+        Label:
+            text: "Future Room Need"
+        TextInput:
+            id: cart_FRM
+            multiline: False
+            font_size: 25
+        Label:
+            text: "Future Time Need"
+        TextInput:
+            id: cart_FPd
+            multiline: False
+            font_size: 25
+        Label:
+            text: "Additional Comments"
+        TextInput:
+            id: addtl_comments
 <SettingsPopup>:
     size_hint: .5, .5
     auto_dismiss: False
@@ -91,3 +162,27 @@ ActionBar:
     Button:
         text: 'Click me to dismiss'
         on_press: root.dismiss()
+
+<Manager>:
+    id: screen_manager
+
+    screen_zero: screen_zero
+    screen_one: screen_one
+    screen_two: screen_two
+
+    MainScreen:
+        id: screen_zero
+        name: 'Screen0'
+        manager: screen_manager
+
+    AddEntryScreen:
+        id: screen_one
+        name: 'Screen1'
+        manager: screen_manager
+
+    EditEntryScreen:
+        id: screen_two
+        name: 'Screen2'
+        manager: screen_manager
+
+
