@@ -30,7 +30,7 @@
                 text: 'Settings'
                 ActionButton:
                     text: 'Settings'
-                    on_release: app.show_popupSettings()
+                    on_release: root.manager.current = 'Screen3'
 
 <cartDB>:
     cart_list_text_input: cart_list
@@ -113,7 +113,6 @@
                     text: 'Save Entry'
 
     BoxLayout:
-
         height: "40dp"
         orientation: 'vertical'
 
@@ -155,12 +154,83 @@
             text: "Additional Comments"
         TextInput:
             id: addtl_comments
+
+<SettingsScreen>:
+    ActionBar:
+        pos_hint: {'top':1}
+        ActionView:
+            use_separator: True
+            ActionPrevious:
+                title: 'Settings'
+                with_previous: False
+                on_release: root.manager.current = 'Screen0'
+            ActionOverflow:
+            ActionGroup:
+                ActionButton:
+                    text: 'Save Settings'
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: 'SQL Address'
+        TextInput:
+            id: SQL Address
+            font_size: 25
+            multiline: False
+            input_filter: lambda text, from_undo: text[:25 - len(self.text)]
+        Label:
+            text: 'SQL Password'
+        TextInput:
+            id: SQL Password
+            font_size: 25
+            password: True
+            multiline: False
+            input_filter: lambda text, from_undo: text[:31 - len(self.text)]
+        Label:
+            text: 'SQL Port'
+        TextInput:
+            id: SQL Port
+            font_size: 25
+            multiline: False
+            input_filter: lambda text, from_undo: text[:5 - len(self.text)]
+        Label:
+            text: 'Notification'
+            bold: True
+        Label:
+            text: 'Add Email'
+        TextInput:
+            id: AddEmail
+            font_size: 25
+            multiline: False
+            input_filter: lambda text, from_undo: text[:48 - len(self.text)]
+        Label:
+            text: 'Current Email'
+        TextInput:
+            id: CurrentEmail
+            font_size: 25
+            multiline: False
+            input_filter: lambda text, from_undo: text[:48 - len(self.text)]
+        Label:
+            text: 'Notification Time'
+        TextInput:
+            id: NotificationTime
+            font_size: 25
+            multiline: False
+            input_filter: lambda text, from_undo: text[:31 - len(self.text)]
+
+        Button:
+            font_size: 15
+            text: 'About'
+            on_release: app.show_popupSettings()
+
 <SettingsPopup>:
-    size_hint: .5, .5
+    size_hint: 1, 1
     auto_dismiss: False
-    title: 'Settings'
+    title: 'About'
+
     Button:
-        text: 'Click me to dismiss'
+        font_size: 22
+        line_height: 2
+        text: 'This app is designed by Kevin Diaz in order to manage\nthe need for computer carts within the Columbia Secondary School.\nAll source code is available at\nhttps://github.com/kevrocks67/Computer-Carts\nClick me to dismiss'
         on_press: root.dismiss()
 
 <Manager>:
@@ -169,6 +239,7 @@
     screen_zero: screen_zero
     screen_one: screen_one
     screen_two: screen_two
+    screen_three: screen_three
 
     MainScreen:
         id: screen_zero
@@ -184,5 +255,26 @@
         id: screen_two
         name: 'Screen2'
         manager: screen_manager
+
+    SettingsScreen:
+        id: screen_three
+        name: 'Screen3'
+        manager: screen_manager
+
+<CustomDropDown>:
+    Button:
+        text: 'My first Item'
+        size_hint_y: None
+        height: 44
+        on_release: root.select('item1')
+    Label:
+        text: 'Unselectable item'
+        size_hint_y: None
+        height: 44
+    Button:
+        text: 'My second Item'
+        size_hint_y: None
+        height: 44
+        on_release: root.select('item2')
 
 

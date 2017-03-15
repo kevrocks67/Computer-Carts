@@ -7,15 +7,18 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import ScreenManager, Screen
+#:import SlideTransition kivy.uix.screenmanager.SlideTransition
 from kivy.properties import ObjectProperty, NumericProperty
+from kivy.properties import BooleanProperty
 from kivy.uix.listview import ListItemButton
+from kivy.uix.dropdown import DropDown
+from kivy.uix.spinner import Spinner
 from kivy.base import runTouchApp
 
 #from sql import *
 #from sql.aggregate import *
 #from sql.conditionals import *
 
-#Popup Classes
 class cartListButton(ListItemButton):
     pass
 
@@ -45,6 +48,9 @@ class cartDB(BoxLayout):
             # Reset the ListView
             self.cart_list._trigger_reset_populate()
 
+class NotificationTime(DropDown):
+    pass
+
 class MainScreen(Screen):
     pass
 
@@ -54,6 +60,9 @@ class AddEntryScreen(Screen):
 class EditEntryScreen(Screen):
     pass
 
+class SettingsScreen(Screen):
+    pass
+
 class SettingsPopup(Popup):
     pass
 
@@ -61,6 +70,7 @@ class Manager(ScreenManager):
     screen_zero = ObjectProperty(None)
     screen_one = ObjectProperty(None)
     screen_two = ObjectProperty(None)
+    screen_three = ObjectProperty(None)
 
 class ComputerCartMSApp(App):
 #Define the popups
@@ -72,12 +82,17 @@ class ComputerCartMSApp(App):
         s = SettingsPopup()
         s.open()
     def build(self):
+        dropdown = NotificationTime()
+        mainbutton = Button(text='Hello', size_hint=(None, None))
+        mainbutton.bind(on_release=dropdown.open)
+        dropdown.bind(on_select=lambda instance, x: setattr(mainbutton, 'text', x))
         return Manager()
 
 
 app = ComputerCartMSApp()
 if __name__ == '__main__':
     app.run()
+
 
 
 
