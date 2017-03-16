@@ -73,19 +73,14 @@ class Manager(ScreenManager):
     screen_three = ObjectProperty(None)
 
 class ComputerCartMSApp(App):
-#Define the popups
-    def show_popupEdit(self):
-       # e = EditEntryPopup()
-       # e.open()
-        pass
+#Define the Setting Popup
     def show_popupSettings(self):
         s = SettingsPopup()
         s.open()
+    def open_dropdown(self):
+        d = NotificationTime()
+        d.open()
     def build(self):
-        dropdown = NotificationTime()
-        mainbutton = Button(text='Hello', size_hint=(None, None))
-        mainbutton.bind(on_release=dropdown.open)
-        dropdown.bind(on_select=lambda instance, x: setattr(mainbutton, 'text', x))
         return Manager()
 
 

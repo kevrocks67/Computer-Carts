@@ -31,7 +31,12 @@
                 ActionButton:
                     text: 'Settings'
                     on_release: root.manager.current = 'Screen3'
-
+    BoxLayout:
+        Button:
+            text: 'Hello'
+            size_hint: None, None
+            pos_hint:
+            on_release: app.open_dropdown
 <cartDB>:
     cart_list_text_input: cart_list
     cart_num_text_input: cart_num
@@ -261,7 +266,7 @@
         name: 'Screen3'
         manager: screen_manager
 
-<CustomDropDown>:
+<NotificationTime>:
     Button:
         text: 'My first Item'
         size_hint_y: None
