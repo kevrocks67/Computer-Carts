@@ -3,14 +3,14 @@ from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.widget import Widget
 from kivy.uix.button import Button
-from kivy.uix.gridlayout import GridLayout
+from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.popup import Popup
-from kivy.uix.screenmanager import ScreenManager, Screen
-#:import SlideTransition kivy.uix.screenmanager.SlideTransition
+from kivy.uix.screenmanager import ScreenManager, Screen, SlideTransition
 from kivy.properties import ObjectProperty, NumericProperty
 from kivy.properties import BooleanProperty
 from kivy.uix.listview import ListItemButton
+from kivy.properties import ReferenceListProperty
 from kivy.uix.dropdown import DropDown
 from kivy.uix.spinner import Spinner
 from kivy.base import runTouchApp
@@ -48,11 +48,11 @@ class cartDB(BoxLayout):
             # Reset the ListView
             self.cart_list._trigger_reset_populate()
 
-class NotificationTime(DropDown):
+class NotificationTime(BoxLayout):
     pass
 
 class MainScreen(Screen):
-    pass
+ pass
 
 class AddEntryScreen(Screen):
     pass
@@ -61,7 +61,23 @@ class EditEntryScreen(Screen):
     pass
 
 class SettingsScreen(Screen):
-    pass
+    def set_time_5(self):
+        print("You will be notified in 5 Minutes")
+
+    def set_time_10(self):
+        print("You will be notified in 10 Minutes")
+
+    def set_time_15(self):
+        print("You will be notified in 15 Minutes")
+
+    def set_time_20(self):
+        print("You will be notified in 20 Minutes")
+
+    def set_time_25(self):
+        print("You will be notified in 25 Minutes")
+
+    def set_time_45(self):
+        print("You will be notified in 45 Minutes")
 
 class SettingsPopup(Popup):
     pass
@@ -77,16 +93,14 @@ class ComputerCartMSApp(App):
     def show_popupSettings(self):
         s = SettingsPopup()
         s.open()
-    def open_dropdown(self):
-        d = NotificationTime()
-        d.open()
     def build(self):
         return Manager()
-
+        return SettingsScreen()
 
 app = ComputerCartMSApp()
 if __name__ == '__main__':
     app.run()
+
 
 
 

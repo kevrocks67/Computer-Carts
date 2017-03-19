@@ -1,6 +1,7 @@
 #: import ListAdaptor kivy.adapters.listadapter.ListAdapter
 #: import ListItemButton kivy.uix.listview.ListItemButton
 #: import ScreenManager kivy.uix.screenmanager
+#:import SlideTransition kivy.uix.screenmanager.SlideTransition
 
 <MainScreen>:
     ActionBar:
@@ -10,15 +11,18 @@
             ActionPrevious:
                 title: 'Computer Cart Management Software Alpha'
                 with_previous: False
+                on_release: root.manager.transition = SlideTransition(direction="right")
                 on_release: root.manager.current = 'Screen0'
             ActionOverflow:
             ActionButton:
                 text: 'Add'
+                on_release: root.manager.transition = SlideTransition(direction="right")
                 on_release: root.manager.current = 'Screen1'
             ActionButton:
                 text: 'Remove'
             ActionButton:
                 text: 'Edit'
+                on_release: root.manager.transition = SlideTransition(direction="right")
                 on_release: root.manager.current = 'Screen2'
             ActionGroup:
                 text: 'Unlock/Lock'
@@ -30,13 +34,9 @@
                 text: 'Settings'
                 ActionButton:
                     text: 'Settings'
+                    on_release: root.manager.transition = SlideTransition(direction="right")
                     on_release: root.manager.current = 'Screen3'
-    BoxLayout:
-        Button:
-            text: 'Hello'
-            size_hint: None, None
-            pos_hint:
-            on_release: app.open_dropdown
+
 <cartDB>:
     cart_list_text_input: cart_list
     cart_num_text_input: cart_num
@@ -55,53 +55,72 @@
             ActionPrevious:
                 title: 'New Entry'
                 with_previous: False
+                on_release: root.manager.transition = SlideTransition(direction="left")
                 on_release: root.manager.current = 'Screen0'
             ActionOverflow:
             ActionGroup:
                 ActionButton:
                     text: 'Save Entry'
+                    on_release: root.manager.transition = SlideTransition(direction="left")
+                    on_release: root.manager.current = 'Screen0'
 
-    BoxLayout:
-
-        height: "40dp"
-        orientation: 'vertical'
-
+    FloatLayout:
         Label:
             text: "Cart Number:"
+            pos_hint:{'x': -.4, 'y': .36}
         Label:
-            text: "Status"
+            text: "Status:"
+            pos_hint:{'x': 0, 'y': .36}
         TextInput:
             id: cart_stat
             multiline: False
             font_size: 25
+            size_hint: .2, .07
+            pos_hint:{'x': .55, 'y': .82}
         Label:
-            text: "Current Room"
+            text: "Current Room:"
+            pos_hint:{'x': -.4, 'y': .25}
         TextInput:
             id: cart_CRM
             multiline: False
             font_size: 25
+            size_hint: .2, .07
+            pos_hint:{'x': .18, 'y': .72}
         Label:
-            text: "Time Req"
+            text: "Time Req:"
+            pos_hint:{'x': 0, 'y': .25}
         TextInput:
             id: cart_CPd
             multiline: False
             font_size: 25
+            size_hint: .2, .07
+            pos_hint: {'x': .55, 'y': .72}
         Label:
-            text: "Future Room Need"
+            text: "Future Room Need:"
+            pos_hint: {'x': -.4, 'y': .15}
         TextInput:
             id: cart_FRM
             multiline: False
             font_size: 25
+            size_hint: .2, .07
+            pos_hint: {'x': .18, 'y': .62}
         Label:
             text: "Future Time Need"
+            pos_hint: {'x': 0, 'y': .15}
         TextInput:
             id: cart_FPd
             multiline: False
             font_size: 25
+            size_hint: .2, .07
+            pos_hint: {'x': .60, 'y': .62}
         Label:
             text: "Additional Comments"
+            pos_hint: {'x': -0.05, 'y': 0}
         TextInput:
             id: addtl_comments
+            font_size: 18
+            size_hint: .5, .35
+            pos_hint: {'x': .20, 'y': 0.08}
 
 <EditEntryScreen>:
     ActionBar:
@@ -111,54 +130,74 @@
             ActionPrevious:
                 title: 'Edit Entry'
                 with_previous: False
+                on_release: root.manager.transition = SlideTransition(direction="left")
                 on_release: root.manager.current = 'Screen0'
             ActionOverflow:
             ActionGroup:
                 ActionButton:
                     text: 'Save Entry'
+                    on_release: root.manager.transition = SlideTransition(direction="left")
+                    on_release: root.manager.current = 'Screen0'
 
-    BoxLayout:
-        height: "40dp"
-        orientation: 'vertical'
-
+    FloatLayout:
         Label:
             text: "Cart Number:"
+            pos_hint:{'x': -.4, 'y': .36}
         Label:
-            text: "Status"
+            text: "Status:"
+            pos_hint:{'x': 0, 'y': .36}
         TextInput:
             id: cart_stat
             multiline: False
             font_size: 25
+            size_hint: .2, .07
+            pos_hint:{'x': .55, 'y': .82}
         Label:
-            text: "Current Room"
+            text: "Current Room:"
+            pos_hint:{'x': -.4, 'y': .25}
         TextInput:
             id: cart_CRM
             multiline: False
             font_size: 25
+            size_hint: .2, .07
+            pos_hint:{'x': .18, 'y': .72}
             readonly: True
         Label:
-            text: "Time Req"
+            text: "Time Req:"
+            pos_hint:{'x': 0, 'y': .25}
         TextInput:
             id: cart_CPd
             multiline: False
             font_size: 25
+            size_hint: .2, .07
+            pos_hint: {'x': .55, 'y': .72}
             readonly: True
         Label:
-            text: "Future Room Need"
+            text: "Future Room Need:"
+            pos_hint: {'x': -.4, 'y': .15}
         TextInput:
             id: cart_FRM
             multiline: False
             font_size: 25
+            size_hint: .2, .07
+            pos_hint: {'x': .18, 'y': .62}
         Label:
             text: "Future Time Need"
+            pos_hint: {'x': 0, 'y': .15}
         TextInput:
             id: cart_FPd
             multiline: False
             font_size: 25
+            size_hint: .2, .07
+            pos_hint: {'x': .60, 'y': .62}
         Label:
             text: "Additional Comments"
+            pos_hint: {'x': -0.05, 'y': 0}
         TextInput:
             id: addtl_comments
+            font_size: 18
+            size_hint: .5, .35
+            pos_hint: {'x': .20, 'y': 0.08}
 
 <SettingsScreen>:
     ActionBar:
@@ -168,64 +207,133 @@
             ActionPrevious:
                 title: 'Settings'
                 with_previous: False
+                on_release: root.manager.transition = SlideTransition(direction="right")
                 on_release: root.manager.current = 'Screen0'
             ActionOverflow:
             ActionGroup:
                 ActionButton:
                     text: 'Save Settings'
-    BoxLayout:
-        orientation: 'vertical'
+                    on_release: root.manager.transition = SlideTransition(direction="left")
+                    on_release: root.manager.current = 'Screen0'
+                    on_release: root.manager.transition = SlideTransition(direction="right")
+
+    FloatLayout:
         Label:
             text: 'SQL Address'
+            pos_hint: {'x': -.25, 'y': .40}
+
         TextInput:
             id: SQL Address
+            size_hint: .4, .07
+            pos_hint: {'x': .05, 'y': .8}
             font_size: 25
             multiline: False
             input_filter: lambda text, from_undo: text[:25 - len(self.text)]
         Label:
             text: 'SQL Password'
+            pos_hint: {'x': .25, 'y': .40}
         TextInput:
             id: SQL Password
+            size_hint: .4, .07
+            pos_hint: {'x': .55, 'y': .8}
             font_size: 25
             password: True
             multiline: False
             input_filter: lambda text, from_undo: text[:31 - len(self.text)]
         Label:
             text: 'SQL Port'
+            pos_hint: {'x': -0.25, 'y': .27}
         TextInput:
             id: SQL Port
+            size_hint: .4, .07
+            pos_hint: {'x': .05, 'y': .68}
             font_size: 25
             multiline: False
             input_filter: lambda text, from_undo: text[:5 - len(self.text)]
         Label:
-            text: 'Notification'
+            text: 'Notification Settings'
             bold: True
+            pos_hint: {'x': 0, 'y': .15}
         Label:
-            text: 'Add Email'
+            text: 'Add Email:'
+            pos_hint: {'x': -.4, 'y': .09}
         TextInput:
             id: AddEmail
+            size_hint: .5, .07
+            pos_hint: {'x': .15, 'y': .55}
             font_size: 25
             multiline: False
             input_filter: lambda text, from_undo: text[:48 - len(self.text)]
         Label:
-            text: 'Current Email'
+            text: 'Current Emails'
         TextInput:
             id: CurrentEmail
+            size_hint: .4, .2
+            pos_hint: {'x': .3, 'y': .25}
             font_size: 25
             multiline: False
             input_filter: lambda text, from_undo: text[:48 - len(self.text)]
-        Label:
-            text: 'Notification Time'
-        TextInput:
-            id: NotificationTime
-            font_size: 25
-            multiline: False
-            input_filter: lambda text, from_undo: text[:31 - len(self.text)]
-
         Button:
-            font_size: 15
+            id: btn
+            text: 'Press to change Notification time'
+            size_hint: .3, .07
+            pos_hint: {'x': .67, 'y': .55}
+            on_release: dropdown.open(self)
+            height: '24dp'
+        Button:
+            id: AboutButton
+            size_hint: .2, .07
+            pos_hint: {'x': .4, 'y': .10}
             text: 'About'
             on_release: app.show_popupSettings()
+
+        DropDown:
+
+            id: dropdown
+            on_parent: self.dismiss()
+            on_select: btn.text = '{}'.format(args[1])
+
+            Button:
+                text: '5 Minutes'
+                size_hint_y: None
+                height: '48dp'
+                on_release: dropdown.select('5 Minutes')
+                on_release: root.set_time_5()
+
+            Button:
+                text: '10 Minutes'
+                size_hint_y: None
+                height: '48dp'
+                on_release: dropdown.select('10 Minutes')
+                on_release: root.set_time_10()
+
+            Button:
+                text: '15 Minutes'
+                size_hint_y: None
+                height: '48dp'
+                on_release: dropdown.select('15 Minutes')
+                on_release: root.set_time_15()
+
+            Button:
+                text: '20 Minutes'
+                size_hint_y: None
+                height: '48dp'
+                on_release: dropdown.select('20 Minutes')
+                on_release: root.set_time_20()
+
+            Button:
+                text: '25 Minutes'
+                size_hint_y: None
+                height: '48dp'
+                on_release: dropdown.select('25 Minutes')
+                on_release: root.set_time_25()
+
+            Button:
+                text: '45 Minutes'
+                size_hint_y: None
+                height: '48dp'
+                on_release: dropdown.select('45 Minutes')
+                on_release: root.set_time_45()
 
 <SettingsPopup>:
     size_hint: 1, 1
