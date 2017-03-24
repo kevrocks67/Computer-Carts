@@ -1,17 +1,1 @@
-BEGIN TRANSACTION;
-CREATE TABLE `Computer Carts` (
-	`Cart Number`	INTEGER,
-	`Computer Type`	INTEGER,
-	`Current Location`	INTEGER,
-	`Time At Location`	INTEGER,
-	`Future Location`	INTEGER,
-	`Future Time`	INTEGER
-);
-INSERT INTO `Computer Carts` (Cart Number,Computer Type,Current Location,Time At Location,Future Location,Future Time) VALUES (1,'Printer Cart',NULL,NULL,NULL,NULL);
-INSERT INTO `Computer Carts` (Cart Number,Computer Type,Current Location,Time At Location,Future Location,Future Time) VALUES (2,'Macbooks',412,'1-4',303,'5-8');
-INSERT INTO `Computer Carts` (Cart Number,Computer Type,Current Location,Time At Location,Future Location,Future Time) VALUES (3,'Yellow Lenovo',NULL,NULL,NULL,NULL);
-INSERT INTO `Computer Carts` (Cart Number,Computer Type,Current Location,Time At Location,Future Location,Future Time) VALUES (4,'Black Lenovo',NULL,NULL,NULL,NULL);
-INSERT INTO `Computer Carts` (Cart Number,Computer Type,Current Location,Time At Location,Future Location,Future Time) VALUES (5,'Engineering Lenovo',NULL,NULL,NULL,NULL);
-INSERT INTO `Computer Carts` (Cart Number,Computer Type,Current Location,Time At Location,Future Location,Future Time) VALUES (6,'Chromebook',NULL,NULL,NULL,NULL);
-INSERT INTO `Computer Carts` (Cart Number,Computer Type,Current Location,Time At Location,Future Location,Future Time) VALUES (7,'Small Lenovo ',NULL,NULL,NULL,NULL);
-COMMIT;
+SELECT * FROM computercarts.computercarts;

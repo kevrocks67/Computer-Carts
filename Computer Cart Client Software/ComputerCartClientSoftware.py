@@ -1,4 +1,6 @@
 import kivy
+import pymysql
+import pymysql.cursors
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.widget import Widget
@@ -14,10 +16,6 @@ from kivy.properties import ReferenceListProperty
 from kivy.uix.dropdown import DropDown
 from kivy.uix.spinner import Spinner
 from kivy.base import runTouchApp
-
-#from sql import *
-#from sql.aggregate import *
-#from sql.conditionals import *
 
 class cartListButton(ListItemButton):
     pass
@@ -52,7 +50,30 @@ class NotificationTime(BoxLayout):
     pass
 
 class MainScreen(Screen):
- pass
+    # Connect to the database
+    try:
+        print("Content-Type: text/html\n")
+        print("<html><Head>")
+        print("<body>")
+        print("<h1>Connecting to mySQL...</h1>")
+        connection = pymysql.connect(host='localhost',
+                                     user='root',
+                                     password='m@5T3r',
+                                     db='computercarts')
+        cur = connection.cursor()
+        cur.execute("SELECT * FROM ComputerCarts")
+       # for CartNumber in cur:
+         #   print("Cart Number: {}")
+        connection.commit()
+        result = cur.fetchmany(3)
+        print(result)
+
+        print("<h2>Connection succeded...</h1>")
+        print("</body></html>")
+    except pymysql.Error as error:
+        print("You messed up")
+
+    connection.close()
 
 class AddEntryScreen(Screen):
     pass
