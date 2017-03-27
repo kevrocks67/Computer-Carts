@@ -6,6 +6,9 @@ from kivy.lang import Builder
 from kivy.uix.widget import Widget
 from kivy.uix.button import Button
 from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.gridlayout import GridLayout
+from kivy.uix.scrollview import ScrollView
+from kivy.uix.label import Label
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import ScreenManager, Screen, SlideTransition
@@ -62,14 +65,41 @@ class MainScreen(Screen):
                                      db='computercarts')
         cur = connection.cursor()
         cur.execute("SELECT * FROM ComputerCarts")
-       # for CartNumber in cur:
-         #   print("Cart Number: {}")
         connection.commit()
-        result = cur.fetchmany(3)
-        print(result)
+
+
+        def db_data(self, cur):
+            vector = []
+            result = cur.fetchall()
+            for row in result:
+                string = str(row[0]) + "," + str(row[1]) + "," + str(row[2]) + "," + str(row[3]) + "," + str(row[4]) + "," + str(row[5])
+                vector.append(string)
+            return vector
+
+        def display_binary(self, cur):
+            q = '''
+            SELECT * FROM ComputerCarts
+            '''
+            self.fill(self.db_data(cur))
+
+        def fill(self, strings):
+            self.GL.clear_widgets()
+            for row in strings:
+                splitRow = row.split(",")
+                for data in splitRow:
+                    label = Label(text=data, size_hint_y=0.2, font_size="16sp")
+                    self.GL.add_widget(label)
+
+        def __init__(self, **kwargs):
+            super(MainScreen, self). __init__(**kwargs)
+            self.GL = GridLayout(cols= 6, spacing=.2, size_hint_y=.8, row_default_height=0.5)
+            #self.GL.bind(minimum_height=self.GL.setter('height'))
+            self.fill(self.db_data(self.cur))
+            self.add_widget(self.GL)
 
         print("<h2>Connection succeded...</h1>")
         print("</body></html>")
+
     except pymysql.Error as error:
         print("You messed up")
 

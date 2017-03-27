@@ -11,8 +11,6 @@
             ActionPrevious:
                 title: 'Computer Cart Management Software Alpha'
                 with_previous: False
-                on_release: root.manager.transition = SlideTransition(direction="right")
-                on_release: root.manager.current = 'Screen0'
             ActionOverflow:
             ActionButton:
                 text: 'Add'
@@ -36,7 +34,10 @@
                     text: 'Settings'
                     on_release: root.manager.transition = SlideTransition(direction="right")
                     on_release: root.manager.current = 'Screen3'
-
+    FloatLayout:
+        Label:
+            text: "Cart Number         Cart Status"
+            pos_hint: {'x': -.33, 'y': .36}
 <cartDB>:
     cart_list_text_input: cart_list
     cart_num_text_input: cart_num
