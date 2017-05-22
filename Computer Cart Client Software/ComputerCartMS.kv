@@ -1,7 +1,8 @@
 #: import ListAdaptor kivy.adapters.listadapter.ListAdapter
 #: import ListItemButton kivy.uix.listview.ListItemButton
 #: import ScreenManager kivy.uix.screenmanager
-#:import SlideTransition kivy.uix.screenmanager.SlideTransition
+#: import SlideTransition kivy.uix.screenmanager.SlideTransition
+#: import TabbedPanel kivy.uix.tabbedpanel.TabbedPanel
 
 <MainScreen>:
     ActionBar:
@@ -10,18 +11,22 @@
             use_separator: True
             ActionPrevious:
                 title: 'Computer Cart Management Software Alpha'
+                on_release: root.replaceText('UpdateSQL')
+                on_release: root.manager.current = 'list'
                 with_previous: False
+
             ActionOverflow:
             ActionButton:
                 text: 'Add'
                 on_release: root.manager.transition = SlideTransition(direction="right")
-                on_release: root.manager.current = 'Screen1'
+                on_release: root.manager.current = 'add'
             ActionButton:
                 text: 'Remove'
+                on_release: root.remove_cart()
             ActionButton:
                 text: 'Edit'
                 on_release: root.manager.transition = SlideTransition(direction="right")
-                on_release: root.manager.current = 'Screen2'
+                on_release: root.manager.current = 'edit'
             ActionGroup:
                 text: 'Unlock/Lock'
                 ActionButton:
@@ -33,11 +38,80 @@
                 ActionButton:
                     text: 'Settings'
                     on_release: root.manager.transition = SlideTransition(direction="right")
-                    on_release: root.manager.current = 'Screen3'
-    FloatLayout:
-        Label:
-            text: "Cart Number         Cart Status"
-            pos_hint: {'x': -.33, 'y': .36}
+                    on_release: root.manager.current = 'settings'
+
+    GridLayout:
+        grid: grid
+        id: grid
+        cols: 6
+        spacing: .2
+        size_hint_y: .8
+        row_default_height: 0.5
+
+<SelectableLabel>:
+    # Draw a background to indicate selection
+    canvas.before:
+        Color:
+            rgba: (0.5, 0.2, 0.1, 1) if self.selected else (0.5, 0.5, 0.5, 1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<ListScreen>:
+    ActionBar:
+        pos_hint: {'top':1}
+        ActionView:
+            use_separator: True
+            ActionPrevious:
+                title: 'Computer Cart Management Software Alpha'
+                with_previous: False
+
+            ActionOverflow:
+            ActionButton:
+                text: 'Add'
+                on_release: root.manager.transition = SlideTransition(direction="right")
+                on_release: root.manager.current = 'add'
+            ActionButton:
+                text: 'Remove'
+                on_release: root.remove_cart()
+            ActionButton:
+                text: 'Edit'
+                on_release: root.manager.transition = SlideTransition(direction="right")
+                on_release: root.manager.current = 'edit'
+            ActionGroup:
+                text: 'Unlock/Lock'
+                ActionButton:
+                    text: 'Unlock'
+                ActionButton:
+                    text: 'Lock'
+            ActionGroup:
+                text: 'Settings'
+                ActionButton:
+                    text: 'Settings'
+                    on_release: root.manager.transition = SlideTransition(direction="right")
+                    on_release: root.manager.current = 'settings'
+
+    RecycleView:
+        id: rv
+        scroll_type: ['bars', 'content']
+        scroll_wheel_distance: dp(114)
+        bar_width: dp(10)
+        viewclass: 'SelectableLabel'
+        SelectableRecycleBoxLayout:
+            default_size: None, dp(56)
+            default_size_hint: 1, None
+            size_hint_y: .8
+            height: self.minimum_height
+            orientation: 'vertical'
+            multiselect: True
+            RecycleBoxLayout:
+                default_size: None, dp(56)
+                default_size_hint: 1, None
+                size_hint_y: None
+                height: self.minimum_height
+                orientation: 'vertical'
+                spacing: dp(2)
+
 <cartDB>:
     cart_list_text_input: cart_list
     cart_num_text_input: cart_num
@@ -57,13 +131,13 @@
                 title: 'New Entry'
                 with_previous: False
                 on_release: root.manager.transition = SlideTransition(direction="left")
-                on_release: root.manager.current = 'Screen0'
+                on_release: root.manager.current = 'main'
             ActionOverflow:
             ActionGroup:
                 ActionButton:
                     text: 'Save Entry'
                     on_release: root.manager.transition = SlideTransition(direction="left")
-                    on_release: root.manager.current = 'Screen0'
+                    on_release: root.manager.current = 'main'
 
     FloatLayout:
         Label:
@@ -132,13 +206,13 @@
                 title: 'Edit Entry'
                 with_previous: False
                 on_release: root.manager.transition = SlideTransition(direction="left")
-                on_release: root.manager.current = 'Screen0'
+                on_release: root.manager.current = 'main'
             ActionOverflow:
             ActionGroup:
                 ActionButton:
                     text: 'Save Entry'
                     on_release: root.manager.transition = SlideTransition(direction="left")
-                    on_release: root.manager.current = 'Screen0'
+                    on_release: root.manager.current = 'main'
 
     FloatLayout:
         Label:
@@ -209,13 +283,13 @@
                 title: 'Settings'
                 with_previous: False
                 on_release: root.manager.transition = SlideTransition(direction="right")
-                on_release: root.manager.current = 'Screen0'
+                on_release: root.manager.current = 'main'
             ActionOverflow:
             ActionGroup:
                 ActionButton:
                     text: 'Save Settings'
                     on_release: root.manager.transition = SlideTransition(direction="left")
-                    on_release: root.manager.current = 'Screen0'
+                    on_release: root.manager.current = 'main'
                     on_release: root.manager.transition = SlideTransition(direction="right")
 
     FloatLayout:
@@ -346,34 +420,6 @@
         line_height: 2
         text: 'This app is designed by Kevin Diaz in order to manage\nthe need for computer carts within the Columbia Secondary School.\nAll source code is available at\nhttps://github.com/kevrocks67/Computer-Carts\nClick me to dismiss'
         on_press: root.dismiss()
-
-<Manager>:
-    id: screen_manager
-
-    screen_zero: screen_zero
-    screen_one: screen_one
-    screen_two: screen_two
-    screen_three: screen_three
-
-    MainScreen:
-        id: screen_zero
-        name: 'Screen0'
-        manager: screen_manager
-
-    AddEntryScreen:
-        id: screen_one
-        name: 'Screen1'
-        manager: screen_manager
-
-    EditEntryScreen:
-        id: screen_two
-        name: 'Screen2'
-        manager: screen_manager
-
-    SettingsScreen:
-        id: screen_three
-        name: 'Screen3'
-        manager: screen_manager
 
 <NotificationTime>:
     Button:

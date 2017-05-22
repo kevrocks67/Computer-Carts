@@ -1,0 +1,85 @@
+<Manager>:
+    id: screen_manager
+
+    screen_zero: screen_zero
+    screen_one: screen_one
+    screen_two: screen_two
+    screen_three: screen_three
+    screen_four: screen_four
+
+    MainScreen:
+        id: screen_zero
+        name: 'Screen0'
+        manager: screen_manager
+
+    AddEntryScreen:
+        id: screen_one
+        name: 'Screen1'
+        manager: screen_manager
+
+    EditEntryScreen:
+        id: screen_two
+        name: 'Screen2'
+        manager: screen_manager
+
+    SettingsScreen:
+        id: screen_three
+        name: 'Screen3'
+        manager: screen_manager
+
+    ListScreen:
+        id: screen_four
+        name: 'Screen4'
+        manager: screen_manager
+
+[CustomListItem@BoxLayout]:
+    sql_data_list_view: sql_data_list_id
+    id: sql_data_list_id
+    size_hint_y: .8
+    height: .4
+    ListItemButton:
+        text: ctx.text
+        is_selected: ctx.is_selected
+
+
+##################################Python Shit
+
+#Factory.register('SelectableView', cls=SelectableView)
+#Factory.register('ListItemButton', cls=ListItemButton)
+
+
+    sql_data_list_view = ObjectProperty()
+
+    def list(self, *args):
+        categories = sorted(sql_data.keys())
+        list_item_args_converter = \
+            lambda row_index, rec: {'text': rec['name'],
+                                    'font_size': "16sp",
+                                    'size_hint_y': None,
+                                    'height': 50}
+
+        # Here we create a dict adapter with 1..100 integer strings as
+        # sorted_keys, and integers_dict from fixtures as data, passing our
+        # CompositeListItem kv template for the list item view. Then we
+        # create a list view using this adapter. args_converter above converts
+        # dict attributes to ctx attributes.
+        sql_data_dict_adapter = DictAdapter(sorted_keys=categories,
+                                            data=sql_data,
+                                            args_converter=list_item_args_converter,
+                                            selection_mode='single',
+                                            allow_empty_selection=True,
+                                            cls=cartListButton)
+
+        sql_data_list_view = \
+            ListView(adapter=sql_data_dict_adapter,
+                     size_hint=(1, .8))
+
+        self.add_widget(sql_data_list_view)
+
+
+class Manager(ScreenManager):
+    screen_zero = ObjectProperty(None)
+    screen_one = ObjectProperty(None)
+    screen_two = ObjectProperty(None)
+    screen_three = ObjectProperty(None)
+    screen_four = ObjectProperty(None)
