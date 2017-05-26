@@ -1,52 +1,9 @@
+#: import kivy kivy
 #: import ListAdaptor kivy.adapters.listadapter.ListAdapter
 #: import ListItemButton kivy.uix.listview.ListItemButton
 #: import ScreenManager kivy.uix.screenmanager
 #: import SlideTransition kivy.uix.screenmanager.SlideTransition
 #: import TabbedPanel kivy.uix.tabbedpanel.TabbedPanel
-
-<MainScreen>:
-    ActionBar:
-        pos_hint: {'top':1}
-        ActionView:
-            use_separator: True
-            ActionPrevious:
-                title: 'Computer Cart Management Software Alpha'
-                on_release: root.replaceText('UpdateSQL')
-                on_release: root.manager.current = 'list'
-                with_previous: False
-
-            ActionOverflow:
-            ActionButton:
-                text: 'Add'
-                on_release: root.manager.transition = SlideTransition(direction="right")
-                on_release: root.manager.current = 'add'
-            ActionButton:
-                text: 'Remove'
-                on_release: root.remove_cart()
-            ActionButton:
-                text: 'Edit'
-                on_release: root.manager.transition = SlideTransition(direction="right")
-                on_release: root.manager.current = 'edit'
-            ActionGroup:
-                text: 'Unlock/Lock'
-                ActionButton:
-                    text: 'Unlock'
-                ActionButton:
-                    text: 'Lock'
-            ActionGroup:
-                text: 'Settings'
-                ActionButton:
-                    text: 'Settings'
-                    on_release: root.manager.transition = SlideTransition(direction="right")
-                    on_release: root.manager.current = 'settings'
-
-    GridLayout:
-        grid: grid
-        id: grid
-        cols: 6
-        spacing: .2
-        size_hint_y: .8
-        row_default_height: 0.5
 
 <SelectableLabel>:
     # Draw a background to indicate selection
@@ -56,14 +13,38 @@
         Rectangle:
             pos: self.pos
             size: self.size
-
-<ListScreen>:
+<MainScreen>:
+    rv: rv
+    RecycleView:
+        id: rv
+        #scroll_type: ['bars', 'content']
+        #scroll_wheel_distance: dp(114)
+        #bar_width: dp(10)
+        viewclass: 'SelectableLabel'
+        SelectableRecycleBoxLayout:
+            default_size: None, dp(50)
+            default_size_hint: 1, None
+            size_hint_y: .8
+            height: self.minimum_height
+            orientation: 'vertical'
+            multiselect: False
+            touch_multiselect: False
+            RecycleBoxLayout:
+                default_size: None, dp(50)
+                default_size_hint: 1, None
+                size_hint_y: None
+                height: self.minimum_height
+                orientation: 'vertical'
+                spacing: dp(2)
     ActionBar:
         pos_hint: {'top':1}
         ActionView:
             use_separator: True
             ActionPrevious:
                 title: 'Computer Cart Management Software Alpha'
+                on_release: root.replaceText('UpdateSQL')
+                on_release: root.populate()
+                #on_release: root.manager.current = 'list'
                 with_previous: False
 
             ActionOverflow:
@@ -78,6 +59,7 @@
                 text: 'Edit'
                 on_release: root.manager.transition = SlideTransition(direction="right")
                 on_release: root.manager.current = 'edit'
+                on_release: root.edit_cart()
             ActionGroup:
                 text: 'Unlock/Lock'
                 ActionButton:
@@ -90,27 +72,6 @@
                     text: 'Settings'
                     on_release: root.manager.transition = SlideTransition(direction="right")
                     on_release: root.manager.current = 'settings'
-
-    RecycleView:
-        id: rv
-        scroll_type: ['bars', 'content']
-        scroll_wheel_distance: dp(114)
-        bar_width: dp(10)
-        viewclass: 'SelectableLabel'
-        SelectableRecycleBoxLayout:
-            default_size: None, dp(56)
-            default_size_hint: 1, None
-            size_hint_y: .8
-            height: self.minimum_height
-            orientation: 'vertical'
-            multiselect: True
-            RecycleBoxLayout:
-                default_size: None, dp(56)
-                default_size_hint: 1, None
-                size_hint_y: None
-                height: self.minimum_height
-                orientation: 'vertical'
-                spacing: dp(2)
 
 <cartDB>:
     cart_list_text_input: cart_list
@@ -140,18 +101,20 @@
                     on_release: root.manager.current = 'main'
 
     FloatLayout:
-        Label:
-            text: "Cart Number:"
-            pos_hint:{'x': -.4, 'y': .36}
-        Label:
-            text: "Status:"
-            pos_hint:{'x': 0, 'y': .36}
         TextInput:
             id: cart_stat
             multiline: False
             font_size: 25
             size_hint: .2, .07
             pos_hint:{'x': .55, 'y': .82}
+
+        Label:
+            text: "Cart Number:"
+            pos_hint:{'x': -.4, 'y': .36}
+        Label:
+            text: "Status:"
+            pos_hint:{'x': 0, 'y': .36}
+
         Label:
             text: "Current Room:"
             pos_hint:{'x': -.4, 'y': .25}
@@ -360,7 +323,7 @@
             size_hint: .2, .07
             pos_hint: {'x': .4, 'y': .10}
             text: 'About'
-            on_release: app.show_popupSettings()
+            on_release: app.show_popup_settings()
 
         DropDown:
 

@@ -33,11 +33,17 @@ from kivy.uix.behaviors import FocusBehavior
 from kivy.uix.recycleview.layout import LayoutSelectionBehavior
 
 
+Builder.load_file('ComputerCart.kv')
 
-class cartListButton(ListItemButton):
+
+currentObj = 0
+
+
+class CartListButton(ListItemButton):
     pass
 
-class cartDB(BoxLayout):
+
+class CartDB(BoxLayout):
     cart_list_text_input = ObjectProperty()
     cart_num_text_input = ObjectProperty()
     cart_stat_text_input = ObjectProperty()
@@ -48,8 +54,10 @@ class cartDB(BoxLayout):
     cart_FPd_text_input = ObjectProperty()
     addtl_comments_text_input = ObjectProperty()
 
+
 class NotificationTime(BoxLayout):
     pass
+
 
 class MainScreen(Screen):
     def __init__(self, **kwargs):
@@ -108,6 +116,33 @@ class MainScreen(Screen):
             if self.event == 'UpdateSQL':
                 self.fill(self.db_data(self.cur))
 
+        def populate(self):
+            path_to_file = "data.txt"
+            data_file = open(path_to_file, 'r')
+            array = []
+
+            for row in data_file:
+                array.append(row)
+
+            self.ids.rv.data = [{'text': line,
+                                 'is_selected': False} for line in array]
+            data_file.close()
+
+        def remove_cart(self):
+            self.ids.rv.data.pop(currentObj)
+            print('Indexed item {} was deleted'.format(str(currentObj)))
+            self.ids.rv.layout_manager.clear_selection()
+
+        def add_cart(self):
+            new_data = None
+            #array2 = [{'text': '2', 'is_selected': False}]
+            #self.ids.rv.data.extend(array2)
+            print('New item added with value {}'.format(new_data))
+            self.ids.rv.refresh_from_data()
+
+        def edit_cart(self):
+            pass
+
         print("<h2>Connection succeded...</h1>")
         print("</body></html>")
 
@@ -137,6 +172,7 @@ class SelectableRecycleBoxLayout(FocusBehavior, LayoutSelectionBehavior,
                                  RecycleBoxLayout):
     ''' Adds selection and focus behaviour to the view. '''
 
+
 class SelectableLabel(RecycleDataViewBehavior, Label):
     ''' Add selection support to the Label '''
     index = None
@@ -158,45 +194,23 @@ class SelectableLabel(RecycleDataViewBehavior, Label):
 
     def apply_selection(self, rv, index, is_selected):
         ''' Respond to the selection of items in the view. '''
+        global currentObj
         self.selected = is_selected
         if is_selected:
-            #print("selection changed to {0}".format(rv.data[index]))
-            #rv.layout_manager.clear_selection()
-            pass
+            currentObj = index
+            print("selection changed to {0}".format(rv.data[index]))
+
         #else:
             #print("selection removed for {0}".format(rv.data[index]))
 
-class ListScreen(Screen):
-    def __init__(self, **kwargs):
-        super(ListScreen, self).__init__(**kwargs)
-
-        path_to_file = "data.txt"
-        data_file = open(path_to_file, 'r')
-        array = []
-
-        for row in data_file:
-            array.append(row)
-
-        self.ids.rv.data = [{'text': line,
-                             'is_selected': False} for line in array]
-
-        # print(array)
-        data_file.close()
-
-    def remove_cart(self):
-        pass
-
-    def add_cart(self):
-        pass
-
-    def edit_cart(self):
-        pass
 
 class AddEntryScreen(Screen):
     pass
 
+
 class EditEntryScreen(Screen):
     pass
+
 
 class SettingsScreen(Screen):
     def set_time_5(self):
@@ -217,26 +231,27 @@ class SettingsScreen(Screen):
     def set_time_45(self):
         print("You will be notified in 45 Minutes")
 
+
 class SettingsPopup(Popup):
     pass
 
+
 class ComputerCartMSApp(App):
 #Define the Setting Popup
-    def show_popupSettings(self):
+    def show_popup_settings(self):
         s = SettingsPopup()
         s.open()
+
     def build(self):
         sm = ScreenManager()
         sm.add_widget(MainScreen(name='main'))
         sm.add_widget(SettingsScreen(name='settings'))
         sm.add_widget(AddEntryScreen(name='add'))
         sm.add_widget(EditEntryScreen(name='edit'))
-        sm.add_widget(ListScreen(name='list'))
         sm.current = 'main'
         return sm
 
 
-Builder.load_file('ComputerCartMS.kv')
 app = ComputerCartMSApp()
 if __name__ == '__main__':
     app.run()

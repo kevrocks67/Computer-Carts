@@ -83,3 +83,24 @@ class Manager(ScreenManager):
     screen_two = ObjectProperty(None)
     screen_three = ObjectProperty(None)
     screen_four = ObjectProperty(None)
+
+ RecycleView:
+        id: rv
+        scroll_type: ['bars', 'content']
+        scroll_wheel_distance: dp(114)
+        bar_width: dp(10)
+        viewclass: 'SelectableLabel'
+        SelectableRecycleBoxLayout:
+            default_size: None, dp(56)
+            default_size_hint: 1, None
+            size_hint_y: .8
+            height: self.minimum_height
+            orientation: 'vertical'
+            multiselect: True
+            RecycleBoxLayout:
+                default_size: None, dp(56)
+                default_size_hint: 1, None
+                size_hint_y: None
+                height: self.minimum_height
+                orientation: 'vertical'
+                spacing: dp(2)
