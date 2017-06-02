@@ -1,9 +1,9 @@
 #: import kivy kivy
-#: import ListAdaptor kivy.adapters.listadapter.ListAdapter
-#: import ListItemButton kivy.uix.listview.ListItemButton
 #: import ScreenManager kivy.uix.screenmanager
 #: import SlideTransition kivy.uix.screenmanager.SlideTransition
 #: import TabbedPanel kivy.uix.tabbedpanel.TabbedPanel
+
+<LoginScreen>:
 
 <SelectableLabel>:
     # Draw a background to indicate selection
@@ -42,9 +42,7 @@
             use_separator: True
             ActionPrevious:
                 title: 'Computer Cart Management Software Alpha'
-                on_release: root.replaceText('UpdateSQL')
-                on_release: root.populate()
-                #on_release: root.manager.current = 'list'
+                on_release: root.replace_text('UpdateSQL')
                 with_previous: False
 
             ActionOverflow:
@@ -66,22 +64,15 @@
                     text: 'Unlock'
                 ActionButton:
                     text: 'Lock'
+
+                    # For testing only
+                    on_release: root.add_cart("Locked", "None", "None", "None", "None")
             ActionGroup:
                 text: 'Settings'
                 ActionButton:
                     text: 'Settings'
                     on_release: root.manager.transition = SlideTransition(direction="right")
                     on_release: root.manager.current = 'settings'
-
-<cartDB>:
-    cart_list_text_input: cart_list
-    cart_num_text_input: cart_num
-    cart_stat_text_input: cart_stat
-    cart_type_text_input: cart_type
-    cart_CRM_text_input: cart_CRM
-    cart_CPd_text_input: cart_CPd
-    cart_FRM_text_input: cart_FRM
-    cart_FPd_text_input: cart_FPd
 
 <AddEntryScreen>:
     ActionBar:
@@ -97,6 +88,7 @@
             ActionGroup:
                 ActionButton:
                     text: 'Save Entry'
+                    on_release: root.add_button(cart_stat.text, cart_crm.text, cart_cpd.text, cart_frm.text, cart_fpd.text)
                     on_release: root.manager.transition = SlideTransition(direction="left")
                     on_release: root.manager.current = 'main'
 
@@ -119,7 +111,7 @@
             text: "Current Room:"
             pos_hint:{'x': -.4, 'y': .25}
         TextInput:
-            id: cart_CRM
+            id: cart_crm
             multiline: False
             font_size: 25
             size_hint: .2, .07
@@ -128,7 +120,7 @@
             text: "Time Req:"
             pos_hint:{'x': 0, 'y': .25}
         TextInput:
-            id: cart_CPd
+            id: cart_cpd
             multiline: False
             font_size: 25
             size_hint: .2, .07
@@ -137,7 +129,7 @@
             text: "Future Room Need:"
             pos_hint: {'x': -.4, 'y': .15}
         TextInput:
-            id: cart_FRM
+            id: cart_frm
             multiline: False
             font_size: 25
             size_hint: .2, .07
@@ -146,7 +138,7 @@
             text: "Future Time Need"
             pos_hint: {'x': 0, 'y': .15}
         TextInput:
-            id: cart_FPd
+            id: cart_fpd
             multiline: False
             font_size: 25
             size_hint: .2, .07

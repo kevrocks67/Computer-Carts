@@ -1,33 +1,15 @@
-import kivy
 import pymysql
 import pymysql.cursors
-import numpy
+import hashlib
+import uuid
+import sys
 from kivy.app import App
 from kivy.lang import Builder
-from kivy.uix.widget import Widget
-from kivy.uix.button import Button
-from kivy.uix.floatlayout import FloatLayout
-from kivy.uix.gridlayout import GridLayout
-from kivy.uix.scrollview import ScrollView
 from kivy.uix.label import Label
-from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.popup import Popup
-from kivy.uix.screenmanager import ScreenManager, Screen, SlideTransition
-from kivy.properties import ObjectProperty, NumericProperty, StringProperty
+from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.properties import BooleanProperty
-from kivy.uix.listview import ListItemButton, ListView
-from kivy.adapters.listadapter import ListAdapter
-from kivy.uix.tabbedpanel import TabbedPanel
-from kivy.properties import ReferenceListProperty
-from kivy.uix.dropdown import DropDown
-from kivy.uix.spinner import Spinner
-from kivy.factory import Factory
-from kivy.adapters.dictadapter import DictAdapter
-from kivy.uix.selectableview import SelectableView
-from dataKeys import sql_data
-from kivy.uix.recycleview import RecycleView
 from kivy.uix.recycleview.views import RecycleDataViewBehavior
-from kivy.properties import BooleanProperty
 from kivy.uix.recycleboxlayout import RecycleBoxLayout
 from kivy.uix.behaviors import FocusBehavior
 from kivy.uix.recycleview.layout import LayoutSelectionBehavior
@@ -37,84 +19,114 @@ Builder.load_file('ComputerCart.kv')
 
 
 currentObj = 0
+users = []
+salts = []
+hashes = []
 
 
-class CartListButton(ListItemButton):
-    pass
+class LoginScreen(Screen):
+    def register(self):
+        global users
+        global salts
+        global hashes
+        user = input('Enter desired username: ')
+        password = input('Enter desired password: ')
 
+        salt = uuid.uuid4().hex
 
-class CartDB(BoxLayout):
-    cart_list_text_input = ObjectProperty()
-    cart_num_text_input = ObjectProperty()
-    cart_stat_text_input = ObjectProperty()
-    cart_type_text_input = ObjectProperty()
-    cart_CRM_text_input = ObjectProperty()
-    cart_CPd_text_input = ObjectProperty()
-    cart_FRM_text_input = ObjectProperty()
-    cart_FPd_text_input = ObjectProperty()
-    addtl_comments_text_input = ObjectProperty()
+        salted_pass = password + salt
+        salted_hash = hashlib.sha512(salted_pass.encode('utf-8')).hexdigest()
 
+        users.append(user)
+        salts.append(salt)
+        hashes.append(salted_hash)
+        self.check_auth()
 
-class NotificationTime(BoxLayout):
-    pass
+    def check_auth(self):
+        global users
+        global salts
+        global hashes
+        while True:
+            user = input('Enter username: ')
+            if user in users:
+                print('Username exists')
+                index = users.index(user)
+                break
+
+            print('User does not exist')
+
+        for retry in range(5):
+            password = input('Enter password: ')
+            salt = salts[index]
+
+            salted_pass = password + salt
+            salted_hash = hashlib.sha512(salted_pass.encode('utf-8')).hexdigest()
+
+            stored_hash = hashes[index]
+
+            if stored_hash == salted_hash:
+                print('Login Successful')
+                break
+
+            print('Your password is incorrect;Attempt:{}/5'.format(retry + 1))
+
+        else:
+            print('You have made too many attempts. Try again later!')
+            print('Would you like to register a new account?')
+            response = input('Yes or No: ')
+            if response.lower == 'yes' or 'y':
+                print('Starting register function...')
+                self.register()
+            else:
+                print('Thank you for your time. Closing application...')
+                sys.exit(1)
+
+    def __init__(self, **kwargs):
+        super(LoginScreen, self).__init__(**kwargs)
+        # self.register()
 
 
 class MainScreen(Screen):
     def __init__(self, **kwargs):
         super(MainScreen, self).__init__(**kwargs)
 
-
-    grid = ObjectProperty(None)
+    connection = pymysql.connect(host='localhost',
+                                 user='root',
+                                 password='m@5T3r',
+                                 db='computercarts')
     # Connect to the database
     try:
-        print("Content-Type: text/html\n")
-        print("<html><Head>")
-        print("<body>")
-        print("<h1>Connecting to mySQL...</h1>")
-        connection = pymysql.connect(host='localhost',
-                                     user='root',
-                                     password='m@5T3r',
-                                     db='computercarts')
-        cur = connection.cursor()
-        cur.execute("SELECT * FROM ComputerCarts")
+        print("Connecting to mySQL...")
+        with connection.cursor() as cur:
+            cur.execute("SELECT * FROM ComputerCarts")
         connection.commit()
 
         def db_data(self, cur):
             vector = []
             result = cur.fetchall()
             for row in result:
-                string = str(row[0]) + "," + str(row[1]) + "," + str(row[2]) + "," + str(row[3]) + "," + str(row[4]) + "," + str(row[5])
+                string = str(row[0]) + "," + str(row[1]) + "," + str(row[2]) + "," + str(row[3]) + "," + str(row[4]) + \
+                         "," + str(row[5])
                 vector.append(string)
             return vector
 
-        def display_binary(self, cur):
-            q = '''
-            SELECT * FROM ComputerCarts
-            '''
-            self.fill(self.db_data(cur))
-
         def fill(self, strings):
-            #self.GL.clear_widgets()
             path_to_file = "data.txt"
             data_file = open(path_to_file, 'a')
             data_file.seek(0)
             data_file.truncate()
 
             for row in strings:
-                #splitRow = row.split(",")
-                noCommas = row.replace(",", "               ")
-                #print(noCommas)
-                data_file.write(noCommas + '\n')
-                #for data in splitRow:
-                   # layout = self.ids.grid
-                    #sql_label = Label(text=data, size_hint_y=0.2, font_size="16sp")
-                   # layout.add_widget(sql_label)
+                no_commas = row.replace(",", "               ")
+                data_file.write(no_commas + '\n')
+
             data_file.close()
 
-        def replaceText(self, event):
+        def replace_text(self, event):
             self.event = event
             if self.event == 'UpdateSQL':
                 self.fill(self.db_data(self.cur))
+                self.populate()
 
         def populate(self):
             path_to_file = "data.txt"
@@ -133,83 +145,73 @@ class MainScreen(Screen):
             print('Indexed item {} was deleted'.format(str(currentObj)))
             self.ids.rv.layout_manager.clear_selection()
 
-        def add_cart(self):
-            new_data = None
-            #array2 = [{'text': '2', 'is_selected': False}]
-            #self.ids.rv.data.extend(array2)
-            print('New item added with value {}'.format(new_data))
+        def add_cart(self, cart_stat, cart_crm, cart_cpd, cart_frm, cart_fpd):
+            line = str(cart_stat) + ',' + str(cart_crm) + ',' + str(cart_cpd) + \
+                   ',' + str(cart_frm) + ',' + str(cart_fpd)
+
+            array2 = [{'text': line, 'is_selected': False}]
+            self.ids.rv.data.extend(array2)
+            print('New item added with value {}'.format(line))
             self.ids.rv.refresh_from_data()
 
         def edit_cart(self):
             pass
 
-        print("<h2>Connection succeded...</h1>")
-        print("</body></html>")
+        print("Connection succeeded...")
 
     except pymysql.Error as error:
         print("You messed up")
+        print(error)
 
-    connection.close()
-
-    LabelLayout = BoxLayout()
-    layout = BoxLayout(orientation='vertical')
-    layout.add_widget(LabelLayout)
-    LabelLayout.size_hint_y = 0.4
-    SQLHeaderLabel = ['Id', 'Cart Status', 'Current Room', 'Time Req', 'Future Room', 'Future Time']
-    for label in SQLHeaderLabel:
-        labelText = StringProperty('')
-        labelText = '[ref=' + label.lower() + ']' + label + '[/ref]'
-       # top_label = Label(text=label, markup=True)
-        #widget.size_hint_y = 0.08
-       # LabelLayout.size_hint_y = .8
-        #label = Label(text=labelText, size_hint_y=0.2, font_size="16sp")
-
-        sql = Label(text=label, size_hint_y=0.2, font_size="16sp")
-        LabelLayout.add_widget(sql)
+    finally:
+        connection.close()
 
 
 class SelectableRecycleBoxLayout(FocusBehavior, LayoutSelectionBehavior,
                                  RecycleBoxLayout):
-    ''' Adds selection and focus behaviour to the view. '''
+    """ Adds selection and focus behaviour to the view. """
 
 
 class SelectableLabel(RecycleDataViewBehavior, Label):
-    ''' Add selection support to the Label '''
+    """ Add selection support to the Label """
     index = None
     selected = BooleanProperty(False)
     selectable = BooleanProperty(True)
 
     def refresh_view_attrs(self, rv, index, data):
-        ''' Catch and handle the view changes '''
+        """ Catch and handle the view changes """
         self.index = index
         return super(SelectableLabel, self).refresh_view_attrs(
             rv, index, data)
 
     def on_touch_down(self, touch):
-        ''' Add selection on touch down '''
+        """ Add selection on touch down """
         if super(SelectableLabel, self).on_touch_down(touch):
             return True
         if self.collide_point(*touch.pos) and self.selectable:
             return self.parent.select_with_touch(self.index, touch)
 
     def apply_selection(self, rv, index, is_selected):
-        ''' Respond to the selection of items in the view. '''
+        """ Respond to the selection of items in the view. """
         global currentObj
         self.selected = is_selected
         if is_selected:
             currentObj = index
             print("selection changed to {0}".format(rv.data[index]))
 
-        #else:
-            #print("selection removed for {0}".format(rv.data[index]))
+        # else:
+            # print("selection removed for {0}".format(rv.data[index]))
 
 
 class AddEntryScreen(Screen):
-    pass
+    def add_button(self, cart_stat, cart_crm, cart_cpd, cart_frm, cart_fpd):
+        main_screen = MainScreen()
+        main_screen.add_cart(cart_stat, cart_crm, cart_cpd, cart_frm, cart_fpd)
 
 
 class EditEntryScreen(Screen):
-    pass
+    def edit_button(self):
+        pass
 
 
 class SettingsScreen(Screen):
@@ -237,13 +239,14 @@ class SettingsPopup(Popup):
 
 
 class ComputerCartMSApp(App):
-#Define the Setting Popup
+    # Define the Setting Popup
     def show_popup_settings(self):
         s = SettingsPopup()
         s.open()
 
     def build(self):
         sm = ScreenManager()
+        sm.add_widget(LoginScreen(name='login'))
         sm.add_widget(MainScreen(name='main'))
         sm.add_widget(SettingsScreen(name='settings'))
         sm.add_widget(AddEntryScreen(name='add'))
@@ -255,8 +258,3 @@ class ComputerCartMSApp(App):
 app = ComputerCartMSApp()
 if __name__ == '__main__':
     app.run()
-
-
-
-
-

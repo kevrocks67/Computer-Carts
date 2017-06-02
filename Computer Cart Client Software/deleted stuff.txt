@@ -41,40 +41,43 @@
         text: ctx.text
         is_selected: ctx.is_selected
 
+RecycleView:
+    id: rv
+    scroll_type: ['bars', 'content']
+    scroll_wheel_distance: dp(114)
+    bar_width: dp(10)
+    viewclass: 'SelectableLabel'
+    SelectableRecycleBoxLayout:
+        default_size: None, dp(56)
+        default_size_hint: 1, None
+        size_hint_y: .8
+        height: self.minimum_height
+        orientation: 'vertical'
+        multiselect: True
+        RecycleBoxLayout:
+            default_size: None, dp(56)
+            default_size_hint: 1, None
+            size_hint_y: None
+            height: self.minimum_height
+            orientation: 'vertical'
+            spacing: dp(2)
 
-##################################Python Shit
+
+<cartDB>:
+    cart_list_text_input: cart_list
+    cart_num_text_input: cart_num
+    cart_stat_text_input: cart_stat
+    cart_type_text_input: cart_type
+    cart_CRM_text_input: cart_CRM
+    cart_CPd_text_input: cart_CPd
+    cart_FRM_text_input: cart_FRM
+    cart_FPd_text_input: cart_FPd
+
+
+##################################Python Stuff
 
 #Factory.register('SelectableView', cls=SelectableView)
 #Factory.register('ListItemButton', cls=ListItemButton)
-
-
-    sql_data_list_view = ObjectProperty()
-
-    def list(self, *args):
-        categories = sorted(sql_data.keys())
-        list_item_args_converter = \
-            lambda row_index, rec: {'text': rec['name'],
-                                    'font_size': "16sp",
-                                    'size_hint_y': None,
-                                    'height': 50}
-
-        # Here we create a dict adapter with 1..100 integer strings as
-        # sorted_keys, and integers_dict from fixtures as data, passing our
-        # CompositeListItem kv template for the list item view. Then we
-        # create a list view using this adapter. args_converter above converts
-        # dict attributes to ctx attributes.
-        sql_data_dict_adapter = DictAdapter(sorted_keys=categories,
-                                            data=sql_data,
-                                            args_converter=list_item_args_converter,
-                                            selection_mode='single',
-                                            allow_empty_selection=True,
-                                            cls=cartListButton)
-
-        sql_data_list_view = \
-            ListView(adapter=sql_data_dict_adapter,
-                     size_hint=(1, .8))
-
-        self.add_widget(sql_data_list_view)
 
 
 class Manager(ScreenManager):
@@ -84,23 +87,79 @@ class Manager(ScreenManager):
     screen_three = ObjectProperty(None)
     screen_four = ObjectProperty(None)
 
- RecycleView:
-        id: rv
-        scroll_type: ['bars', 'content']
-        scroll_wheel_distance: dp(114)
-        bar_width: dp(10)
-        viewclass: 'SelectableLabel'
-        SelectableRecycleBoxLayout:
-            default_size: None, dp(56)
-            default_size_hint: 1, None
-            size_hint_y: .8
-            height: self.minimum_height
-            orientation: 'vertical'
-            multiselect: True
-            RecycleBoxLayout:
-                default_size: None, dp(56)
-                default_size_hint: 1, None
-                size_hint_y: None
-                height: self.minimum_height
-                orientation: 'vertical'
-                spacing: dp(2)
+
+sql_data_list_view = ObjectProperty()
+
+def list(self, *args):
+    categories = sorted(sql_data.keys())
+    list_item_args_converter = \
+        lambda row_index, rec: {'text': rec['name'],
+                                'font_size': "16sp",
+                                'size_hint_y': None,
+                                'height': 50}
+
+    # Here we create a dict adapter with 1..100 integer strings as
+    # sorted_keys, and integers_dict from fixtures as data, passing our
+    # CompositeListItem kv template for the list item view. Then we
+    # create a list view using this adapter. args_converter above converts
+    # dict attributes to ctx attributes.
+    sql_data_dict_adapter = DictAdapter(sorted_keys=categories,
+                                        data=sql_data,
+                                        args_converter=list_item_args_converter,
+                                        selection_mode='single',
+                                        allow_empty_selection=True,
+                                        cls=cartListButton)
+
+    sql_data_list_view = \
+        ListView(adapter=sql_data_dict_adapter,
+                 size_hint=(1, .8))
+
+    self.add_widget(sql_data_list_view)
+
+
+class CartListButton(ListItemButton):
+    pass
+
+
+def display_binary
+     q = '''
+           SELECT * FROM ComputerCarts
+            '''
+
+
+# def display_binary(self, cur):
+            #self.fill(self.db_data(cur))
+
+
+LabelLayout = BoxLayout()
+    layout = BoxLayout(orientation='vertical')
+    layout.add_widget(LabelLayout)
+    LabelLayout.size_hint_y = 0.4
+    SQLHeaderLabel = ['Id', 'Cart Status', 'Current Room', 'Time Req', 'Future Room', 'Future Time']
+    for label in SQLHeaderLabel:
+        labelText = StringProperty('')
+        # labelText = '[ref=' + label.lower() + ']' + label + '[/ref]'
+        # top_label = Label(text=label, markup=True)
+        # widget.size_hint_y = 0.08
+        # LabelLayout.size_hint_y = .8
+        # label = Label(text=labelText, size_hint_y=0.2, font_size="16sp")
+
+        sql = Label(text=label, size_hint_y=0.2, font_size="16sp")
+        LabelLayout.add_widget(sql)
+
+
+class NotificationTime(BoxLayout):
+    pass
+
+
+class CartDB(BoxLayout):
+    cart_list_text_input = ObjectProperty()
+    cart_num_text_input = ObjectProperty()
+    cart_stat_text_input = ObjectProperty()
+    cart_type_text_input = ObjectProperty()
+    cart_CRM_text_input = ObjectProperty()
+    cart_CPd_text_input = ObjectProperty()
+    cart_FRM_text_input = ObjectProperty()
+    cart_FPd_text_input = ObjectProperty()
+    addtl_comments_text_input = ObjectProperty()
+

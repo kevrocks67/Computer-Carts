@@ -1,4 +1,4 @@
-#This file defines the keys for listview dict adapter
+# This file defines the keys for listview dict adapter
 path_to_file = "data.txt"
 data_file = open(path_to_file, 'r')
 array = []
@@ -6,7 +6,7 @@ array = []
 for row in data_file:
     array.append(row)
 
-#print(array)
+# print(array)
 data_file.close()
 
 
