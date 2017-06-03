@@ -73,7 +73,184 @@ RecycleView:
     cart_FRM_text_input: cart_FRM
     cart_FPd_text_input: cart_FPd
 
+<NotificationTime>:
+    Button:
+        text: 'My first Item'
+        size_hint_y: None
+        height: 44
+        on_release: root.select('item1')
+    Label:
+        text: 'Unselectable item'
+        size_hint_y: None
+        height: 44
+    Button:
+        text: 'My second Item'
+        size_hint_y: None
+        height: 44
+        on_release: root.select('item2')
 
+
+<AddEntryScreen>:
+    ActionBar:
+        pos_hint: {'top':1}
+        ActionView:
+            use_separator: True
+            ActionPrevious:
+                title: 'New Entry'
+                with_previous: False
+                on_release: root.manager.transition = SlideTransition(direction="left")
+                on_release: root.manager.current = 'main'
+            ActionOverflow:
+            ActionGroup:
+                ActionButton:
+                    text: 'Save Entry'
+                    on_release: root.add_button(cart_stat.text, cart_crm.text, cart_cpd.text, cart_frm.text, cart_fpd.text)
+                    on_release: root.manager.transition = SlideTransition(direction="left")
+                    on_release: root.manager.current = 'main'
+
+    FloatLayout:
+        TextInput:
+            id: cart_stat
+            multiline: False
+            font_size: 25
+            size_hint: .2, .07
+            pos_hint:{'x': .55, 'y': .82}
+
+        Label:
+            text: "Cart Number:"
+            pos_hint:{'x': -.4, 'y': .36}
+        Label:
+            text: "Status:"
+            pos_hint:{'x': 0, 'y': .36}
+
+        Label:
+            text: "Current Room:"
+            pos_hint:{'x': -.4, 'y': .25}
+        TextInput:
+            id: cart_crm
+            multiline: False
+            font_size: 25
+            size_hint: .2, .07
+            pos_hint:{'x': .18, 'y': .72}
+        Label:
+            text: "Time Req:"
+            pos_hint:{'x': 0, 'y': .25}
+        TextInput:
+            id: cart_cpd
+            multiline: False
+            font_size: 25
+            size_hint: .2, .07
+            pos_hint: {'x': .55, 'y': .72}
+        Label:
+            text: "Future Room Need:"
+            pos_hint: {'x': -.4, 'y': .15}
+        TextInput:
+            id: cart_frm
+            multiline: False
+            font_size: 25
+            size_hint: .2, .07
+            pos_hint: {'x': .18, 'y': .62}
+        Label:
+            text: "Future Time Need"
+            pos_hint: {'x': 0, 'y': .15}
+        TextInput:
+            id: cart_fpd
+            multiline: False
+            font_size: 25
+            size_hint: .2, .07
+            pos_hint: {'x': .60, 'y': .62}
+        Label:
+            text: "Additional Comments"
+            pos_hint: {'x': -0.05, 'y': 0}
+        TextInput:
+            id: addtl_comments
+            font_size: 18
+            size_hint: .5, .35
+            pos_hint: {'x': .20, 'y': 0.08}
+
+<EditEntryScreen>:
+    ActionBar:
+        pos_hint: {'top':1}
+        ActionView:
+            use_separator: True
+            ActionPrevious:
+                title: 'Edit Entry'
+                with_previous: False
+                on_release: root.manager.transition = SlideTransition(direction="left")
+                on_release: root.manager.current = 'main'
+            ActionOverflow:
+            ActionGroup:
+                ActionButton:
+                    text: 'Save Entry'
+                    on_release: root.manager.transition = SlideTransition(direction="left")
+                    on_release: root.manager.current = 'main'
+
+    FloatLayout:
+        Label:
+            text: "Cart Number:"
+            pos_hint:{'x': -.4, 'y': .36}
+        Label:
+            text: "Status:"
+            pos_hint:{'x': 0, 'y': .36}
+        TextInput:
+            id: cart_stat
+            multiline: False
+            font_size: 25
+            size_hint: .2, .07
+            pos_hint:{'x': .55, 'y': .82}
+        Label:
+            text: "Current Room:"
+            pos_hint:{'x': -.4, 'y': .25}
+        TextInput:
+            id: cart_CRM
+            multiline: False
+            font_size: 25
+            size_hint: .2, .07
+            pos_hint:{'x': .18, 'y': .72}
+            readonly: True
+        Label:
+            text: "Time Req:"
+            pos_hint:{'x': 0, 'y': .25}
+        TextInput:
+            id: cart_CPd
+            multiline: False
+            font_size: 25
+            size_hint: .2, .07
+            pos_hint: {'x': .55, 'y': .72}
+            readonly: True
+        Label:
+            text: "Future Room Need:"
+            pos_hint: {'x': -.4, 'y': .15}
+        TextInput:
+            id: cart_FRM
+            multiline: False
+            font_size: 25
+            size_hint: .2, .07
+            pos_hint: {'x': .18, 'y': .62}
+        Label:
+            text: "Future Time Need"
+            pos_hint: {'x': 0, 'y': .15}
+        TextInput:
+            id: cart_FPd
+            multiline: False
+            font_size: 25
+            size_hint: .2, .07
+            pos_hint: {'x': .60, 'y': .62}
+        Label:
+            text: "Additional Comments"
+            pos_hint: {'x': -0.05, 'y': 0}
+        TextInput:
+            id: addtl_comments
+            font_size: 18
+            size_hint: .5, .35
+            pos_hint: {'x': .20, 'y': 0.08}
+
+# background
+canvas.before:
+    Rectangle:
+        pos: self.pos
+        size: self.size
+        source: 'C:\\Users\\Test For Bootpass\\Pictures\\lion-304487_640.png'
 ##################################Python Stuff
 
 #Factory.register('SelectableView', cls=SelectableView)
@@ -163,3 +340,14 @@ class CartDB(BoxLayout):
     cart_FPd_text_input = ObjectProperty()
     addtl_comments_text_input = ObjectProperty()
 
+class AddEntryScreen(Screen):
+    def add_button(self, cart_stat, cart_crm, cart_cpd, cart_frm, cart_fpd):
+        main_screen = MainScreen()
+        main_screen.add_cart(cart_stat, cart_crm, cart_cpd, cart_frm, cart_fpd)
+
+class EditEntryScreen(Screen):
+    def edit_button(self):
+        pass
+
+ sm.add_widget(AddEntryScreen(name='add'))
+ sm.add_widget(EditEntryScreen(name='edit'))
