@@ -4,12 +4,17 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e23900b1-95fe-41e7-ae00-b36b2e3f09ca" name="Default" comment="Merge branch 'master' of https://github.com/kevrocks67/Computer-Carts">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/csslogocut small.png" />
+    <list default="true" id="e23900b1-95fe-41e7-ae00-b36b2e3f09ca" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/uix/csslogocut small.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Deprecated/dataKeys.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Deprecated/deleted stuff.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/config.ini" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/csslogocut small.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dataKeys.py" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/deleted stuff.txt" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ComputerCart.kv" afterPath="$PROJECT_DIR$/ComputerCart.kv" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ComputerCartClientSoftware.py" afterPath="$PROJECT_DIR$/ComputerCartClientSoftware.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/deleted stuff.txt" afterPath="$PROJECT_DIR$/deleted stuff.txt" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,19 +26,19 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ComputerCartClientSoftware.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ComputerCartClientSoftware.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ComputerCartClientSoftware.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="91">
-              <caret line="200" column="0" lean-forward="true" selection-start-line="200" selection-start-column="0" selection-end-line="200" selection-end-column="0" />
+            <state relative-caret-position="2839">
+              <caret line="243" column="64" lean-forward="true" selection-start-line="243" selection-start-column="64" selection-end-line="243" selection-end-column="64" />
               <folding>
-                <element signature="e#0#14#0" expanded="true" />
-                <element signature="e#722#3275#0" expanded="false" />
-                <element signature="e#3310#3425#0" expanded="false" />
-                <element signature="e#7523#7578#0" expanded="false" />
-                <element signature="e#7640#8691#0" expanded="false" />
-                <element signature="e#8728#9272#0" expanded="false" />
-                <element signature="e#9307#9311#0" expanded="false" />
+                <element signature="e#0#19#0" expanded="true" />
+                <element signature="e#756#3427#0" expanded="false" />
+                <element signature="e#3462#3577#0" expanded="false" />
+                <element signature="e#9792#9847#0" expanded="false" />
+                <element signature="e#9909#10960#0" expanded="false" />
+                <element signature="e#10997#12384#0" expanded="false" />
+                <element signature="e#12419#12423#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -42,28 +47,18 @@
       <file leaf-file-name="ComputerCart.kv" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ComputerCart.kv">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="168" column="61" lean-forward="false" selection-start-line="168" selection-start-column="61" selection-end-line="168" selection-end-column="61" />
+            <state relative-caret-position="629">
+              <caret line="37" column="37" lean-forward="false" selection-start-line="37" selection-start-column="37" selection-end-line="37" selection-end-column="37" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dataKeys.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dataKeys.py">
+      <file leaf-file-name="config.ini" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/config.ini">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="36" lean-forward="false" selection-start-line="0" selection-start-column="36" selection-end-line="0" selection-end-column="36" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="deleted stuff.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/deleted stuff.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="287">
-              <caret line="352" column="1" lean-forward="true" selection-start-line="352" selection-start-column="1" selection-end-line="352" selection-end-column="1" />
+            <state relative-caret-position="68">
+              <caret line="4" column="10" lean-forward="false" selection-start-line="4" selection-start-column="10" selection-end-line="4" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -81,6 +76,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>panel</find>
+      <find>register_butt</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -100,8 +96,10 @@
         <option value="$PROJECT_DIR$/ComputerCartMS.kv" />
         <option value="$PROJECT_DIR$/dataKeys.py" />
         <option value="$PROJECT_DIR$/deleted stuff.txt" />
-        <option value="$PROJECT_DIR$/ComputerCart.kv" />
+        <option value="$PROJECT_DIR$/Deprecated/deleted stuff.txt" />
         <option value="$PROJECT_DIR$/ComputerCartClientSoftware.py" />
+        <option value="$PROJECT_DIR$/ComputerCart.kv" />
+        <option value="$PROJECT_DIR$/config.ini" />
       </list>
     </option>
   </component>
@@ -323,7 +321,14 @@
       <option name="project" value="LOCAL" />
       <updated>1496371459863</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Merge branch 'master' of https://github.com/kevrocks67/Computer-Carts&#10;Figured out that RecycleView is not screenmanager friendly so I am now using an animated layout with text boxes on the main screen&#10;Added Login Screen design but it still needs work and it breaks when the password is entered incorrectly. Also added popup for registering users.&#10;Fixed notification dropdown bug&#10;Realized the text inputs were missing the type field and added it. This also lead to the realization that the SQL table is missing a lock status column.&#10;Made Columbia Secondary logo the icon for the application.">
+      <created>1496462810855</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1496462810855</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -337,12 +342,11 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20726173" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21633889" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32991454" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27008548" sideWeight="0.5060514" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.408547" sideWeight="0.49394855" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32991454" sideWeight="0.4969743" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32991454" sideWeight="0.4969743" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26495728" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32991454" sideWeight="0.49394855" order="9" side_tool="false" content_ui="tabs" />
@@ -354,6 +358,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -400,139 +405,85 @@
     <MESSAGE value="Fixed more ScreenManager issues and began process of adding functions to the action bar buttons. Currently the 'Remove' button functions correctly. All changes are local and only pertain to the RecycleView, not the database or data file.&#10;Renamed ComputerCartMS.kv to ComputerCart.kv to avoid overwrite conflicts. Notification manager is broken and needs fixing." />
     <MESSAGE value="All python code is now pep-8 compliant&#10;Clean up of unused imports and code&#10;Login Screen function was added, but is currently not in use. All code is simply for proof of concept and not the final product&#10;More work was done on the add button, but I am struggling with getting the recycleview to update" />
     <MESSAGE value="Merge branch 'master' of https://github.com/kevrocks67/Computer-Carts" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'master' of https://github.com/kevrocks67/Computer-Carts" />
+    <MESSAGE value="Merge branch 'master' of https://github.com/kevrocks67/Computer-Carts&#10;Figured out that RecycleView is not screenmanager friendly so I am now using an animated layout with text boxes on the main screen&#10;Added Login Screen design but it still needs work and it breaks when the password is entered incorrectly. Also added popup for registering users.&#10;Fixed notification dropdown bug&#10;Realized the text inputs were missing the type field and added it. This also lead to the realization that the SQL table is missing a lock status column.&#10;Made Columbia Secondary logo the icon for the application." />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'master' of https://github.com/kevrocks67/Computer-Carts&#10;Figured out that RecycleView is not screenmanager friendly so I am now using an animated layout with text boxes on the main screen&#10;Added Login Screen design but it still needs work and it breaks when the password is entered incorrectly. Also added popup for registering users.&#10;Fixed notification dropdown bug&#10;Realized the text inputs were missing the type field and added it. This also lead to the realization that the SQL table is missing a lock status column.&#10;Made Columbia Secondary logo the icon for the application." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="26" />
+      <option name="time" value="28" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/dataKeys.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="1" lean-forward="false" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ComputerCartClientSoftware.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-            <element signature="e#722#3275#0" expanded="false" />
-            <element signature="e#3310#3425#0" expanded="false" />
-            <element signature="e#7523#7578#0" expanded="false" />
-            <element signature="e#7640#8691#0" expanded="false" />
-            <element signature="e#8728#9272#0" expanded="false" />
-            <element signature="e#9307#9311#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ComputerCartMS.kv" />
-    <entry file="file://$PROJECT_DIR$/deleted stuff" />
-    <entry file="file://$PROJECT_DIR$/dataKeys.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="1" lean-forward="false" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ComputerCartClientSoftware.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="544">
           <caret line="85" column="40" lean-forward="false" selection-start-line="85" selection-start-column="40" selection-end-line="85" selection-end-column="40" />
           <folding>
-            <element signature="e#0#14#0" expanded="true" />
-            <element signature="e#722#3275#0" expanded="false" />
-            <element signature="e#3310#3425#0" expanded="false" />
-            <element signature="e#7523#7578#0" expanded="false" />
-            <element signature="e#7640#8691#0" expanded="false" />
-            <element signature="e#8728#9272#0" expanded="false" />
-            <element signature="e#9307#9311#0" expanded="false" />
+            <element signature="e#0#19#0" expanded="true" />
+            <element signature="e#756#3427#0" expanded="false" />
+            <element signature="e#3462#3577#0" expanded="false" />
+            <element signature="e#9792#9847#0" expanded="false" />
+            <element signature="e#9909#10960#0" expanded="false" />
+            <element signature="e#10997#12384#0" expanded="false" />
+            <element signature="e#12419#12423#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/deleted stuff" />
-    <entry file="file://$PROJECT_DIR$/dataKeys.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="1" lean-forward="false" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/dataKeys.py" />
     <entry file="file://$PROJECT_DIR$/ComputerCartMS.kv" />
     <entry file="file://$PROJECT_DIR$/ComputerCartClientSoftware.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#14#0" expanded="true" />
-            <element signature="e#722#3275#0" expanded="false" />
-            <element signature="e#3310#3425#0" expanded="false" />
-            <element signature="e#7523#7578#0" expanded="false" />
-            <element signature="e#7640#8691#0" expanded="false" />
-            <element signature="e#8728#9272#0" expanded="false" />
-            <element signature="e#9307#9311#0" expanded="false" />
+            <element signature="e#0#19#0" expanded="true" />
+            <element signature="e#756#3427#0" expanded="false" />
+            <element signature="e#3462#3577#0" expanded="false" />
+            <element signature="e#9792#9847#0" expanded="false" />
+            <element signature="e#9909#10960#0" expanded="false" />
+            <element signature="e#10997#12384#0" expanded="false" />
+            <element signature="e#12419#12423#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ComputerCartMS.kv" />
     <entry file="file://$PROJECT_DIR$/deleted stuff" />
-    <entry file="file://$PROJECT_DIR$/dataKeys.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="1" lean-forward="false" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/dataKeys.py" />
     <entry file="file://$PROJECT_DIR$/ComputerCartClientSoftware.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="833">
           <caret line="49" column="0" lean-forward="false" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
           <folding>
-            <element signature="e#0#14#0" expanded="true" />
-            <element signature="e#722#3275#0" expanded="false" />
-            <element signature="e#3310#3425#0" expanded="false" />
-            <element signature="e#7523#7578#0" expanded="false" />
-            <element signature="e#7640#8691#0" expanded="false" />
-            <element signature="e#8728#9272#0" expanded="false" />
-            <element signature="e#9307#9311#0" expanded="false" />
+            <element signature="e#0#19#0" expanded="true" />
+            <element signature="e#756#3427#0" expanded="false" />
+            <element signature="e#3462#3577#0" expanded="false" />
+            <element signature="e#9792#9847#0" expanded="false" />
+            <element signature="e#9909#10960#0" expanded="false" />
+            <element signature="e#10997#12384#0" expanded="false" />
+            <element signature="e#12419#12423#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/deleted stuff" />
-    <entry file="file://$PROJECT_DIR$/dataKeys.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="1" lean-forward="false" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/dataKeys.py" />
     <entry file="file://$PROJECT_DIR$/ComputerCartMS.kv" />
     <entry file="file://$PROJECT_DIR$/ComputerCartClientSoftware.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#14#0" expanded="true" />
-            <element signature="e#722#3275#0" expanded="false" />
-            <element signature="e#3310#3425#0" expanded="false" />
-            <element signature="e#7523#7578#0" expanded="false" />
-            <element signature="e#7640#8691#0" expanded="false" />
-            <element signature="e#8728#9272#0" expanded="false" />
-            <element signature="e#9307#9311#0" expanded="false" />
+            <element signature="e#0#19#0" expanded="true" />
+            <element signature="e#756#3427#0" expanded="false" />
+            <element signature="e#3462#3577#0" expanded="false" />
+            <element signature="e#9792#9847#0" expanded="false" />
+            <element signature="e#9909#10960#0" expanded="false" />
+            <element signature="e#10997#12384#0" expanded="false" />
+            <element signature="e#12419#12423#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -543,13 +494,13 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#14#0" expanded="true" />
-            <element signature="e#722#3275#0" expanded="false" />
-            <element signature="e#3310#3425#0" expanded="false" />
-            <element signature="e#7523#7578#0" expanded="false" />
-            <element signature="e#7640#8691#0" expanded="false" />
-            <element signature="e#8728#9272#0" expanded="false" />
-            <element signature="e#9307#9311#0" expanded="false" />
+            <element signature="e#0#19#0" expanded="true" />
+            <element signature="e#756#3427#0" expanded="false" />
+            <element signature="e#3462#3577#0" expanded="false" />
+            <element signature="e#9792#9847#0" expanded="false" />
+            <element signature="e#9909#10960#0" expanded="false" />
+            <element signature="e#10997#12384#0" expanded="false" />
+            <element signature="e#12419#12423#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -559,13 +510,13 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#14#0" expanded="true" />
-            <element signature="e#722#3275#0" expanded="false" />
-            <element signature="e#3310#3425#0" expanded="false" />
-            <element signature="e#7523#7578#0" expanded="false" />
-            <element signature="e#7640#8691#0" expanded="false" />
-            <element signature="e#8728#9272#0" expanded="false" />
-            <element signature="e#9307#9311#0" expanded="false" />
+            <element signature="e#0#19#0" expanded="true" />
+            <element signature="e#756#3427#0" expanded="false" />
+            <element signature="e#3462#3577#0" expanded="false" />
+            <element signature="e#9792#9847#0" expanded="false" />
+            <element signature="e#9909#10960#0" expanded="false" />
+            <element signature="e#10997#12384#0" expanded="false" />
+            <element signature="e#12419#12423#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -575,30 +526,13 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#14#0" expanded="true" />
-            <element signature="e#722#3275#0" expanded="false" />
-            <element signature="e#3310#3425#0" expanded="false" />
-            <element signature="e#7523#7578#0" expanded="false" />
-            <element signature="e#7640#8691#0" expanded="false" />
-            <element signature="e#8728#9272#0" expanded="false" />
-            <element signature="e#9307#9311#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ComputerCartMS.kv" />
-    <entry file="file://$PROJECT_DIR$/ComputerCartClientSoftware.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-            <element signature="e#722#3275#0" expanded="false" />
-            <element signature="e#3310#3425#0" expanded="false" />
-            <element signature="e#7523#7578#0" expanded="false" />
-            <element signature="e#7640#8691#0" expanded="false" />
-            <element signature="e#8728#9272#0" expanded="false" />
-            <element signature="e#9307#9311#0" expanded="false" />
+            <element signature="e#0#19#0" expanded="true" />
+            <element signature="e#756#3427#0" expanded="false" />
+            <element signature="e#3462#3577#0" expanded="false" />
+            <element signature="e#9792#9847#0" expanded="false" />
+            <element signature="e#9909#10960#0" expanded="false" />
+            <element signature="e#10997#12384#0" expanded="false" />
+            <element signature="e#12419#12423#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -609,13 +543,13 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#14#0" expanded="true" />
-            <element signature="e#722#3275#0" expanded="false" />
-            <element signature="e#3310#3425#0" expanded="false" />
-            <element signature="e#7523#7578#0" expanded="false" />
-            <element signature="e#7640#8691#0" expanded="false" />
-            <element signature="e#8728#9272#0" expanded="false" />
-            <element signature="e#9307#9311#0" expanded="false" />
+            <element signature="e#0#19#0" expanded="true" />
+            <element signature="e#756#3427#0" expanded="false" />
+            <element signature="e#3462#3577#0" expanded="false" />
+            <element signature="e#9792#9847#0" expanded="false" />
+            <element signature="e#9909#10960#0" expanded="false" />
+            <element signature="e#10997#12384#0" expanded="false" />
+            <element signature="e#12419#12423#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -626,13 +560,30 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#14#0" expanded="true" />
-            <element signature="e#722#3275#0" expanded="false" />
-            <element signature="e#3310#3425#0" expanded="false" />
-            <element signature="e#7523#7578#0" expanded="false" />
-            <element signature="e#7640#8691#0" expanded="false" />
-            <element signature="e#8728#9272#0" expanded="false" />
-            <element signature="e#9307#9311#0" expanded="false" />
+            <element signature="e#0#19#0" expanded="true" />
+            <element signature="e#756#3427#0" expanded="false" />
+            <element signature="e#3462#3577#0" expanded="false" />
+            <element signature="e#9792#9847#0" expanded="false" />
+            <element signature="e#9909#10960#0" expanded="false" />
+            <element signature="e#10997#12384#0" expanded="false" />
+            <element signature="e#12419#12423#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ComputerCartMS.kv" />
+    <entry file="file://$PROJECT_DIR$/ComputerCartClientSoftware.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+            <element signature="e#756#3427#0" expanded="false" />
+            <element signature="e#3462#3577#0" expanded="false" />
+            <element signature="e#9792#9847#0" expanded="false" />
+            <element signature="e#9909#10960#0" expanded="false" />
+            <element signature="e#10997#12384#0" expanded="false" />
+            <element signature="e#12419#12423#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -642,13 +593,13 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#14#0" expanded="true" />
-            <element signature="e#722#3275#0" expanded="false" />
-            <element signature="e#3310#3425#0" expanded="false" />
-            <element signature="e#7523#7578#0" expanded="false" />
-            <element signature="e#7640#8691#0" expanded="false" />
-            <element signature="e#8728#9272#0" expanded="false" />
-            <element signature="e#9307#9311#0" expanded="false" />
+            <element signature="e#0#19#0" expanded="true" />
+            <element signature="e#756#3427#0" expanded="false" />
+            <element signature="e#3462#3577#0" expanded="false" />
+            <element signature="e#9792#9847#0" expanded="false" />
+            <element signature="e#9909#10960#0" expanded="false" />
+            <element signature="e#10997#12384#0" expanded="false" />
+            <element signature="e#12419#12423#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -659,13 +610,13 @@
         <state relative-caret-position="289">
           <caret line="63" column="35" lean-forward="false" selection-start-line="63" selection-start-column="35" selection-end-line="63" selection-end-column="35" />
           <folding>
-            <element signature="e#0#14#0" expanded="true" />
-            <element signature="e#722#3275#0" expanded="false" />
-            <element signature="e#3310#3425#0" expanded="false" />
-            <element signature="e#7523#7578#0" expanded="false" />
-            <element signature="e#7640#8691#0" expanded="false" />
-            <element signature="e#8728#9272#0" expanded="false" />
-            <element signature="e#9307#9311#0" expanded="false" />
+            <element signature="e#0#19#0" expanded="true" />
+            <element signature="e#756#3427#0" expanded="false" />
+            <element signature="e#3462#3577#0" expanded="false" />
+            <element signature="e#9792#9847#0" expanded="false" />
+            <element signature="e#9909#10960#0" expanded="false" />
+            <element signature="e#10997#12384#0" expanded="false" />
+            <element signature="e#12419#12423#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -676,13 +627,13 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#14#0" expanded="true" />
-            <element signature="e#722#3275#0" expanded="false" />
-            <element signature="e#3310#3425#0" expanded="false" />
-            <element signature="e#7523#7578#0" expanded="false" />
-            <element signature="e#7640#8691#0" expanded="false" />
-            <element signature="e#8728#9272#0" expanded="false" />
-            <element signature="e#9307#9311#0" expanded="false" />
+            <element signature="e#0#19#0" expanded="true" />
+            <element signature="e#756#3427#0" expanded="false" />
+            <element signature="e#3462#3577#0" expanded="false" />
+            <element signature="e#9792#9847#0" expanded="false" />
+            <element signature="e#9909#10960#0" expanded="false" />
+            <element signature="e#10997#12384#0" expanded="false" />
+            <element signature="e#12419#12423#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -693,13 +644,13 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#14#0" expanded="true" />
-            <element signature="e#722#3275#0" expanded="false" />
-            <element signature="e#3310#3425#0" expanded="false" />
-            <element signature="e#7523#7578#0" expanded="false" />
-            <element signature="e#7640#8691#0" expanded="false" />
-            <element signature="e#8728#9272#0" expanded="false" />
-            <element signature="e#9307#9311#0" expanded="false" />
+            <element signature="e#0#19#0" expanded="true" />
+            <element signature="e#756#3427#0" expanded="false" />
+            <element signature="e#3462#3577#0" expanded="false" />
+            <element signature="e#9792#9847#0" expanded="false" />
+            <element signature="e#9909#10960#0" expanded="false" />
+            <element signature="e#10997#12384#0" expanded="false" />
+            <element signature="e#12419#12423#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -710,13 +661,13 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#14#0" expanded="true" />
-            <element signature="e#722#3275#0" expanded="false" />
-            <element signature="e#3310#3425#0" expanded="false" />
-            <element signature="e#7523#7578#0" expanded="false" />
-            <element signature="e#7640#8691#0" expanded="false" />
-            <element signature="e#8728#9272#0" expanded="false" />
-            <element signature="e#9307#9311#0" expanded="false" />
+            <element signature="e#0#19#0" expanded="true" />
+            <element signature="e#756#3427#0" expanded="false" />
+            <element signature="e#3462#3577#0" expanded="false" />
+            <element signature="e#9792#9847#0" expanded="false" />
+            <element signature="e#9909#10960#0" expanded="false" />
+            <element signature="e#10997#12384#0" expanded="false" />
+            <element signature="e#12419#12423#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -758,47 +709,70 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dataKeys.py">
+    <entry file="file://$PROJECT_DIR$/dataKeys.py" />
+    <entry file="file://$PROJECT_DIR$/deleted stuff.txt" />
+    <entry file="file://$PROJECT_DIR$/Deprecated/dataKeys.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="0" column="36" lean-forward="false" selection-start-line="0" selection-start-column="36" selection-end-line="0" selection-end-column="36" />
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitattributes">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python34/Lib/_collections_abc.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-301">
+          <caret line="574" column="8" lean-forward="false" selection-start-line="574" selection-start-column="8" selection-end-line="574" selection-end-column="8" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/deleted stuff.txt">
+    <entry file="file://$PROJECT_DIR$/Deprecated/deleted stuff.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="352" column="1" lean-forward="true" selection-start-line="352" selection-start-column="1" selection-end-line="352" selection-end-column="1" />
+        <state relative-caret-position="236">
+          <caret line="391" column="75" lean-forward="true" selection-start-line="391" selection-start-column="75" selection-end-line="391" selection-end-column="75" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ComputerCart.kv">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="168" column="61" lean-forward="false" selection-start-line="168" selection-start-column="61" selection-end-line="168" selection-end-column="61" />
+        <state relative-caret-position="629">
+          <caret line="37" column="37" lean-forward="false" selection-start-line="37" selection-start-column="37" selection-end-line="37" selection-end-column="37" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ComputerCartClientSoftware.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="91">
-          <caret line="200" column="0" lean-forward="true" selection-start-line="200" selection-start-column="0" selection-end-line="200" selection-end-column="0" />
+        <state relative-caret-position="2839">
+          <caret line="243" column="64" lean-forward="true" selection-start-line="243" selection-start-column="64" selection-end-line="243" selection-end-column="64" />
           <folding>
-            <element signature="e#0#14#0" expanded="true" />
-            <element signature="e#722#3275#0" expanded="false" />
-            <element signature="e#3310#3425#0" expanded="false" />
-            <element signature="e#7523#7578#0" expanded="false" />
-            <element signature="e#7640#8691#0" expanded="false" />
-            <element signature="e#8728#9272#0" expanded="false" />
-            <element signature="e#9307#9311#0" expanded="false" />
+            <element signature="e#0#19#0" expanded="true" />
+            <element signature="e#756#3427#0" expanded="false" />
+            <element signature="e#3462#3577#0" expanded="false" />
+            <element signature="e#9792#9847#0" expanded="false" />
+            <element signature="e#9909#10960#0" expanded="false" />
+            <element signature="e#10997#12384#0" expanded="false" />
+            <element signature="e#12419#12423#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="10" lean-forward="false" selection-start-line="4" selection-start-column="10" selection-end-line="4" selection-end-column="10" />
+          <folding />
         </state>
       </provider>
     </entry>

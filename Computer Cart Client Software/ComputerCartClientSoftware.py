@@ -1,3 +1,4 @@
+import configparser
 import pymysql
 import pymysql.cursors
 import hashlib
@@ -17,97 +18,89 @@ from kivy.uix.recycleview.layout import LayoutSelectionBehavior
 
 
 Builder.load_file('ComputerCart.kv')
+cfg = configparser.ConfigParser()
 
 
+login = False
 currentObj = 0
-users = []
-salts = []
-hashes = []
 retry = 0
 addState = 1
 editState = 1
 
 
 class LoginScreen(Screen):
+    def __init__(self, **kwargs):
+        super(LoginScreen, self).__init__(**kwargs)
+
+    def settings(self):
+        self.manager.current = 'settings'
+
     def register_butt(self):
         r = RegisterPopup()
         r.open()
 
     def register(self, user, password):
-        global users
-        global salts
-        global hashes
-        # user = input('Enter desired username: ')
-        # password = input('Enter desired password: ')
-
         salt = uuid.uuid4().hex
 
         salted_pass = password + salt
         salted_hash = hashlib.sha512(salted_pass.encode('utf-8')).hexdigest()
 
-        users.append(user)
-        salts.append(salt)
-        hashes.append(salted_hash)
-
+        file = open('config.ini', 'w')
+        cfg.add_section('User:' + user)
+        cfg.set('User:' + user, 'username', user)
+        cfg.set('User:' + user, 'salt', salt)
+        cfg.set('User:' + user, 'hash', salted_hash)
+        cfg.write(file)
+        file.close()
         print('User: {} was registered'.format(user))
-        # self.check_auth()
 
     def check_auth(self, user, password):
-        global users
-        global salts
-        global hashes
         global retry
-        # while True:
-        # user = input('Enter username: ')
-        if user in users:
-            print('Username exists')
-            index = users.index(user)
-            # self.ids.inp_username.text = ''
-            self.ids.inp_password.text = ''
-            # break
-            # for retry in range(5):
-            # password = input('Enter password: ')
+        global login
 
-            salt = salts[index]
-
-            salted_pass = password + salt
-            salted_hash = hashlib.sha512(salted_pass.encode('utf-8')).hexdigest()
-
-            stored_hash = hashes[index]
-
-            if stored_hash == salted_hash:
-                print('Login Successful')
-                self.manager.current = 'main'
-                # break
-
-            else:
-                print('Your password is incorrect;Attempt:{}/5'.format(retry + 1))
-                retry = retry + 1
+        with open('config.ini', 'r+') as configfile:
+            cfg.read('config.ini')
+            if 'User:' + user in cfg.sections():
+                print('Username exists')
                 self.ids.inp_password.text = ''
 
-                if retry == 5:
-                    print('You have made too many attempts. Try again later!')
-                    print('Would you like to register a new account?')
-                    response = input('Yes or No: ')
+                salt = cfg.get('User:' + user, 'salt')
 
-                    if response.lower == 'yes' or 'y':
-                        print('Starting register function...')
-                        retry = 0
-                        self.ids.inp_username.text = ''
-                        self.register_butt()
+                salted_pass = password + salt
+                salted_hash = hashlib.sha512(salted_pass.encode('utf-8')).hexdigest()
 
-                    elif response.lower == 'no' or 'n':
-                        print('Thank you for your time. Closing application...')
-                        sys.exit(1)
+                stored_hash = cfg.get('User:' + user, 'hash')
 
-        else:
-            print('User does not exist')
-            self.ids.inp_username.text = ''
-            self.ids.inp_password.text = ''
+                if stored_hash == salted_hash:
+                    print('Login Successful')
+                    self.manager.current = 'main'
+                    login = True
+                else:
+                    print('Your password is incorrect;Attempt:{}/5'.format(retry + 1))
+                    retry = retry + 1
+                    self.ids.inp_password.text = ''
 
-    def __init__(self, **kwargs):
-        super(LoginScreen, self).__init__(**kwargs)
-        # self.register()
+                    if retry == 5:
+                        print('You have made too many attempts. Try again later!')
+                        print('Would you like to register a new account?')
+                        response = input('Yes or No: ')
+
+                        if response.lower == 'yes' or 'y':
+                            print('Starting register function...')
+                            retry = 0
+                            self.ids.inp_username.text = ''
+                            self.register_butt()
+                        elif response.lower == 'no' or 'n':
+                            print('Thank you for your time. Closing application...')
+                            sys.exit(1)
+                        else:
+                            print('That is not a valid answer')
+            else:
+                print('User does not exist')
+                self.ids.inp_username.text = ''
+                self.ids.inp_password.text = ''
+
+        configfile.close()
 
 
 class RegisterPopup(Popup):
@@ -121,16 +114,28 @@ class MainScreen(Screen):
     def __init__(self, **kwargs):
         super(MainScreen, self).__init__(**kwargs)
 
-    connection = pymysql.connect(host='localhost',
-                                 user='root',
-                                 password='m@5T3r',
-                                 db='computercarts')
+    with open('config.ini', 'r+') as configfile:
+        cfg.read('config.ini')
+        sql_host = cfg.get('db', 'host')
+        sql_port = int(cfg.get('db', 'port'))
+        sql_user = cfg.get('db', 'username')
+        sql_password = cfg.get('db', 'password')
+        sql_db = cfg.get('db', 'db')
+
+    configfile.close()
+
+    connection = pymysql.connect(host=sql_host,
+                                 port=sql_port,
+                                 user=sql_user,
+                                 password=sql_password,
+                                 db=sql_db)
+
     # Connect to the database
     try:
         print("Connecting to mySQL...")
         with connection.cursor() as cur:
             cur.execute("SELECT * FROM ComputerCarts")
-        connection.commit()
+            connection.commit()
 
         def db_data(self, cur):
             vector = []
@@ -184,11 +189,11 @@ class MainScreen(Screen):
             line = comma_line.replace(",", "              ")
 
             self.ids.cart_type.text = ''
-            # self.ids.cart_stat.text = ''
             self.ids.cart_crm.text = ''
             self.ids.cart_cpd.text = ''
             self.ids.cart_frm.text = ''
             self.ids.cart_fpd.text = ''
+            self.ids.cart_stat.text = ''
 
             array2 = [{'text': line, 'is_selected': False}]
             self.ids.rv.data.extend(array2)
@@ -196,34 +201,68 @@ class MainScreen(Screen):
             self.show_add()
             self.ids.rv.refresh_from_data()
 
-        def edit_cart(self):
-            pass
+        def edit_cart(self, cart_type_e, cart_crm_e, cart_cpd_e, cart_frm_e, cart_fpd_e):
+            comma_line = str(self.ids.cart_id_e.text) + ',' + str(cart_type_e) + ',' + ',' + str(cart_crm_e) + ',' + \
+                         str(cart_cpd_e) + ',' + str(cart_frm_e) + ',' + str(cart_fpd_e)
+
+            line = comma_line.replace(",", "              ")
+
+            self.ids.rv.data[currentObj]['text'] = line
+            self.ids.rv.refresh_from_data()
+            self.ids.rv.layout_manager.clear_selection()
+            self.show_edit()
 
         def show_add(self):
             global addState
             global editState
+            self.ids.cart_id.text = str(len(self.ids.rv.data) + 1)
             addState = addState + 1
             if addState % 2 == 0:
                 if editState % 2 == 0:
                     self.show_edit()
-                slide_in = Animation(x=self.width)
+                slide_in = Animation(x=self.width + 20)
                 slide_in.start(self.ids.AddBox)
-
             else:
-                slide_out = Animation(x=-self.width)
+                slide_out = Animation(x=-self.width + 20)
                 slide_out.start(self.ids.AddBox)
 
         def show_edit(self):
             global editState
             global addState
+            self.ids.cart_id_e.text = ''
+            self.ids.cart_type_e.text = ''
+            self.ids.cart_crm_e.text = ''
+            self.ids.cart_cpd_e.text = ''
+            self.ids.cart_frm_e.text = ''
+            self.ids.cart_fpd_e.text = ''
+
             editState = editState + 1
             if editState % 2 == 0:
                 if addState % 2 == 0:
                     self.show_add()
-                slide_in = Animation(x=self.width)
+
+                prev_data = self.ids.rv.data[currentObj]['text']
+                prev_data = prev_data.split('               ')
+                prev_data_id = prev_data[0]
+                prev_data_type = prev_data[1]
+                prev_data_crm = prev_data[2]
+                prev_data_cpd = prev_data[3]
+                prev_data_frm = prev_data[4]
+                prev_data_fpd = prev_data[5]
+                prev_data_fpd = prev_data_fpd.strip('\n')
+                # prev_data_stat = prev_data[6]
+
+                self.ids.cart_id_e.text = prev_data_id
+                self.ids.cart_type_e.text = prev_data_type
+                self.ids.cart_crm_e.text = prev_data_crm
+                self.ids.cart_cpd_e.text = prev_data_cpd
+                self.ids.cart_frm_e.text = prev_data_frm
+                self.ids.cart_fpd_e.text = prev_data_fpd
+                # self.ids.cart_stat_e.text = prev_data_stat
+                slide_in = Animation(x=self.width + 20)
                 slide_in.start(self.ids.EditBox)
             else:
-                slide_out = Animation(x=-self.width)
+                slide_out = Animation(x=-self.width + 20)
                 slide_out.start(self.ids.EditBox)
 
         print("Connection succeeded...")
@@ -274,8 +313,32 @@ class SelectableLabel(RecycleDataViewBehavior, Label):
 
 
 class SettingsScreen(Screen):
-    def set_sql_cred(self, sql_user, sql_pass, sql_port):
-        pass
+    def set_sql_cred(self, sql_host, sql_port, sql_user, sql_pass, sql_db):
+        file = open('config.ini', 'w')
+        if 'db' in cfg.sections():
+            cfg.set('db', 'host', sql_host)
+            cfg.set('db', 'port', sql_port)
+            cfg.set('db', 'username', sql_user)
+            cfg.set('db', 'password', sql_pass)
+            cfg.set('db', 'db', sql_db)
+            cfg.write(file)
+            file.close()
+        else:
+            cfg.add_section('db')
+            cfg.set('db', 'host', sql_host)
+            cfg.set('db', 'port', sql_port)
+            cfg.set('db', 'username', sql_user)
+            cfg.set('db', 'password', sql_pass)
+            cfg.set('db', 'db', sql_db)
+            cfg.write(file)
+            file.close()
+
+    def buttons(self):
+        global login
+        if login:
+            self.manager.current = 'main'
+        else:
+            self.manager.current = 'login'
 
     def set_time_5(self):
         print("You will be notified in 5 Minutes")
@@ -309,12 +372,12 @@ class ComputerCartMSApp(App):
     def build(self):
         self.title = 'Computer Cart Management Software Alpha 4.0'
         # self.icon = 'some cool logo I need to design'
-        self.icon = 'csslogocut small.png'
+        self.icon = 'uix/csslogocut small.png'
         sm = ScreenManager()
         sm.add_widget(LoginScreen(name='login'))
         sm.add_widget(MainScreen(name='main'))
         sm.add_widget(SettingsScreen(name='settings'))
-        sm.current = 'main'
+        sm.current = 'login'
         return sm
 
 

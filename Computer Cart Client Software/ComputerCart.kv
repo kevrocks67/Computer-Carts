@@ -25,6 +25,8 @@
                 pos_hint: {'x':.4, 'y':.5}
                 height: self.minimum_height
                 hint_text: 'Username'
+                multiline: False
+                write_tab: False
                 halign: 'justify'
                 border: 10,10,10,10
 
@@ -34,7 +36,9 @@
                 pos_hint: {'x':.4, 'y':.42}
                 height: self.minimum_height
                 hint_text: 'Password'
+                multiline: False
                 password: True
+                write_tab: False
                 halign: 'justify'
                 border: 10,10,10,10
 
@@ -52,6 +56,14 @@
                 pos_hint: {'x':.33, 'y':.3}
                 on_release: root.register_butt()
 
+            Button:
+                text: 'Settings'
+                size_hint: None, None
+                height: '48dp'
+                pos_hint: {'x':.86, 'y':0.02}
+                on_release: root.manager.transition = SlideTransition(direction="left")
+                on_release: root.settings()
+
 <RegisterPopup>:
     title: 'Register New Account'
     size_hint: .75, .75
@@ -62,12 +74,16 @@
             hint_text: 'Desired Username'
             size_hint: .5, .1
             pos_hint: {'x':.2, 'y':.6}
+            multiline: False
+            write_tab: False
 
         TextInput:
             id:pwd
             hint_text: 'Desired Password'
             size_hint: .5, .1
             pos_hint: {'x':.2, 'y':.4}
+            multiline: False
+            write_tab: False
 
         Button:
             id: RegisterButton
@@ -91,6 +107,7 @@
         Rectangle:
             pos: self.pos
             size: self.size
+
 <MainScreen>:
     rv: rv
     RecycleView:
@@ -128,40 +145,50 @@
 
             BoxLayout:
                 spacing: dp(8)
+
+                Label:
+                    id: cart_id
+                    text: ''
+
                 TextInput:
                     id: cart_type
                     size_hint_x: None
                     hint_text: 'Cart Type'
-
-               # TextInput:
-                  #  id: cart_stat
-                   # size_hint_x: None
-                   # hint_text: 'Status'
-                   # padding: dp(10), dp(10), 0, 0
+                    write_tab: False
 
                 TextInput:
                     id: cart_crm
                     multiline: False
                     size_hint_x: None
                     hint_text: 'Current Room'
+                    write_tab: False
 
                 TextInput:
                     id: cart_cpd
                     multiline: False
                     size_hint_x: None
                     hint_text: 'Current Period'
+                    write_tab: False
 
                 TextInput:
                     id: cart_frm
                     multiline: False
                     size_hint_x: None
                     hint_text: 'Future Room'
+                    write_tab: False
 
                 TextInput:
                     id: cart_fpd
                     multiline: False
                     size_hint_x: None
                     hint_text: 'Future Period'
+                    write_tab: False
+
+                TextInput:
+                    id: cart_stat
+                    size_hint_x: None
+                    hint_text: 'Status'
+                    write_tab: False
 
                 Button:
                     text: 'Add Cart'
@@ -182,31 +209,56 @@
 
             BoxLayout:
                 spacing: dp(8)
+
+                Label:
+                    id: cart_id_e
+                    text: ''
+                TextInput:
+                    id: cart_type_e
+                    size_hint_x: None
+                    multiline: False
+                    hint_text: 'Cart Type'
+                    write_tab: False
+
+                TextInput:
+                    id: cart_crm_e
+                    size_hint_x: None
+                    multiline: False
+                    hint_text: 'Current Room'
+                    write_tab: False
+
+                TextInput:
+                    id: cart_cpd_e
+                    size_hint_x: None
+                    multiline: False
+                    hint_text: 'Current Period'
+                    write_tab: False
+
+                TextInput:
+                    id: cart_frm_e
+                    size_hint_x: None
+                    multiline: False
+                    hint_text: 'Future Room'
+                    write_tab: False
+
+                TextInput:
+                    id: cart_fpd_e
+                    size_hint_x: None
+                    multiline: False
+                    hint_text: 'Future Period'
+                    write_tab: False
+
                 TextInput:
                     id: cart_stat_e
-                    size_hint_x: 0.6
+                    size_hint_x: None
+                    multiline: False
                     hint_text: 'Status'
-                    padding: dp(10), dp(10), 0, 0
+                    write_tab: False
 
-            TextInput:
-                id: cart_crm_e
-                hint_text: 'Current Room'
-
-            TextInput:
-                id: cart_cpd_e
-                hint_text: 'Current Period'
-
-            TextInput:
-                id: cart_frm_e
-                hint_text: 'Future Room'
-
-            TextInput:
-                id: cart_fpd_e
-                hint_text: 'Future Period'
-
-            Button:
-                text: 'Edit Cart'
-                on_release: root.edit_cart(cart_stat.text, cart_crm.text, cart_cpd.text, cart_frm.text, cart_fpd.text)
+                Button:
+                    text: 'Edit Cart'
+                    size_hint_x: None
+                    on_release: root.edit_cart(cart_type_e.text, cart_crm_e.text, cart_cpd_e.text, cart_frm_e.text, cart_fpd_e.text)
 
     ActionBar:
         pos_hint: {'top':1}
@@ -250,48 +302,78 @@
                 title: 'Settings'
                 with_previous: False
                 on_release: root.manager.transition = SlideTransition(direction="right")
-                on_release: root.manager.current = 'main'
+                on_release: root.buttons()
             ActionOverflow:
             ActionGroup:
                 ActionButton:
                     text: 'Save Settings'
-                    on_release: root.manager.transition = SlideTransition(direction="left")
-                    on_release: root.manager.current = 'main'
                     on_release: root.manager.transition = SlideTransition(direction="right")
+                    on_release: root.buttons()
+                    on_release: root.set_sql_cred(sql_address.text, sql_port.text, sql_user.text, sql_password.text, sql_db.text)
 
     FloatLayout:
         Label:
-            text: 'SQL Address'
+            text: 'SQL Username'
             pos_hint: {'x': -.25, 'y': .40}
-
         TextInput:
-            id: SQL Address
+            id: sql_user
             size_hint: .4, .07
             pos_hint: {'x': .05, 'y': .8}
             font_size: 25
             multiline: False
-            input_filter: lambda text, from_undo: text[:25 - len(self.text)]
+            write_tab: False
+            input_filter: lambda text, from_undo: text[:20 - len(self.text)]
+
         Label:
             text: 'SQL Password'
             pos_hint: {'x': .25, 'y': .40}
         TextInput:
-            id: SQL Password
+            id: sql_password
             size_hint: .4, .07
             pos_hint: {'x': .55, 'y': .8}
             font_size: 25
             password: True
             multiline: False
+            write_tab: False
             input_filter: lambda text, from_undo: text[:31 - len(self.text)]
+
         Label:
-            text: 'SQL Port'
-            pos_hint: {'x': -0.25, 'y': .27}
+            text: 'SQL Address'
+            pos_hint: {'x': -.25, 'y': .27}
         TextInput:
-            id: SQL Port
+            id: sql_address
             size_hint: .4, .07
             pos_hint: {'x': .05, 'y': .68}
             font_size: 25
             multiline: False
+            write_tab: False
+            input_filter: lambda text, from_undo: text[:25 - len(self.text)]
+
+        Label:
+            text: 'SQL Port'
+            pos_hint: {'x': 0.03, 'y': .27}
+        TextInput:
+            id: sql_port
+            size_hint: .15, .07
+            pos_hint: {'x': .46, 'y': .68}
+            font_size: 25
+            multiline: False
+            write_tab: False
             input_filter: lambda text, from_undo: text[:5 - len(self.text)]
+
+        Label:
+            text: 'SQL Table'
+            pos_hint: {'x': .30, 'y': .27}
+        TextInput:
+            id: sql_db
+            size_hint: .3, .07
+            pos_hint: {'x': .65, 'y': .68}
+            font_size: 25
+            multiline: False
+            write_tab: False
+            input_filter: lambda text, from_undo: text[:20 - len(self.text)]
+
+
         Label:
             text: 'Notification Settings'
             bold: True
@@ -305,6 +387,7 @@
             pos_hint: {'x': .15, 'y': .55}
             font_size: 25
             multiline: False
+            write_tab: False
             input_filter: lambda text, from_undo: text[:48 - len(self.text)]
         Label:
             text: 'Current Emails'
@@ -314,6 +397,7 @@
             pos_hint: {'x': .3, 'y': .25}
             font_size: 25
             multiline: False
+            write_tab: False
             input_filter: lambda text, from_undo: text[:48 - len(self.text)]
         Button:
             id: btn

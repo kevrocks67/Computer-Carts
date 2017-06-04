@@ -351,3 +351,74 @@ class EditEntryScreen(Screen):
 
  sm.add_widget(AddEntryScreen(name='add'))
  sm.add_widget(EditEntryScreen(name='edit'))
+
+ ############################################################### Login Screen with lists
+
+users = []
+salts = []
+hashes = []
+
+def register(self):
+    global users
+    global salts
+    global hashes
+    # user = input('Enter desired username: ')
+    # password = input('Enter desired password: ')
+
+    users.append(user)
+    salts.append(salt)
+    hashes.append(salted_hash)
+
+def check_auth(self):
+    global users
+    global salts
+    global hashes
+
+    # while True:
+    # user = input('Enter username: ')
+
+    # if user in users:
+    #     print('Username exists')
+    #     index = users.index(user)
+    #     # self.ids.inp_username.text = ''
+    #     self.ids.inp_password.text = ''
+    #     # break
+    #     # for retry in range(5):
+    #     # password = input('Enter password: ')
+    #
+    #     salt = salts[index]
+    #
+    #     salted_pass = password + salt
+    #     salted_hash = hashlib.sha512(salted_pass.encode('utf-8')).hexdigest()
+    #
+    #     stored_hash = hashes[index]
+    #
+    #     if stored_hash == salted_hash:
+    #         print('Login Successful')
+    #         self.manager.current = 'main'
+    #         # break
+    #
+    #     else:
+    #         print('Your password is incorrect;Attempt:{}/5'.format(retry + 1))
+    #         retry = retry + 1
+    #         self.ids.inp_password.text = ''
+    #
+    #         if retry == 5:
+    #             print('You have made too many attempts. Try again later!')
+    #             print('Would you like to register a new account?')
+    #             response = input('Yes or No: ')
+    #
+    #             if response.lower == 'yes' or 'y':
+    #                 print('Starting register function...')
+    #                 retry = 0
+    #                 self.ids.inp_username.text = ''
+    #                 self.register_butt()
+    #
+    #             elif response.lower == 'no' or 'n':
+    #                 print('Thank you for your time. Closing application...')
+    #                 sys.exit(1)
+    #
+    # else:
+    #     print('User does not exist')
+    #     self.ids.inp_username.text = ''
+    #     self.ids.inp_password.text = ''
