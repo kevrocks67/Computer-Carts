@@ -5,16 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e23900b1-95fe-41e7-ae00-b36b2e3f09ca" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/uix/csslogocut small.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Deprecated/dataKeys.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Deprecated/deleted stuff.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/config.ini" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/csslogocut small.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dataKeys.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/deleted stuff.txt" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ComputerCart.kv" afterPath="$PROJECT_DIR$/ComputerCart.kv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ComputerCartClientSoftware.py" afterPath="$PROJECT_DIR$/ComputerCartClientSoftware.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config.ini" afterPath="$PROJECT_DIR$/config.ini" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -58,7 +50,7 @@
         <entry file="file://$PROJECT_DIR$/config.ini">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="68">
-              <caret line="4" column="10" lean-forward="false" selection-start-line="4" selection-start-column="10" selection-end-line="4" selection-end-column="10" />
+              <caret line="4" column="17" lean-forward="false" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -82,8 +74,8 @@
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
       <list>
-        <option value="kevrocks67 &lt;kevrocks67@users.noreply.github.com&gt;" />
         <option value="Kevin Diaz &lt;kevrocks67@gmail.com&gt;" />
+        <option value="kevrocks67 &lt;kevrocks67@users.noreply.github.com&gt;" />
       </list>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -328,7 +320,14 @@
       <option name="project" value="LOCAL" />
       <updated>1496462810855</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Functional methods of application is complete&#10;Add and edit functions work, but need SQL implementation&#10;Unlock/Lock Table needs to be added to SQL file&#10;Edit Function has bug when trying to re-edit the same item&#10;Login screen still needs some conversions from command line to kivy&#10;Login Screen and SQL settings were configured using ConfigParser. All credentials will be stored in 'config.ini'&#10;Must remember to configure SQL settings in 'config.ini' or else app will crash&#10;Settings screen was updated to properly accommodate the correct SQL credentials&#10;Id names were updated for SQL credential boxes&#10;Edit function TextInput id names were renamed to avoid collision&#10;Added DataKeys and deleted items to a 'deprecated' folder since these items are either no longer used or unable to be run&#10;Placed App icon in uix folder since I expect to use more pictures in order to make a nicer UI&#10;Scrolling in the selectable RecycleView is broken. After about 10 items are added to the view, it does not accept further input">
+      <created>1496607842742</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1496607842742</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -342,11 +341,11 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21633889" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21633889" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32991454" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27008548" sideWeight="0.5060514" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.408547" sideWeight="0.49394855" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32991454" sideWeight="0.4969743" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32991454" sideWeight="0.4969743" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26495728" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32991454" sideWeight="0.49394855" order="9" side_tool="false" content_ui="tabs" />
@@ -406,7 +405,9 @@
     <MESSAGE value="All python code is now pep-8 compliant&#10;Clean up of unused imports and code&#10;Login Screen function was added, but is currently not in use. All code is simply for proof of concept and not the final product&#10;More work was done on the add button, but I am struggling with getting the recycleview to update" />
     <MESSAGE value="Merge branch 'master' of https://github.com/kevrocks67/Computer-Carts" />
     <MESSAGE value="Merge branch 'master' of https://github.com/kevrocks67/Computer-Carts&#10;Figured out that RecycleView is not screenmanager friendly so I am now using an animated layout with text boxes on the main screen&#10;Added Login Screen design but it still needs work and it breaks when the password is entered incorrectly. Also added popup for registering users.&#10;Fixed notification dropdown bug&#10;Realized the text inputs were missing the type field and added it. This also lead to the realization that the SQL table is missing a lock status column.&#10;Made Columbia Secondary logo the icon for the application." />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'master' of https://github.com/kevrocks67/Computer-Carts&#10;Figured out that RecycleView is not screenmanager friendly so I am now using an animated layout with text boxes on the main screen&#10;Added Login Screen design but it still needs work and it breaks when the password is entered incorrectly. Also added popup for registering users.&#10;Fixed notification dropdown bug&#10;Realized the text inputs were missing the type field and added it. This also lead to the realization that the SQL table is missing a lock status column.&#10;Made Columbia Secondary logo the icon for the application." />
+    <MESSAGE value="Functional methods of application is complete&#10;Add and edit functions work, but need SQL implementation&#10;Unlock/Lock Table needs to be added to SQL file&#10;Edit Function has bug when trying to re-edit the same item&#10;Login screen still needs some conversions from command line to kivy&#10;Login Screen and SQL settings were configured using ConfigParser. All credentials will be stored in 'config.ini'&#10;Must remember to configure SQL settings in 'config.ini' or else app will crash&#10;Settings screen was updated to properly accommodate the correct SQL credentials&#10;Id names were updated for SQL credential boxes&#10;Edit function TextInput id names were renamed to avoid collision&#10;Added DataKeys and deleted items to a 'deprecated' folder since these items are either no longer used or unable to be run&#10;Placed App icon in uix folder since I expect to use more pictures in order to make a nicer UI&#10;Scrolling in the selectable RecycleView is broken. After about 10 items are added to the view, it does not accept further input" />
+    <option name="LAST_COMMIT_MESSAGE" value="Functional methods of application is complete&#10;Add and edit functions work, but need SQL implementation&#10;Unlock/Lock Table needs to be added to SQL file&#10;Edit Function has bug when trying to re-edit the same item&#10;Login screen still needs some conversions from command line to kivy&#10;Login Screen and SQL settings were configured using ConfigParser. All credentials will be stored in 'config.ini'&#10;Must remember to configure SQL settings in 'config.ini' or else app will crash&#10;Settings screen was updated to properly accommodate the correct SQL credentials&#10;Id names were updated for SQL credential boxes&#10;Edit function TextInput id names were renamed to avoid collision&#10;Added DataKeys and deleted items to a 'deprecated' folder since these items are either no longer used or unable to be run&#10;Placed App icon in uix folder since I expect to use more pictures in order to make a nicer UI&#10;Scrolling in the selectable RecycleView is broken. After about 10 items are added to the view, it does not accept further input" />
+    <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -771,7 +772,7 @@
     <entry file="file://$PROJECT_DIR$/config.ini">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
-          <caret line="4" column="10" lean-forward="false" selection-start-line="4" selection-start-column="10" selection-end-line="4" selection-end-column="10" />
+          <caret line="4" column="17" lean-forward="false" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
           <folding />
         </state>
       </provider>
