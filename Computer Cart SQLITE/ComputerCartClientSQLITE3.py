@@ -1,28 +1,30 @@
 import configparser
-import pymysql
-import pymysql.cursors
+import sqlite3
 import hashlib
 import uuid
 import sys
 from kivy.app import App
 from kivy.lang import Builder
+from kivy.core.window import Window
 from kivy.uix.label import Label
 from kivy.uix.popup import Popup
-from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.uix.screenmanager import ScreenManager, Screen, SlideTransition
 from kivy.animation import Animation
 from kivy.properties import BooleanProperty
 from kivy.uix.recycleview.views import RecycleDataViewBehavior
 from kivy.uix.recycleboxlayout import RecycleBoxLayout
 from kivy.uix.behaviors import FocusBehavior
 from kivy.uix.recycleview.layout import LayoutSelectionBehavior
+from uix.toast import Toast
 
 
 Builder.load_file('ComputerCart.kv')
 cfg = configparser.ConfigParser()
 
-
 login = False
+populated = False
 currentObj = 0
+itemSelected = False
 retry = 0
 addState = 1
 editState = 1
@@ -31,6 +33,9 @@ editState = 1
 class LoginScreen(Screen):
     def __init__(self, **kwargs):
         super(LoginScreen, self).__init__(**kwargs)
+
+    def _show_toast(self, text):
+        self.ids['toast'].show(text)
 
     def settings(self):
         self.manager.current = 'settings'
@@ -53,6 +58,7 @@ class LoginScreen(Screen):
         cfg.write(file)
         file.close()
         print('User: {} was registered'.format(user))
+        self._show_toast('User: {} was registered'.format(user))
 
     def check_auth(self, user, password):
         global retry
@@ -73,33 +79,38 @@ class LoginScreen(Screen):
 
                 if stored_hash == salted_hash:
                     print('Login Successful')
+                    self.manager.transition = SlideTransition(direction="left")
                     self.manager.current = 'main'
                     login = True
                 else:
                     print('Your password is incorrect;Attempt:{}/5'.format(retry + 1))
+                    self._show_toast('Your Password is incorrect\nAttempt:{}/5'.format(retry + 1))
                     retry = retry + 1
                     self.ids.inp_password.text = ''
 
                     if retry == 5:
                         print('You have made too many attempts. Try again later!')
                         print('Would you like to register a new account?')
-                        response = input('Yes or No: ')
-                        response = str(response)
-                        response = response.lower()
-
-                        if response == 'yes' or response == 'y':
-                            print('Starting register function...')
-                            retry = 0
-                            self.ids.inp_username.text = ''
-                            self.register_butt()
-                        elif response == 'no' or response == 'n':
-                            print('Thank you for your time. Closing application...')
-                            app.on_quit()
-                            sys.exit(0)
-                        else:
-                            print('That is not a valid answer')
+                        self._show_toast('Too many attempts!')
+                        self.register_butt()
+##                        response = input('Yes or No: ')
+##                        response = str(response)
+##                        response = response.lower()
+##
+##                        if response == 'yes' or response == 'y':
+##                            print('Starting register function...')
+##                            retry = 0
+##                            self.ids.inp_username.text = ''
+##                            self.register_butt()
+##                        elif response == 'no' or response == 'n':
+##                            print('Thank you for your time. Closing application...')
+##                            app.on_quit()
+##                            sys.exit(0)
+##                        else:
+##                            print('That is not a valid answer')
             else:
                 print('User does not exist')
+                self._show_toast('User does not exist')
                 self.ids.inp_username.text = ''
                 self.ids.inp_password.text = ''
 
@@ -116,74 +127,49 @@ class RegisterPopup(Popup):
 class MainScreen(Screen):
     def __init__(self, **kwargs):
         super(MainScreen, self).__init__(**kwargs)
+        self.replace_text('UpdateSQL')
 
     with open('config.ini', 'r+') as configfile:
         cfg.read('config.ini')
-        sql_host = cfg.get('db', 'host')
-        sql_port = int(cfg.get('db', 'port'))
-        sql_user = cfg.get('db', 'username')
-        sql_password = cfg.get('db', 'password')
-        sql_db = cfg.get('db', 'db')
         tableExists = cfg.get('db', 'table_exists')
 
     configfile.close()
 
-    connection = pymysql.connect(host=sql_host,
-                                 port=sql_port,
-                                 user=sql_user,
-                                 password=sql_password,
-                                 db=sql_db)
+    connection = sqlite3.connect('carts.db')
+    cur = connection.cursor()
 
-    # Connect to the database
     try:
         print("Connecting to mySQL...")
-        with connection.cursor() as cur:
-            cur.execute("SHOW TABLES LIKE 'computercarts'")
-            connection.commit()
-            tables = cur.fetchall()
-            tables = str(tables)
-
-            if tables == "(('computercarts',),)":
-                tableExists = True
-            else:
-                tableExists = False
-
-            if tableExists:
-                print('Table ComputerCarts Exists')
-                cur.execute("SELECT * FROM ComputerCarts")
-                connection.commit()
-            else:
-                print('Creating table ComputerCarts...')
-                cur.execute('''CREATE TABLE ComputerCarts (\
-                                                  CartNumber int(11) DEFAULT NULL,\
-                                                  ComputerType text,\
-                                                  CurrentLocation int(11) DEFAULT NULL,\
-                                                  TimeAtLocation text,\
-                                                  FutureLocation int(11) DEFAULT NULL,\
-                                                  FutureTime text,\
-                                                  CartStatus text )''')
-                connection.commit()
-                cur.execute("INSERT INTO ComputerCarts VALUES\
-                                                    (1,'Printer Cart',NULL,NULL,NULL,NULL,NULL),\
-                                                    (2,'Macbooks',412,'1-4',303,'5-8',NULL),\
-                                                    (3,'Yellow Lenovo',NULL,NULL,NULL,NULL,NULL),\
-                                                    (4,'Black Lenovo',NULL,NULL,NULL,NULL,NULL),\
-                                                    (5,'Engineering Lenovo',NULL,NULL,NULL,NULL,NULL),\
-                                                    (6,'Chromebook',NULL,NULL,NULL,NULL,NULL),\
-                                                    (7,'Small Lenovo ',NULL,NULL,NULL,NULL,NULL)")
-
-                connection.commit()
-
+        cur.execute("SELECT * FROM computercarts")
+        connection.commit()
+        
         def db_data(self, cur):
-            vector = []
-            result = cur.fetchall()
-            for row in result:
-                string = str(row[0]) + "," + str(row[1]) + "," + str(row[2]) + "," + str(row[3]) + "," + str(row[4]) + \
-                         "," + str(row[5]) + "," + str(row[6])
-                vector.append(string)
-            return vector
+            global populated
+
+            if populated:
+                connection = sqlite3.connect('carts.db')
+                cur = connection.cursor()
+                cur.execute("SELECT * FROM computercarts")
+                connection.commit()
+                
+                vector = []
+                result = cur.fetchall()
+                for row in result:
+                    string = str(row[0]) + "," + str(row[1]) + "," + str(row[2]) + "," + str(row[3]) + "," + str(row[4]) + \
+                             "," + str(row[5]) + "," + str(row[6])
+                    vector.append(string)
+                return vector
+            else:
+                vector = []
+                result = cur.fetchall()
+                for row in result:
+                    string = str(row[0]) + "," + str(row[1]) + "," + str(row[2]) + "," + str(row[3]) + "," + str(row[4]) + \
+                             "," + str(row[5]) + "," + str(row[6])
+                    vector.append(string)
+                return vector
 
         def fill(self, strings):
+            global populated
             path_to_file = "data.txt"
             data_file = open(path_to_file, 'a')
             data_file.seek(0)
@@ -194,7 +180,8 @@ class MainScreen(Screen):
                 data_file.write(no_commas + '\n')
 
             data_file.close()
-
+            populated = True
+            
         def replace_text(self, event):
             self.event = event
             if self.event == 'UpdateSQL':
@@ -214,11 +201,27 @@ class MainScreen(Screen):
             data_file.close()
 
         def remove_cart(self):
-            self.ids.rv.data.pop(currentObj)
-            print('Indexed item {} was deleted'.format(str(currentObj)))
-            self.ids.rv.layout_manager.clear_selection()
+            global itemSelected
 
+            if itemSelected:
+                connection = sqlite3.connect('carts.db')
+                cur = connection.cursor()
+                cart_id = self.ids.rv.data[currentObj]['text']
+                cart_id = cart_id.split('               ')
+                cart_id = cart_id[0]
+                self.ids.rv.data.pop(currentObj)
+                print('Indexed item {} was deleted'.format(cart_id))
+                cur.execute("DELETE FROM computercarts where CartNumber = {}".format(cart_id))
+                connection.commit()
+                self.ids.rv.layout_manager.clear_selection()
+                self.replace_text('UpdateSQL')
+            else:
+                print('You must select an item to delete')
+            
         def add_cart(self, cart_type, cart_crm, cart_cpd, cart_frm, cart_fpd):
+            connection = sqlite3.connect('carts.db')
+            cur = connection.cursor()
+            
             cart_id = len(self.ids.rv.data) + 1
             comma_line = str(cart_id) + ',' + str(cart_type) + ',' + ',' + str(cart_crm) + ',' + \
                 str(cart_cpd) + ',' + str(cart_frm) + ',' + str(cart_fpd)
@@ -234,11 +237,19 @@ class MainScreen(Screen):
 
             array2 = [{'text': line, 'is_selected': False}]
             self.ids.rv.data.extend(array2)
-            print('New item added with value {}'.format(line))
-            self.show_add()
             self.ids.rv.refresh_from_data()
+            cur.execute("INSERT INTO 'computercarts' VALUES\
+                    (?,?,?,?,?,?,?)",(cart_id, cart_type, cart_crm, cart_cpd, cart_frm, cart_fpd, 'None'))
+            connection.commit()
+            print('New item added with value {}'.format(line))
+            self.replace_text('UpdateSQL')
+            self.show_add()
+            
 
         def edit_cart(self, cart_type_e, cart_crm_e, cart_cpd_e, cart_frm_e, cart_fpd_e):
+            connection = sqlite3.connect('carts.db')
+            cur = connection.cursor()
+            
             comma_line = str(self.ids.cart_id_e.text) + ',' + str(cart_type_e) + ',' + ',' + str(cart_crm_e) + ',' + \
                          str(cart_cpd_e) + ',' + str(cart_frm_e) + ',' + str(cart_fpd_e)
 
@@ -247,6 +258,12 @@ class MainScreen(Screen):
             self.ids.rv.data[currentObj]['text'] = line
             self.ids.rv.refresh_from_data()
             self.ids.rv.layout_manager.clear_selection()
+            
+            cur.execute("UPDATE computercarts set CartNumber = ?, ComputerType = ?, CurrentLocation = ?,\
+                        TimeAtLocation = ?, FutureLocation = ?, FutureTime = ?\
+                        where CartNumber = ?",(self.ids.cart_id_e.text, cart_type_e, cart_crm_e, cart_cpd_e, cart_frm_e, cart_fpd_e, self.ids.cart_id_e.text))
+            connection.commit()
+            self.replace_text('UpdateSQL')
             self.show_edit()
 
         def show_add(self):
@@ -259,57 +276,71 @@ class MainScreen(Screen):
                     self.show_edit()
                 slide_in = Animation(x=self.width + 20)
                 slide_in.start(self.ids.AddBox)
+                slide_in2 = Animation(x=40)
             else:
                 slide_out = Animation(x=-self.width + 20)
                 slide_out.start(self.ids.AddBox)
-
+                slide_out2 = Animation(x=-100)
+                
         def show_edit(self):
             global editState
             global addState
-            self.ids.cart_id_e.text = ''
-            self.ids.cart_type_e.text = ''
-            self.ids.cart_crm_e.text = ''
-            self.ids.cart_cpd_e.text = ''
-            self.ids.cart_frm_e.text = ''
-            self.ids.cart_fpd_e.text = ''
+            global itemSelected
 
-            editState = editState + 1
-            if editState % 2 == 0:
-                if addState % 2 == 0:
-                    self.show_add()
+            if itemSelected:
+                self.ids.cart_id_e.text = ''
+                self.ids.cart_type_e.text = ''
+                self.ids.cart_crm_e.text = ''
+                self.ids.cart_cpd_e.text = ''
+                self.ids.cart_frm_e.text = ''
+                self.ids.cart_fpd_e.text = ''
 
-                prev_data = self.ids.rv.data[currentObj]['text']
-                prev_data = prev_data.split('               ')
-                prev_data_id = prev_data[0]
-                prev_data_type = prev_data[1]
-                prev_data_crm = prev_data[2]
-                prev_data_cpd = prev_data[3]
-                prev_data_frm = prev_data[4]
-                prev_data_fpd = prev_data[5]
-                prev_data_fpd = prev_data_fpd.strip('\n')
-                # prev_data_stat = prev_data[6]
+                editState = editState + 1
+                if editState % 2 == 0:
+                    if addState % 2 == 0:
+                        self.show_add()
 
-                self.ids.cart_id_e.text = prev_data_id
-                self.ids.cart_type_e.text = prev_data_type
-                self.ids.cart_crm_e.text = prev_data_crm
-                self.ids.cart_cpd_e.text = prev_data_cpd
-                self.ids.cart_frm_e.text = prev_data_frm
-                self.ids.cart_fpd_e.text = prev_data_fpd
-                # self.ids.cart_stat_e.text = prev_data_stat
-                slide_in = Animation(x=self.width + 20)
-                slide_in.start(self.ids.EditBox)
+                    prev_data = self.ids.rv.data[currentObj]['text']
+                    prev_data = prev_data.split('               ')
+                    prev_data_id = prev_data[0]
+                    prev_data_type = prev_data[1]
+                    prev_data_crm = prev_data[2]
+                    prev_data_cpd = prev_data[3]
+                    prev_data_frm = prev_data[4]
+                    prev_data_fpd = prev_data[5]
+                    prev_data_fpd = prev_data_fpd.strip('\n')
+                    # prev_data_stat = prev_data[6]
+
+                    self.ids.cart_id_e.text = prev_data_id
+                    self.ids.cart_type_e.text = prev_data_type
+                    self.ids.cart_crm_e.text = prev_data_crm
+                    self.ids.cart_cpd_e.text = prev_data_cpd
+                    self.ids.cart_frm_e.text = prev_data_frm
+                    self.ids.cart_fpd_e.text = prev_data_fpd
+                    # self.ids.cart_stat_e.text = prev_data_stat
+                    slide_in = Animation(x=self.width + 20)
+                    slide_in.start(self.ids.EditBox)
+                else:
+                    slide_out = Animation(x=-self.width + 20)
+                    slide_out.start(self.ids.EditBox)
             else:
-                slide_out = Animation(x=-self.width + 20)
-                slide_out.start(self.ids.EditBox)
+                if editState % 2 == 0:
+                    slide_out = Animation(x=-self.width + 20)
+                    slide_out.start(self.ids.EditBox)
+                else:
+                    print('You must select an item to edit')
 
-        print("Connection succeeded...")
-
-    except pymysql.Error as error:
-        print("You messed up")
-        print(error)
-
+        def logout(self):
+            global login
+            login = False
+            print('Thank you for using Computer Cart MS. Logging out...')
+            self.manager.transition = SlideTransition(direction="right")
+            self.manager.current = 'login'
+            
+        print('Connection Succeeded')
+        
     finally:
-        connection.close()
+        connection.commit()
 
 
 class SelectableRecycleBoxLayout(FocusBehavior, LayoutSelectionBehavior,
@@ -340,14 +371,15 @@ class SelectableLabel(RecycleDataViewBehavior, Label):
     def apply_selection(self, rv, index, is_selected):
         """ Respond to the selection of items in the view. """
         global currentObj
+        global itemSelected
         self.selected = is_selected
+        itemSelected = is_selected
         if is_selected:
             currentObj = index
             print("selection changed to {0}".format(rv.data[index]))
 
         # else:
             # print("selection removed for {0}".format(rv.data[index]))
-
 
 class SettingsScreen(Screen):
     def set_sql_cred(self, sql_host, sql_port, sql_user, sql_pass, sql_db):
@@ -410,14 +442,14 @@ class ComputerCartMSApp(App):
         exit()
 
     def build(self):
-        self.title = 'Computer Cart Management Software Alpha 4.0'
+        self.title = 'Computer Cart Management Software Version 1.0'
         # self.icon = 'some cool logo I need to design'
-        self.icon = 'uix/csslogocut small.png'
+        self.icon = 'uix/src/csslogocut small.png'
         sm = ScreenManager()
         sm.add_widget(LoginScreen(name='login'))
         sm.add_widget(MainScreen(name='main'))
         sm.add_widget(SettingsScreen(name='settings'))
-        sm.current = 'main'
+        sm.current = 'login'
         return sm
 
 

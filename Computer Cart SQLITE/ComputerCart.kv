@@ -3,6 +3,44 @@
 #: import SlideTransition kivy.uix.screenmanager.SlideTransition
 #: import TabbedPanel kivy.uix.tabbedpanel.TabbedPanel
 
+<SegButton@Button>:
+    #font_name: 'Lato-Bold.ttf'
+    font_size: '22sp'
+    border: 10,10,10,10
+    #background_disabled_normal:'data/images/src/but_disabled.png'
+    #background_disabled_down:'data/images/src/but_disabled.png'
+
+
+<Toast@AnchorLayout>:
+    size_hint:None,None
+    y:'-60dp'
+    size: '600dp','48dp'
+    anchor_x:'right'
+    canvas:
+        Color:
+            rgba: 0.910, 0.298, 0.239, 1.0
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: 10,10,10,10
+    Label:
+        id:label
+        font_size: '18sp'
+        #font_name: 'Lato-Bold.ttf'
+        
+    AnchorLayout:
+        size_hint:None, None
+        size:'48dp','48dp'
+        anchor_x:'center'
+        SegButton:
+            size_hint:None, None
+            size:'24dp', '24dp'
+            border:0,0,0,0
+            background_normal:'uix/src/close.png'
+            background_down:'uix/src/close_down.png'
+            on_release:root.exit(None)
+
+            
 <LoginScreen>:
     FloatLayout:
         canvas.before:
@@ -66,6 +104,11 @@
                 on_release: root.manager.transition = SlideTransition(direction="left")
                 on_release: root.settings()
 
+            Toast:
+                id:toast
+                width: min(root.width - dp(32), dp(300))
+                x:root.center_x - self.width // 2
+
 <RegisterPopup>:
     title: 'Register New Account'
     size_hint: .75, .75
@@ -96,9 +139,13 @@
 
         Button:
             id: ClosePopup
-            text: 'Cancel'
-            size_hint: .1, .1
-            pos_hint: {'x':.9, 'y':1}
+            size_hint: None, None
+            pos_hint: {'x':.95, 'y':1.02}
+            border:0,0,0,0
+            size:'24dp', '24dp'
+            font_size: '22sp'
+            background_normal:'close.png'
+            background_down:'close_down.png'
             on_release: root.dismiss()
 
 <SelectableLabel>:
@@ -114,7 +161,7 @@
     rv: rv
     BoxLayout:
         orientation: 'vertical'
-        size_hint: 1, .82
+        size_hint: 1, .78
         RecycleView:
             id: rv
             scroll_type: ['bars', 'content']
@@ -130,21 +177,22 @@
                 multiselect: False
                 touch_multiselect: False
 
+                
     BoxLayout:
         id: AddBox
         orientation: 'vertical'
+        pos_hint: {'y':.85}
         GridLayout:
             cols: 6
             rows: 1
-            size_hint_y: None
-            pos_hint: {'x':-1, 'y':.1}
+            pos_hint: {'x':-1, 'y':1}
+            size_hint_y: 0
             height: dp(50)
             padding: dp(8)
             spacing: dp(16)
-
+          
             BoxLayout:
                 spacing: dp(8)
-
                 Label:
                     id: cart_id
                     text: ''
@@ -197,6 +245,7 @@
     BoxLayout:
         id: EditBox
         orientation: 'vertical'
+        pos_hint: {'y':.85}
         GridLayout:
             cols: 6
             rows: 1
@@ -259,12 +308,36 @@
                     size_hint_x: None
                     on_release: root.edit_cart(cart_type_e.text, cart_crm_e.text, cart_cpd_e.text, cart_frm_e.text, cart_fpd_e.text)
 
+    BoxLayout:
+        id: labelLayout
+        orientation: 'horizontal'
+
+        GridLayout:
+            cols: 7
+            rows:1
+            pos_hint: {'x':self.center_x, 'y':.32}
+            
+            Label:
+                text: 'Cart Number'
+            Label:
+                text: 'Cart Type'
+            Label:
+                text: 'Current Room'
+            Label:
+                text: 'Current Periods'
+            Label:
+                text: 'Future Room'
+            Label:
+                text: 'Future Periods'
+            Label:
+                text: 'Lock Status'
+            
     ActionBar:
         pos_hint: {'top':1}
         ActionView:
             use_separator: True
             ActionPrevious:
-                title: 'Computer Cart Management Software Alpha'
+                title: 'CCMS v1.0'
                 on_release: root.replace_text('UpdateSQL')
                 #app_icon: 'csslogocut small.png'
                 with_previous: False
@@ -291,6 +364,11 @@
                     text: 'Settings'
                     on_release: root.manager.transition = SlideTransition(direction="right")
                     on_release: root.manager.current = 'settings'
+            ActionGroup:
+                text: 'Logout'
+                ActionButton:
+                    text: 'Logout'
+                    on_release: root.logout()
 
 <SettingsScreen>:
     ActionBar:
