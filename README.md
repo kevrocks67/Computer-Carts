@@ -31,8 +31,8 @@
   1. Download and install python 3 from (https://www.python.org/ "Python's Homepage") and make sure you allow it to create a PATH.
   2. If you let the installer create a PATH, then you must install Cython, a pre-requisite for kivy. Type in
   
-  
   `python -m pip install cython`
+  
   3. Now install kivy by typing
   `python -m pip install kivy`
   4. Download the github project and open the Computer Cart SQLITE folder
