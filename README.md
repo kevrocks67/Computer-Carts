@@ -94,6 +94,16 @@ Login Screen With Toast from Segreto3:
 " target="_blank"><img src="http://img.youtube.com/vi/KL_JG3QGPzA/0.jpg" 
 alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
 
+## Credits
+
+#### Merbin J Anselm of Segreto for the toast messages
+https://github.com/anselm94/segreto-3
+
+#### The kivy reddit community
+https://www.reddit.com/r/kivy/
+
+#### Professor Lauter for allowing and trusting me to work on this project independently instead of making me automate the garden like everyone else
+
 ## License
     kevrocks67/Computer-Carts
     Copyright (C) <2017>  <Kevin Diaz>
