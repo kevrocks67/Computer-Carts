@@ -102,6 +102,9 @@ https://github.com/anselm94/segreto-3
 #### The kivy reddit community
 https://www.reddit.com/r/kivy/
 
+#### Ilan Rodriguez for helping me fix a bug with the add/edit functions
+https://github.com/baboomerang
+
 #### Professor Lauter for allowing and trusting me to work on this project independently instead of making me automate the garden like everyone else
 
 ## License
