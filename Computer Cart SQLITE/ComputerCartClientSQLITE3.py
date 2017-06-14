@@ -3,14 +3,16 @@ import sqlite3
 import hashlib
 import uuid
 import sys
+import os
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.core.window import Window
 from kivy.uix.label import Label
 from kivy.uix.popup import Popup
+from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.screenmanager import ScreenManager, Screen, SlideTransition
 from kivy.animation import Animation
-from kivy.properties import BooleanProperty
+from kivy.properties import BooleanProperty, StringProperty
 from kivy.uix.recycleview.views import RecycleDataViewBehavior
 from kivy.uix.recycleboxlayout import RecycleBoxLayout
 from kivy.uix.behaviors import FocusBehavior
@@ -29,6 +31,21 @@ retry = 0
 addState = 1
 editState = 1
 
+config_name = 'config.ini'
+
+
+class toaster(AnchorLayout):
+    def bg(self):
+        self.ids.seg.background_normal = 'uix/src/close.png'
+        self.ids.seg.background_down = 'uix/src/close_down.png'
+
+# determine if application is a script file or frozen exe
+if getattr(sys, 'frozen', False):
+    application_path = os.path.dirname(sys.executable)
+elif __file__:
+    application_path = os.path.dirname(__file__)
+
+config_path = os.path.join(application_path, config_name)
 
 class LoginScreen(Screen):
     def __init__(self, **kwargs):
@@ -45,12 +62,13 @@ class LoginScreen(Screen):
         r.open()
 
     def register(self, user, password):
+        global config_path
         salt = uuid.uuid4().hex
 
         salted_pass = password + salt
         salted_hash = hashlib.sha512(salted_pass.encode('utf-8')).hexdigest()
 
-        file = open('config.ini', 'w')
+        file = open(config_path, 'w')
         cfg.add_section('User:' + user)
         cfg.set('User:' + user, 'username', user)
         cfg.set('User:' + user, 'salt', salt)
@@ -64,8 +82,8 @@ class LoginScreen(Screen):
         global retry
         global login
 
-        with open('config.ini', 'r+') as configfile:
-            cfg.read('config.ini')
+        with open(config_path, 'r+') as configfile:
+            cfg.read(config_path)
             if 'User:' + user in cfg.sections():
                 print('Username exists')
                 self.ids.inp_password.text = ''
@@ -79,6 +97,7 @@ class LoginScreen(Screen):
 
                 if stored_hash == salted_hash:
                     print('Login Successful')
+                    self.ids.inp_username.text = ''
                     self.manager.transition = SlideTransition(direction="left")
                     self.manager.current = 'main'
                     login = True
@@ -125,17 +144,27 @@ class RegisterPopup(Popup):
 
 
 class MainScreen(Screen):
+    global config_path
     def __init__(self, **kwargs):
         super(MainScreen, self).__init__(**kwargs)
         self.replace_text('UpdateSQL')
 
-    with open('config.ini', 'r+') as configfile:
-        cfg.read('config.ini')
+    with open(config_path, 'r+') as configfile:
+        cfg.read(config_path)
         tableExists = cfg.get('db', 'table_exists')
 
     configfile.close()
 
-    connection = sqlite3.connect('carts.db')
+    carts_name = 'carts.db'
+        # determine if application is a script file or frozen exe
+    if getattr(sys, 'frozen', False):
+        application_path = os.path.dirname(sys.executable)
+    elif __file__:
+        application_path = os.path.dirname(__file__)
+
+    carts_path = os.path.join(application_path, carts_name)
+
+    connection = sqlite3.connect(carts_path)
     cur = connection.cursor()
 
     try:
@@ -170,8 +199,17 @@ class MainScreen(Screen):
 
         def fill(self, strings):
             global populated
-            path_to_file = "data.txt"
-            data_file = open(path_to_file, 'a')
+            
+            filename = "data.txt"
+            if getattr(sys, 'frozen', False):
+                application_path = os.path.dirname(sys.executable)
+            elif __file__:
+                application_path = os.path.dirname(__file__)
+
+            data_path = os.path.join(application_path, filename)
+            
+            
+            data_file = open(data_path, 'a')
             data_file.seek(0)
             data_file.truncate()
 
@@ -383,7 +421,8 @@ class SelectableLabel(RecycleDataViewBehavior, Label):
 
 class SettingsScreen(Screen):
     def set_sql_cred(self, sql_host, sql_port, sql_user, sql_pass, sql_db):
-        file = open('config.ini', 'w')
+        global config_path
+        file = open(config_path, 'w')
         if 'db' in cfg.sections():
             cfg.set('db', 'host', sql_host)
             cfg.set('db', 'port', sql_port)
@@ -441,7 +480,7 @@ class ComputerCartMSApp(App):
     def on_quit(self):
         exit()
 
-    def build(self):
+    def build(self):        
         self.title = 'Computer Cart Management Software Version 1.0'
         # self.icon = 'some cool logo I need to design'
         self.icon = 'uix/src/csslogocut small.png'
