@@ -90,7 +90,7 @@ Login Screen With Toast from Segreto3:
 
 ## Video
 
-To be uploaded
+<iframe width="560" height="315" src="https://www.youtube.com/embed/KL_JG3QGPzA" frameborder="0" allowfullscreen></iframe>
 
 ## License
     kevrocks67/Computer-Carts
