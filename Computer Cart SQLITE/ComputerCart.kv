@@ -352,23 +352,20 @@
             ActionButton:
                 text: 'Edit'
                 on_release: root.show_edit()
-            ActionGroup:
-                text: 'Unlock/Lock'
-                ActionButton:
-                    text: 'Unlock'
-                ActionButton:
-                    text: 'Lock'
-            ActionGroup:
+            ActionSeparator:
+            ActionButton:
+                text: 'Unlock'
+            ActionButton:
+                text: 'Lock'
+            ActionSeparator:
+            ActionButton:
                 text: 'Settings'
-                ActionButton:
-                    text: 'Settings'
-                    on_release: root.manager.transition = SlideTransition(direction="right")
-                    on_release: root.manager.current = 'settings'
-            ActionGroup:
+                on_release: root.manager.transition = SlideTransition(direction="right")
+                on_release: root.manager.current = 'settings'
+            ActionSeparator:
+            ActionButton:
                 text: 'Logout'
-                ActionButton:
-                    text: 'Logout'
-                    on_release: root.logout()
+                on_release: root.logout()
 
 <SettingsScreen>:
     ActionBar:
@@ -381,12 +378,12 @@
                 on_release: root.manager.transition = SlideTransition(direction="right")
                 on_release: root.buttons()
             ActionOverflow:
-            ActionGroup:
-                ActionButton:
-                    text: 'Save Settings'
-                    on_release: root.manager.transition = SlideTransition(direction="right")
-                    on_release: root.buttons()
-                    on_release: root.set_sql_cred(sql_address.text, sql_port.text, sql_user.text, sql_password.text, sql_db.text)
+            ActionSeparator:
+            ActionButton:
+                text: 'Save Settings'
+                on_release: root.manager.transition = SlideTransition(direction="right")
+                on_release: root.buttons()
+                on_release: root.set_sql_cred(sql_address.text, sql_port.text, sql_user.text, sql_password.text, sql_db.text)
 
     FloatLayout:
         Label:
