@@ -420,6 +420,10 @@ class SelectableLabel(RecycleDataViewBehavior, Label):
             # print("selection removed for {0}".format(rv.data[index]))
 
 class SettingsScreen(Screen):
+    def __init__(self, **kwargs):
+        super(SettingsScreen, self).__init__(**kwargs)
+        self.ids.dropdown.dismiss()
+        
     def set_sql_cred(self, sql_host, sql_port, sql_user, sql_pass, sql_db):
         global config_path
         file = open(config_path, 'w')
