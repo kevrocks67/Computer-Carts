@@ -66,17 +66,21 @@ Login::Login(QWidget * parent):
 
         connect(registerButton, SIGNAL(clicked()),
                 SLOT(registerNew()));
-
-        /*connect(login, SIGNAL(destroyer()),
-                mainView, SLOT(exec()));*/
+        
     }
 
 void Login::authenticate(){
-    this->close();
+    //For now zero authentication, eventually will be used for smtp
+    cartView = new Carts();
+    cartView->show();
+    this->hide();
 }
 
 void Login::registerNew(){
-
+    registerView = new Register();
+    registerView->setAttribute(Qt::WA_DeleteOnClose);
+    registerView->setModal(true);
+    registerView->show();
 }
 
 /*void Login::test(){

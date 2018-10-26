@@ -1,6 +1,8 @@
 #ifndef LOGIN_H
 #define LOGIN_H
 
+#include "carts.h"
+#include "register.h"
 #include <iostream>
 #include <QApplication>
 #include <QHBoxLayout>
@@ -11,6 +13,7 @@
 #include <QWidget>
 #include <QString>
 #include <QDebug>
+#include <QStackedWidget>
 
 class Login : public QWidget {
     Q_OBJECT
@@ -31,6 +34,9 @@ class Login : public QWidget {
         QVBoxLayout *fieldLayout;
         QHBoxLayout *buttonLayout;
         QSize *fieldsize;
+        QStackedWidget *stack;
+        Carts *cartView;
+        Register *registerView;
 };
 
 #endif //WINDOW_H
