@@ -1,11 +1,14 @@
 #include "MainWindow.h"
+#include "AddCart.h"
 
 MainWindow::MainWindow(Session& session, CartModel& cModel) :
     mySession(session),
     cartModel(cModel) {
-        //UI shit goes here, either manually code or use .ui file
+        //Initialize layouts 
         centralWidget = new QWidget(this);
         mainLayout = new QVBoxLayout(centralWidget);
+
+        //Initialize widgets
         toolbar = new QToolBar();
         addTool = new QToolButton();
         removeTool = new QToolButton();
@@ -28,10 +31,18 @@ MainWindow::MainWindow(Session& session, CartModel& cModel) :
         
         cView->setModel(&cModel);
 
-        //Add CartView to layout
+        //Add widgets to layouts
         mainLayout->addWidget(toolbar);
         mainLayout->addWidget(cView);
         setCentralWidget(centralWidget);
         show();
         raise();
-    }
+
+        //Slots and signals
+        AddCart *newCart = new AddCart();
+        connect(addTool, SIGNAL(clicked()),
+                newCart, SLOT(exec())); 
+}
+
+MainWindow::~MainWindow(){
+}

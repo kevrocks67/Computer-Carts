@@ -1,8 +1,6 @@
 #ifndef CARTVIEW_H
 #define CARTVIEW_H
 
-#include "CartModel.h"
-
 #include <QTableView>
 
 class CartView : public QTableView {

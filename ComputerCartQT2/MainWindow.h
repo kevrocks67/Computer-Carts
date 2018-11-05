@@ -19,7 +19,7 @@ class MainWindow : public QMainWindow {
 
     public:
         MainWindow(Session&, CartModel&);
-        //virtual ~MainWindow();
+        virtual ~MainWindow();
     signals:
     public slots:
     private slots:

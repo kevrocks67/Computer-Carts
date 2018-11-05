@@ -50,20 +50,24 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = Application.cpp \
+SOURCES       = AddCart.cpp \
+		Application.cpp \
 		CartModel.cpp \
 		CartView.cpp \
 		MainWindow.cpp \
-		Session.cpp moc_Application.cpp \
+		Session.cpp moc_AddCart.cpp \
+		moc_Application.cpp \
 		moc_CartModel.cpp \
 		moc_CartView.cpp \
 		moc_MainWindow.cpp \
 		moc_Session.cpp
-OBJECTS       = Application.o \
+OBJECTS       = AddCart.o \
+		Application.o \
 		CartModel.o \
 		CartView.o \
 		MainWindow.o \
 		Session.o \
+		moc_AddCart.o \
 		moc_Application.o \
 		moc_CartModel.o \
 		moc_CartView.o \
@@ -185,7 +189,6 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/features/qt_config.prf \
 		/usr/lib/qt/mkspecs/linux-g++/qmake.conf \
 		/usr/lib/qt/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		/usr/lib/qt/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/qt/mkspecs/features/toolchain.prf \
 		/usr/lib/qt/mkspecs/features/default_pre.prf \
@@ -204,11 +207,13 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/features/exceptions.prf \
 		/usr/lib/qt/mkspecs/features/yacc.prf \
 		/usr/lib/qt/mkspecs/features/lex.prf \
-		ComputerCartQT2.pro Application.h \
+		ComputerCartQT2.pro AddCart.h \
+		Application.h \
 		CartModel.h \
 		CartView.h \
 		MainWindow.h \
-		Session.h Application.cpp \
+		Session.h AddCart.cpp \
+		Application.cpp \
 		CartModel.cpp \
 		CartView.cpp \
 		MainWindow.cpp \
@@ -340,7 +345,6 @@ Makefile: ComputerCartQT2.pro /usr/lib/qt/mkspecs/linux-g++/qmake.conf /usr/lib/
 		/usr/lib/qt/mkspecs/features/qt_config.prf \
 		/usr/lib/qt/mkspecs/linux-g++/qmake.conf \
 		/usr/lib/qt/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		/usr/lib/qt/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/qt/mkspecs/features/toolchain.prf \
 		/usr/lib/qt/mkspecs/features/default_pre.prf \
@@ -481,7 +485,6 @@ Makefile: ComputerCartQT2.pro /usr/lib/qt/mkspecs/linux-g++/qmake.conf /usr/lib/
 /usr/lib/qt/mkspecs/features/qt_config.prf:
 /usr/lib/qt/mkspecs/linux-g++/qmake.conf:
 /usr/lib/qt/mkspecs/features/spec_post.prf:
-.qmake.stash:
 /usr/lib/qt/mkspecs/features/exclusive_builds.prf:
 /usr/lib/qt/mkspecs/features/toolchain.prf:
 /usr/lib/qt/mkspecs/features/default_pre.prf:
@@ -520,8 +523,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/qt/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents Application.h CartModel.h CartView.h MainWindow.h Session.h $(DISTDIR)/
-	$(COPY_FILE) --parents Application.cpp CartModel.cpp CartView.cpp MainWindow.cpp Session.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents AddCart.h Application.h CartModel.h CartView.h MainWindow.h Session.h $(DISTDIR)/
+	$(COPY_FILE) --parents AddCart.cpp Application.cpp CartModel.cpp CartView.cpp MainWindow.cpp Session.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -553,12 +556,18 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/lib/qt/mkspecs/features/data/dummy.cpp
 	g++ -pipe -O2 -march=x86-64 -mtune=generic -O2 -pipe -fstack-protector-strong -fno-plt -Wall -W -dM -E -o moc_predefs.h /usr/lib/qt/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_Application.cpp moc_CartModel.cpp moc_CartView.cpp moc_MainWindow.cpp moc_Session.cpp
+compiler_moc_header_make_all: moc_AddCart.cpp moc_Application.cpp moc_CartModel.cpp moc_CartView.cpp moc_MainWindow.cpp moc_Session.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_Application.cpp moc_CartModel.cpp moc_CartView.cpp moc_MainWindow.cpp moc_Session.cpp
+	-$(DEL_FILE) moc_AddCart.cpp moc_Application.cpp moc_CartModel.cpp moc_CartView.cpp moc_MainWindow.cpp moc_Session.cpp
+moc_AddCart.cpp: AddCart.h \
+		moc_predefs.h \
+		/usr/bin/moc
+	/usr/bin/moc $(DEFINES) --include /home/kevrocks67/ProgrammingWorkspace/pythonProjects/Computer-Carts/ComputerCartQT2/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/kevrocks67/ProgrammingWorkspace/pythonProjects/Computer-Carts/ComputerCartQT2 -I/home/kevrocks67/ProgrammingWorkspace/pythonProjects/Computer-Carts/ComputerCartQT2 -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/8.2.1 -I/usr/include/c++/8.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/8.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/include-fixed -I/usr/include AddCart.h -o moc_AddCart.cpp
+
 moc_Application.cpp: MainWindow.h \
 		Session.h \
 		CartModel.h \
+		CartView.h \
 		Application.h \
 		moc_predefs.h \
 		/usr/bin/moc
@@ -569,14 +578,14 @@ moc_CartModel.cpp: CartModel.h \
 		/usr/bin/moc
 	/usr/bin/moc $(DEFINES) --include /home/kevrocks67/ProgrammingWorkspace/pythonProjects/Computer-Carts/ComputerCartQT2/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/kevrocks67/ProgrammingWorkspace/pythonProjects/Computer-Carts/ComputerCartQT2 -I/home/kevrocks67/ProgrammingWorkspace/pythonProjects/Computer-Carts/ComputerCartQT2 -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/8.2.1 -I/usr/include/c++/8.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/8.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/include-fixed -I/usr/include CartModel.h -o moc_CartModel.cpp
 
-moc_CartView.cpp: CartModel.h \
-		CartView.h \
+moc_CartView.cpp: CartView.h \
 		moc_predefs.h \
 		/usr/bin/moc
 	/usr/bin/moc $(DEFINES) --include /home/kevrocks67/ProgrammingWorkspace/pythonProjects/Computer-Carts/ComputerCartQT2/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/kevrocks67/ProgrammingWorkspace/pythonProjects/Computer-Carts/ComputerCartQT2 -I/home/kevrocks67/ProgrammingWorkspace/pythonProjects/Computer-Carts/ComputerCartQT2 -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/8.2.1 -I/usr/include/c++/8.2.1/x86_64-pc-linux-gnu -I/usr/include/c++/8.2.1/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.1/include-fixed -I/usr/include CartView.h -o moc_CartView.cpp
 
 moc_MainWindow.cpp: Session.h \
 		CartModel.h \
+		CartView.h \
 		MainWindow.h \
 		moc_predefs.h \
 		/usr/bin/moc
@@ -603,26 +612,34 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 
 ####### Compile
 
+AddCart.o: AddCart.cpp AddCart.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o AddCart.o AddCart.cpp
+
 Application.o: Application.cpp Application.h \
 		MainWindow.h \
 		Session.h \
-		CartModel.h
+		CartModel.h \
+		CartView.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Application.o Application.cpp
 
 CartModel.o: CartModel.cpp CartModel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o CartModel.o CartModel.cpp
 
-CartView.o: CartView.cpp CartView.h \
-		CartModel.h
+CartView.o: CartView.cpp CartView.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o CartView.o CartView.cpp
 
 MainWindow.o: MainWindow.cpp MainWindow.h \
 		Session.h \
-		CartModel.h
+		CartModel.h \
+		CartView.h \
+		AddCart.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o MainWindow.o MainWindow.cpp
 
 Session.o: Session.cpp Session.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Session.o Session.cpp
+
+moc_AddCart.o: moc_AddCart.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_AddCart.o moc_AddCart.cpp
 
 moc_Application.o: moc_Application.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_Application.o moc_Application.cpp
