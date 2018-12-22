@@ -15,7 +15,7 @@ Application::Application(int& argc, char** argv) :
 
 int main(int argc, char* argv[]) {
     #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
-    Application::setAttribute(Qt::AA_EnableHighDpiScaling);
+        Application::setAttribute(Qt::AA_EnableHighDpiScaling);
     #endif
 
     Application::setAttribute(Qt::AA_UseHighDpiPixmaps);

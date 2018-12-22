@@ -13,13 +13,13 @@ AddCart::AddCart(QWidget * parent) :
     quantField = new QLineEdit();
     cRoomField = new QLineEdit();
     cPeriodField = new QLineEdit();
-    
+
     cancelButton = new QPushButton("Cancel");
     addButton = new QPushButton("Add Cart");
-    
+
     //Set widget properties
     QFont sansFont("Helvetica [Cronyx]", 14);
-    
+
     cNumLabel->setFont(sansFont);
     typeField->setPlaceholderText("Computer Type");
     typeField->setFont(sansFont);
@@ -31,7 +31,7 @@ AddCart::AddCart(QWidget * parent) :
     cPeriodField->setFont(sansFont);
     cancelButton->setFont(sansFont);
     addButton->setFont(sansFont);
-    
+
     //Add widget to layouts
     fieldLayout->addWidget(cNumLabel);
     fieldLayout->addWidget(typeField);
@@ -41,22 +41,38 @@ AddCart::AddCart(QWidget * parent) :
 
     buttonLayout->addWidget(cancelButton);
     buttonLayout->addWidget(addButton);
-    
+
     mainLayout->addLayout(fieldLayout);
     mainLayout->addLayout(buttonLayout);
     setLayout(mainLayout);
     setModal(true);
 
     //Signals and slots
-    connect(addButton, SIGNAL(clicked()),
-            SLOT(addCart()));
+    /*connect(addButton, SIGNAL(clicked()),
+            CartModel, SLOT(add()));*/
     connect(cancelButton, SIGNAL(clicked()),
             SLOT(close()));
+    connect(addButton, SIGNAL(clicked()),
+            SLOT(addCartAction()));
 }
 
-void AddCart::addCart() {
-    this->close();
+void AddCart::addCartAction() {
+    qDebug()<<"AddCart::addCartAction";
+    QDialog::done(QDialog::Accepted);
+
+    cartDetails.cartNo = cNumLabel->text().toInt();
+    cartDetails.cartType = typeField->text();
+    cartDetails.quantity = quantField->text().toInt();
+    cartDetails.cRoom = cRoomField->text();
+    cartDetails.cPeriod = cPeriodField->text().toInt();
+
+    cartModel->addCart(cartDetails);
 }
+
+/*
+void AddCart::GetOptions(int Opt1) {
+    Opt1 = 1337;
+}*/
 
 AddCart::~AddCart(){
 }

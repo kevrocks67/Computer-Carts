@@ -10,28 +10,25 @@
 #include <QString>
 #include <QStringList>
 
+
 class CartModel : public QSqlQueryModel {
     Q_OBJECT
 
     public:
-        CartModel(void);
+        explicit CartModel(void);
         virtual ~CartModel();
-        //virtual int rowCount(QModelIndex const& parent = QModelIndex()) const;
-        //virtual QVariant data(QModelIndex const& index, int role = Qt::DisplayRole) const;
-        /*
-        struct cartDetails{
+        struct Cart{
             int cartNo;
             QString cartType;
             int quantity;
             QString cRoom;
             int cPeriod;
-            QString fRoom;
-            QString fPeriod;
-            bool status;
         }cart;
-        */
+
+        //virtual int rowCount(QModelIndex const& parent = QModelIndex()) const;
+        //virtual QVariant data(QModelIndex const& index, int role = Qt::DisplayRole) const;
     public slots:
+        void addCart(Cart &cart);
     private slots:
-        //addCart(cartDetails);
     private:
 };

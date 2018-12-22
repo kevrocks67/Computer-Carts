@@ -1,5 +1,6 @@
 #pragma once
-#include "Session.h" 
+#include "AddCart.h"
+#include "Session.h"
 #include "CartModel.h"
 #include "CartView.h"
 
@@ -9,6 +10,7 @@
 #include <QPushButton>
 #include <QToolBar>
 #include <QToolButton>
+#include <QDebug>
 
 class Session;
 class CartModel;
@@ -22,12 +24,14 @@ class MainWindow : public QMainWindow {
         virtual ~MainWindow();
     signals:
     public slots:
+        //void GetDialogOutput();
     private slots:
     private:
         Session& mySession;
         CartModel& cartModel;
         CartView *cView;
-        QWidget *centralWidget;  
+        AddCart *newCart;
+        QWidget *centralWidget;
         QVBoxLayout *mainLayout;
         QToolBar *toolbar;
         QToolButton *addTool;

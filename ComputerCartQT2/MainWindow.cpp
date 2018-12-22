@@ -4,7 +4,7 @@
 MainWindow::MainWindow(Session& session, CartModel& cModel) :
     mySession(session),
     cartModel(cModel) {
-        //Initialize layouts 
+        //Initialize layouts
         centralWidget = new QWidget(this);
         mainLayout = new QVBoxLayout(centralWidget);
 
@@ -15,20 +15,25 @@ MainWindow::MainWindow(Session& session, CartModel& cModel) :
         editTool = new QToolButton();
         logoutTool = new QToolButton();
         cView = new CartView();
+        QFont sansFont("Helvetica [Cronyx]", 14);
 
         //Set widget properties
         addTool->setText("Add");
+        addTool->setFont(sansFont);
         removeTool->setText("Remove");
+        removeTool->setFont(sansFont);
         editTool->setText("Edit");
+        editTool->setFont(sansFont);
         logoutTool->setText("Logout");
-    
+        logoutTool->setFont(sansFont);
+
         toolbar->setAllowedAreas(Qt::TopToolBarArea);
         toolbar->addWidget(addTool);
         toolbar->addWidget(removeTool);
         toolbar->addWidget(editTool);
         toolbar->addSeparator();
         toolbar->addWidget(logoutTool);
-        
+
         cView->setModel(&cModel);
 
         //Add widgets to layouts
@@ -39,10 +44,20 @@ MainWindow::MainWindow(Session& session, CartModel& cModel) :
         raise();
 
         //Slots and signals
-        AddCart *newCart = new AddCart();
+        newCart = new AddCart();
         connect(addTool, SIGNAL(clicked()),
-                newCart, SLOT(exec())); 
+                newCart, SLOT(exec()));
+        //Check for AddCart modal close
+        //connect(newCart, SIGNAL(accepted()), SLOT(GetDialogOutput()));
 }
+
+/*
+void MainWindow::GetDialogOutput() {
+    int Opt1;
+    newCart->GetOptions(Opt1);
+    qDebug()<<Opt1;
+    qDebug()<<"dialog closed";
+}*/
 
 MainWindow::~MainWindow(){
 }

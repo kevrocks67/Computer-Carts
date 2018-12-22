@@ -1,6 +1,8 @@
 #ifndef ADDCARTS_H
 #define ADDCARTS_H
 
+#include "CartModel.h"
+
 #include <QApplication>
 #include <QHBoxLayout>
 #include <QLabel>
@@ -10,17 +12,30 @@
 #include <QVBoxLayout>
 #include <QWidget>
 #include <QDialog>
+#include <QDebug>
+
+class CartModel;
 
 class AddCart : public QDialog {
     Q_OBJECT
-    
+
     public:
-        explicit AddCart(QWidget * parent = 0);
+        explicit AddCart(QWidget * parent=0);
+        /*struct Cart{
+            int cartNo;
+            QString cartType;
+            int quantity;
+            QString cRoom;
+            int cPeriod;
+        }cartDetails;*/
         virtual ~AddCart();
     public slots:
+        //void GetOptions(int Opt1);
     private slots:
-        void addCart();
+        void addCartAction();
     private:
+        CartModel  *cartModel;
+        CartModel::Cart cartDetails;
         QVBoxLayout *mainLayout;
         QVBoxLayout *fieldLayout;
         QHBoxLayout *buttonLayout;
