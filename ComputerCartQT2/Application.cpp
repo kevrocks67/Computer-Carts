@@ -19,6 +19,9 @@ int main(int argc, char* argv[]) {
     #endif
 
     Application::setAttribute(Qt::AA_UseHighDpiPixmaps);
+    Application::setOrganizationName("Columbia Secondary School");
+    Application::setApplicationName("CCMS");
+    Application::setApplicationVersion("0.1");
 
     Application app(argc, argv);
     return app.exec();

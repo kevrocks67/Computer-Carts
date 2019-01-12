@@ -1,5 +1,6 @@
 #include "MainWindow.h"
 #include "AddCart.h"
+#include "EditCart.h"
 
 MainWindow::MainWindow(Session& session, CartModel& cModel) :
     mySession(session),
@@ -45,8 +46,14 @@ MainWindow::MainWindow(Session& session, CartModel& cModel) :
 
         //Slots and signals
         newCart = new AddCart();
+        editCart = new EditCart();
         connect(addTool, SIGNAL(clicked()),
                 newCart, SLOT(exec()));
+        connect(editTool, SIGNAL(clicked()),
+                editCart, SLOT(exec()));
+        /*connect(removeTool, SIGNAL(clicked()),
+                delCart, SLOT(exec()));*/
+
         //Check for AddCart modal close
         //connect(newCart, SIGNAL(accepted()), SLOT(GetDialogOutput()));
 }

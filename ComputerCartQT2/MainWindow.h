@@ -1,5 +1,6 @@
 #pragma once
 #include "AddCart.h"
+#include "EditCart.h"
 #include "Session.h"
 #include "CartModel.h"
 #include "CartView.h"
@@ -31,6 +32,7 @@ class MainWindow : public QMainWindow {
         CartModel& cartModel;
         CartView *cView;
         AddCart *newCart;
+        EditCart *editCart;
         QWidget *centralWidget;
         QVBoxLayout *mainLayout;
         QToolBar *toolbar;
@@ -38,4 +40,7 @@ class MainWindow : public QMainWindow {
         QToolButton *removeTool;
         QToolButton *logoutTool;
         QToolButton *editTool;
+        QToolButton *addResTool;
+        QToolButton *editResTool;
+        QToolButton *detailsTool;
 };

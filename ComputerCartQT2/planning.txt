@@ -1,0 +1,65 @@
+CREATE TABLE ComputerCarts (
+    CartNumber INTEGER PRIMARY KEY AUTOINCREMENT,
+    ComputerType TEXT NOT NULL,
+    Quantity INTEGER DEFAULT NULL,
+    CurrentLocation TEXT DEFAULT NULL,
+    CurrentLocTime TEXT DEFAULT NULL,
+    FutureResId INTEGER DEFAULT NULL,
+    CartStatus BOOLEAN DEFAULT NULL,
+    LastUpdate DATETIME
+);
+
+CREATE TABLE reservations (
+    ResId INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    CartNumber INTEGER DEFAULT NULL,
+    Location TEXT NOT NULL,
+    Date TEXT NOT NULL,
+    Time INTEGER NOT NULL,
+    Comments TEXT DEFAULT NULL
+);
+
+If CartNumber == '' -> Unassigned list
+Else getDetails(FutureResId)-> Display reservation details and modal with comments
+
+select * from reservations where CartNumber=cartNo ORDER by date, time); -> next reservation
+    getResId -> update table computercarts where CartNumber=cartNo value of FutureResId
+
+// Reservations view
+    Add reservation button -> modal
+    Edit reservations table -> regular table in modal window
+    Delete reservation button -> confirmBox
+
+    Table with reservation info, possible search function?
+    Second table with no assignment?
+
+    Upon close of reservation view, send signal to main view to refresh table
+
+double click table row for comments and to check reservations for cart, tabbed view modal
+    QTabWidget -> https://doc.qt.io/qt-5/qtwidgets-dialogs-tabdialog-example.html
+
+Check if futureresid.date < currentDate -> Get next reservation for the next future date
+by checking time
+
+Check if period has passed by comparing currentTime > periodTime -> updateFutureResId
+    Check every 10 mins if app open
+    Manual refresh/check button
+
+
+
+//OLD IDEA
+Future date and time, Support for multiple dates and times
+Create new database just for future location and location time
+    select * from reservations where CartNumber=cartNo AND id=1 -> next appointment
+    select * from reservations where CartNumber=cartNo AND id=2 -> 2nd appointment
+
+resId -> Get largest id for cartNum and set to that + 1
+End of month -> resId resets to 1
+
+FutureLocation TEXT DEFAULT NULL,
+FutureLocTime TEXT DEFAULT NULL,
+
+//Other Ideas
+select * from reservations where CartNumber=cartNo ORDER by date,time; -> next location
+select * from reservations where CartNumber=cartNo ORDER by date ASC; -> get date of 1st entry
+select * from reservations where CartNumber=cartNo AND date=dateFromAbove ORDER by time; -> the next
+

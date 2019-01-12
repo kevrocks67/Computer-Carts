@@ -1,5 +1,5 @@
-#ifndef ADDCARTS_H
-#define ADDCARTS_H
+#ifndef EDITCART_H
+#define EDITCART_H
 
 #include "CartModel.h"
 
@@ -16,16 +16,15 @@
 
 class CartModel;
 
-class AddCart : public QDialog {
+class EditCart : public QDialog {
     Q_OBJECT
 
     public:
-        explicit AddCart(QWidget * parent=0);
-        virtual ~AddCart();
+        explicit EditCart(QWidget * parent=0);
+        virtual ~EditCart();
     public slots:
-        //void GetOptions(int Opt1);
     private slots:
-        void addCartAction();
+        void editCartAction();
     private:
         CartModel  *cartModel;
         CartModel::Cart cartDetails;
@@ -40,4 +39,4 @@ class AddCart : public QDialog {
         QPushButton *cancelButton;
         QPushButton *addButton;
 };
-#endif //ADDCARTS_H
+#endif //ADDCART_H

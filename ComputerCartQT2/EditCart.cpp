@@ -1,6 +1,6 @@
-#include "AddCart.h"
+#include "EditCart.h"
 
-AddCart::AddCart(QWidget * parent) :
+EditCart::EditCart(QWidget * parent) :
     QDialog(parent) {
     //Initialize layouts
     mainLayout = new QVBoxLayout(this);
@@ -56,8 +56,8 @@ AddCart::AddCart(QWidget * parent) :
             SLOT(addCartAction()));
 }
 
-void AddCart::addCartAction() {
-    qDebug()<<"AddCart::addCartAction";
+void EditCart::editCartAction() {
+    qDebug()<<"EditCart::editCartAction";
     QDialog::done(QDialog::Accepted);
 
 //    cartDetails.cartNo = cNumLabel->text().toInt();
@@ -69,10 +69,5 @@ void AddCart::addCartAction() {
     cartModel->addCart(cartDetails);
 }
 
-/*
-void AddCart::GetOptions(int Opt1) {
-    Opt1 = 1337;
-}*/
-
-AddCart::~AddCart(){
+EditCart::~EditCart(){
 }

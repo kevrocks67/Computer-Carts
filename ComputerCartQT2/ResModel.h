@@ -11,15 +11,15 @@
 #include <QStringList>
 
 
-class CartModel : public QSqlQueryModel {
+class ResModel : public QSqlQueryModel {
     Q_OBJECT
 
     public:
-        explicit CartModel(void);
-        virtual ~CartModel();
+        explicit ResModel(void);
+        virtual ~ResModel();
         struct Cart{
-//            int cartNo;
-            QString compType;
+            int cartNo;
+            QString cartType;
             int quantity;
             QString cRoom;
             int cPeriod;
