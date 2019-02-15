@@ -74,7 +74,7 @@ void CartModel::addCart(Cart &cart) {
     query.bindValue(4, cart.cPeriod);
     query.bindValue(5, QVariant(QVariant::Int));
     query.bindValue(6, QVariant(QVariant::Bool));
-    query.bindValue(7, "CURRENT_TIMESTAMP");
+    query.bindValue(7, QDateTime::currentDateTime());
 
     bool res = query.exec();
     qDebug()<<res;

@@ -6,6 +6,7 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QSqlQueryModel>
+#include <QDateTime>
 #include <QVariant>
 #include <QString>
 #include <QStringList>

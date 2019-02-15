@@ -37,6 +37,6 @@ class EditCart : public QDialog {
         QLineEdit *cRoomField;
         QLineEdit *cPeriodField;
         QPushButton *cancelButton;
-        QPushButton *addButton;
+        QPushButton *editButton;
 };
 #endif //ADDCART_H

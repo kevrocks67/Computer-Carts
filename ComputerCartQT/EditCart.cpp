@@ -15,7 +15,7 @@ EditCart::EditCart(QWidget * parent) :
     cPeriodField = new QLineEdit();
 
     cancelButton = new QPushButton("Cancel");
-    addButton = new QPushButton("Add Cart");
+    editButton = new QPushButton("Edit Cart");
 
     //Set widget properties
     QFont sansFont("Helvetica [Cronyx]", 14);
@@ -30,7 +30,7 @@ EditCart::EditCart(QWidget * parent) :
     cPeriodField->setPlaceholderText("Current Period(s)");
     cPeriodField->setFont(sansFont);
     cancelButton->setFont(sansFont);
-    addButton->setFont(sansFont);
+    editButton->setFont(sansFont);
 
     //Add widget to layouts
     fieldLayout->addWidget(cNumLabel);
@@ -40,7 +40,7 @@ EditCart::EditCart(QWidget * parent) :
     fieldLayout->addWidget(cPeriodField);
 
     buttonLayout->addWidget(cancelButton);
-    buttonLayout->addWidget(addButton);
+    buttonLayout->addWidget(editButton);
 
     mainLayout->addLayout(fieldLayout);
     mainLayout->addLayout(buttonLayout);
@@ -52,8 +52,8 @@ EditCart::EditCart(QWidget * parent) :
             CartModel, SLOT(add()));*/
     connect(cancelButton, SIGNAL(clicked()),
             SLOT(close()));
-    connect(addButton, SIGNAL(clicked()),
-            SLOT(addCartAction()));
+    connect(editButton, SIGNAL(clicked()),
+            SLOT(editCartAction()));
 }
 
 void EditCart::editCartAction() {
@@ -66,7 +66,7 @@ void EditCart::editCartAction() {
     cartDetails.cRoom = cRoomField->text();
     cartDetails.cPeriod = cPeriodField->text().toInt();
 
-    cartModel->addCart(cartDetails);
+    //cartModel->editCart(cartDetails);
 }
 
 EditCart::~EditCart(){
