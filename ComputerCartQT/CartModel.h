@@ -10,6 +10,7 @@
 #include <QVariant>
 #include <QString>
 #include <QStringList>
+#include <QSqlError>
 
 
 class CartModel : public QSqlQueryModel {
@@ -19,17 +20,23 @@ class CartModel : public QSqlQueryModel {
         explicit CartModel(void);
         virtual ~CartModel();
         struct Cart{
-//            int cartNo;
+            int cartNo;
             QString compType;
             int quantity;
             QString cRoom;
             int cPeriod;
+            int resId;
+            bool status;
         }cart;
 
-        //virtual int rowCount(QModelIndex const& parent = QModelIndex()) const;
-        //virtual QVariant data(QModelIndex const& index, int role = Qt::DisplayRole) const;
     public slots:
         void addCart(Cart &cart);
+        void editCart(Cart &cart);
+        void deleteCart(int cartNo);
+
     private slots:
+    signals:
+        //void updateTable();
     private:
+       // virtual QVariant data(QModelIndex const& index, int role = Qt::DisplayRole) const;
 };

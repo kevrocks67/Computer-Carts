@@ -5,6 +5,7 @@ CREATE TABLE ComputerCarts (
     CurrentLocation TEXT DEFAULT NULL,
     CurrentLocTime TEXT DEFAULT NULL,
     FutureResId INTEGER DEFAULT NULL,
+    FOREIGN KEY(FutureResId) REFERENCES reservations(ResId),
     CartStatus BOOLEAN DEFAULT NULL,
     LastUpdate DATETIME
 );
@@ -15,6 +16,7 @@ CREATE TABLE reservations (
     Location TEXT NOT NULL,
     Date TEXT NOT NULL,
     Time INTEGER NOT NULL,
+    Teacher TEXT DEFAULT NULL,
     Comments TEXT DEFAULT NULL
 );
 

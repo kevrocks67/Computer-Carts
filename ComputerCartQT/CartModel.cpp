@@ -33,9 +33,9 @@ CartModel::CartModel(void){
      setHeaderData(6, Qt::Horizontal, tr("Cart Status"));
      setHeaderData(7, Qt::Horizontal, tr("Last Updated"));
 
-     QString test = "Test,something";
-     QStringList testlist = test.split(",");
-     qDebug()<<testlist[0];
+     //QString test = "Test,something";
+     //QStringList testlist = test.split(",");
+     //qDebug()<<testlist[0];
 
      /*QSqlQuery qry;
      if(qry.exec("SELECT * from computercarts")){
@@ -77,22 +77,72 @@ void CartModel::addCart(Cart &cart) {
     query.bindValue(7, QDateTime::currentDateTime());
 
     bool res = query.exec();
-    qDebug()<<res;
+    //revert();
+    //emit updateTable();
+    /*if (query.exec()) {
+        emit updateTable();
+    }
+    else {
+        qDebug()<<query.lastError().text();
+    }*/
+    qDebug()<<"Add query resulted in: "<<res;
 }
+
+
+void CartModel::editCart(Cart &cart) {
+    QSqlQuery query;
 
 /*
-void CartModel::editCart(Cart &cart) {
-    QSqlQuery qry;
+cur.execute("UPDATE computercarts set CartNumber = ?, ComputerType = ?, CurrentLocation = ?,\
+TimeAtLocation = ?, FutureLocation = ?, FutureTime = ?\
+where CartNumber = ?",(self.ids.cart_id_e.text, cart_type_e, cart_crm_e,
+cart_cpd_e, cart_frm_e, cart_fpd_e, self.ids.cart_id_e.text))*/
 
-                cur.execute("UPDATE computercarts set CartNumber = ?, ComputerType = ?, CurrentLocation = ?,\
-                        TimeAtLocation = ?, FutureLocation = ?, FutureTime = ?\
-                        where CartNumber = ?",(self.ids.cart_id_e.text, cart_type_e, cart_crm_e, cart_cpd_e, cart_frm_e, cart_fpd_e, self.ids.cart_id_e.text))
-}*/
+// SELECT data for cart to edit and populate edit modal,
+//  possibly a separate function for that?
 
-/*int CartModel::rowCount(QModelIndex const& parent) const {
-    Q_UNUSED(parent);
+    query.prepare("UPDATE computercarts set ComputerType=?,\
+                                            Quantity=?,\
+                                            CurrentLocation=?,\
+                                            CurrentLocTime=?,\
+                                            FutureResId=?,\
+                                            CartStatus=?,\
+                                            LastUpdate=?\
+                   where CartNumber=?");
+    
+    query.bindValue(0, cart.compType);
+    query.bindValue(1, cart.quantity);
+    query.bindValue(2, cart.cRoom);
+    query.bindValue(3, cart.cPeriod);
+    query.bindValue(4, cart.resId);
+    query.bindValue(5, cart.status);
+    query.bindValue(6, QDateTime::currentDateTime());
+    query.bindValue(7, cart.cartNo);
 }
 
-QVariant CartModel::data(QModelIndex const& index, int role) const {
+void CartModel::deleteCart(int cartNo) {
+/*
+ print('Indexed item {} was deleted'.format(cart_id))
+ cur.execute("DELETE FROM computercarts where CartNumber = {}".format(cart_id))
+ connection.commit()
+ self.ids.rv.layout_manager.clear_selection()
+ self.replace_text('UpdateSQL')
+*/
 
+    QSqlQuery query;
+
+    query.prepare("DELETE FROM computercarts where CartNumber=?");
+    query.bindValue(0, cartNo);
+    
+    if (query.exec()) {
+        //emit updateTable();
+    }
+    else {
+        qDebug()<<query.lastError().text();
+    }
+}
+
+
+/*QVariant CartModel::data(QModelIndex const& index, int role) const {
+return QVariant();
 }*/

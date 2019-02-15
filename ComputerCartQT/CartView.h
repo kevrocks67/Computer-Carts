@@ -9,6 +9,7 @@ class CartView : public QTableView {
     public:
         CartView(QWidget * parent = nullptr);
     public slots:
+        void updateTable();
     private slots:
     private:
 };
