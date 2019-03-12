@@ -51,11 +51,13 @@ MainWindow::MainWindow(Session& session, CartModel& cModel) :
                 newCart, SLOT(exec()));
         connect(editTool, SIGNAL(clicked()),
                 editCart, SLOT(exec()));
+        /*connect(&cModel, SIGNAL(updateTable()),
+                &cView, SLOT(updateTable()));*/
         /*connect(removeTool, SIGNAL(clicked()),
                 delCart, SLOT(exec()));*/
 
         //Check for AddCart modal close
-        //connect(newCart, SIGNAL(accepted()), SLOT(GetDialogOutput()));
+        connect(newCart, SIGNAL(accepted()), cView, SLOT(updateTable()));
 }
 
 /*

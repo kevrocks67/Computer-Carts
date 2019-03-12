@@ -1,6 +1,7 @@
 #include "CartView.h"
 #include "QHeaderView"
 #include "QDebug"
+#include <QDebug>
 
 CartView::CartView(QWidget * parent):
     QTableView(parent) {
@@ -11,3 +12,8 @@ CartView::CartView(QWidget * parent):
         this->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
 
+
+void CartView::updateTable(){
+    this->repaint();
+    qDebug()<<"Updating view";
+}

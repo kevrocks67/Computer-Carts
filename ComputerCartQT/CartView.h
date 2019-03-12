@@ -10,6 +10,7 @@ class CartView : public QTableView {
         CartView(QWidget * parent = nullptr);
         //void test(const QItemSelection &selected, const QItemSelection &deselected);
     public slots:
+        void updateTable();
     private slots:
     private:
 };
