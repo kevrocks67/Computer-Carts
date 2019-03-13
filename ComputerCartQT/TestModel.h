@@ -6,6 +6,7 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QSqlQueryModel>
+#include <QSqlTableModel>
 #include <QDateTime>
 #include <QVariant>
 #include <QString>
@@ -13,11 +14,11 @@
 #include <QSqlError>
 
 
-class CartModel : public QSqlQueryModel {
+class CartModel : public QSqlTableModel {
     Q_OBJECT
 
     public:
-        explicit CartModel(void);
+        explicit CartModel(QObject *parent, QSqlDatabase cartdb);
         virtual ~CartModel();
         struct Cart{
             int cartNo;

@@ -1,6 +1,7 @@
 #pragma once
 #include "AddCart.h"
 #include "EditCart.h"
+#include "DeleteCart.h"
 #include "Session.h"
 #include "CartModel.h"
 #include "CartView.h"
@@ -26,6 +27,7 @@ class MainWindow : public QMainWindow {
     signals:
     public slots:
         //void GetDialogOutput();
+        void removeAction();
     private slots:
     private:
         Session& mySession;
@@ -33,6 +35,7 @@ class MainWindow : public QMainWindow {
         CartView *cView;
         AddCart *newCart;
         EditCart *editCart;
+        DeleteCart *deleteCart;
         QWidget *centralWidget;
         QVBoxLayout *mainLayout;
         QToolBar *toolbar;

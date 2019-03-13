@@ -8,6 +8,9 @@ Application::Application(int& argc, char** argv) :
     cModel(nullptr) {
 
     mySession = new Session();
+    //QSqlDatabase cartdb = QSqlDatabase::addDatabase("QSQLITE");
+    //cartdb.setDatabaseName("carts.db");
+    //cModel = new CartModel(0,cartdb);
     cModel = new CartModel();
     mainWindow = new MainWindow(*mySession, *cModel);
 

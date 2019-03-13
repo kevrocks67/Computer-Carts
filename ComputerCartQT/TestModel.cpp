@@ -1,11 +1,11 @@
 //TODO Add, edit; use prepopulated modal with textboxes
-//TODO Get cartno from row and delete that
-//TODO Find a way to refresh view after change
+//TODO Remove, have confirmation box
 
 #include "CartModel.h"
 
-CartModel::CartModel(void){
-     QSqlDatabase cartdb = QSqlDatabase::addDatabase("QSQLITE");
+CartModel::CartModel(QObject *parent, QSqlDatabase cartdb) :
+    QSqlTableModel(parent, cartdb) {
+     /*QSqlDatabase cartdb = QSqlDatabase::addDatabase("QSQLITE");
      cartdb.setDatabaseName("carts.db");
 
      if(!cartdb.open()){
@@ -13,8 +13,10 @@ CartModel::CartModel(void){
      }
      else{
          qDebug()<<"DB has connected";
-     }
-     setQuery("SELECT * from computercarts");
+     }*/
+     //setQuery("SELECT * from computercarts");
+     setTable("ComputerCarts");
+     select();
      /*
      setHeaderData(0, Qt::Horizontal, tr("Cart Number"));
      setHeaderData(1, Qt::Horizontal, tr("Cart Type"));

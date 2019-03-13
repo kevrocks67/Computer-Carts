@@ -19,5 +19,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 # Input
-HEADERS += AddCart.h Application.h CartModel.h CartView.h EditCart.h MainWindow.h Session.h
-SOURCES += AddCart.cpp Application.cpp CartModel.cpp CartView.cpp EditCart.cpp MainWindow.cpp Session.cpp
+HEADERS += AddCart.h Application.h CartModel.h CartView.h EditCart.h MainWindow.h Session.h\
+DeleteCart.h
+SOURCES += AddCart.cpp Application.cpp CartModel.cpp CartView.cpp EditCart.cpp MainWindow.cpp\
+Session.cpp DeleteCart.cpp

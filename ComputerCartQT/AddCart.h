@@ -1,5 +1,5 @@
-#ifndef ADDCARTS_H
-#define ADDCARTS_H
+#ifndef ADDCART_H
+#define ADDCART_H
 
 #include "CartModel.h"
 
@@ -40,4 +40,4 @@ class AddCart : public QDialog {
         QPushButton *cancelButton;
         QPushButton *addButton;
 };
-#endif //ADDCARTS_H
+#endif //ADDCART_H
