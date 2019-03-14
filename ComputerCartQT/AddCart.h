@@ -24,6 +24,7 @@ class AddCart : public QDialog {
         virtual ~AddCart();
     public slots:
         //void GetOptions(int Opt1);
+        void setCartNum(int c);
     private slots:
         void addCartAction();
     private:

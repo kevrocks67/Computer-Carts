@@ -12,11 +12,10 @@ CartView::CartView(QWidget * parent):
         this->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
 
-
 void CartView::updateTable(){
     this->update();
     this->repaint();
-    qDebug()<<"Updating view";
+    qDebug()<<"CartView::updateTable (I dont work)";
 }
 
 void CartView::currentChanged(const QModelIndex &current, const QModelIndex &previous) {

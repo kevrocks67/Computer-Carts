@@ -23,6 +23,7 @@ class EditCart : public QDialog {
         explicit EditCart(QWidget * parent=0);
         virtual ~EditCart();
     public slots:
+        void setCartNum(int c);
     private slots:
         void editCartAction();
     private:
@@ -38,5 +39,6 @@ class EditCart : public QDialog {
         QLineEdit *cPeriodField;
         QPushButton *cancelButton;
         QPushButton *editButton;
+        int cartNo;
 };
 #endif //ADDCART_H

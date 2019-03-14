@@ -69,6 +69,10 @@ void AddCart::addCartAction() {
     cartModel->addCart(cartDetails);
 }
 
+void AddCart::setCartNum(int c) {
+    //Set modal text
+    cNumLabel->setText(QString::number(c));
+}
 /*
 void AddCart::GetOptions(int Opt1) {
     Opt1 = 1337;

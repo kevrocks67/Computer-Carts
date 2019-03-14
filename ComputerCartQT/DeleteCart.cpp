@@ -4,18 +4,20 @@ DeleteCart::DeleteCart(QWidget * parent) :
     QDialog(parent) {
     //Initialize layouts
     mainLayout = new QVBoxLayout(this);
+    textLayout = new QHBoxLayout();
     buttonLayout = new QHBoxLayout();
 
     //Initialize widgets
     cancelButton = new QPushButton("Cancel");
     delButton = new QPushButton("Delete Cart");
     deleteMessage = new QLabel("Are you sure you want to delete cart no: ");
-    //rowNum = new QLabel(row);
-    rowNum = new QLabel("NULL");
+    cartNum = new QLabel("NULL");
 
     //Set widget properties
     QFont sansFont("Helvetica [Cronyx]", 14);
 
+    deleteMessage->setFont(sansFont);
+    cartNum->setFont(sansFont);
     cancelButton->setFont(sansFont);
     delButton->setFont(sansFont);
 
@@ -23,15 +25,17 @@ DeleteCart::DeleteCart(QWidget * parent) :
     buttonLayout->addWidget(cancelButton);
     buttonLayout->addWidget(delButton);
 
-    mainLayout->addWidget(deleteMessage);
-    mainLayout->addWidget(rowNum);
+
+    textLayout->addWidget(deleteMessage);
+    textLayout->addWidget(cartNum);
+    //mainLayout->addWidget(deleteMessage);
+    //mainLayout->addWidget(rowNum);
+    mainLayout->addLayout(textLayout);
     mainLayout->addLayout(buttonLayout);
     setLayout(mainLayout);
     setModal(true);
 
     //Signals and slots
-    /*connect(addButton, SIGNAL(clicked()),
-            CartModel, SLOT(add()));*/
     connect(cancelButton, SIGNAL(clicked()),
             SLOT(close()));
     connect(delButton, SIGNAL(clicked()),
@@ -40,14 +44,16 @@ DeleteCart::DeleteCart(QWidget * parent) :
 
 void DeleteCart::delCartAction() {
     qDebug()<<"DeleteCart::delCartAction";
-    cartModel->deleteCart(row);
+    cartModel->deleteCart(cartNo);
     QDialog::done(QDialog::Accepted);
 
 }
 
-void DeleteCart::setRowNum(QString r) {
-    rowNum->setText(r);
-    row = r.toInt();
+void DeleteCart::setCartNum(int c) {
+    //Set modal text
+    cartNum->setText(QString::number(c));
+    //Set variable for action
+    cartNo = c;
 }
 
 DeleteCart::~DeleteCart(){

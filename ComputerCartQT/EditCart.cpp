@@ -60,13 +60,26 @@ void EditCart::editCartAction() {
     qDebug()<<"EditCart::editCartAction";
     QDialog::done(QDialog::Accepted);
 
-//    cartDetails.cartNo = cNumLabel->text().toInt();
+    cartDetails.cartNo = cNumLabel->text().toInt();
     cartDetails.compType = typeField->text();
     cartDetails.quantity = quantField->text().toInt();
     cartDetails.cRoom = cRoomField->text();
     cartDetails.cPeriod = cPeriodField->text().toInt();
 
-    //cartModel->editCart(cartDetails);
+    cartModel->editCart(cartDetails);
+}
+
+void EditCart::setCartNum(int c) {
+    //Set modal text
+     cNumLabel->setText(QString::number(c));
+    //Set variable for action
+     cartNo = c;
+     CartModel::Cart cartToEdit = cartModel->getEditCart(c);
+
+     typeField->setText(cartToEdit.compType);
+     quantField->setText(QString::number(cartToEdit.quantity));
+     cRoomField->setText(cartToEdit.cRoom);
+     cPeriodField->setText(QString::number(cartToEdit.cPeriod));
 }
 
 EditCart::~EditCart(){

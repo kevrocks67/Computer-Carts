@@ -3,20 +3,23 @@
 
 #include "CartModel.h"
 
-CartModel::CartModel(QObject *parent, QSqlDatabase cartdb) :
-    QSqlTableModel(parent, cartdb) {
-     /*QSqlDatabase cartdb = QSqlDatabase::addDatabase("QSQLITE");
-     cartdb.setDatabaseName("carts.db");
+/*
+CartModel::CartModel(QObject *parent, QSqlDatabase cartd) :
+    QSqlTableModel(parent, cartd) {*/
+CartModel::CartModel(QObject *parent) :
+    QSqlTableModel(parent) {
 
+     QSqlDatabase cartdb = QSqlDatabase::addDatabase("QSQLITE");
+     cartdb.setDatabaseName("carts.db");
      if(!cartdb.open()){
          qDebug()<<"DB did not open";
      }
      else{
          qDebug()<<"DB has connected";
-     }*/
-     //setQuery("SELECT * from computercarts");
-     setTable("ComputerCarts");
+     }
+     setTable("person");
      select();
+     //setQuery("SELECT * from computercarts");
      /*
      setHeaderData(0, Qt::Horizontal, tr("Cart Number"));
      setHeaderData(1, Qt::Horizontal, tr("Cart Type"));

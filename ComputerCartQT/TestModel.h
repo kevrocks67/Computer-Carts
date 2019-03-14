@@ -18,7 +18,8 @@ class CartModel : public QSqlTableModel {
     Q_OBJECT
 
     public:
-        explicit CartModel(QObject *parent, QSqlDatabase cartdb);
+        //explicit CartModel(QObject *parent, QSqlDatabase cartd);
+        explicit CartModel(QObject *parent = 0);
         virtual ~CartModel();
         struct Cart{
             int cartNo;

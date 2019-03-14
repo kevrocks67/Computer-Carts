@@ -1,8 +1,9 @@
-//TODO Add, edit; use prepopulated modal with textboxes
-//TODO Get cartno from row and delete that
+//TODO edit
 //TODO Find a way to refresh view after change
 
 #include "CartModel.h"
+#include <QModelIndex>
+#include <QSqlRecord>
 
 CartModel::CartModel(void){
      QSqlDatabase cartdb = QSqlDatabase::addDatabase("QSQLITE");
@@ -23,8 +24,7 @@ CartModel::CartModel(void){
      setHeaderData(4, Qt::Horizontal, tr("Current Period"));
      setHeaderData(5, Qt::Horizontal, tr("Future Room"));
      setHeaderData(6, Qt::Horizontal, tr("Future Period"));
-     setHeaderData(7, Qt::Horizontal, tr("Status"));
-     */
+     setHeaderData(7, Qt::Horizontal, tr("Status")); */
      setHeaderData(0, Qt::Horizontal, tr("Cart Number"));
      setHeaderData(1, Qt::Horizontal, tr("Computer Type"));
      setHeaderData(2, Qt::Horizontal, tr("Quantity"));
@@ -33,7 +33,6 @@ CartModel::CartModel(void){
      setHeaderData(5, Qt::Horizontal, tr("Future Reservation ID"));
      setHeaderData(6, Qt::Horizontal, tr("Cart Status"));
      setHeaderData(7, Qt::Horizontal, tr("Last Updated"));
-
      //QString test = "Test,something";
      //QStringList testlist = test.split(",");
      //qDebug()<<testlist[0];
@@ -106,8 +105,6 @@ cart_cpd_e, cart_frm_e, cart_fpd_e, self.ids.cart_id_e.text))*/
                                             Quantity=?,\
                                             CurrentLocation=?,\
                                             CurrentLocTime=?,\
-                                            FutureResId=?,\
-                                            CartStatus=?,\
                                             LastUpdate=?\
                    where CartNumber=?");
 
@@ -115,27 +112,46 @@ cart_cpd_e, cart_frm_e, cart_fpd_e, self.ids.cart_id_e.text))*/
     query.bindValue(1, cart.quantity);
     query.bindValue(2, cart.cRoom);
     query.bindValue(3, cart.cPeriod);
-    query.bindValue(4, cart.resId);
-    query.bindValue(5, cart.status);
-    query.bindValue(6, QDateTime::currentDateTime());
-    query.bindValue(7, cart.cartNo);
+    query.bindValue(4, QDateTime::currentDateTime());
+    query.bindValue(5, cart.cartNo);
+
+    if (query.exec()) {
+        qDebug()<<"Edited cart no: "<<cart.cartNo;
+    }
+    else {
+        qDebug()<<query.lastError().text();
+    }
+}
+
+CartModel::Cart CartModel::getEditCart(int cartNo) {
+    QSqlQuery query;
+
+    query.prepare("SELECT * FROM computercarts where CartNumber=?");
+    query.bindValue(0, cartNo);
+
+    Cart cartDetails;
+
+    if (query.exec()) {
+        query.first();
+        cartDetails.compType  = query.value(1).toString();
+        cartDetails.quantity = query.value(2).toInt();
+        cartDetails.cRoom = query.value(3).toString();
+        cartDetails.cPeriod = query.value(4).toInt();
+    }
+    else {
+        qDebug()<<query.lastError().text();
+    }
+    return cartDetails;
 }
 
 void CartModel::deleteCart(int cartNo) {
-/*
- print('Indexed item {} was deleted'.format(cart_id))
- cur.execute("DELETE FROM computercarts where CartNumber = {}".format(cart_id))
- connection.commit()
- self.ids.rv.layout_manager.clear_selection()
- self.replace_text('UpdateSQL')
-*/
     QSqlQuery query;
 
     query.prepare("DELETE FROM computercarts where CartNumber=?");
     query.bindValue(0, cartNo);
 
     if (query.exec()) {
-        qDebug()<<"deleted that shit: "<<cartNo;
+        qDebug()<<"Deleted cart number: "<<cartNo;
     }
     else {
         qDebug()<<query.lastError().text();

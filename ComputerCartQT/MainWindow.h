@@ -27,6 +27,8 @@ class MainWindow : public QMainWindow {
     signals:
     public slots:
         //void GetDialogOutput();
+        void addAction();
+        void editAction();
         void removeAction();
     private slots:
     private:
