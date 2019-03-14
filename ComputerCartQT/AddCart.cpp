@@ -58,7 +58,6 @@ AddCart::AddCart(QWidget * parent) :
 
 void AddCart::addCartAction() {
     qDebug()<<"AddCart::addCartAction";
-    QDialog::done(QDialog::Accepted);
 
 //    cartDetails.cartNo = cNumLabel->text().toInt();
     cartDetails.compType = typeField->text();
@@ -67,6 +66,7 @@ void AddCart::addCartAction() {
     cartDetails.cPeriod = cPeriodField->text().toInt();
 
     cartModel->addCart(cartDetails);
+    QDialog::done(QDialog::Accepted);
 }
 
 void AddCart::setCartNum(int c) {

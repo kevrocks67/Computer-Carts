@@ -9,13 +9,8 @@ CartView::CartView(QWidget * parent):
         this->setAlternatingRowColors(true);
         this->setSelectionBehavior(QAbstractItemView::SelectRows);
         //this->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
+        this->setSelectionMode(QAbstractItemView::SingleSelection);
         this->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-}
-
-void CartView::updateTable(){
-    this->update();
-    this->repaint();
-    qDebug()<<"CartView::updateTable (I dont work)";
 }
 
 void CartView::currentChanged(const QModelIndex &current, const QModelIndex &previous) {

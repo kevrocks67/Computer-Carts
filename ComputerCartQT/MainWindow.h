@@ -31,6 +31,7 @@ class MainWindow : public QMainWindow {
         void editAction();
         void removeAction();
     private slots:
+        void update();
     private:
         Session& mySession;
         CartModel& cartModel;

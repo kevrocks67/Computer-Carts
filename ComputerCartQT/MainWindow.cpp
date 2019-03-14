@@ -63,9 +63,12 @@ MainWindow::MainWindow(Session& session, CartModel& cModel) :
             deleteCart, SLOT(exec()));
 
         //Check for dialog close
-        connect(newCart, SIGNAL(accepted()), cView, SLOT(updateTable()));
+        connect(newCart, SIGNAL(accepted()),
+                this, SLOT(update()));
+        connect(editCart, SIGNAL(accepted()),
+                this, SLOT(update()));
         connect(deleteCart, SIGNAL(accepted()),
-                cView, SLOT(updateTable()));
+                this, SLOT(update()));
 
 }
 
@@ -110,5 +113,11 @@ void MainWindow::GetDialogOutput() {
     qDebug()<<"dialog closed";
 }*/
 
+void MainWindow::update() {
+    QString queryStr = cartModel.query().executedQuery();
+    cartModel.clear();
+    cartModel.query().clear();
+    cartModel.setQuery(queryStr);
+}
 MainWindow::~MainWindow(){
 }

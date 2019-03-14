@@ -12,7 +12,6 @@ class CartView : public QTableView {
         void currentChanged(const QModelIndex &current, const QModelIndex &previous) override;
         int getRow();
     public slots:
-        void updateTable();
     private slots:
     private:
         int currentRow;
