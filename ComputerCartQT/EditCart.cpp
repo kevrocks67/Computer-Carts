@@ -72,8 +72,13 @@ void EditCart::editCartAction() {
 void EditCart::setCartNum(int c) {
     //Set modal text
      cNumLabel->setText(QString::number(c));
-    //Set variable for action
-     cartNo = c;
+
+	//Check if no cart is selected
+     if (c == 0) {
+        QDialog::done(QDialog::Rejected);
+        close();
+     }
+
      CartModel::Cart cartToEdit = cartModel->getEditCart(c);
 
      typeField->setText(cartToEdit.compType);

@@ -1,6 +1,3 @@
-//TODO edit
-//TODO Find a way to refresh view after change
-
 #include "CartModel.h"
 #include <QModelIndex>
 #include <QSqlRecord>

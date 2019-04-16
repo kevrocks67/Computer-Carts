@@ -27,6 +27,7 @@ select * from reservations where CartNumber=cartNo ORDER by date, time); -> next
     getResId -> update table computercarts where CartNumber=cartNo value of FutureResId
 
 // Reservations view
+    In QStackedWidget?
     Add reservation button -> modal
     Edit reservations table -> regular table in modal window
     Delete reservation button -> confirmBox
@@ -65,3 +66,4 @@ select * from reservations where CartNumber=cartNo ORDER by date,time; -> next l
 select * from reservations where CartNumber=cartNo ORDER by date ASC; -> get date of 1st entry
 select * from reservations where CartNumber=cartNo AND date=dateFromAbove ORDER by time; -> the next
 
+Add funhouse theme options

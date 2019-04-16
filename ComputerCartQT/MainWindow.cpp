@@ -3,6 +3,7 @@
 MainWindow::MainWindow(Session& session, CartModel& cModel) :
     mySession(session),
     cartModel(cModel) {
+        setStyleSheet("QMainWindow {background: #c1c1c1;}");
         //Initialize layouts
         centralWidget = new QWidget(this);
         mainLayout = new QVBoxLayout(centralWidget);
@@ -15,7 +16,8 @@ MainWindow::MainWindow(Session& session, CartModel& cModel) :
         logoutTool = new QToolButton();
         cView = new CartView();
         QFont sansFont("Helvetica [Cronyx]", 14);
-//Set widget properties
+
+		//Set widget properties
         addTool->setText("Add");
         addTool->setFont(sansFont);
         removeTool->setText("Remove");
