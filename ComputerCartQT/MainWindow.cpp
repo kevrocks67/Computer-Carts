@@ -3,7 +3,7 @@
 MainWindow::MainWindow(Session& session, CartModel& cModel) :
     mySession(session),
     cartModel(cModel) {
-        setStyleSheet("QMainWindow {background: #c1c1c1;}");
+        //setStyleSheet("QMainWindow {background: #c1c1c1;}");
         //Initialize layouts
         centralWidget = new QWidget(this);
         mainLayout = new QVBoxLayout(centralWidget);
@@ -14,6 +14,7 @@ MainWindow::MainWindow(Session& session, CartModel& cModel) :
         removeTool = new QToolButton();
         editTool = new QToolButton();
         logoutTool = new QToolButton();
+        themePicker = new QComboBox();
         cView = new CartView();
         QFont sansFont("Helvetica [Cronyx]", 14);
 
@@ -27,12 +28,22 @@ MainWindow::MainWindow(Session& session, CartModel& cModel) :
         logoutTool->setText("Logout");
         logoutTool->setFont(sansFont);
 
+        //Phantom Style Picker
+        themePicker->setFont(sansFont);
+        themePicker->addItem("Carbon");
+        themePicker->addItem("Polar");
+        themePicker->addItem("Stealth");
+        themePicker->addItem("Sakura");
+        themePicker->setCurrentIndex(2);
+
         toolbar->setAllowedAreas(Qt::TopToolBarArea);
         toolbar->addWidget(addTool);
         toolbar->addWidget(removeTool);
         toolbar->addWidget(editTool);
         toolbar->addSeparator();
         toolbar->addWidget(logoutTool);
+        toolbar->addSeparator();
+        toolbar->addWidget(themePicker);
 
         cView->setModel(&cModel);
 
@@ -71,7 +82,13 @@ MainWindow::MainWindow(Session& session, CartModel& cModel) :
                 this, SLOT(update()));
         connect(deleteCart, SIGNAL(accepted()),
                 this, SLOT(update()));
+        connect(themePicker, SIGNAL(activated(QString)),
+                this, SLOT(changeTheme(QString)));
 
+}
+
+void MainWindow::changeTheme(const QString& styleName) {
+    qDebug()<<styleName;
 }
 
 void MainWindow::removeAction() {

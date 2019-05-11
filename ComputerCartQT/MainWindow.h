@@ -13,6 +13,7 @@
 #include <QToolBar>
 #include <QToolButton>
 #include <QDebug>
+#include <QComboBox>
 
 class Session;
 class CartModel;
@@ -32,6 +33,7 @@ class MainWindow : public QMainWindow {
         void removeAction();
     private slots:
         void update();
+        void changeTheme(const QString& styleName);
     private:
         Session& mySession;
         CartModel& cartModel;
@@ -49,4 +51,5 @@ class MainWindow : public QMainWindow {
         QToolButton *addResTool;
         QToolButton *editResTool;
         QToolButton *detailsTool;
+        QComboBox *themePicker;
 };
