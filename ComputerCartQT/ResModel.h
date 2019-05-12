@@ -1,14 +1,15 @@
 #pragma once
 
-//#include <QAbstractListModel>
 #include <QDebug>
 #include <QSql>
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QSqlQueryModel>
+#include <QDateTime>
 #include <QVariant>
 #include <QString>
 #include <QStringList>
+#include <QSqlError>
 
 
 class ResModel : public QSqlQueryModel {
@@ -17,18 +18,8 @@ class ResModel : public QSqlQueryModel {
     public:
         explicit ResModel(void);
         virtual ~ResModel();
-        struct Cart{
-            int cartNo;
-            QString cartType;
-            int quantity;
-            QString cRoom;
-            int cPeriod;
-        }cart;
-
-        //virtual int rowCount(QModelIndex const& parent = QModelIndex()) const;
-        //virtual QVariant data(QModelIndex const& index, int role = Qt::DisplayRole) const;
     public slots:
-        void addCart(Cart &cart);
     private slots:
+    signals:
     private:
 };

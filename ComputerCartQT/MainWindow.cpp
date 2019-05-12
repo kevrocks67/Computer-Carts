@@ -58,7 +58,9 @@ MainWindow::MainWindow(Session& session, CartModel& cModel) :
         show();
         raise();
 
-        //Slots and signals
+
+        //Signals and slots
+
         newCart = new AddCart();
         editCart = new EditCart();
         deleteCart = new DeleteCart();
@@ -86,6 +88,8 @@ MainWindow::MainWindow(Session& session, CartModel& cModel) :
                 this, SLOT(updateTable()));
         connect(deleteCart, SIGNAL(accepted()),
                 this, SLOT(updateTable()));
+
+        //Theme Picker Combobox Events
         connect(themePicker, SIGNAL(activated(int)),
                 this, SLOT(changeTheme(int)));
 

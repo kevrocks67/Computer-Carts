@@ -1,6 +1,5 @@
 #pragma once
 
-//#include <QAbstractListModel>
 #include <QDebug>
 #include <QSql>
 #include <QSqlDatabase>
@@ -36,7 +35,5 @@ class CartModel : public QSqlQueryModel {
         CartModel::Cart getEditCart(int cartNo);
     private slots:
     signals:
-        void updateTable();
     private:
-       // virtual QVariant data(QModelIndex const& index, int role = Qt::DisplayRole) const;
 };
