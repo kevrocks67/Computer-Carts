@@ -1,9 +1,13 @@
 #include "MainWindow.h"
+#include "Palette.h"
 
 MainWindow::MainWindow(Session& session, CartModel& cModel) :
     mySession(session),
     cartModel(cModel) {
-        //setStyleSheet("QMainWindow {background: #c1c1c1;}");
+        //Set look and feel
+        QApplication::setPalette(namedColorSchemePalette(Stealth));
+        QFont sansFont("Helvetica [Cronyx]", 14);
+
         //Initialize layouts
         centralWidget = new QWidget(this);
         mainLayout = new QVBoxLayout(centralWidget);
@@ -16,7 +20,6 @@ MainWindow::MainWindow(Session& session, CartModel& cModel) :
         logoutTool = new QToolButton();
         themePicker = new QComboBox();
         cView = new CartView();
-        QFont sansFont("Helvetica [Cronyx]", 14);
 
 		//Set widget properties
         addTool->setText("Add");
@@ -30,6 +33,7 @@ MainWindow::MainWindow(Session& session, CartModel& cModel) :
 
         //Phantom Style Picker
         themePicker->setFont(sansFont);
+        themePicker->addItem("Default");
         themePicker->addItem("Carbon");
         themePicker->addItem("Polar");
         themePicker->addItem("Stealth");
@@ -77,18 +81,34 @@ MainWindow::MainWindow(Session& session, CartModel& cModel) :
 
         //Check for dialog close
         connect(newCart, SIGNAL(accepted()),
-                this, SLOT(update()));
+                this, SLOT(updateTable()));
         connect(editCart, SIGNAL(accepted()),
-                this, SLOT(update()));
+                this, SLOT(updateTable()));
         connect(deleteCart, SIGNAL(accepted()),
-                this, SLOT(update()));
-        connect(themePicker, SIGNAL(activated(QString)),
-                this, SLOT(changeTheme(QString)));
+                this, SLOT(updateTable()));
+        connect(themePicker, SIGNAL(activated(int)),
+                this, SLOT(changeTheme(int)));
 
 }
 
-void MainWindow::changeTheme(const QString& styleName) {
-    qDebug()<<styleName;
+void MainWindow::changeTheme(int styleName) {
+    switch (styleName) {
+        case 0:
+            QApplication::setPalette(namedColorSchemePalette(Stealth));
+            break;
+        case 1:
+            QApplication::setPalette(namedColorSchemePalette(Carbon));
+            break;
+        case 2:
+            QApplication::setPalette(namedColorSchemePalette(Polar));
+            break;
+        case 3:
+            QApplication::setPalette(namedColorSchemePalette(Stealth));
+            break;
+        case 4:
+            QApplication::setPalette(namedColorSchemePalette(Sakura));
+            break;
+    }
 }
 
 void MainWindow::removeAction() {
@@ -124,19 +144,12 @@ void MainWindow::addAction() {
     newCart->setCartNum(cart);
 }
 
-/*
-void MainWindow::GetDialogOutput() {
-    int Opt1;
-    newCart->GetOptions(Opt1);
-    qDebug()<<Opt1;
-    qDebug()<<"dialog closed";
-}*/
-
-void MainWindow::update() {
+void MainWindow::updateTable() {
     QString queryStr = cartModel.query().executedQuery();
     cartModel.clear();
     cartModel.query().clear();
     cartModel.setQuery(queryStr);
 }
+
 MainWindow::~MainWindow(){
 }

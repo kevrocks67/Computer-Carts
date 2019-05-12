@@ -1,23 +1,24 @@
 #pragma once
+
 #include "AddCart.h"
+#include "CartModel.h"
+#include "CartView.h"
 #include "EditCart.h"
 #include "DeleteCart.h"
 #include "Session.h"
-#include "CartModel.h"
-#include "CartView.h"
 
+#include <QComboBox>
+#include <QDebug>
 #include <QMainWindow>
-#include <QWidget>
-#include <QVBoxLayout>
 #include <QPushButton>
 #include <QToolBar>
 #include <QToolButton>
-#include <QDebug>
-#include <QComboBox>
+#include <QVBoxLayout>
+#include <QWidget>
 
-class Session;
 class CartModel;
 class CartView;
+class Session;
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
@@ -27,13 +28,12 @@ class MainWindow : public QMainWindow {
         virtual ~MainWindow();
     signals:
     public slots:
-        //void GetDialogOutput();
         void addAction();
         void editAction();
         void removeAction();
     private slots:
-        void update();
-        void changeTheme(const QString& styleName);
+        void updateTable();
+        void changeTheme(int styleName);
     private:
         Session& mySession;
         CartModel& cartModel;
