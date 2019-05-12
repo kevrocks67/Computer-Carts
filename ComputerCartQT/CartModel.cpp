@@ -57,19 +57,21 @@ void CartModel::addCart(Cart &cart) {
 void CartModel::editCart(Cart &cart) {
     QSqlQuery query;
 
-    query.prepare("UPDATE computercarts set ComputerType=?,\
-                                            Quantity=?,\
-                                            CurrentLocation=?,\
-                                            CurrentLocTime=?,\
-                                            LastUpdate=?\
-                   where CartNumber=?");
+    if(cart.cartNo) {
+        query.prepare("UPDATE computercarts set ComputerType=?,\
+                                                Quantity=?,\
+                                                CurrentLocation=?,\
+                                                CurrentLocTime=?,\
+                                                LastUpdate=?\
+                       where CartNumber=?");
 
-    query.bindValue(0, cart.compType);
-    query.bindValue(1, cart.quantity);
-    query.bindValue(2, cart.cRoom);
-    query.bindValue(3, cart.cPeriod);
-    query.bindValue(4, QDateTime::currentDateTime());
-    query.bindValue(5, cart.cartNo);
+        query.bindValue(0, cart.compType);
+        query.bindValue(1, cart.quantity);
+        query.bindValue(2, cart.cRoom);
+        query.bindValue(3, cart.cPeriod);
+        query.bindValue(4, QDateTime::currentDateTime());
+        query.bindValue(5, cart.cartNo);
+    }
 
     if (query.exec()) {
         qDebug()<<"Edited cart no: "<<cart.cartNo;
@@ -81,11 +83,12 @@ void CartModel::editCart(Cart &cart) {
 
 CartModel::Cart CartModel::getEditCart(int cartNo) {
     QSqlQuery query;
-
-    query.prepare("SELECT * FROM computercarts where CartNumber=?");
-    query.bindValue(0, cartNo);
-
     Cart cartDetails;
+
+    if(cartNo) {
+        query.prepare("SELECT * FROM computercarts where CartNumber=?");
+        query.bindValue(0, cartNo);
+    }
 
     if (query.exec()) {
         query.first();
@@ -103,8 +106,10 @@ CartModel::Cart CartModel::getEditCart(int cartNo) {
 void CartModel::deleteCart(int cartNo) {
     QSqlQuery query;
 
-    query.prepare("DELETE FROM computercarts where CartNumber=?");
-    query.bindValue(0, cartNo);
+    if(cartNo) {
+        query.prepare("DELETE FROM computercarts where CartNumber=?");
+        query.bindValue(0, cartNo);
+    }
 
     if (query.exec()) {
         qDebug()<<"Deleted cart number: "<<cartNo;

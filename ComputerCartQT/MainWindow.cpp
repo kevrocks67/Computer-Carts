@@ -30,6 +30,7 @@ MainWindow::MainWindow(Session& session, CartModel& cModel) :
         editTool->setFont(sansFont);
         logoutTool->setText("Logout");
         logoutTool->setFont(sansFont);
+        logoutTool->setEnabled(false);
 
         //Phantom Style Picker
         themePicker->setFont(sansFont);
@@ -38,7 +39,7 @@ MainWindow::MainWindow(Session& session, CartModel& cModel) :
         themePicker->addItem("Polar");
         themePicker->addItem("Stealth");
         themePicker->addItem("Sakura");
-        themePicker->setCurrentIndex(2);
+        themePicker->setCurrentIndex(3);
 
         toolbar->setAllowedAreas(Qt::TopToolBarArea);
         toolbar->addWidget(addTool);
