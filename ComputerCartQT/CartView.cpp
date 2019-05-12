@@ -18,6 +18,19 @@ void CartView::currentChanged(const QModelIndex &current, const QModelIndex &pre
     previousRow = previous.row();
 }
 
+void CartView::mouseDoubleClickEvent(QMouseEvent* event) {
+    //Checks if item is selected before performing action
+    QModelIndex index = indexAt(event->pos());
+
+    if(index.isValid()) {
+        qDebug()<<"Showing additional info";
+    }
+    else {
+        qDebug()<<"No item under cursor pos";
+        this->clearSelection();
+    }
+}
+
 int CartView::getRow() {
     return currentRow;
 }
