@@ -1,4 +1,8 @@
 # Computer-Carts
+**NOTE** - This project has ***NOT*** been abandoned. It is being worked on in the restructuring
+branch under ComputerCartQT.
+
+
  A python3 based project built on a kivy gui and sql database in order to manage the laptop carts at the Columbia Secondary School.
 
 ## Project Author
