@@ -23,7 +23,7 @@ void CartView::mouseDoubleClickEvent(QMouseEvent* event) {
     QModelIndex index = indexAt(event->pos());
 
     if(index.isValid()) {
-        qDebug()<<"Showing additional info";
+        emit showDetailsEvent(index);
     }
     else {
         qDebug()<<"No item under cursor pos";

@@ -7,6 +7,8 @@
 class CartView : public QTableView {
     Q_OBJECT
 
+    signals:
+        void showDetailsEvent(const QModelIndex &index);
     public:
         CartView(QWidget * parent = nullptr);
         //void test(const QItemSelection &selected, const QItemSelection &deselected);

@@ -94,6 +94,8 @@ MainWindow::MainWindow(Session& session, CartModel& cModel) :
         connect(themePicker, SIGNAL(activated(int)),
                 this, SLOT(changeTheme(int)));
 
+        connect(cView, SIGNAL(showDetailsEvent(const QModelIndex)),
+                this, SLOT(showDetails(const QModelIndex)));
 }
 
 void MainWindow::changeTheme(int styleName) {
@@ -154,6 +156,10 @@ void MainWindow::updateTable() {
     cartModel.clear();
     cartModel.query().clear();
     cartModel.setQuery(queryStr);
+}
+
+void MainWindow::showDetails(const QModelIndex &index) {
+    qDebug()<<"Showing additional details for item: "<<index.row();
 }
 
 MainWindow::~MainWindow(){

@@ -34,6 +34,7 @@ class MainWindow : public QMainWindow {
     private slots:
         void updateTable();
         void changeTheme(int styleName);
+        void showDetails(const QModelIndex &index);
     private:
         Session& mySession;
         CartModel& cartModel;
