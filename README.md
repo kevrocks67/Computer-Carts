@@ -10,7 +10,7 @@ branch under ComputerCartQT.
 
 # Qt Version
 ## Credits
-Themes come from the [Phantom Style](https://github.com/randrew/phantomstyle) project:
+Themes come from the [Phantom Style](https://github.com/randrew/phantomstyle) project
 
 # Python Version (original)
 ## Motivation and Story
