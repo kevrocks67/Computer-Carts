@@ -1,3 +1,5 @@
+# PULL NEW VERSION FROM MASTER, SQL CODE IS GONE
+# OOPS
 import configparser
 import pymysql
 import pymysql.cursors
