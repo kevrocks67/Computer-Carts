@@ -11,7 +11,6 @@ class CartView : public QTableView {
         void showDetailsEvent(const QModelIndex &index);
     public:
         CartView(QWidget * parent = nullptr);
-        //void test(const QItemSelection &selected, const QItemSelection &deselected);
         void currentChanged(const QModelIndex &current, const QModelIndex &previous) override;
         void mouseDoubleClickEvent(QMouseEvent* event) override;
         int getRow();

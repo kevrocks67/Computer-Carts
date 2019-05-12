@@ -33,4 +33,4 @@ class DeleteCart : public QDialog {
         QPushButton *delButton;
         int cartNo;
 };
-#endif //DELETECARTS_H
+#endif //DELETECART_H

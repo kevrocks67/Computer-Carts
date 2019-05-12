@@ -5,6 +5,7 @@
 #include "CartView.h"
 #include "EditCart.h"
 #include "DeleteCart.h"
+#include "DetailView.h"
 #include "Session.h"
 
 #include <QComboBox>
@@ -36,12 +37,16 @@ class MainWindow : public QMainWindow {
         void changeTheme(int styleName);
         void showDetails(const QModelIndex &index);
     private:
+        //Class declarations
         Session& mySession;
         CartModel& cartModel;
         CartView *cView;
         AddCart *newCart;
         EditCart *editCart;
         DeleteCart *deleteCart;
+        DetailView *detailView;
+
+        //Widget declarations
         QWidget *centralWidget;
         QVBoxLayout *mainLayout;
         QToolBar *toolbar;

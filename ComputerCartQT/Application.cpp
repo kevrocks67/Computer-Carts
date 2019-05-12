@@ -16,6 +16,8 @@ Application::Application(int& argc, char** argv) :
     }
 
 int main(int argc, char* argv[]) {
+    QFont sansFont("Helvetica [Cronxy]", 14);
+
     #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
         Application::setAttribute(Qt::AA_EnableHighDpiScaling);
     #endif
@@ -24,6 +26,7 @@ int main(int argc, char* argv[]) {
     Application::setOrganizationName("Columbia Secondary School");
     Application::setApplicationName("CCMS");
     Application::setApplicationVersion("0.1");
+    Application::setFont(sansFont);
 
     Application app(argc, argv);
     return app.exec();

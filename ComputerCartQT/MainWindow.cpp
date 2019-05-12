@@ -65,6 +65,7 @@ MainWindow::MainWindow(Session& session, CartModel& cModel) :
         newCart = new AddCart();
         editCart = new EditCart();
         deleteCart = new DeleteCart();
+        detailView = new DetailView();
 
         //Check for dialog open
         connect(addTool, SIGNAL(clicked()),
@@ -160,6 +161,7 @@ void MainWindow::updateTable() {
 
 void MainWindow::showDetails(const QModelIndex &index) {
     qDebug()<<"Showing additional details for item: "<<index.row();
+    detailView->exec();
 }
 
 MainWindow::~MainWindow(){

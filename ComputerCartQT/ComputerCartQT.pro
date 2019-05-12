@@ -22,7 +22,7 @@ include (phantom/phantom.pri)
 
 # Input
 HEADERS += AddCart.h Application.h CartModel.h CartView.h EditCart.h MainWindow.h Session.h\
-DeleteCart.h
+DeleteCart.h DetailView.h
 SOURCES += AddCart.cpp Application.cpp CartModel.cpp CartView.cpp EditCart.cpp MainWindow.cpp\
-Session.cpp DeleteCart.cpp
+Session.cpp DeleteCart.cpp DetailView.cpp
 
