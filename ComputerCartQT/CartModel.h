@@ -32,7 +32,7 @@ class CartModel : public QSqlQueryModel {
         void addCart(Cart &cart);
         void editCart(Cart &cart);
         void deleteCart(int cartNo);
-        CartModel::Cart getEditCart(int cartNo);
+        CartModel::Cart getCart(int cartNo);
     private slots:
     signals:
     private:

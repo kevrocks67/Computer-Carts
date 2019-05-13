@@ -79,7 +79,7 @@ void EditCart::setCartNum(int c) {
         close();
      }
 
-     CartModel::Cart cartToEdit = cartModel->getEditCart(c);
+     CartModel::Cart cartToEdit = cartModel->getCart(c);
 
      typeField->setText(cartToEdit.compType);
      quantField->setText(QString::number(cartToEdit.quantity));

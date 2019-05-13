@@ -81,7 +81,7 @@ void CartModel::editCart(Cart &cart) {
     }
 }
 
-CartModel::Cart CartModel::getEditCart(int cartNo) {
+CartModel::Cart CartModel::getCart(int cartNo) {
     QSqlQuery query;
     Cart cartDetails;
 
