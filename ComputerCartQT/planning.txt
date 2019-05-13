@@ -7,7 +7,9 @@ CREATE TABLE ComputerCarts (
     FutureResId INTEGER DEFAULT NULL,
     FOREIGN KEY(FutureResId) REFERENCES reservations(ResId),
     CartStatus BOOLEAN DEFAULT NULL,
-    LastUpdate DATETIME
+    LastUpdate DATETIME,
+
+    ADD THIS COLUMN ->Comments TEXT DEFAULT NULL
 );
 
 CREATE TABLE reservations (
@@ -36,9 +38,6 @@ select * from reservations where CartNumber=cartNo ORDER by date, time); -> next
     Second table with no assignment?
 
     Upon close of reservation view, send signal to main view to refresh table
-
-double click table row for comments and to check reservations for cart, tabbed view modal
-    QTabWidget -> https://doc.qt.io/qt-5/qtwidgets-dialogs-tabdialog-example.html
 
 Check if futureresid.date < currentDate -> Get next reservation for the next future date
 by checking time
