@@ -5,10 +5,10 @@
 
 #include <QApplication>
 #include <QDialog>
-#include <QHBoxLayout>
 #include <QLabel>
 #include <QPushButton>
 #include <QTabWidget>
+#include <QTextEdit>
 #include <QVBoxLayout>
 #include <QWidget>
 
@@ -21,10 +21,12 @@ class DetailView : public QDialog {
         explicit DetailView(QWidget * parent=0);
         virtual ~DetailView();
     public slots:
+        void getDetails(int cartNo);
     private slots:
     private:
         CartModel *cartModel;
 
+        //Main Widgets
         QVBoxLayout *mainLayout;
         QTabWidget *tabWidget;
         QWidget *cartWidget;
@@ -32,5 +34,13 @@ class DetailView : public QDialog {
         QVBoxLayout *cartLayout;
         QVBoxLayout *resLayout;
         QPushButton *closeButton;
+
+        //Cart Tab Widgets
+        QLabel *cartNumLabel;
+        QLabel *compTypeLabel;
+        QLabel *quantLabel;
+        QLabel *cRoomLabel;
+        QLabel *cPeriodLabel;
+        QTextEdit *commentBox;
 };
 #endif //DETAILVIEW_H

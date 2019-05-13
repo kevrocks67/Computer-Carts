@@ -160,7 +160,13 @@ void MainWindow::updateTable() {
 }
 
 void MainWindow::showDetails(const QModelIndex &index) {
-    qDebug()<<"Showing additional details for item: "<<index.row();
+    //Convert table row to cart number
+    int row = index.row();
+    QModelIndex cartIndex (cartModel.index(row, 0));
+    int cart = cartModel.data(cartIndex).toInt();
+    //Pass cart number to data fill function
+    detailView->getDetails(cart);
+    //Execute detailView
     detailView->exec();
 }
 
