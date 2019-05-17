@@ -2,6 +2,7 @@
  -CREATE TABLE `Computer Carts` (
  -	`Cart Number`	INTEGER,
  -	`Computer Type`	INTEGER,
+    `Computer Quantity` INTEGER,
  -	`Current Location`	INTEGER,
  -	`Time At Location`	INTEGER,
  -	`Future Location`	INTEGER,

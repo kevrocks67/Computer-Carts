@@ -1,3 +1,9 @@
+#!/usr/bin/python
+
+#TODO Remake labels for columns (Add quantity section, make them more like request sheet)
+#TODO Remove unnecessary extra code
+#TODO Redo data table view
+
 import configparser
 import sqlite3
 import hashlib
@@ -32,7 +38,6 @@ addState = 1
 editState = 1
 
 config_name = 'config.ini'
-
 
 class toaster(AnchorLayout):
     def bg(self):
@@ -135,7 +140,6 @@ class LoginScreen(Screen):
 
         configfile.close()
 
-
 class RegisterPopup(Popup):
     def register(self, uname, pwd):
         reg = LoginScreen()
@@ -171,7 +175,7 @@ class MainScreen(Screen):
         print("Connecting to mySQL...")
         cur.execute("SELECT * FROM computercarts")
         connection.commit()
-        
+
         def db_data(self, cur):
             global populated
 
@@ -180,7 +184,7 @@ class MainScreen(Screen):
                 cur = connection.cursor()
                 cur.execute("SELECT * FROM computercarts")
                 connection.commit()
-                
+
                 vector = []
                 result = cur.fetchall()
                 for row in result:
@@ -199,7 +203,7 @@ class MainScreen(Screen):
 
         def fill(self, strings):
             global populated
-            
+
             filename = "data.txt"
             if getattr(sys, 'frozen', False):
                 application_path = os.path.dirname(sys.executable)
@@ -207,8 +211,8 @@ class MainScreen(Screen):
                 application_path = os.path.dirname(__file__)
 
             data_path = os.path.join(application_path, filename)
-            
-            
+
+
             data_file = open(data_path, 'a')
             data_file.seek(0)
             data_file.truncate()
@@ -219,7 +223,7 @@ class MainScreen(Screen):
 
             data_file.close()
             populated = True
-            
+
         def replace_text(self, event):
             self.event = event
             if self.event == 'UpdateSQL':
@@ -255,11 +259,11 @@ class MainScreen(Screen):
                 self.replace_text('UpdateSQL')
             else:
                 print('You must select an item to delete')
-            
+
         def add_cart(self, cart_type, cart_crm, cart_cpd, cart_frm, cart_fpd):
             connection = sqlite3.connect('carts.db')
             cur = connection.cursor()
-            
+
             cart_id = len(self.ids.rv.data) + 1
             comma_line = str(cart_id) + ',' + str(cart_type) + ',' + ',' + str(cart_crm) + ',' + \
                 str(cart_cpd) + ',' + str(cart_frm) + ',' + str(cart_fpd)
@@ -282,12 +286,12 @@ class MainScreen(Screen):
             print('New item added with value {}'.format(line))
             self.replace_text('UpdateSQL')
             self.show_add()
-            
+
 
         def edit_cart(self, cart_type_e, cart_crm_e, cart_cpd_e, cart_frm_e, cart_fpd_e):
             connection = sqlite3.connect('carts.db')
             cur = connection.cursor()
-            
+
             comma_line = str(self.ids.cart_id_e.text) + ',' + str(cart_type_e) + ',' + ',' + str(cart_crm_e) + ',' + \
                          str(cart_cpd_e) + ',' + str(cart_frm_e) + ',' + str(cart_fpd_e)
 
@@ -296,7 +300,7 @@ class MainScreen(Screen):
             self.ids.rv.data[currentObj]['text'] = line
             self.ids.rv.refresh_from_data()
             self.ids.rv.layout_manager.clear_selection()
-            
+
             cur.execute("UPDATE computercarts set CartNumber = ?, ComputerType = ?, CurrentLocation = ?,\
                         TimeAtLocation = ?, FutureLocation = ?, FutureTime = ?\
                         where CartNumber = ?",(self.ids.cart_id_e.text, cart_type_e, cart_crm_e, cart_cpd_e, cart_frm_e, cart_fpd_e, self.ids.cart_id_e.text))
@@ -319,7 +323,7 @@ class MainScreen(Screen):
                 slide_out = Animation(x=-self.width + 20)
                 slide_out.start(self.ids.AddBox)
                 slide_out2 = Animation(x=-100)
-                
+
         def show_edit(self):
             global editState
             global addState
@@ -374,9 +378,9 @@ class MainScreen(Screen):
             print('Thank you for using Computer Cart MS. Logging out...')
             self.manager.transition = SlideTransition(direction="right")
             self.manager.current = 'login'
-            
+
         print('Connection Succeeded')
-        
+
     finally:
         connection.commit()
 
@@ -423,7 +427,7 @@ class SettingsScreen(Screen):
     def __init__(self, **kwargs):
         super(SettingsScreen, self).__init__(**kwargs)
         self.ids.dropdown.dismiss()
-        
+
     def set_sql_cred(self, sql_host, sql_port, sql_user, sql_pass, sql_db):
         global config_path
         file = open(config_path, 'w')
@@ -484,7 +488,7 @@ class ComputerCartMSApp(App):
     def on_quit(self):
         exit()
 
-    def build(self):        
+    def build(self):
         self.title = 'Computer Cart Management Software Version 1.0'
         # self.icon = 'some cool logo I need to design'
         self.icon = 'uix/src/csslogocut small.png'

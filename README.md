@@ -8,6 +8,11 @@ branch under ComputerCartQT.
 ## Project Author
   Kevin Diaz
 
+# Qt Version
+## Credits
+Themes come from the [Phantom Style](https://github.com/randrew/phantomstyle) project
+
+# Python Version (original)
 ## Motivation and Story
    During my time at the Columbia Secondary School, I worked closely with the IT department helping in any way I could. One of the things I frequently had to do was move the laptop carts from one room to another at the end of a certain period. This was where I realized that there was a problem which needed solving. Frequently, our "tech team" had to rely on the instruction of the head of the IT department to tell us what to do. Sometimes even he didn't know which cart had to go to which room at what time. Another problem which existed was that the carts were typically left unlocked overnight since the head was the only one who had the keys to the carts. As a security freak myself, this did not bode well with me. After having searched for a project to work on for several months, the opportunity to take on this problem arised. I decided to create this application as part of my Capstone Engineering Final Project.
 
@@ -113,7 +118,7 @@ https://github.com/baboomerang
 
 ## License
     kevrocks67/Computer-Carts
-    Copyright (C) <2017>  <Kevin Diaz>
+    Copyright (C) <2019> <Kevin Diaz>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by

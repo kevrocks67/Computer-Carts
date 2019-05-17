@@ -1,3 +1,5 @@
+#TODO This version never got finished, need to add SQL statements
+
 import configparser
 import pymysql
 import pymysql.cursors
@@ -15,7 +17,6 @@ from kivy.uix.recycleview.views import RecycleDataViewBehavior
 from kivy.uix.recycleboxlayout import RecycleBoxLayout
 from kivy.uix.behaviors import FocusBehavior
 from kivy.uix.recycleview.layout import LayoutSelectionBehavior
-
 
 Builder.load_file('ComputerCart.kv')
 cfg = configparser.ConfigParser()

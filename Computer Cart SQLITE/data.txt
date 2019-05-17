@@ -1,7 +1,6 @@
-1               Printer Cart               None               None               None               None               None
-2               Macbooks               412               1-4               303               5-8               None
-3               Yellow Lenovo               None               None               None               None               None
-4               Black Lenovo               None               None               None               None               None
-5               Engineering Lenovo               None               None               None               None               None
-6               Chromebook               None               None               None               None               None
-7               Small Lenovo               None               None               None               None               None
+1               Engineering               412               15                                             None
+2               Chromebooks               412               28                                             None
+3               Lenovo 11e               N/A               35                                             None
+4               Lenovo 131e               305               12                                             None
+5               Chromebooks               N/A               27                                             None
+6               Lenovo L440               B5               13                                             None
