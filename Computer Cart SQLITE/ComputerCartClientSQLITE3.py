@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 #TODO Remake labels for columns (Add quantity section, make them more like request sheet)
 #TODO Remove unnecessary extra code
 #TODO Redo data table view

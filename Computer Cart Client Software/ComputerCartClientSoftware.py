@@ -1,5 +1,5 @@
-# PULL NEW VERSION FROM MASTER, SQL CODE IS GONE
-# OOPS
+#TODO This version never got finished, need to add SQL statements
+
 import configparser
 import pymysql
 import pymysql.cursors
