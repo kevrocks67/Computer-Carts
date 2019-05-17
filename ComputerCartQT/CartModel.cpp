@@ -1,28 +1,65 @@
 #include "CartModel.h"
-#include <QModelIndex>
-#include <QSqlRecord>
 
-CartModel::CartModel(void){
-     QSqlDatabase cartdb = QSqlDatabase::addDatabase("QSQLITE");
-     cartdb.setDatabaseName("carts.db");
+CartModel::CartModel(void) {
+    QSqlDatabase cartdb = QSqlDatabase::addDatabase("QSQLITE");
+    cartdb.setDatabaseName("carts.db");
 
-     if(!cartdb.open()){
-         qDebug()<<"DB did not open";
-     }
-     else{
-         qDebug()<<"DB has connected";
-     }
+    if(QFileInfo("carts.db").exists()){
+        if(!cartdb.open()){
+            qDebug()<<"DB did not open";
+        }
+        else{
+            qDebug()<<"DB has connected";
+        }
+    }
+    else{
+        qDebug()<<"Could not find database";
 
-     setQuery("SELECT * from computercarts");
+        if(!cartdb.open()){
+            qDebug()<<"DB did not open";
+        }
+        else{
+            qDebug()<<"DB has connected";
+            qDebug()<<"Creating carts.db with proper schema";
 
-     setHeaderData(0, Qt::Horizontal, tr("Cart Number"));
-     setHeaderData(1, Qt::Horizontal, tr("Computer Type"));
-     setHeaderData(2, Qt::Horizontal, tr("Quantity"));
-     setHeaderData(3, Qt::Horizontal, tr("Current Room"));
-     setHeaderData(4, Qt::Horizontal, tr("Current Period"));
-     setHeaderData(5, Qt::Horizontal, tr("Future Reservation ID"));
-     setHeaderData(6, Qt::Horizontal, tr("Cart Status"));
-     setHeaderData(7, Qt::Horizontal, tr("Last Updated"));
+            QSqlQuery query;
+
+            qDebug()<<"Creating table 'ComputerCarts'";
+            query.exec("CREATE TABLE ComputerCarts (\n "
+                           "\tCartNumber INTEGER PRIMARY KEY AUTOINCREMENT,\n"
+                           "\tComputerType TEXT NOT NULL,\n"
+                           "\tQuantity INTEGER DEFAULT NULL,\n"
+                           "\tCurrentLocation TEXT DEFAULT NULL,\n"
+                           "\tCurrentLocTime TEXT DEFAULT NULL,\n"
+                           "\tFutureResId INTEGER DEFAULT NULL,\n"
+                           "\tCartStatus BOOLEAN DEFAULT NULL,\n"
+                           "\tLastUpdate DATETIME\n);");
+            qDebug()<<"Table 'ComputerCarts' has been created";
+
+            qDebug()<<"Creating table 'reservations'";
+            query.exec("CREATE TABLE reservations (\n"
+                            "\tResId INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n"
+                            "\tCartNumber INTEGER DEFAULT NULL,\n"
+                            "\tLocation TEXT NOT NULL,\n"
+                            "\tDate TEXT NOT NULL,\n"
+                            "\tTime INTEGER NOT NULL,\n"
+                            "\tComments TEXT DEFAULT NULL\n);");
+            qDebug()<<"Table 'reservations' has been created";
+
+            qDebug()<<"carts.db is ready for use";
+        }
+    }
+
+    setQuery("SELECT * from computercarts");
+
+    setHeaderData(0, Qt::Horizontal, tr("Cart Number"));
+    setHeaderData(1, Qt::Horizontal, tr("Computer Type"));
+    setHeaderData(2, Qt::Horizontal, tr("Quantity"));
+    setHeaderData(3, Qt::Horizontal, tr("Current Room"));
+    setHeaderData(4, Qt::Horizontal, tr("Current Period"));
+    setHeaderData(5, Qt::Horizontal, tr("Future Reservation ID"));
+    setHeaderData(6, Qt::Horizontal, tr("Cart Status"));
+    setHeaderData(7, Qt::Horizontal, tr("Last Updated"));
 }
 
 

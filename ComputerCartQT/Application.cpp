@@ -1,5 +1,7 @@
 #include "Application.h"
 
+//TODO Add config file for font, theme, and possibly language
+
 Application::Application(int& argc, char** argv) :
     QApplication(argc, argv),
     mainWindow(nullptr),
