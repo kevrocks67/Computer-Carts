@@ -53,6 +53,8 @@ class MainWindow : public QMainWindow {
         QToolButton *addTool;
         QToolButton *removeTool;
         QToolButton *logoutTool;
+        QToolButton *settingsTool;
+
         QToolButton *editTool;
         QToolButton *addResTool;
         QToolButton *editResTool;

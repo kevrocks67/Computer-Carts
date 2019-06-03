@@ -11,6 +11,7 @@ CartView::CartView(QWidget * parent):
         //this->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
         this->setSelectionMode(QAbstractItemView::SingleSelection);
         this->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+        this->verticalHeader()->setVisible(false);
 }
 
 void CartView::currentChanged(const QModelIndex &current, const QModelIndex &previous) {

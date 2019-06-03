@@ -18,6 +18,7 @@ MainWindow::MainWindow(Session& session, CartModel& cModel) :
         removeTool = new QToolButton();
         editTool = new QToolButton();
         logoutTool = new QToolButton();
+        settingsTool = new QToolButton();
         themePicker = new QComboBox();
         cView = new CartView();
 
@@ -31,6 +32,9 @@ MainWindow::MainWindow(Session& session, CartModel& cModel) :
         logoutTool->setText("Logout");
         logoutTool->setFont(sansFont);
         logoutTool->setEnabled(false);
+        settingsTool->setText("Settings");
+        settingsTool->setFont(sansFont);
+        settingsTool->setEnabled(false);
 
         //Phantom Style Picker
         themePicker->setFont(sansFont);
@@ -49,6 +53,7 @@ MainWindow::MainWindow(Session& session, CartModel& cModel) :
         toolbar->addWidget(logoutTool);
         toolbar->addSeparator();
         toolbar->addWidget(themePicker);
+        toolbar->addWidget(settingsTool);
 
         cView->setModel(&cModel);
 
