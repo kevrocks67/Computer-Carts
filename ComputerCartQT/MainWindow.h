@@ -6,7 +6,6 @@
 #include "EditCart.h"
 #include "DeleteCart.h"
 #include "DetailView.h"
-#include "Session.h"
 
 #include <QComboBox>
 #include <QDebug>
@@ -19,13 +18,12 @@
 
 class CartModel;
 class CartView;
-class Session;
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
 
     public:
-        MainWindow(Session&, CartModel&);
+        MainWindow(CartModel&);
         virtual ~MainWindow();
     signals:
     public slots:
@@ -38,7 +36,6 @@ class MainWindow : public QMainWindow {
         void showDetails(const QModelIndex &index);
     private:
         //Class declarations
-        Session& mySession;
         CartModel& cartModel;
         CartView *cView;
         AddCart *newCart;

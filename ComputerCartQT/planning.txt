@@ -46,7 +46,7 @@ Check if period has passed by comparing currentTime > periodTime -> updateFuture
     Check every 10 mins if app open
     Manual refresh/check button
 
-
+Update readme, move stuff to a blog post or another folder
 
 //OLD IDEA
 Future date and time, Support for multiple dates and times
@@ -64,3 +64,4 @@ FutureLocTime TEXT DEFAULT NULL,
 select * from reservations where CartNumber=cartNo ORDER by date,time; -> next location
 select * from reservations where CartNumber=cartNo ORDER by date ASC; -> get date of 1st entry
 select * from reservations where CartNumber=cartNo AND date=dateFromAbove ORDER by time; -> the next
+

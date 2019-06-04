@@ -1,8 +1,7 @@
 #include "MainWindow.h"
 #include "Palette.h"
 
-MainWindow::MainWindow(Session& session, CartModel& cModel) :
-    mySession(session),
+MainWindow::MainWindow(CartModel& cModel) :
     cartModel(cModel) {
         //Set look and feel
         QApplication::setPalette(namedColorSchemePalette(Stealth));
