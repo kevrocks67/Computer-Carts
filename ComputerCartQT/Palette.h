@@ -1,6 +1,7 @@
 #pragma once
 
 #include "phantomstyle.h"
+#include <QString>
 
 enum ThemeType : int {
   Carbon = 0,
@@ -8,6 +9,25 @@ enum ThemeType : int {
   Stealth = 2,
   Sakura = 3,
 };
+
+
+ThemeType getThemeType(QVariant themeVariant) {
+    QString theme = themeVariant.toString();
+    ThemeType type;
+
+    if (theme == "Stealth") {
+        type = Stealth;
+    } else if (theme == "Carbon") {
+        type = Carbon;
+    } else if (theme == "Polar") {
+        type = Polar;
+    } else if (theme == "Sakura") {
+        type = Sakura;
+    } else {
+        type = Stealth;
+    }
+    return type;
+}
 
 QPalette namedColorSchemePalette(ThemeType x);
 

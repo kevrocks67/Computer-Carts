@@ -11,6 +11,7 @@
 #include <QDebug>
 #include <QMainWindow>
 #include <QPushButton>
+#include <QSettings>
 #include <QToolBar>
 #include <QToolButton>
 #include <QVBoxLayout>
@@ -34,6 +35,8 @@ class MainWindow : public QMainWindow {
         void updateTable();
         void changeTheme(int styleName);
         void showDetails(const QModelIndex &index);
+        void loadSettings();
+        void saveSettings();
     private:
         //Class declarations
         CartModel& cartModel;

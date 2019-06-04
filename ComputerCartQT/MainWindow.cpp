@@ -3,9 +3,8 @@
 
 MainWindow::MainWindow(CartModel& cModel) :
     cartModel(cModel) {
-        //Set look and feel
-        QApplication::setPalette(namedColorSchemePalette(Stealth));
-        QFont sansFont("Helvetica [Cronyx]", 14);
+        //Set user preferences
+        loadSettings();
 
         //Initialize layouts
         centralWidget = new QWidget(this);
@@ -23,20 +22,20 @@ MainWindow::MainWindow(CartModel& cModel) :
 
 		//Set widget properties
         addTool->setText("Add");
-        addTool->setFont(sansFont);
+        //addTool->setFont(sansFont);
         removeTool->setText("Remove");
-        removeTool->setFont(sansFont);
+        //removeTool->setFont(sansFont);
         editTool->setText("Edit");
-        editTool->setFont(sansFont);
+        //editTool->setFont(sansFont);
         logoutTool->setText("Logout");
-        logoutTool->setFont(sansFont);
+        //logoutTool->setFont(sansFont);
         logoutTool->setEnabled(false);
         settingsTool->setText("Settings");
-        settingsTool->setFont(sansFont);
+        //settingsTool->setFont(sansFont);
         settingsTool->setEnabled(false);
 
         //Phantom Style Picker
-        themePicker->setFont(sansFont);
+        //themePicker->setFont(sansFont);
         themePicker->addItem("Default");
         themePicker->addItem("Carbon");
         themePicker->addItem("Polar");
@@ -121,6 +120,7 @@ void MainWindow::changeTheme(int styleName) {
             QApplication::setPalette(namedColorSchemePalette(Sakura));
             break;
     }
+    saveSettings();
 }
 
 void MainWindow::removeAction() {
@@ -174,5 +174,23 @@ void MainWindow::showDetails(const QModelIndex &index) {
     detailView->exec();
 }
 
+void MainWindow::loadSettings() {
+    //Eventually this will be replaced with NativeFile for OS standards compliance
+    QSettings settings("config.ini", QSettings::IniFormat);
+    auto theme = namedColorSchemePalette(getThemeType(settings.value("app/theme")));
+
+    QApplication::setPalette(theme);
+    this->setFont(settings.value("app/font").value<QFont>());
+}
+
+void MainWindow::saveSettings() {
+    QSettings settings("config.ini", QSettings::IniFormat);
+
+    QFont sansFont("Helvetica [Cronyx]", 8);
+    settings.setValue("app/font", QApplication::font());
+    settings.setValue("app/theme", themePicker->currentText());
+}
+
 MainWindow::~MainWindow(){
+    saveSettings();
 }
