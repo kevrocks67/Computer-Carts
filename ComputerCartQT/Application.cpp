@@ -10,7 +10,7 @@ Application::Application(int& argc, char** argv) :
 
 int main(int argc, char* argv[]) {
     //Default font
-    QFont sansFont("Helvetica [Cronxy]", 12);
+    QFont sansFont("Helvetica [Cronxy]", 14);
 
     #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
         Application::setAttribute(Qt::AA_EnableHighDpiScaling);

@@ -43,8 +43,8 @@ MainWindow::MainWindow(CartModel& cModel) :
         //Check for dialog close
         connect(newCart, SIGNAL(accepted()),
                 this, SLOT(updateTable()));
-        connect(editCart, SIGNAL(accepted()),
-                this, SLOT(updateTable()));
+        //connect(editCart, SIGNAL(accepted()),
+         //       this, SLOT(updateTable()));
         connect(deleteCart, SIGNAL(accepted()),
                 this, SLOT(updateTable()));
 
@@ -119,23 +119,31 @@ void MainWindow::changeTheme(int styleName) {
 void MainWindow::removeAction() {
     //Get selected row
     int row = cView->getRow();
-    //Convert row number to cart number
-    QModelIndex modelIndex (cartModel.index(row, 0));
-    int cart = cartModel.data(modelIndex).toInt();
-    //Send cart number to modal for display and action
-    deleteCart->setCartNum(cart);
-    deleteCart->exec();
+    if (row >= 0) {
+        //Convert row number to cart number
+        QModelIndex modelIndex (cartModel.index(row, 0));
+        int cart = cartModel.data(modelIndex).toInt();
+        //Send cart number to modal for display and action
+        deleteCart->setCartNum(cart);
+        deleteCart->exec();
+    } else {
+        qDebug()<<"No cart selected";
+    }
 }
 
 void MainWindow::editAction() {
     //Get selected row
     int row = cView->getRow();
-    //Convert row number to cart number
-    QModelIndex modelIndex (cartModel.index(row, 0));
-    int cart = cartModel.data(modelIndex).toInt();
-    //Send cart number to modal for display and action
-    editCart->setCartNum(cart);
-    editCart->exec();
+    if (row >= 0) {
+        //Convert row number to cart number
+        QModelIndex modelIndex (cartModel.index(row, 0));
+        int cart = cartModel.data(modelIndex).toInt();
+        //Send cart number to modal for display and action
+        editCart->setCartNum(cart);
+        editCart->exec();
+    } else {
+        qDebug()<<"No cart selected";
+    }
 }
 
 void MainWindow::addAction() {

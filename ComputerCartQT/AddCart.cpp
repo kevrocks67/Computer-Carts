@@ -18,19 +18,10 @@ AddCart::AddCart(QWidget * parent) :
     addButton = new QPushButton("Add Cart");
 
     //Set widget properties
-    QFont sansFont("Helvetica [Cronyx]", 14);
-
-    cNumLabel->setFont(sansFont);
     typeField->setPlaceholderText("Computer Type");
-    typeField->setFont(sansFont);
     quantField->setPlaceholderText("Quantity");
-    quantField->setFont(sansFont);
     cRoomField->setPlaceholderText("Current Room");
-    cRoomField->setFont(sansFont);
     cPeriodField->setPlaceholderText("Current Period(s)");
-    cPeriodField->setFont(sansFont);
-    cancelButton->setFont(sansFont);
-    addButton->setFont(sansFont);
 
     //Add widget to layouts
     fieldLayout->addWidget(cNumLabel);

@@ -1,6 +1,7 @@
 #include "CartView.h"
 #include <QHeaderView>
 #include <QDebug>
+#include <QPoint>
 
 CartView::CartView(QWidget * parent):
     QTableView(parent) {
@@ -26,6 +27,8 @@ void CartView::mouseDoubleClickEvent(QMouseEvent* event) {
     else {
         qDebug()<<"No item under cursor pos";
         this->clearSelection();
+        QModelIndex nullpos = indexAt(QPoint(-1, -1));
+        this->setCurrentIndex(nullpos);
     }
 }
 
