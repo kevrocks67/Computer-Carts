@@ -1,7 +1,5 @@
 #include "Application.h"
 
-//TODO Add config file for font, theme, and possibly language
-
 Application::Application(int& argc, char** argv) :
     QApplication(argc, argv),
     mainWindow(nullptr),
@@ -11,7 +9,8 @@ Application::Application(int& argc, char** argv) :
     }
 
 int main(int argc, char* argv[]) {
-    QFont sansFont("Helvetica [Cronxy]", 14);
+    //Default font
+    QFont sansFont("Helvetica [Cronxy]", 12);
 
     #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
         Application::setAttribute(Qt::AA_EnableHighDpiScaling);

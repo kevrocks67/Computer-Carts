@@ -4,11 +4,8 @@
 
 CartView::CartView(QWidget * parent):
     QTableView(parent) {
-        QFont sansFont("Helvetica [Cronyx]", 14);
-        this->setFont(sansFont);
         this->setAlternatingRowColors(true);
         this->setSelectionBehavior(QAbstractItemView::SelectRows);
-        //this->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
         this->setSelectionMode(QAbstractItemView::SingleSelection);
         this->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
         this->verticalHeader()->setVisible(false);

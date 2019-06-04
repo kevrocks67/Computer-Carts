@@ -186,8 +186,13 @@ void MainWindow::loadSettings() {
 void MainWindow::saveSettings() {
     QSettings settings("config.ini", QSettings::IniFormat);
 
-    QFont sansFont("Helvetica [Cronyx]", 8);
-    settings.setValue("app/font", QApplication::font());
+    //Will become font = QFontDialog::getFont(...)
+    QFont sansFont("Helvetica [Cronyx]", 14);
+    this->setFont(sansFont);
+    this->repaint();
+    updateTable();
+
+    settings.setValue("app/font", this->font());
     settings.setValue("app/theme", themePicker->currentText());
 }
 
