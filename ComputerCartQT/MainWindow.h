@@ -32,6 +32,7 @@ class MainWindow : public QMainWindow {
         void editAction();
         void removeAction();
     private slots:
+        void createToolbar();
         void updateTable();
         void changeTheme(int styleName);
         void showDetails(const QModelIndex &index);

@@ -3,82 +3,42 @@
 
 MainWindow::MainWindow(CartModel& cModel) :
     cartModel(cModel) {
-        //Set user preferences
+        //Load user preferences
         loadSettings();
 
         //Initialize layouts
         centralWidget = new QWidget(this);
         mainLayout = new QVBoxLayout(centralWidget);
 
-        //Initialize widgets
-        toolbar = new QToolBar();
-        addTool = new QToolButton();
-        removeTool = new QToolButton();
-        editTool = new QToolButton();
-        logoutTool = new QToolButton();
-        settingsTool = new QToolButton();
-        themePicker = new QComboBox();
+        //Initialize and create widgets
+        createToolbar();
+
         cView = new CartView();
-
-		//Set widget properties
-        addTool->setText("Add");
-        removeTool->setText("Remove");
-        editTool->setText("Edit");
-        logoutTool->setText("Logout");
-        logoutTool->setEnabled(false);
-        settingsTool->setText("Settings");
-        settingsTool->setEnabled(false);
-
-        //Phantom Style Picker
-        themePicker->addItem("Default");
-        themePicker->addItem("Carbon");
-        themePicker->addItem("Polar");
-        themePicker->addItem("Stealth");
-        themePicker->addItem("Sakura");
-        themePicker->setCurrentIndex(3);
-
-        toolbar->setAllowedAreas(Qt::TopToolBarArea);
-        toolbar->addWidget(addTool);
-        toolbar->addWidget(removeTool);
-        toolbar->addWidget(editTool);
-        toolbar->addSeparator();
-        toolbar->addWidget(logoutTool);
-        toolbar->addSeparator();
-        toolbar->addWidget(themePicker);
-        toolbar->addWidget(settingsTool);
-
         cView->setModel(&cModel);
 
         //Add widgets to layouts
         mainLayout->addWidget(toolbar);
         mainLayout->addWidget(cView);
+
+        //Set MainWindow properties
         setCentralWidget(centralWidget);
         show();
         raise();
 
 
-        //Signals and slots
-
+        //Initialize classes for signal/slot usage
         newCart = new AddCart();
         editCart = new EditCart();
         deleteCart = new DeleteCart();
         detailView = new DetailView();
 
-        //Check for dialog open
+        //Check for dialog open action
         connect(addTool, SIGNAL(clicked()),
                 this, SLOT(addAction()));
         connect(editTool, SIGNAL(clicked()),
                 this, SLOT(editAction()));
         connect(removeTool, SIGNAL(clicked()),
                 this, SLOT(removeAction()));
-
-        //Exec dialogs
-        connect(addTool, SIGNAL(clicked()),
-                newCart, SLOT(exec()));
-        connect(editTool, SIGNAL(clicked()),
-                editCart, SLOT(exec()));
-        connect(removeTool, SIGNAL(clicked()),
-            deleteCart, SLOT(exec()));
 
         //Check for dialog close
         connect(newCart, SIGNAL(accepted()),
@@ -92,8 +52,47 @@ MainWindow::MainWindow(CartModel& cModel) :
         connect(themePicker, SIGNAL(activated(int)),
                 this, SLOT(changeTheme(int)));
 
+        //DetailView dialog creation
         connect(cView, SIGNAL(showDetailsEvent(const QModelIndex)),
                 this, SLOT(showDetails(const QModelIndex)));
+}
+
+void MainWindow::createToolbar() {
+    //Initialize widgets
+    toolbar = new QToolBar();
+    addTool = new QToolButton();
+    removeTool = new QToolButton();
+    editTool = new QToolButton();
+    logoutTool = new QToolButton();
+    settingsTool = new QToolButton();
+    themePicker = new QComboBox();
+
+    //Set widget properties
+    addTool->setText("Add");
+    removeTool->setText("Remove");
+    editTool->setText("Edit");
+    logoutTool->setText("Logout");
+    logoutTool->setEnabled(false);
+    settingsTool->setText("Settings");
+    settingsTool->setEnabled(false);
+
+    //Phantom Style Picker
+    themePicker->addItem("Default");
+    themePicker->addItem("Carbon");
+    themePicker->addItem("Polar");
+    themePicker->addItem("Stealth");
+    themePicker->addItem("Sakura");
+    themePicker->setCurrentIndex(3);
+
+    toolbar->setAllowedAreas(Qt::TopToolBarArea);
+    toolbar->addWidget(addTool);
+    toolbar->addWidget(removeTool);
+    toolbar->addWidget(editTool);
+    toolbar->addSeparator();
+    toolbar->addWidget(logoutTool);
+    toolbar->addSeparator();
+    toolbar->addWidget(themePicker);
+    toolbar->addWidget(settingsTool);
 }
 
 void MainWindow::changeTheme(int styleName) {
@@ -125,6 +124,7 @@ void MainWindow::removeAction() {
     int cart = cartModel.data(modelIndex).toInt();
     //Send cart number to modal for display and action
     deleteCart->setCartNum(cart);
+    deleteCart->exec();
 }
 
 void MainWindow::editAction() {
@@ -135,6 +135,7 @@ void MainWindow::editAction() {
     int cart = cartModel.data(modelIndex).toInt();
     //Send cart number to modal for display and action
     editCart->setCartNum(cart);
+    editCart->exec();
 }
 
 void MainWindow::addAction() {
@@ -148,6 +149,7 @@ void MainWindow::addAction() {
     cart++;
     //Send cart number to modal for display and action
     newCart->setCartNum(cart);
+    newCart->exec();
 }
 
 void MainWindow::updateTable() {
