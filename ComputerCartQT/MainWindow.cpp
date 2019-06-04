@@ -22,20 +22,14 @@ MainWindow::MainWindow(CartModel& cModel) :
 
 		//Set widget properties
         addTool->setText("Add");
-        //addTool->setFont(sansFont);
         removeTool->setText("Remove");
-        //removeTool->setFont(sansFont);
         editTool->setText("Edit");
-        //editTool->setFont(sansFont);
         logoutTool->setText("Logout");
-        //logoutTool->setFont(sansFont);
         logoutTool->setEnabled(false);
         settingsTool->setText("Settings");
-        //settingsTool->setFont(sansFont);
         settingsTool->setEnabled(false);
 
         //Phantom Style Picker
-        //themePicker->setFont(sansFont);
         themePicker->addItem("Default");
         themePicker->addItem("Carbon");
         themePicker->addItem("Polar");
@@ -186,9 +180,7 @@ void MainWindow::loadSettings() {
 void MainWindow::saveSettings() {
     QSettings settings("config.ini", QSettings::IniFormat);
 
-    //Will become font = QFontDialog::getFont(...)
-    QFont sansFont("Helvetica [Cronyx]", 14);
-    this->setFont(sansFont);
+    //Settings menu: font = QFontDialog::getFont(...)
     this->repaint();
     updateTable();
 
