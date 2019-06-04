@@ -14,6 +14,7 @@ class CartView : public QTableView {
         void currentChanged(const QModelIndex &current, const QModelIndex &previous) override;
         void mouseDoubleClickEvent(QMouseEvent* event) override;
         int getRow();
+        void clearUserSelections();
     public slots:
     private slots:
     private:

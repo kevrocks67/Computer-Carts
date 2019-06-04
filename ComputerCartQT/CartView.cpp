@@ -26,10 +26,14 @@ void CartView::mouseDoubleClickEvent(QMouseEvent* event) {
     }
     else {
         qDebug()<<"No item under cursor pos";
-        this->clearSelection();
-        QModelIndex nullpos = indexAt(QPoint(-1, -1));
-        this->setCurrentIndex(nullpos);
+        clearUserSelections();
     }
+}
+
+void CartView::clearUserSelections() {
+    this->clearSelection();
+    QModelIndex nullpos = indexAt(QPoint(-1, -1));
+    this->setCurrentIndex(nullpos);
 }
 
 int CartView::getRow() {

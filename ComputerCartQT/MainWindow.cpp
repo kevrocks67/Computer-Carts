@@ -43,8 +43,8 @@ MainWindow::MainWindow(CartModel& cModel) :
         //Check for dialog close
         connect(newCart, SIGNAL(accepted()),
                 this, SLOT(updateTable()));
-        //connect(editCart, SIGNAL(accepted()),
-         //       this, SLOT(updateTable()));
+        connect(editCart, SIGNAL(accepted()),
+                this, SLOT(updateTable()));
         connect(deleteCart, SIGNAL(accepted()),
                 this, SLOT(updateTable()));
 
@@ -165,6 +165,7 @@ void MainWindow::updateTable() {
     cartModel.clear();
     cartModel.query().clear();
     cartModel.setQuery(queryStr);
+    cView->clearUserSelections();
 }
 
 void MainWindow::showDetails(const QModelIndex &index) {
