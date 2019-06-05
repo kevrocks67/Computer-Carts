@@ -10,6 +10,8 @@
 #include <QWidget>
 #include <QDialog>
 #include <QDebug>
+#include <QFont>
+#include <QFontDialog>
 
 class Settings : public QDialog {
     Q_OBJECT
@@ -20,10 +22,15 @@ class Settings : public QDialog {
     public slots:
     private slots:
         void save();
+        void changeFontDialog();
+    signals:
+        void fontChanged(const QFont &font);
     private:
         QVBoxLayout *mainLayout;
         QHBoxLayout *buttonLayout;
         QPushButton *cancelButton;
         QPushButton *saveButton;
+
+        QPushButton *changeFontButton;
 };
 #endif //SETTINGS_H

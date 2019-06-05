@@ -10,10 +10,12 @@ Settings::Settings(QWidget * parent) :
     //Initialize widgets
     cancelButton = new QPushButton("Cancel");
     saveButton = new QPushButton("Save Settings");
+    changeFontButton = new QPushButton("Change Font");
 
     //Set widget properties
 
     //Add widget to layouts
+    mainLayout->addWidget(changeFontButton);
     buttonLayout->addWidget(cancelButton);
     buttonLayout->addWidget(saveButton);
 
@@ -27,6 +29,18 @@ Settings::Settings(QWidget * parent) :
             SLOT(close()));
     connect(saveButton, SIGNAL(clicked()),
             SLOT(save()));
+    connect(changeFontButton, SIGNAL(clicked()),
+            SLOT(changeFontDialog()));
+}
+
+void Settings::changeFontDialog() {
+    bool ok;
+    QFont font = QFontDialog::getFont(&ok, this->font());
+    if (ok) {
+        emit fontChanged(font);
+    } else {
+        qDebug()<<"Font change cancelled";
+    }
 }
 
 void Settings::save() {

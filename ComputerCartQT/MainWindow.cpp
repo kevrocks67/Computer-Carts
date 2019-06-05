@@ -50,6 +50,8 @@ MainWindow::MainWindow(CartModel& cModel) :
                 this, SLOT(updateTable()));
         connect(deleteCart, SIGNAL(accepted()),
                 this, SLOT(updateTable()));
+        connect(deleteCart, SIGNAL(accepted()),
+                this, SLOT(saveSettings()));
 
         //Theme Picker Combobox Events
         connect(themePicker, SIGNAL(activated(int)),
@@ -58,6 +60,9 @@ MainWindow::MainWindow(CartModel& cModel) :
         //DetailView dialog creation
         connect(cView, SIGNAL(showDetailsEvent(const QModelIndex)),
                 this, SLOT(showDetails(const QModelIndex)));
+
+        connect(settingsView, SIGNAL(fontChanged(const QFont)),
+                this, SLOT(changeFont(const QFont)));
 }
 
 void MainWindow::createToolbar() {
@@ -166,6 +171,10 @@ void MainWindow::updateTable() {
     cartModel.query().clear();
     cartModel.setQuery(queryStr);
     cView->clearUserSelections();
+}
+
+void MainWindow::changeFont(const QFont &font) {
+    this->setFont(font);
 }
 
 void MainWindow::showDetails(const QModelIndex &index) {

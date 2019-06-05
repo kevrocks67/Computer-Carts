@@ -37,6 +37,7 @@ class MainWindow : public QMainWindow {
         void updateTable();
         void changeTheme(int styleName);
         void showDetails(const QModelIndex &index);
+        void changeFont(const QFont &font);
         void loadSettings();
         void saveSettings();
     private:
