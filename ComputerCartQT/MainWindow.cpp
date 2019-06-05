@@ -3,8 +3,6 @@
 
 MainWindow::MainWindow(CartModel& cModel) :
     cartModel(cModel) {
-        //Load user preferences
-
         //Initialize layouts
         centralWidget = new QWidget(this);
         mainLayout = new QVBoxLayout(centralWidget);
@@ -19,8 +17,10 @@ MainWindow::MainWindow(CartModel& cModel) :
         mainLayout->addWidget(toolbar);
         mainLayout->addWidget(cView);
 
-        //Set MainWindow properties
+        //Load user preferences
         loadSettings();
+
+        //Set MainWindow properties
         setCentralWidget(centralWidget);
         show();
         raise();
