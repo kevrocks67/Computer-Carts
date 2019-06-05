@@ -4,7 +4,6 @@
 MainWindow::MainWindow(CartModel& cModel) :
     cartModel(cModel) {
         //Load user preferences
-        loadSettings();
 
         //Initialize layouts
         centralWidget = new QWidget(this);
@@ -21,6 +20,7 @@ MainWindow::MainWindow(CartModel& cModel) :
         mainLayout->addWidget(cView);
 
         //Set MainWindow properties
+        loadSettings();
         setCentralWidget(centralWidget);
         show();
         raise();
@@ -79,12 +79,10 @@ void MainWindow::createToolbar() {
     settingsTool->setText("Settings");
 
     //Phantom Style Picker
-    themePicker->addItem("Default");
     themePicker->addItem("Carbon");
     themePicker->addItem("Polar");
     themePicker->addItem("Stealth");
     themePicker->addItem("Sakura");
-    themePicker->setCurrentIndex(3);
 
     toolbar->setAllowedAreas(Qt::TopToolBarArea);
     toolbar->addWidget(addTool);
@@ -100,19 +98,19 @@ void MainWindow::createToolbar() {
 void MainWindow::changeTheme(int styleName) {
     switch (styleName) {
         case 0:
-            QApplication::setPalette(namedColorSchemePalette(Stealth));
-            break;
-        case 1:
             QApplication::setPalette(namedColorSchemePalette(Carbon));
             break;
-        case 2:
+        case 1:
             QApplication::setPalette(namedColorSchemePalette(Polar));
             break;
-        case 3:
+        case 2:
             QApplication::setPalette(namedColorSchemePalette(Stealth));
             break;
-        case 4:
+        case 3:
             QApplication::setPalette(namedColorSchemePalette(Sakura));
+            break;
+        default:
+            QApplication::setPalette(namedColorSchemePalette(Stealth));
             break;
     }
     saveSettings();
@@ -184,9 +182,10 @@ void MainWindow::showDetails(const QModelIndex &index) {
 void MainWindow::loadSettings() {
     //Eventually this will be replaced with NativeFile for OS standards compliance
     QSettings settings("config.ini", QSettings::IniFormat);
-    auto theme = namedColorSchemePalette(getThemeType(settings.value("app/theme")));
+    auto theme = getThemeType(settings.value("app/theme"));
 
-    QApplication::setPalette(theme);
+    QApplication::setPalette(namedColorSchemePalette(theme));
+    themePicker->setCurrentIndex(getThemeValue(theme));
     this->setFont(settings.value("app/font").value<QFont>());
 }
 

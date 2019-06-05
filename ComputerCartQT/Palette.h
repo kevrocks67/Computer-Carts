@@ -29,6 +29,10 @@ ThemeType getThemeType(QVariant themeVariant) {
     return type;
 }
 
+int getThemeValue(ThemeType theme) {
+   return theme;
+}
+
 QPalette namedColorSchemePalette(ThemeType x);
 
 
