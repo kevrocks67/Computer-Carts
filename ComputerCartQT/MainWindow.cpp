@@ -31,6 +31,7 @@ MainWindow::MainWindow(CartModel& cModel) :
         editCart = new EditCart();
         deleteCart = new DeleteCart();
         detailView = new DetailView();
+        settingsView = new Settings();
 
         //Check for dialog open action
         connect(addTool, SIGNAL(clicked()),
@@ -39,6 +40,8 @@ MainWindow::MainWindow(CartModel& cModel) :
                 this, SLOT(editAction()));
         connect(removeTool, SIGNAL(clicked()),
                 this, SLOT(removeAction()));
+        connect(settingsTool, SIGNAL(clicked()),
+                settingsView, SLOT(exec()));
 
         //Check for dialog close
         connect(newCart, SIGNAL(accepted()),
@@ -74,7 +77,6 @@ void MainWindow::createToolbar() {
     logoutTool->setText("Logout");
     logoutTool->setEnabled(false);
     settingsTool->setText("Settings");
-    settingsTool->setEnabled(false);
 
     //Phantom Style Picker
     themePicker->addItem("Default");
@@ -89,10 +91,10 @@ void MainWindow::createToolbar() {
     toolbar->addWidget(removeTool);
     toolbar->addWidget(editTool);
     toolbar->addSeparator();
+    toolbar->addWidget(settingsTool);
     toolbar->addWidget(logoutTool);
     toolbar->addSeparator();
     toolbar->addWidget(themePicker);
-    toolbar->addWidget(settingsTool);
 }
 
 void MainWindow::changeTheme(int styleName) {

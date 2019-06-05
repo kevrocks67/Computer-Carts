@@ -6,6 +6,7 @@
 #include "EditCart.h"
 #include "DeleteCart.h"
 #include "DetailView.h"
+#include "Settings.h"
 
 #include <QComboBox>
 #include <QDebug>
@@ -46,6 +47,7 @@ class MainWindow : public QMainWindow {
         EditCart *editCart;
         DeleteCart *deleteCart;
         DetailView *detailView;
+        Settings *settingsView;
 
         //Widget declarations
         QWidget *centralWidget;

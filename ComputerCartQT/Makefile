@@ -61,7 +61,8 @@ SOURCES       = phantom/phantomcolor.cpp \
 		EditCart.cpp \
 		MainWindow.cpp \
 		DeleteCart.cpp \
-		DetailView.cpp moc_phantomstyle.cpp \
+		DetailView.cpp \
+		Settings.cpp moc_phantomstyle.cpp \
 		moc_AddCart.cpp \
 		moc_Application.cpp \
 		moc_CartModel.cpp \
@@ -69,7 +70,8 @@ SOURCES       = phantom/phantomcolor.cpp \
 		moc_EditCart.cpp \
 		moc_MainWindow.cpp \
 		moc_DeleteCart.cpp \
-		moc_DetailView.cpp
+		moc_DetailView.cpp \
+		moc_Settings.cpp
 OBJECTS       = phantomcolor.o \
 		phantomstyle.o \
 		AddCart.o \
@@ -80,6 +82,7 @@ OBJECTS       = phantomcolor.o \
 		MainWindow.o \
 		DeleteCart.o \
 		DetailView.o \
+		Settings.o \
 		moc_phantomstyle.o \
 		moc_AddCart.o \
 		moc_Application.o \
@@ -88,7 +91,8 @@ OBJECTS       = phantomcolor.o \
 		moc_EditCart.o \
 		moc_MainWindow.o \
 		moc_DeleteCart.o \
-		moc_DetailView.o
+		moc_DetailView.o \
+		moc_Settings.o
 DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/common/unix.conf \
 		/usr/lib/qt/mkspecs/common/linux.conf \
@@ -344,7 +348,8 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		EditCart.h \
 		MainWindow.h \
 		DeleteCart.h \
-		DetailView.h phantom/phantomcolor.cpp \
+		DetailView.h \
+		Settings.h phantom/phantomcolor.cpp \
 		phantom/phantomstyle.cpp \
 		AddCart.cpp \
 		Application.cpp \
@@ -353,7 +358,8 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		EditCart.cpp \
 		MainWindow.cpp \
 		DeleteCart.cpp \
-		DetailView.cpp
+		DetailView.cpp \
+		Settings.cpp
 QMAKE_TARGET  = ComputerCartQT
 DESTDIR       = 
 TARGET        = ComputerCartQT
@@ -881,8 +887,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/qt/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents phantom/phantomcolor.h phantom/phantomstyle.h phantom/phantomtweak.h AddCart.h Application.h CartModel.h CartView.h EditCart.h MainWindow.h DeleteCart.h DetailView.h $(DISTDIR)/
-	$(COPY_FILE) --parents phantom/phantomcolor.cpp phantom/phantomstyle.cpp AddCart.cpp Application.cpp CartModel.cpp CartView.cpp EditCart.cpp MainWindow.cpp DeleteCart.cpp DetailView.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents phantom/phantomcolor.h phantom/phantomstyle.h phantom/phantomtweak.h AddCart.h Application.h CartModel.h CartView.h EditCart.h MainWindow.h DeleteCart.h DetailView.h Settings.h $(DISTDIR)/
+	$(COPY_FILE) --parents phantom/phantomcolor.cpp phantom/phantomstyle.cpp AddCart.cpp Application.cpp CartModel.cpp CartView.cpp EditCart.cpp MainWindow.cpp DeleteCart.cpp DetailView.cpp Settings.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -914,9 +920,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/lib/qt/mkspecs/features/data/dummy.cpp
 	g++ -pipe -O2 -march=x86-64 -mtune=generic -O2 -pipe -fstack-protector-strong -fno-plt -Wall -W -dM -E -o moc_predefs.h /usr/lib/qt/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_phantomstyle.cpp moc_AddCart.cpp moc_Application.cpp moc_CartModel.cpp moc_CartView.cpp moc_EditCart.cpp moc_MainWindow.cpp moc_DeleteCart.cpp moc_DetailView.cpp
+compiler_moc_header_make_all: moc_phantomstyle.cpp moc_AddCart.cpp moc_Application.cpp moc_CartModel.cpp moc_CartView.cpp moc_EditCart.cpp moc_MainWindow.cpp moc_DeleteCart.cpp moc_DetailView.cpp moc_Settings.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_phantomstyle.cpp moc_AddCart.cpp moc_Application.cpp moc_CartModel.cpp moc_CartView.cpp moc_EditCart.cpp moc_MainWindow.cpp moc_DeleteCart.cpp moc_DetailView.cpp
+	-$(DEL_FILE) moc_phantomstyle.cpp moc_AddCart.cpp moc_Application.cpp moc_CartModel.cpp moc_CartView.cpp moc_EditCart.cpp moc_MainWindow.cpp moc_DeleteCart.cpp moc_DetailView.cpp moc_Settings.cpp
 moc_phantomstyle.cpp: phantom/phantomstyle.h \
 		moc_predefs.h \
 		/usr/bin/moc
@@ -936,6 +942,7 @@ moc_Application.cpp: Application.h \
 		EditCart.h \
 		DeleteCart.h \
 		DetailView.h \
+		Settings.h \
 		moc_predefs.h \
 		/usr/bin/moc
 	/usr/bin/moc $(DEFINES) --include /home/kevrocks67/ProgrammingWorkspace/pythonProjects/Computer-Carts/ComputerCartQT/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/kevrocks67/ProgrammingWorkspace/pythonProjects/Computer-Carts/ComputerCartQT -I/home/kevrocks67/ProgrammingWorkspace/pythonProjects/Computer-Carts/ComputerCartQT -I/home/kevrocks67/ProgrammingWorkspace/pythonProjects/Computer-Carts/ComputerCartQT/phantom -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/8.3.0 -I/usr/include/c++/8.3.0/x86_64-pc-linux-gnu -I/usr/include/c++/8.3.0/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/8.3.0/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/8.3.0/include-fixed -I/usr/include Application.h -o moc_Application.cpp
@@ -963,6 +970,7 @@ moc_MainWindow.cpp: MainWindow.h \
 		EditCart.h \
 		DeleteCart.h \
 		DetailView.h \
+		Settings.h \
 		moc_predefs.h \
 		/usr/bin/moc
 	/usr/bin/moc $(DEFINES) --include /home/kevrocks67/ProgrammingWorkspace/pythonProjects/Computer-Carts/ComputerCartQT/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/kevrocks67/ProgrammingWorkspace/pythonProjects/Computer-Carts/ComputerCartQT -I/home/kevrocks67/ProgrammingWorkspace/pythonProjects/Computer-Carts/ComputerCartQT -I/home/kevrocks67/ProgrammingWorkspace/pythonProjects/Computer-Carts/ComputerCartQT/phantom -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/8.3.0 -I/usr/include/c++/8.3.0/x86_64-pc-linux-gnu -I/usr/include/c++/8.3.0/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/8.3.0/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/8.3.0/include-fixed -I/usr/include MainWindow.h -o moc_MainWindow.cpp
@@ -978,6 +986,11 @@ moc_DetailView.cpp: DetailView.h \
 		moc_predefs.h \
 		/usr/bin/moc
 	/usr/bin/moc $(DEFINES) --include /home/kevrocks67/ProgrammingWorkspace/pythonProjects/Computer-Carts/ComputerCartQT/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/kevrocks67/ProgrammingWorkspace/pythonProjects/Computer-Carts/ComputerCartQT -I/home/kevrocks67/ProgrammingWorkspace/pythonProjects/Computer-Carts/ComputerCartQT -I/home/kevrocks67/ProgrammingWorkspace/pythonProjects/Computer-Carts/ComputerCartQT/phantom -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/8.3.0 -I/usr/include/c++/8.3.0/x86_64-pc-linux-gnu -I/usr/include/c++/8.3.0/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/8.3.0/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/8.3.0/include-fixed -I/usr/include DetailView.h -o moc_DetailView.cpp
+
+moc_Settings.cpp: Settings.h \
+		moc_predefs.h \
+		/usr/bin/moc
+	/usr/bin/moc $(DEFINES) --include /home/kevrocks67/ProgrammingWorkspace/pythonProjects/Computer-Carts/ComputerCartQT/moc_predefs.h -I/usr/lib/qt/mkspecs/linux-g++ -I/home/kevrocks67/ProgrammingWorkspace/pythonProjects/Computer-Carts/ComputerCartQT -I/home/kevrocks67/ProgrammingWorkspace/pythonProjects/Computer-Carts/ComputerCartQT -I/home/kevrocks67/ProgrammingWorkspace/pythonProjects/Computer-Carts/ComputerCartQT/phantom -I/usr/include/qt -I/usr/include/qt/QtWidgets -I/usr/include/qt/QtGui -I/usr/include/qt/QtSql -I/usr/include/qt/QtCore -I/usr/include/c++/8.3.0 -I/usr/include/c++/8.3.0/x86_64-pc-linux-gnu -I/usr/include/c++/8.3.0/backward -I/usr/lib/gcc/x86_64-pc-linux-gnu/8.3.0/include -I/usr/local/include -I/usr/lib/gcc/x86_64-pc-linux-gnu/8.3.0/include-fixed -I/usr/include Settings.h -o moc_Settings.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -1014,7 +1027,8 @@ Application.o: Application.cpp Application.h \
 		CartView.h \
 		EditCart.h \
 		DeleteCart.h \
-		DetailView.h
+		DetailView.h \
+		Settings.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Application.o Application.cpp
 
 CartModel.o: CartModel.cpp CartModel.h
@@ -1034,6 +1048,7 @@ MainWindow.o: MainWindow.cpp MainWindow.h \
 		EditCart.h \
 		DeleteCart.h \
 		DetailView.h \
+		Settings.h \
 		Palette.h \
 		phantom/phantomstyle.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o MainWindow.o MainWindow.cpp
@@ -1045,6 +1060,9 @@ DeleteCart.o: DeleteCart.cpp DeleteCart.h \
 DetailView.o: DetailView.cpp DetailView.h \
 		CartModel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o DetailView.o DetailView.cpp
+
+Settings.o: Settings.cpp Settings.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Settings.o Settings.cpp
 
 moc_phantomstyle.o: moc_phantomstyle.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_phantomstyle.o moc_phantomstyle.cpp
@@ -1072,6 +1090,9 @@ moc_DeleteCart.o: moc_DeleteCart.cpp
 
 moc_DetailView.o: moc_DetailView.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_DetailView.o moc_DetailView.cpp
+
+moc_Settings.o: moc_Settings.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_Settings.o moc_Settings.cpp
 
 ####### Install
 
