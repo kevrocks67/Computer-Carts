@@ -41,6 +41,8 @@ class DetailView : public QDialog {
         QLabel *quantLabel;
         QLabel *cRoomLabel;
         QLabel *cPeriodLabel;
+        QLabel *homeLabel;
+        QLabel *lockTypeLabel;
         QTextEdit *commentBox;
 };
 #endif //DETAILVIEW_H

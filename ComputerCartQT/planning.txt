@@ -1,3 +1,5 @@
+PRAGMA foreign_keys = ON;
+
 CREATE TABLE ComputerCarts (
     CartNumber INTEGER PRIMARY KEY AUTOINCREMENT,
     ComputerType TEXT NOT NULL,
@@ -10,9 +12,19 @@ CREATE TABLE ComputerCarts (
     LastUpdate DATETIME,
 
     ADD THIS COLUMN ->Comments TEXT DEFAULT NULL
+    ADD THIS COLUMN ->HomeLocation TEXT DEFAULT NULL
+    ADD THIS COLUMN ->LockType TEXT DEFAULT NULL
+        Key
+        Circular Key
+        Combination
+    ADD THIS COLUMN -> OS TEXT DEFAULT NULL
+        Windows
+        ChromeOS
+        Linux
+        MacOSX
 );
 
-CREATE TABLE reservations (
+CREATE TABLE Reservations (
     ResId INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     CartNumber INTEGER DEFAULT NULL,
     Location TEXT NOT NULL,
@@ -21,6 +33,19 @@ CREATE TABLE reservations (
     Teacher TEXT DEFAULT NULL,
     Comments TEXT DEFAULT NULL
 );
+
+
+CREATE TABLE Laptops (
+    AssetID TEXT PRIMARY KEY,
+    Brand TEXT NOT NULL,
+    GenericName TEXT NOT NULL,
+    Model TEXT,
+    CartNumber INTEGER DEFAULT NULL,
+    FOREIGN KEY(CartNumber) REFERENCES ComputerCarts(CartNumber)
+    Status TEXT
+);
+
+Get all laptops -> select * foom laptops where CartNumber=?
 
 If CartNumber == '' -> Unassigned list
 Else getDetails(FutureResId)-> Display reservation details and modal with comments

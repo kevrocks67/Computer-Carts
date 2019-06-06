@@ -20,6 +20,8 @@ DetailView::DetailView(QWidget * parent) :
     quantLabel = new QLabel();
     cRoomLabel = new QLabel();
     cPeriodLabel = new QLabel();
+    homeLabel = new QLabel();
+    lockTypeLabel = new QLabel();
     commentBox = new QTextEdit();
 
     //Cart Tab Widget Properties
@@ -31,6 +33,7 @@ DetailView::DetailView(QWidget * parent) :
     cartLayout->addWidget(quantLabel);
     cartLayout->addWidget(cRoomLabel);
     cartLayout->addWidget(cPeriodLabel);
+    cartLayout->addWidget(homeLabel);
     cartLayout->addWidget(commentBox);
 
     cartWidget->setLayout(cartLayout);

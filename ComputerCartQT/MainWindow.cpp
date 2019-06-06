@@ -193,7 +193,6 @@ void MainWindow::loadSettings() {
 void MainWindow::saveSettings() {
     QSettings settings("config.ini", QSettings::IniFormat);
 
-    //Settings menu: font = QFontDialog::getFont(...)
     this->repaint();
     updateTable();
 
