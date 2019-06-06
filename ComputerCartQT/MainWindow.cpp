@@ -3,6 +3,13 @@
 
 MainWindow::MainWindow(CartModel& cModel) :
     cartModel(cModel) {
+        //Initialize classes for signal/slot usage
+        newCart = new AddCart();
+        editCart = new EditCart();
+        deleteCart = new DeleteCart();
+        detailView = new DetailView();
+        settingsView = new Settings();
+
         //Initialize layouts
         centralWidget = new QWidget(this);
         mainLayout = new QVBoxLayout(centralWidget);
@@ -26,13 +33,6 @@ MainWindow::MainWindow(CartModel& cModel) :
         raise();
 
 
-        //Initialize classes for signal/slot usage
-        newCart = new AddCart();
-        editCart = new EditCart();
-        deleteCart = new DeleteCart();
-        detailView = new DetailView();
-        settingsView = new Settings();
-
         //Check for dialog open action
         connect(addTool, SIGNAL(clicked()),
                 this, SLOT(addAction()));
@@ -54,7 +54,7 @@ MainWindow::MainWindow(CartModel& cModel) :
                 this, SLOT(saveSettings()));
 
         //Theme Picker Combobox Events
-        connect(themePicker, SIGNAL(activated(int)),
+        connect(settingsView, SIGNAL(themeChanged(int)),
                 this, SLOT(changeTheme(int)));
 
         //DetailView dialog creation
@@ -73,7 +73,6 @@ void MainWindow::createToolbar() {
     editTool = new QToolButton();
     logoutTool = new QToolButton();
     settingsTool = new QToolButton();
-    themePicker = new QComboBox();
 
     //Set widget properties
     addTool->setText("Add");
@@ -83,12 +82,6 @@ void MainWindow::createToolbar() {
     logoutTool->setEnabled(false);
     settingsTool->setText("Settings");
 
-    //Phantom Style Picker
-    themePicker->addItem("Carbon");
-    themePicker->addItem("Polar");
-    themePicker->addItem("Stealth");
-    themePicker->addItem("Sakura");
-
     toolbar->setAllowedAreas(Qt::TopToolBarArea);
     toolbar->addWidget(addTool);
     toolbar->addWidget(removeTool);
@@ -97,7 +90,6 @@ void MainWindow::createToolbar() {
     toolbar->addWidget(settingsTool);
     toolbar->addWidget(logoutTool);
     toolbar->addSeparator();
-    toolbar->addWidget(themePicker);
 }
 
 void MainWindow::changeTheme(int styleName) {
@@ -194,7 +186,7 @@ void MainWindow::loadSettings() {
     auto theme = getThemeType(settings.value("app/theme"));
 
     QApplication::setPalette(namedColorSchemePalette(theme));
-    themePicker->setCurrentIndex(getThemeValue(theme));
+    settingsView->setSettingsTheme(getThemeValue(theme));
     this->setFont(settings.value("app/font").value<QFont>());
 }
 
@@ -206,7 +198,7 @@ void MainWindow::saveSettings() {
     updateTable();
 
     settings.setValue("app/font", this->font());
-    settings.setValue("app/theme", themePicker->currentText());
+    settings.setValue("app/theme", settingsView->getTheme());
 }
 
 MainWindow::~MainWindow(){

@@ -12,6 +12,8 @@
 #include <QDebug>
 #include <QFont>
 #include <QFontDialog>
+#include <QComboBox>
+#include <QString>
 
 class Settings : public QDialog {
     Q_OBJECT
@@ -20,11 +22,14 @@ class Settings : public QDialog {
         explicit Settings(QWidget * parent=0);
         virtual ~Settings();
     public slots:
+        void setSettingsTheme(int theme);
+        QString getTheme();
     private slots:
         void save();
         void changeFontDialog();
     signals:
         void fontChanged(const QFont &font);
+        void themeChanged(int);
     private:
         QVBoxLayout *mainLayout;
         QHBoxLayout *buttonLayout;
@@ -32,5 +37,6 @@ class Settings : public QDialog {
         QPushButton *saveButton;
 
         QPushButton *changeFontButton;
+        QComboBox *themePicker;
 };
 #endif //SETTINGS_H

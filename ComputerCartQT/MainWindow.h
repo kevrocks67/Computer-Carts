@@ -8,7 +8,6 @@
 #include "DetailView.h"
 #include "Settings.h"
 
-#include <QComboBox>
 #include <QDebug>
 #include <QMainWindow>
 #include <QPushButton>
@@ -63,5 +62,4 @@ class MainWindow : public QMainWindow {
         QToolButton *addResTool;
         QToolButton *editResTool;
         QToolButton *detailsTool;
-        QComboBox *themePicker;
 };
