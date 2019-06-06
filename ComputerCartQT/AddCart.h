@@ -28,7 +28,7 @@ class AddCart : public QDialog {
     private slots:
         void addCartAction();
     private:
-        CartModel  *cartModel;
+        CartModel *cartModel;
         CartModel::Cart cartDetails;
         QVBoxLayout *mainLayout;
         QVBoxLayout *fieldLayout;

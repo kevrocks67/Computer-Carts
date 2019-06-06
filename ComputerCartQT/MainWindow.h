@@ -54,12 +54,11 @@ class MainWindow : public QMainWindow {
         QVBoxLayout *mainLayout;
         QToolBar *toolbar;
         QToolButton *addTool;
+        QToolButton *editTool;
         QToolButton *removeTool;
         QToolButton *logoutTool;
         QToolButton *settingsTool;
 
-        QToolButton *editTool;
         QToolButton *addResTool;
         QToolButton *editResTool;
-        QToolButton *detailsTool;
 };

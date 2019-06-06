@@ -3,7 +3,7 @@
 #include <QSqlRecord>
 
 ResModel::ResModel(void){
-     QSqlDatabase cartdb = QSqlDatabase::addDatabase("QSQLITE");
+     QSqlDatabase cartdb = QSqlDatabase::addDatabase("QSQLITE", "ResModelConnection");
 
      //PLACEHOLDER DB AND TABLE
      cartdb.setDatabaseName("carts.db");
@@ -15,7 +15,7 @@ ResModel::ResModel(void){
          qDebug()<<"DB has connected";
      }
 
-     setQuery("SELECT * from computercarts");
+     setQuery("SELECT * from reservations");
 
      setHeaderData(0, Qt::Horizontal, tr("Cart Number"));
      setHeaderData(1, Qt::Horizontal, tr("Computer Type"));

@@ -8,6 +8,7 @@ DetailView::DetailView(QWidget * parent) :
     tabWidget = new QTabWidget;
     cartWidget = new QWidget;
     resWidget = new QWidget;
+    laptopWidget = new QWidget;
     cartLayout = new QVBoxLayout;
     resLayout = new QVBoxLayout;
     closeButton = new QPushButton("Close");
@@ -23,9 +24,36 @@ DetailView::DetailView(QWidget * parent) :
     homeLabel = new QLabel();
     lockTypeLabel = new QLabel();
     commentBox = new QTextEdit();
+    laptopsButton = new QPushButton("View Laptops For This Cart");
 
     //Cart Tab Widget Properties
     commentBox->setReadOnly(true);
+
+    //Laptop Widget
+    addLapTool = new QToolButton();
+    editLapTool = new QToolButton();
+    removeLapTool = new QToolButton();
+
+    addLapTool->setText("Add");
+    editLapTool->setText("Edit");
+    removeLapTool->setText("Remove");
+
+    laptopToolbar = new QToolBar();
+    laptopToolbar->setAllowedAreas(Qt::TopToolBarArea);
+    laptopToolbar->addWidget(addLapTool);
+    laptopToolbar->addWidget(editLapTool);
+    laptopToolbar->addWidget(removeLapTool);
+
+    cartNum = new QLabel();
+
+    lapMainLayout = new QVBoxLayout();
+    laptopView = new LaptopView();
+    laptopModel = new LaptopModel();
+    laptopView->setModel(laptopModel);
+    lapMainLayout->addWidget(laptopToolbar);
+    lapMainLayout->addWidget(cartNum);
+    lapMainLayout->addWidget(laptopView);
+    laptopWidget->setLayout(lapMainLayout);
 
     //Add widgets to Cart Widget
     cartLayout->addWidget(cartNumLabel);
@@ -35,6 +63,7 @@ DetailView::DetailView(QWidget * parent) :
     cartLayout->addWidget(cPeriodLabel);
     cartLayout->addWidget(homeLabel);
     cartLayout->addWidget(commentBox);
+    cartLayout->addWidget(laptopsButton);
 
     cartWidget->setLayout(cartLayout);
 
@@ -50,9 +79,10 @@ DetailView::DetailView(QWidget * parent) :
     //Slots and signals
     connect(closeButton, SIGNAL(clicked()),
             SLOT(close()));
-}
-
-DetailView::~DetailView(){
+    connect(laptopsButton, SIGNAL(clicked()),
+            this, SLOT(close()));
+    connect(laptopsButton, SIGNAL(clicked()),
+            laptopWidget, SLOT(show()));
 }
 
 void DetailView::getDetails(int cartNo) {
@@ -64,4 +94,19 @@ void DetailView::getDetails(int cartNo) {
     quantLabel->setText("Quantity: "+QString::number(cart.quantity));
     cRoomLabel->setText("Current Location: "+cart.cRoom);
     cPeriodLabel->setText("Needed For Period: "+QString::number(cart.cPeriod));
+    laptopModel->getLaptops(cartNo);
+    cartNum->setText("Cart Number: "+QString::number(cartNo));
+    laptopView->repaint();
+    laptopWidget->repaint();
+}
+
+void DetailView::updateTable() {
+     QString queryStr = laptopModel->query().executedQuery();
+     laptopModel->clear();
+     laptopModel->query().clear();
+     laptopModel->setQuery(queryStr);
+     //laptopView->clearUserSelections();
+}
+
+DetailView::~DetailView(){
 }

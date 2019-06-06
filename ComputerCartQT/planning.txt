@@ -7,9 +7,9 @@ CREATE TABLE ComputerCarts (
     CurrentLocation TEXT DEFAULT NULL,
     CurrentLocTime TEXT DEFAULT NULL,
     FutureResId INTEGER DEFAULT NULL,
-    FOREIGN KEY(FutureResId) REFERENCES reservations(ResId),
     CartStatus BOOLEAN DEFAULT NULL,
     LastUpdate DATETIME,
+    FOREIGN KEY(FutureResId) REFERENCES reservations(ResId)
 
     ADD THIS COLUMN ->Comments TEXT DEFAULT NULL
     ADD THIS COLUMN ->HomeLocation TEXT DEFAULT NULL
@@ -17,11 +17,12 @@ CREATE TABLE ComputerCarts (
         Key
         Circular Key
         Combination
-    ADD THIS COLUMN -> OS TEXT DEFAULT NULL
+    ADD THIS COLUMN -> OS TEXT DEFAULT NOT NULL
         Windows
         ChromeOS
         Linux
         MacOSX
+        Multiple
 );
 
 CREATE TABLE Reservations (
@@ -36,16 +37,21 @@ CREATE TABLE Reservations (
 
 
 CREATE TABLE Laptops (
-    AssetID TEXT PRIMARY KEY,
+    AssetID TEXT type UNIQUE DEFAULT NULL,
     Brand TEXT NOT NULL,
     GenericName TEXT NOT NULL,
-    Model TEXT,
+    Model TEXT DEFAULT NULL,
+    OS TEXT NOT NULL,
     CartNumber INTEGER DEFAULT NULL,
+    Status TEXT,
+    IsDeployed BOOLEAN NOT NULL,
     FOREIGN KEY(CartNumber) REFERENCES ComputerCarts(CartNumber)
-    Status TEXT
 );
 
 Get all laptops -> select * foom laptops where CartNumber=?
+Add interface to select
+    Get unique values from each column (brand, genricname, model)
+
 
 If CartNumber == '' -> Unassigned list
 Else getDetails(FutureResId)-> Display reservation details and modal with comments
