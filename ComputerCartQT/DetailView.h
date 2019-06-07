@@ -2,6 +2,7 @@
 #define DETAILVIEW_H
 
 #include "CartModel.h"
+#include "Laptops.h"
 #include "LaptopView.h"
 #include "LaptopModel.h"
 
@@ -38,10 +39,11 @@ class DetailView : public QDialog {
         QTabWidget *tabWidget;
         QWidget *cartWidget;
         QWidget *resWidget;
-        QWidget *laptopWidget;
+        //QWidget *laptopWidget;
         QVBoxLayout *cartLayout;
         QVBoxLayout *resLayout;
         QPushButton *closeButton;
+        Laptops *laptops;
 
         //Cart Tab Widgets
         QLabel *cartNumLabel;
@@ -55,11 +57,11 @@ class DetailView : public QDialog {
         QPushButton *laptopsButton;
 
         //Laptop Widget widgets
-        QVBoxLayout *lapMainLayout;
+        /*QVBoxLayout *lapMainLayout;
         QLabel *cartNum;
         QToolBar *laptopToolbar;
         QToolButton *addLapTool;
         QToolButton *editLapTool;
-        QToolButton *removeLapTool;
+        QToolButton *removeLapTool;*/
 };
 #endif //DETAILVIEW_H

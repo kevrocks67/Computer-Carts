@@ -3,6 +3,8 @@
 
 #include <QTableView>
 #include <QHeaderView>
+#include <QMouseEvent>
+#include <QModelIndex>
 
 
 class LaptopView : public QTableView {
@@ -10,8 +12,11 @@ class LaptopView : public QTableView {
 
     public:
         LaptopView(QWidget * parent = nullptr);
+        void mouseDoubleClickEvent(QMouseEvent *event) override;
+    signals:
     public slots:
     private slots:
+        void clearUserSelections();
     private:
 };
 

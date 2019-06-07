@@ -36,8 +36,8 @@ CartModel::CartModel(void) {
                            "\tLastUpdate DATETIME\n);");
             qDebug()<<"Table 'ComputerCarts' has been created";
 
-            qDebug()<<"Creating table 'reservations'";
-            query.exec("CREATE TABLE reservations (\n"
+            qDebug()<<"Creating table 'Reservations'";
+            query.exec("CREATE TABLE Reservations (\n"
                             "\tResId INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,\n"
                             "\tCartNumber INTEGER DEFAULT NULL,\n"
                             "\tLocation TEXT NOT NULL,\n"
@@ -45,6 +45,22 @@ CartModel::CartModel(void) {
                             "\tTime INTEGER NOT NULL,\n"
                             "\tComments TEXT DEFAULT NULL\n);");
             qDebug()<<"Table 'reservations' has been created";
+
+            qDebug()<<"Creating table 'Laptops'";
+            query.exec("CREATE TABLE Laptops (\n"
+                            "\tAssetID TEXT type UNIQUE DEFAULT NULL,\n"
+                            "\tBrand TEXT NOT NULL,\n"
+                            "\tGenericName TEXT NOT NULL,\n"
+                            "\tModel TEXT DEFAULT NULL,\n"
+                            "\tOS TEXT NOT NULL,\n"
+                            "\tCartNumber INTEGER DEFAULT NULL,\n"
+                            "\tStatus TEXT,\n"
+                            "\tIsDeployed BOOLEAN NOT NULL,\n"
+                            "\tFOREIGN KEY(CartNumber) REFERENCES ComputerCarts(CartNumber)\n);");
+            qDebug()<<"Table 'Laptops' has been created";
+
+            qDebug()<<"Enabling properties";
+            query.exec("PRAGMA foreign_keys = ON;");
 
             qDebug()<<"carts.db is ready for use";
         }

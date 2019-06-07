@@ -3,18 +3,21 @@
 
 #include <QTableView>
 #include <QMouseEvent>
+#include <QHeaderView>
+#include <QPoint>
+#include <QDebug>
 
 class CartView : public QTableView {
     Q_OBJECT
 
-    signals:
-        void showDetailsEvent(const QModelIndex &index);
     public:
         CartView(QWidget * parent = nullptr);
         void currentChanged(const QModelIndex &current, const QModelIndex &previous) override;
         void mouseDoubleClickEvent(QMouseEvent* event) override;
         int getRow();
         void clearUserSelections();
+    signals:
+        void showDetailsEvent(const QModelIndex &index);
     public slots:
     private slots:
     private:

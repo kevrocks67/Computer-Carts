@@ -1,7 +1,4 @@
 #include "CartView.h"
-#include <QHeaderView>
-#include <QDebug>
-#include <QPoint>
 
 CartView::CartView(QWidget * parent):
     QTableView(parent) {

@@ -8,7 +8,7 @@ DetailView::DetailView(QWidget * parent) :
     tabWidget = new QTabWidget;
     cartWidget = new QWidget;
     resWidget = new QWidget;
-    laptopWidget = new QWidget;
+    //laptopWidget = new QWidget;
     cartLayout = new QVBoxLayout;
     resLayout = new QVBoxLayout;
     closeButton = new QPushButton("Close");
@@ -24,11 +24,11 @@ DetailView::DetailView(QWidget * parent) :
     homeLabel = new QLabel();
     lockTypeLabel = new QLabel();
     commentBox = new QTextEdit();
-    laptopsButton = new QPushButton("View Laptops For This Cart");
+    laptopsButton = new QPushButton("View Laptops In This Cart");
 
     //Cart Tab Widget Properties
     commentBox->setReadOnly(true);
-
+/*
     //Laptop Widget
     addLapTool = new QToolButton();
     editLapTool = new QToolButton();
@@ -46,14 +46,18 @@ DetailView::DetailView(QWidget * parent) :
 
     cartNum = new QLabel();
 
-    lapMainLayout = new QVBoxLayout();
+    */
+    //lapMainLayout = new QVBoxLayout();
     laptopView = new LaptopView();
     laptopModel = new LaptopModel();
     laptopView->setModel(laptopModel);
+    laptops = new Laptops(*laptopModel, *laptopView);
+    /*
     lapMainLayout->addWidget(laptopToolbar);
     lapMainLayout->addWidget(cartNum);
     lapMainLayout->addWidget(laptopView);
     laptopWidget->setLayout(lapMainLayout);
+    */
 
     //Add widgets to Cart Widget
     cartLayout->addWidget(cartNumLabel);
@@ -82,7 +86,7 @@ DetailView::DetailView(QWidget * parent) :
     connect(laptopsButton, SIGNAL(clicked()),
             this, SLOT(close()));
     connect(laptopsButton, SIGNAL(clicked()),
-            laptopWidget, SLOT(show()));
+            laptops, SLOT(show()));
 }
 
 void DetailView::getDetails(int cartNo) {
@@ -95,9 +99,9 @@ void DetailView::getDetails(int cartNo) {
     cRoomLabel->setText("Current Location: "+cart.cRoom);
     cPeriodLabel->setText("Needed For Period: "+QString::number(cart.cPeriod));
     laptopModel->getLaptops(cartNo);
-    cartNum->setText("Cart Number: "+QString::number(cartNo));
+    laptops->setCartNum("Cart Number: "+QString::number(cartNo));
     laptopView->repaint();
-    laptopWidget->repaint();
+    laptops->repaint();
 }
 
 void DetailView::updateTable() {
