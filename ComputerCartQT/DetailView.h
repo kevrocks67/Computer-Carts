@@ -27,7 +27,6 @@ class DetailView : public QDialog {
         virtual ~DetailView();
     public slots:
         void getDetails(int cartNo);
-        void updateTable();
     private slots:
     private:
         CartModel *cartModel;

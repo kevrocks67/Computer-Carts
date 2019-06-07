@@ -186,7 +186,8 @@ void MainWindow::loadSettings() {
     auto theme = getThemeType(settings.value("app/theme"));
 
     QApplication::setPalette(namedColorSchemePalette(theme));
-    settingsView->setSettingsTheme(getThemeValue(theme));
+    //settingsView->setSettingsTheme(getThemeValue(theme));
+    settingsView->setSettingsTheme((int) theme);
     this->setFont(settings.value("app/font").value<QFont>());
 }
 
