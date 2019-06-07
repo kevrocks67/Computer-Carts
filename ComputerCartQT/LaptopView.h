@@ -15,8 +15,8 @@ class LaptopView : public QTableView {
         void mouseDoubleClickEvent(QMouseEvent *event) override;
     signals:
     public slots:
-    private slots:
         void clearUserSelections();
+    private slots:
     private:
 };
 

@@ -104,13 +104,5 @@ void DetailView::getDetails(int cartNo) {
     laptops->repaint();
 }
 
-void DetailView::updateTable() {
-     QString queryStr = laptopModel->query().executedQuery();
-     laptopModel->clear();
-     laptopModel->query().clear();
-     laptopModel->setQuery(queryStr);
-     //laptopView->clearUserSelections();
-}
-
 DetailView::~DetailView(){
 }

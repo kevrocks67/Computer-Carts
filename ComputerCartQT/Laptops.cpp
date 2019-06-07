@@ -39,7 +39,7 @@ void Laptops::updateTable() {
      model.clear();
      model.query().clear();
      model.setQuery(queryStr);
-     //view.clearUserSelections();
+     view.clearUserSelections();
 }
 
 void Laptops::setCartNum(QString label) {
