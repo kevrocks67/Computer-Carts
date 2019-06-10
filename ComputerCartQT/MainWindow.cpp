@@ -167,6 +167,7 @@ void MainWindow::updateTable() {
 
 void MainWindow::changeFont(const QFont &font) {
     qApp->setFont(font);
+    this->setFont(font);
 }
 
 void MainWindow::showDetails(const QModelIndex &index) {

@@ -3,6 +3,8 @@
 
 Laptops::Laptops(LaptopModel &laptopModel, LaptopView &laptopView) :
     model(laptopModel), view(laptopView) {
+        addLaptop = new AddLaptop(model);
+
         mainLayout = new QVBoxLayout;
 
         //Initialize widgets
@@ -29,9 +31,12 @@ Laptops::Laptops(LaptopModel &laptopModel, LaptopView &laptopView) :
 
         setLayout(mainLayout);
 
+
         //Slots and signals
         connect(addTool, SIGNAL(clicked()),
                 this, SLOT(updateTable()));
+        connect(addTool, SIGNAL(clicked()),
+                this, SLOT(addAction()));
 }
 
 void Laptops::updateTable() {
@@ -44,6 +49,10 @@ void Laptops::updateTable() {
 
 void Laptops::setCartNum(QString label) {
     cartNum->setText(label);
+}
+
+void Laptops::addAction() {
+    addLaptop->exec();
 }
 
 Laptops::~Laptops(){

@@ -3,6 +3,7 @@
 
 #include "LaptopModel.h"
 #include "LaptopView.h"
+#include "AddLaptop.h"
 
 #include <QApplication>
 #include <QWidget>
@@ -22,9 +23,12 @@ class Laptops : public QWidget {
         void setCartNum(QString label);
     private slots:
         void updateTable();
+        void addAction();
     private:
         LaptopModel& model;
         LaptopView& view;
+
+        AddLaptop *addLaptop;
 
         QVBoxLayout *mainLayout;
         QLabel *cartNum;

@@ -20,6 +20,8 @@ class LaptopModel : public QSqlQueryModel {
         virtual ~LaptopModel();
     public slots:
         void getLaptops(int cartno);
+        QStringList getBrands();
+        QStringList getGNames();
     private slots:
     signals:
     private:

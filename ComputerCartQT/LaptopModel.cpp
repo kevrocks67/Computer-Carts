@@ -27,10 +27,27 @@ LaptopModel::LaptopModel(void){
 
 void LaptopModel::getLaptops(int cartno) {
      QSqlQuery query;
-     query.prepare("SELECT * from Laptops where CartNumber=?");
+     query.prepare("SELECT * from Laptops where CartNumber=?;");
      query.bindValue(0, cartno);
      query.exec();
      setQuery(query);
+}
+
+QStringList LaptopModel::getBrands() {
+    QStringList brands;
+    QSqlQuery query;
+    query.exec("SELECT DISTINCT Brand from Laptops;");
+    for (int i=0; i <= query.size(); i++) {
+        brands << query.value(i).toString();
+    }
+    return brands;
+}
+
+QStringList LaptopModel::getGNames() {
+    QStringList names;
+    QSqlQuery query;
+    query.exec("SELECT DISTINCT GenericName from Laptops;");
+    return names;
 }
 
 LaptopModel::~LaptopModel(){
