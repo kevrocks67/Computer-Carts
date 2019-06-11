@@ -3,7 +3,6 @@
 
 Laptops::Laptops(LaptopModel &laptopModel, LaptopView &laptopView) :
     model(laptopModel), view(laptopView) {
-        addLaptop = new AddLaptop(model);
 
         mainLayout = new QVBoxLayout;
 
@@ -47,11 +46,16 @@ void Laptops::updateTable() {
      view.clearUserSelections();
 }
 
+void Laptops::setCartNum(int cartno) {
+    cartNo = cartno;
+}
+
 void Laptops::setCartNum(QString label) {
     cartNum->setText(label);
 }
 
 void Laptops::addAction() {
+    addLaptop = new AddLaptop(model, cartNo);
     addLaptop->exec();
 }
 

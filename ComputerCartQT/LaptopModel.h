@@ -18,8 +18,20 @@ class LaptopModel : public QSqlQueryModel {
     public:
         explicit LaptopModel(void);
         virtual ~LaptopModel();
+        struct Laptop {
+            QString AssetID;
+            QString Brand;
+            QString GenericName;
+            QString Model;
+            QString Serial;
+            QString OS;
+            int CartNumber;
+            QString Status;
+            bool IsDeployed;
+        };
     public slots:
         void getLaptops(int cartno);
+        void addLaptop(Laptop laptop);
         QStringList getBrands();
         QStringList getGNames();
     private slots:

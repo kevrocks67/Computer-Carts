@@ -1,7 +1,6 @@
 #include "LaptopModel.h"
 #include <QModelIndex>
 #include <QSqlRecord>
-
 LaptopModel::LaptopModel(void){
      QSqlDatabase cartdb = QSqlDatabase::addDatabase("QSQLITE", "LaptopModelConnection");
 
@@ -49,6 +48,18 @@ QStringList LaptopModel::getGNames() {
         names << query.value(0).toString();
     }
     return names;
+}
+
+void LaptopModel::addLaptop(Laptop laptop) {
+    qDebug()<<laptop.AssetID;
+    qDebug()<<laptop.Brand;
+    qDebug()<<laptop.GenericName;
+    qDebug()<<laptop.Model;
+    qDebug()<<laptop.Serial;
+    qDebug()<<laptop.OS;
+    qDebug()<<laptop.CartNumber;
+    qDebug()<<laptop.Status;
+    qDebug()<<laptop.IsDeployed;
 }
 
 LaptopModel::~LaptopModel(){

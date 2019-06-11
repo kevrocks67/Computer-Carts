@@ -99,6 +99,7 @@ void DetailView::getDetails(int cartNo) {
     cRoomLabel->setText("Current Location: "+cart.cRoom);
     cPeriodLabel->setText("Needed For Period: "+QString::number(cart.cPeriod));
     laptopModel->getLaptops(cartNo);
+    laptops->setCartNum(cartNo);
     laptops->setCartNum("Cart Number: "+QString::number(cartNo));
     laptopView->repaint();
     laptops->repaint();

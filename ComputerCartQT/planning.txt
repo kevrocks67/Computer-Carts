@@ -1,7 +1,7 @@
 PRAGMA foreign_keys = ON;
 
 CREATE TABLE ComputerCarts (
-    CartNumber INTEGER PRIMARY KEY AUTOINCREMENT,
+    CartNumber INTEGER PRIMARY KEY,
     ComputerType TEXT NOT NULL,
     Quantity INTEGER DEFAULT NULL,
     CurrentLocation TEXT DEFAULT NULL,
@@ -41,6 +41,7 @@ CREATE TABLE Laptops (
     Brand TEXT NOT NULL,
     GenericName TEXT NOT NULL,
     Model TEXT DEFAULT NULL,
+    Serial TEXT DEFAULT NULL,
     OS TEXT NOT NULL,
     CartNumber INTEGER DEFAULT NULL,
     Status TEXT,

@@ -20,6 +20,7 @@ class Laptops : public QWidget {
         explicit Laptops(LaptopModel &laptopModel, LaptopView &laptopView);
         virtual ~Laptops();
     public slots:
+        void setCartNum(int cartno);
         void setCartNum(QString label);
     private slots:
         void updateTable();
@@ -27,6 +28,7 @@ class Laptops : public QWidget {
     private:
         LaptopModel& model;
         LaptopView& view;
+        int cartNo;
 
         AddLaptop *addLaptop;
 

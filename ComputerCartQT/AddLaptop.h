@@ -22,15 +22,18 @@ class AddLaptop : public QDialog {
 
     public:
         explicit AddLaptop(LaptopModel &lapModel);
+        explicit AddLaptop(LaptopModel &lapModel, int cartNo);
         virtual ~AddLaptop();
     public slots:
     private slots:
-        void setComboItems();
+        void setWidgetProperties();
+        void createWidgets();
         void addLaptopAction();
     signals:
     private:
         LaptopModel *model;
         int cartNum;
+        LaptopModel::Laptop laptop;
 
         QVBoxLayout *mainLayout;
         QVBoxLayout *fieldLayout;
@@ -46,7 +49,7 @@ class AddLaptop : public QDialog {
         QLabel * genericNLabel;
         QComboBox *genericNField;
         QLineEdit *modelField;
-
+        QLineEdit *serialField;
         QComboBox *osSelect;
         QComboBox *cartNumberSelect;
 
