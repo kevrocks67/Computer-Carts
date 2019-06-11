@@ -26,6 +26,7 @@ class AddLaptop : public QDialog {
     public slots:
     private slots:
         void setComboItems();
+        void addLaptopAction();
     signals:
     private:
         LaptopModel *model;

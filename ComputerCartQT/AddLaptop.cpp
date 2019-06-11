@@ -10,9 +10,9 @@ AddLaptop::AddLaptop(LaptopModel &lapModel):
 
         cartNumLabel = new QLabel();
         assetField = new QLineEdit();
-        brandLabel = new QLabel();
+        brandLabel = new QLabel("Brand");
         brandField = new QComboBox();
-        genericNLabel = new QLabel();
+        genericNLabel = new QLabel("Generic Name");
         genericNField = new QComboBox();
         modelField = new QLineEdit();
         osSelect = new QComboBox();
@@ -31,8 +31,6 @@ AddLaptop::AddLaptop(LaptopModel &lapModel):
         cancelButton = new QPushButton("Cancel");
 
         assetField->setPlaceholderText("Asset Tag");
-        brandLabel->setText("Brand");
-        genericNLabel->setText("Generic Name");
         modelField->setPlaceholderText("Model (Optional)");
 
         brandField->setEditable(true);
@@ -49,7 +47,9 @@ AddLaptop::AddLaptop(LaptopModel &lapModel):
 
         fieldLayout->addWidget(cartNumLabel);
         fieldLayout->addWidget(assetField);
+        fieldLayout->addWidget(brandLabel);
         fieldLayout->addWidget(brandField);
+        fieldLayout->addWidget(genericNLabel);
         fieldLayout->addWidget(genericNField);
         fieldLayout->addWidget(modelField);
         fieldLayout->addWidget(osSelect);
@@ -64,6 +64,12 @@ AddLaptop::AddLaptop(LaptopModel &lapModel):
         mainLayout->addLayout(buttonLayout);
         setLayout(mainLayout);
         setModal(true);
+
+        connect(cancelButton, SIGNAL(clicked()),
+                SLOT(close()));
+        connect(addButton, SIGNAL(clicked()),
+                SLOT(addLaptopAction()));
+
 }
 
 void AddLaptop::setComboItems() {
@@ -72,10 +78,17 @@ void AddLaptop::setComboItems() {
     for(QString brand: brands) {
         brandField->addItem(brand);
     }
+    for(QString gName: gNames) {
+        genericNField->addItem(gName);
+    }
     osSelect->addItem("Windows");
     osSelect->addItem("Chrome OS");
     osSelect->addItem("Linux");
     osSelect->addItem("Mac OSX");
+}
+
+void AddLaptop::addLaptopAction() {
+
 }
 
 AddLaptop::~AddLaptop() {

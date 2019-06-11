@@ -35,18 +35,19 @@ void LaptopModel::getLaptops(int cartno) {
 
 QStringList LaptopModel::getBrands() {
     QStringList brands;
-    QSqlQuery query;
-    query.exec("SELECT DISTINCT Brand from Laptops;");
-    for (int i=0; i <= query.size(); i++) {
-        brands << query.value(i).toString();
+    QSqlQuery query("SELECT DISTINCT Brand from Laptops");
+    while(query.next()) {
+        brands << query.value(0).toString();
     }
     return brands;
 }
 
 QStringList LaptopModel::getGNames() {
     QStringList names;
-    QSqlQuery query;
-    query.exec("SELECT DISTINCT GenericName from Laptops;");
+    QSqlQuery query("SELECT DISTINCT GenericName from Laptops");
+    while(query.next()) {
+        names << query.value(0).toString();
+    }
     return names;
 }
 
