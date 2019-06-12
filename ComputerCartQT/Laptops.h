@@ -29,6 +29,7 @@ class Laptops : public QWidget {
         void addAction();
         void addActionCart();
         void deleteAction();
+        void deleteActionCart();
     private:
         LaptopModel& model;
         LaptopView& view;

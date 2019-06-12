@@ -31,7 +31,7 @@ void LaptopModel::getLaptops() {
 void LaptopModel::getLaptops(int cartno) {
      QSqlQuery query;
      query.prepare("SELECT * from Laptops where CartNumber=?");
-     query.bindValue(0, cartno);
+     query.bindValue(0, QString::number(cartno));
      query.exec();
      setQuery(query);
 }
@@ -81,7 +81,12 @@ void LaptopModel::addLaptop(Laptop laptop) {
 }
 
 void LaptopModel::deleteLaptop(QString asset, QString gName) {
-
+    QSqlQuery query;
+    query.prepare("DELETE FROM Laptops WHERE AssetID=? AND GenericName=?");
+    query.bindValue(0, asset);
+    query.bindValue(1, gName);
+    query.exec();
+    qDebug()<<"Deleted laptop asset: "+asset;
 }
 
 LaptopModel::~LaptopModel(){
