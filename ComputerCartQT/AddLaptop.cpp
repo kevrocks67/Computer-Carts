@@ -1,6 +1,5 @@
 #include "AddLaptop.h"
 
-
 AddLaptop::AddLaptop(LaptopModel &lapModel):
     model(&lapModel) {
         fieldLayout->addWidget(cartNumberSelect);

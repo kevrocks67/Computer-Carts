@@ -30,6 +30,7 @@ class LaptopModel : public QSqlQueryModel {
             bool IsDeployed;
         };
     public slots:
+        void getLaptops();
         void getLaptops(int cartno);
         void addLaptop(Laptop laptop);
         QStringList getBrands();

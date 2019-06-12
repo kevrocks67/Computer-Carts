@@ -24,7 +24,9 @@ class Laptops : public QWidget {
         void setCartNum(QString label);
     private slots:
         void updateTable();
+        void updateTableCart();
         void addAction();
+        void addActionCart();
     private:
         LaptopModel& model;
         LaptopView& view;
