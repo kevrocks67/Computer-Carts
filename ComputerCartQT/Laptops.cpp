@@ -34,6 +34,8 @@ Laptops::Laptops(LaptopModel &laptopModel, LaptopView &laptopView) :
         //Slots and signals
         connect(addTool, SIGNAL(clicked()),
                 this, SLOT(addActionCart()));
+        connect(editTool, SIGNAL(clicked()),
+                this, SLOT(editActionCart()));
         connect(removeTool, SIGNAL(clicked()),
                 this, SLOT(deleteActionCart()));
 }
@@ -72,6 +74,20 @@ void Laptops::addActionCart() {
     connect(addLaptop, SIGNAL(accepted()),
             this, SLOT(updateTableCart()));
     addLaptop->exec();
+}
+
+void Laptops::editAction() {
+    editLaptop = new EditLaptop(model);
+    connect(editLaptop, SIGNAL(accepted()),
+            this, SLOT(updateTable()));
+    editLaptop->exec();
+}
+
+void Laptops::editActionCart() {
+    editLaptop = new EditLaptop(model, cartNo);
+    connect(editLaptop, SIGNAL(accepted()),
+            this, SLOT(updateTableCart()));
+    editLaptop->exec();
 }
 
 void Laptops::deleteAction() {

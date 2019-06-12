@@ -4,6 +4,7 @@
 #include "LaptopModel.h"
 #include "LaptopView.h"
 #include "AddLaptop.h"
+#include "EditLaptop.h"
 #include "DeleteLaptop.h"
 
 #include <QApplication>
@@ -28,6 +29,8 @@ class Laptops : public QWidget {
         void updateTableCart();
         void addAction();
         void addActionCart();
+        void editAction();
+        void editActionCart();
         void deleteAction();
         void deleteActionCart();
     private:
@@ -36,6 +39,7 @@ class Laptops : public QWidget {
         int cartNo;
 
         AddLaptop *addLaptop;
+        EditLaptop *editLaptop;
         DeleteLaptop *deleteLaptop;
 
         QVBoxLayout *mainLayout;

@@ -65,7 +65,8 @@ SOURCES       = phantom/phantomcolor.cpp \
 		LaptopModel.cpp \
 		Laptops.cpp \
 		AddLaptop.cpp \
-		DeleteLaptop.cpp moc_phantomstyle.cpp \
+		DeleteLaptop.cpp \
+		EditLaptop.cpp moc_phantomstyle.cpp \
 		moc_AddCart.cpp \
 		moc_Application.cpp \
 		moc_CartModel.cpp \
@@ -79,7 +80,8 @@ SOURCES       = phantom/phantomcolor.cpp \
 		moc_LaptopModel.cpp \
 		moc_Laptops.cpp \
 		moc_AddLaptop.cpp \
-		moc_DeleteLaptop.cpp
+		moc_DeleteLaptop.cpp \
+		moc_EditLaptop.cpp
 OBJECTS       = phantomcolor.o \
 		phantomstyle.o \
 		AddCart.o \
@@ -96,6 +98,7 @@ OBJECTS       = phantomcolor.o \
 		Laptops.o \
 		AddLaptop.o \
 		DeleteLaptop.o \
+		EditLaptop.o \
 		moc_phantomstyle.o \
 		moc_AddCart.o \
 		moc_Application.o \
@@ -110,7 +113,8 @@ OBJECTS       = phantomcolor.o \
 		moc_LaptopModel.o \
 		moc_Laptops.o \
 		moc_AddLaptop.o \
-		moc_DeleteLaptop.o
+		moc_DeleteLaptop.o \
+		moc_EditLaptop.o
 DIST          = /usr/lib64/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib64/qt5/mkspecs/common/unix.conf \
 		/usr/lib64/qt5/mkspecs/common/linux.conf \
@@ -201,7 +205,8 @@ DIST          = /usr/lib64/qt5/mkspecs/features/spec_pre.prf \
 		LaptopModel.h \
 		Laptops.h \
 		AddLaptop.h \
-		DeleteLaptop.h phantom/phantomcolor.cpp \
+		DeleteLaptop.h \
+		EditLaptop.h phantom/phantomcolor.cpp \
 		phantom/phantomstyle.cpp \
 		AddCart.cpp \
 		Application.cpp \
@@ -216,7 +221,8 @@ DIST          = /usr/lib64/qt5/mkspecs/features/spec_pre.prf \
 		LaptopModel.cpp \
 		Laptops.cpp \
 		AddLaptop.cpp \
-		DeleteLaptop.cpp
+		DeleteLaptop.cpp \
+		EditLaptop.cpp
 QMAKE_TARGET  = ComputerCartQT
 DESTDIR       = 
 TARGET        = ComputerCartQT
@@ -402,8 +408,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib64/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents phantom/phantomcolor.h phantom/phantomstyle.h phantom/phantomtweak.h AddCart.h Application.h CartModel.h CartView.h EditCart.h MainWindow.h DeleteCart.h DetailView.h Settings.h LaptopView.h LaptopModel.h Laptops.h AddLaptop.h DeleteLaptop.h $(DISTDIR)/
-	$(COPY_FILE) --parents phantom/phantomcolor.cpp phantom/phantomstyle.cpp AddCart.cpp Application.cpp CartModel.cpp CartView.cpp EditCart.cpp MainWindow.cpp DeleteCart.cpp DetailView.cpp Settings.cpp LaptopView.cpp LaptopModel.cpp Laptops.cpp AddLaptop.cpp DeleteLaptop.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents phantom/phantomcolor.h phantom/phantomstyle.h phantom/phantomtweak.h AddCart.h Application.h CartModel.h CartView.h EditCart.h MainWindow.h DeleteCart.h DetailView.h Settings.h LaptopView.h LaptopModel.h Laptops.h AddLaptop.h DeleteLaptop.h EditLaptop.h $(DISTDIR)/
+	$(COPY_FILE) --parents phantom/phantomcolor.cpp phantom/phantomstyle.cpp AddCart.cpp Application.cpp CartModel.cpp CartView.cpp EditCart.cpp MainWindow.cpp DeleteCart.cpp DetailView.cpp Settings.cpp LaptopView.cpp LaptopModel.cpp Laptops.cpp AddLaptop.cpp DeleteLaptop.cpp EditLaptop.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -435,9 +441,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/lib64/qt5/mkspecs/features/data/dummy.cpp
 	g++ -pipe -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -m64 -mtune=generic -O2 -std=gnu++11 -Wall -W -dM -E -o moc_predefs.h /usr/lib64/qt5/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_phantomstyle.cpp moc_AddCart.cpp moc_Application.cpp moc_CartModel.cpp moc_CartView.cpp moc_EditCart.cpp moc_MainWindow.cpp moc_DeleteCart.cpp moc_DetailView.cpp moc_Settings.cpp moc_LaptopView.cpp moc_LaptopModel.cpp moc_Laptops.cpp moc_AddLaptop.cpp moc_DeleteLaptop.cpp
+compiler_moc_header_make_all: moc_phantomstyle.cpp moc_AddCart.cpp moc_Application.cpp moc_CartModel.cpp moc_CartView.cpp moc_EditCart.cpp moc_MainWindow.cpp moc_DeleteCart.cpp moc_DetailView.cpp moc_Settings.cpp moc_LaptopView.cpp moc_LaptopModel.cpp moc_Laptops.cpp moc_AddLaptop.cpp moc_DeleteLaptop.cpp moc_EditLaptop.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_phantomstyle.cpp moc_AddCart.cpp moc_Application.cpp moc_CartModel.cpp moc_CartView.cpp moc_EditCart.cpp moc_MainWindow.cpp moc_DeleteCart.cpp moc_DetailView.cpp moc_Settings.cpp moc_LaptopView.cpp moc_LaptopModel.cpp moc_Laptops.cpp moc_AddLaptop.cpp moc_DeleteLaptop.cpp
+	-$(DEL_FILE) moc_phantomstyle.cpp moc_AddCart.cpp moc_Application.cpp moc_CartModel.cpp moc_CartView.cpp moc_EditCart.cpp moc_MainWindow.cpp moc_DeleteCart.cpp moc_DetailView.cpp moc_Settings.cpp moc_LaptopView.cpp moc_LaptopModel.cpp moc_Laptops.cpp moc_AddLaptop.cpp moc_DeleteLaptop.cpp moc_EditLaptop.cpp
 moc_phantomstyle.cpp: phantom/phantomstyle.h \
 		moc_predefs.h \
 		/usr/lib64/qt5/bin/moc
@@ -460,6 +466,7 @@ moc_Application.cpp: MainWindow.h \
 		LaptopModel.h \
 		LaptopView.h \
 		AddLaptop.h \
+		EditLaptop.h \
 		DeleteLaptop.h \
 		Settings.h \
 		Application.h \
@@ -493,6 +500,7 @@ moc_MainWindow.cpp: AddCart.h \
 		LaptopModel.h \
 		LaptopView.h \
 		AddLaptop.h \
+		EditLaptop.h \
 		DeleteLaptop.h \
 		Settings.h \
 		MainWindow.h \
@@ -511,6 +519,7 @@ moc_DetailView.cpp: CartModel.h \
 		LaptopModel.h \
 		LaptopView.h \
 		AddLaptop.h \
+		EditLaptop.h \
 		DeleteLaptop.h \
 		DetailView.h \
 		moc_predefs.h \
@@ -535,6 +544,7 @@ moc_LaptopModel.cpp: LaptopModel.h \
 moc_Laptops.cpp: LaptopModel.h \
 		LaptopView.h \
 		AddLaptop.h \
+		EditLaptop.h \
 		DeleteLaptop.h \
 		Laptops.h \
 		moc_predefs.h \
@@ -552,6 +562,12 @@ moc_DeleteLaptop.cpp: LaptopModel.h \
 		moc_predefs.h \
 		/usr/lib64/qt5/bin/moc
 	/usr/lib64/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib64/qt5/mkspecs/linux-g++ -I/home/lab/Computer-Carts/ComputerCartQT -I/home/lab/Computer-Carts/ComputerCartQT -I/home/lab/Computer-Carts/ComputerCartQT/phantom -I/usr/include/qt5 -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtSql -I/usr/include/qt5/QtCore -I/usr/include/c++/4.8.5 -I/usr/include/c++/4.8.5/x86_64-redhat-linux -I/usr/include/c++/4.8.5/backward -I/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include -I/usr/local/include -I/usr/include DeleteLaptop.h -o moc_DeleteLaptop.cpp
+
+moc_EditLaptop.cpp: LaptopModel.h \
+		EditLaptop.h \
+		moc_predefs.h \
+		/usr/lib64/qt5/bin/moc
+	/usr/lib64/qt5/bin/moc $(DEFINES) --include ./moc_predefs.h -I/usr/lib64/qt5/mkspecs/linux-g++ -I/home/lab/Computer-Carts/ComputerCartQT -I/home/lab/Computer-Carts/ComputerCartQT -I/home/lab/Computer-Carts/ComputerCartQT/phantom -I/usr/include/qt5 -I/usr/include/qt5/QtWidgets -I/usr/include/qt5/QtGui -I/usr/include/qt5/QtSql -I/usr/include/qt5/QtCore -I/usr/include/c++/4.8.5 -I/usr/include/c++/4.8.5/x86_64-redhat-linux -I/usr/include/c++/4.8.5/backward -I/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include -I/usr/local/include -I/usr/include EditLaptop.h -o moc_EditLaptop.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -591,6 +607,7 @@ Application.o: Application.cpp Application.h \
 		LaptopModel.h \
 		LaptopView.h \
 		AddLaptop.h \
+		EditLaptop.h \
 		DeleteLaptop.h \
 		Settings.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Application.o Application.cpp
@@ -616,6 +633,7 @@ MainWindow.o: MainWindow.cpp MainWindow.h \
 		LaptopModel.h \
 		LaptopView.h \
 		AddLaptop.h \
+		EditLaptop.h \
 		DeleteLaptop.h \
 		Settings.h \
 		Palette.h \
@@ -632,6 +650,7 @@ DetailView.o: DetailView.cpp DetailView.h \
 		LaptopModel.h \
 		LaptopView.h \
 		AddLaptop.h \
+		EditLaptop.h \
 		DeleteLaptop.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o DetailView.o DetailView.cpp
 
@@ -648,6 +667,7 @@ Laptops.o: Laptops.cpp Laptops.h \
 		LaptopModel.h \
 		LaptopView.h \
 		AddLaptop.h \
+		EditLaptop.h \
 		DeleteLaptop.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Laptops.o Laptops.cpp
 
@@ -658,6 +678,10 @@ AddLaptop.o: AddLaptop.cpp AddLaptop.h \
 DeleteLaptop.o: DeleteLaptop.cpp DeleteLaptop.h \
 		LaptopModel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o DeleteLaptop.o DeleteLaptop.cpp
+
+EditLaptop.o: EditLaptop.cpp AddLaptop.h \
+		LaptopModel.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o EditLaptop.o EditLaptop.cpp
 
 moc_phantomstyle.o: moc_phantomstyle.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_phantomstyle.o moc_phantomstyle.cpp
@@ -703,6 +727,9 @@ moc_AddLaptop.o: moc_AddLaptop.cpp
 
 moc_DeleteLaptop.o: moc_DeleteLaptop.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_DeleteLaptop.o moc_DeleteLaptop.cpp
+
+moc_EditLaptop.o: moc_EditLaptop.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_EditLaptop.o moc_EditLaptop.cpp
 
 ####### Install
 

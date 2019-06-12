@@ -23,8 +23,8 @@ include (phantom/phantom.pri)
 # Input
 HEADERS += AddCart.h Application.h CartModel.h CartView.h EditCart.h MainWindow.h \
 DeleteCart.h DetailView.h Settings.h LaptopView.h LaptopModel.h Laptops.h AddLaptop.h\
-DeleteLaptop.h
+DeleteLaptop.h EditLaptop.h
 SOURCES += AddCart.cpp Application.cpp CartModel.cpp CartView.cpp EditCart.cpp MainWindow.cpp\
 DeleteCart.cpp DetailView.cpp Settings.cpp LaptopView.cpp LaptopModel.cpp Laptops.cpp\
-AddLaptop.cpp DeleteLaptop.cpp
+AddLaptop.cpp DeleteLaptop.cpp EditLaptop.cpp
 
