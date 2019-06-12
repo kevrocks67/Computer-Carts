@@ -34,6 +34,8 @@ Laptops::Laptops(LaptopModel &laptopModel, LaptopView &laptopView) :
         //Slots and signals
         connect(addTool, SIGNAL(clicked()),
                 this, SLOT(addActionCart()));
+        connect(removeTool, SIGNAL(clicked()),
+                this, SLOT(deleteAction()));
 }
 
 void Laptops::updateTable() {
@@ -70,6 +72,22 @@ void Laptops::addActionCart() {
     connect(addLaptop, SIGNAL(accepted()),
             this, SLOT(updateTableCart()));
     addLaptop->exec();
+}
+
+void Laptops::deleteAction() {
+    deleteLaptop = new DeleteLaptop(model);
+
+    int row = view.getRow();
+    if (row >= 0) {
+        QModelIndex assetModelIndex(model.index(row, 0));
+        QModelIndex gNameModelIndex(model.index(row, 2));
+        QString asset = model.data(assetModelIndex).toString();
+        QString gName = model.data(gNameModelIndex).toString();
+        deleteLaptop->setLapDetails(asset, gName);
+        deleteLaptop->exec();
+    }  else {
+        qDebug()<<"No cart selected";
+    }
 }
 
 Laptops::~Laptops(){

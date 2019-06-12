@@ -12,12 +12,16 @@ class LaptopView : public QTableView {
 
     public:
         LaptopView(QWidget * parent = nullptr);
+        void currentChanged(const QModelIndex &current, const QModelIndex &previous) override;
         void mouseDoubleClickEvent(QMouseEvent *event) override;
     signals:
     public slots:
+        int getRow();
         void clearUserSelections();
     private slots:
     private:
+        int currentRow;
+        int previousRow;
 };
 
 #endif //LAPTOPVIEW_H

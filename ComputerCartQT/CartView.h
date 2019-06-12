@@ -14,11 +14,11 @@ class CartView : public QTableView {
         CartView(QWidget * parent = nullptr);
         void currentChanged(const QModelIndex &current, const QModelIndex &previous) override;
         void mouseDoubleClickEvent(QMouseEvent* event) override;
-        int getRow();
         void clearUserSelections();
     signals:
         void showDetailsEvent(const QModelIndex &index);
     public slots:
+        int getRow();
     private slots:
     private:
         int currentRow;

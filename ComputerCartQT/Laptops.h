@@ -4,6 +4,7 @@
 #include "LaptopModel.h"
 #include "LaptopView.h"
 #include "AddLaptop.h"
+#include "DeleteLaptop.h"
 
 #include <QApplication>
 #include <QWidget>
@@ -27,12 +28,14 @@ class Laptops : public QWidget {
         void updateTableCart();
         void addAction();
         void addActionCart();
+        void deleteAction();
     private:
         LaptopModel& model;
         LaptopView& view;
         int cartNo;
 
         AddLaptop *addLaptop;
+        DeleteLaptop *deleteLaptop;
 
         QVBoxLayout *mainLayout;
         QLabel *cartNum;

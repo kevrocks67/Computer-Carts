@@ -80,6 +80,10 @@ void LaptopModel::addLaptop(Laptop laptop) {
     }
 }
 
+void LaptopModel::deleteLaptop(QString asset, QString gName) {
+
+}
+
 LaptopModel::~LaptopModel(){
 
 }

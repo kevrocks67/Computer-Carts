@@ -33,6 +33,7 @@ class LaptopModel : public QSqlQueryModel {
         void getLaptops();
         void getLaptops(int cartno);
         void addLaptop(Laptop laptop);
+        void deleteLaptop(QString asset, QString gName);
         QStringList getBrands();
         QStringList getGNames();
     private slots:

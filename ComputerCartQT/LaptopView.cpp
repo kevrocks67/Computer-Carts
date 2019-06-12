@@ -8,6 +8,11 @@ LaptopView::LaptopView(QWidget * parent):
         this->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
 
+void LaptopView::currentChanged(const QModelIndex &current, const QModelIndex &previous) {
+    currentRow = current.row();
+    previousRow = previous.row();
+}
+
 void LaptopView::mouseDoubleClickEvent(QMouseEvent* event) {
     //Checks if item is selected before performing action
     QModelIndex index = indexAt(event->pos());
@@ -21,4 +26,8 @@ void LaptopView::clearUserSelections() {
     this->clearSelection();
     QModelIndex nullpos = indexAt(QPoint(-1, -1));
     this->setCurrentIndex(nullpos);
+}
+
+int LaptopView::getRow() {
+    return currentRow;
 }
