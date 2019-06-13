@@ -62,7 +62,6 @@ void EditLaptop::createWidgets() {
         modelField = new QLineEdit();
         serialField = new QLineEdit();
         osSelect = new QComboBox();
-        //Only if all laptops view
         cartNumberSelect = new QComboBox();
 
         statusGroup = new QGroupBox(tr("Status"));
@@ -105,7 +104,7 @@ void EditLaptop::setWidgetProperties() {
 }
 
 void EditLaptop::editLaptopAction() {
-    qDebug()<<"EditLaptop::addLaptopAction";
+    qDebug()<<"EditLaptop::editLaptopAction";
     laptop.AssetID = assetField->text();
     laptop.Brand = brandField->currentText();
     laptop.GenericName = genericNField->currentText();
@@ -119,6 +118,7 @@ void EditLaptop::editLaptopAction() {
     else {
         laptop.Status = "Broken";
     }
+
     if (deployedButton->isChecked()) {
         laptop.IsDeployed = true;
     }
@@ -126,11 +126,35 @@ void EditLaptop::editLaptopAction() {
         laptop.IsDeployed = false;
     }
 
-    model->addLaptop(laptop);
+    model->editLaptop(laptop);
     QDialog::done(QDialog::Accepted);
 }
 
-EditLaptop::~EditLaptop() {
+void EditLaptop::setLapDetails(QString asset, QString gName) {
+    assetField->setText(asset);
+    //genericNField->setCurrentText(gName);
 
+    LaptopModel::Laptop laptopToEdit = model->getLaptop(asset, gName);
+
+    brandField->setCurrentText(laptopToEdit.Brand);
+    modelField->setText(laptopToEdit.Model);
+    //serialField->setText(laptopToEdit.Serial);
+    osSelect->setCurrentText(laptopToEdit.OS);
+    cartNumberSelect->setCurrentText(QString::number(laptopToEdit.CartNumber));
+
+    if (laptopToEdit.Status == "Working") {
+        workingStatusButton->setChecked(true);
+    } else {
+        brokenStatusButton->setChecked(true);
+    }
+
+    if (laptopToEdit.IsDeployed) {
+        deployedButton->setChecked(true);
+    } else {
+        notDeployedButton->setChecked(true);
+    }
+}
+
+EditLaptop::~EditLaptop() {
 }
 

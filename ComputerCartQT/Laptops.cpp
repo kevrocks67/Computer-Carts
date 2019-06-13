@@ -87,7 +87,18 @@ void Laptops::editActionCart() {
     editLaptop = new EditLaptop(model, cartNo);
     connect(editLaptop, SIGNAL(accepted()),
             this, SLOT(updateTableCart()));
-    editLaptop->exec();
+
+    int row = view.getRow();
+    if (row >= 0) {
+        QModelIndex assetModelIndex(model.index(row, 0));
+        QModelIndex gNameModelIndex(model.index(row, 2));
+        QString asset = model.data(assetModelIndex).toString();
+        QString gName = model.data(gNameModelIndex).toString();
+        editLaptop->setLapDetails(asset, gName);
+        editLaptop->exec();
+    }  else {
+        qDebug()<<"No cart selected";
+    }
 }
 
 void Laptops::deleteAction() {

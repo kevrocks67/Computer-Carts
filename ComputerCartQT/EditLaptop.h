@@ -24,6 +24,7 @@ class EditLaptop : public QDialog {
         explicit EditLaptop(LaptopModel &lapModel, int cartNo);
         virtual ~EditLaptop();
     public slots:
+        void setLapDetails(QString asset, QString gName);
     private slots:
         void setWidgetProperties();
         void createWidgets();

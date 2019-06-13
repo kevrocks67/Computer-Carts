@@ -30,9 +30,11 @@ class LaptopModel : public QSqlQueryModel {
             bool IsDeployed;
         };
     public slots:
+        LaptopModel::Laptop getLaptop(QString asset, QString gName);
         void getLaptops();
         void getLaptops(int cartno);
         void addLaptop(Laptop laptop);
+        void editLaptop(Laptop laptop);
         void deleteLaptop(QString asset, QString gName);
         QStringList getBrands();
         QStringList getGNames();

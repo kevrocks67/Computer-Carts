@@ -24,6 +24,33 @@ LaptopModel::LaptopModel(void){
      setHeaderData(7, Qt::Horizontal, tr("IsDeployed"));
 }
 
+LaptopModel::Laptop LaptopModel::getLaptop(QString asset, QString gName) {
+    QSqlQuery query;
+    Laptop laptop;
+    query.prepare("Select * from Laptops where AssetID=? AND GenericName=?");
+    query.bindValue(0, asset);
+    query.bindValue(1, gName);
+    if (query.exec()) {
+        laptop.AssetID = query.value(0).toString();
+        laptop.Brand = query.value(1).toString();
+        laptop.GenericName = query.value(2).toString();
+        laptop.Model = query.value(3).toString();
+        laptop.OS = query.value(4).toString();
+        laptop.CartNumber = query.value(5).toInt();
+        laptop.Status = query.value(6).toString();
+        laptop.IsDeployed = query.value(7).toBool();
+        /*laptop.Serial = query.value(4).toString();
+        laptop.OS = query.value(5).toString();
+        laptop.CartNumber = query.value(6).toInt();
+        laptop.Status = query.value(7).toString();
+        laptop.IsDeployed = query.value(8).toBool();
+        */
+    } else {
+        qDebug()<<query.lastError().text();
+    }
+    return laptop;
+}
+
 void LaptopModel::getLaptops() {
      setQuery("SELECT * from Laptops");
 }
@@ -75,6 +102,40 @@ void LaptopModel::addLaptop(Laptop laptop) {
     */
     if (query.exec()) {
         qDebug()<<"Add query success";
+    } else {
+        qDebug()<<query.lastError().text();
+    }
+}
+
+void LaptopModel::editLaptop(Laptop laptop) {
+    QSqlQuery query;
+    query.prepare("UPDATE Laptops set AssetID=?,\
+                                      Brand=?,\
+                                      GenericName=?,\
+                                      Model=?,\
+                                      Serial=?,\
+                                      OS=?,\
+                                      CartNumber=?,\
+                                      Status=?,\
+                                      IsDeployed=?\
+                   WHERE AssetID=? AND GenericName=?)");
+    query.bindValue(0, laptop.AssetID);
+    query.bindValue(1, laptop.Brand);
+    query.bindValue(2, laptop.GenericName);
+    query.bindValue(3, laptop.Model);
+    //query.bindValue(4, laptop.Serial);
+    query.bindValue(4, laptop.OS);
+    query.bindValue(5, laptop.CartNumber);
+    query.bindValue(6, laptop.Status);
+    query.bindValue(7, laptop.IsDeployed);
+    /*
+    query.bindValue(5, laptop.OS);
+    query.bindValue(6, laptop.CartNumber);
+    query.bindValue(7, laptop.Status);
+    query.bindValue(8, laptop.IsDeployed);
+    */
+    if (query.exec()) {
+        qDebug()<<"Edit query success";
     } else {
         qDebug()<<query.lastError().text();
     }
