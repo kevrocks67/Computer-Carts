@@ -28,6 +28,10 @@ class CartModel : public QSqlQueryModel {
             int cPeriod;
             int resId;
             bool status;
+            QString homeLoc;
+            QString lockType;
+            QString os;
+            QString comments;
         } cart;
 
     public slots:

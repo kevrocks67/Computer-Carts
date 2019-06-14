@@ -26,15 +26,20 @@ CartModel::CartModel(void) {
 
             qDebug()<<"Creating table 'ComputerCarts'";
             query.exec("CREATE TABLE ComputerCarts (\n "
-                           "\tCartNumber INTEGER PRIMARY KEY AUTOINCREMENT,\n"
+                           "\tCartNumber INTEGER PRIMARY KEY,\n"
                            "\tComputerType TEXT NOT NULL,\n"
                            "\tQuantity INTEGER DEFAULT NULL,\n"
                            "\tCurrentLocation TEXT DEFAULT NULL,\n"
                            "\tCurrentLocTime TEXT DEFAULT NULL,\n"
                            "\tFutureResId INTEGER DEFAULT NULL,\n"
                            "\tCartStatus BOOLEAN DEFAULT NULL,\n"
-                           "\tLastUpdate DATETIME\n);");
+                           "\tOS TEXT NOT NULL,\n"
+                           "\tLockType TEXT DEFAULT NULL,\n"
+                           "\tHomeLocation TEXT DEFAULT NULL,\n"
+                           "\tLastUpdate DATETIME,\n"
+                           "\tComments TEXT DEFAULT NULL\n);");
             qDebug()<<"Table 'ComputerCarts' has been created";
+            qDebug()<<query.lastError().text();
 
             qDebug()<<"Creating table 'Reservations'";
             query.exec("CREATE TABLE Reservations (\n"
@@ -52,6 +57,7 @@ CartModel::CartModel(void) {
                             "\tBrand TEXT NOT NULL,\n"
                             "\tGenericName TEXT NOT NULL,\n"
                             "\tModel TEXT DEFAULT NULL,\n"
+                            "\tSerial TEXT DEFAULT NULL,\n"
                             "\tOS TEXT NOT NULL,\n"
                             "\tCartNumber INTEGER DEFAULT NULL,\n"
                             "\tStatus TEXT,\n"
@@ -87,7 +93,7 @@ void CartModel::addCart(Cart &cart) {
     QSqlQuery query;
 
     query.prepare("INSERT INTO computercarts "
-                "VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)");
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     query.bindValue(0, QVariant(QVariant::Int));
     query.bindValue(1, cart.compType);
     query.bindValue(2, cart.quantity);
@@ -95,7 +101,11 @@ void CartModel::addCart(Cart &cart) {
     query.bindValue(4, cart.cPeriod);
     query.bindValue(5, QVariant(QVariant::Int));
     query.bindValue(6, QVariant(QVariant::Bool));
-    query.bindValue(7, QDateTime::currentDateTime());
+    query.bindValue(7, cart.os);
+    query.bindValue(8, cart.lockType);
+    query.bindValue(9, cart.homeLoc);
+    query.bindValue(10, QDateTime::currentDateTime());
+    query.bindValue(11, cart.comments);
 
     if (query.exec()) {
         qDebug()<<"Add query success";
@@ -106,7 +116,6 @@ void CartModel::addCart(Cart &cart) {
 
 }
 
-
 void CartModel::editCart(Cart &cart) {
     QSqlQuery query;
 
@@ -115,14 +124,22 @@ void CartModel::editCart(Cart &cart) {
                                                 Quantity=?,\
                                                 CurrentLocation=?,\
                                                 CurrentLocTime=?,\
-                                                LastUpdate=?\
+                                                OS=?,\
+                                                LockType=?,\
+                                                HomeLocation=?,\
+                                                LastUpdate=?,\
+                                                Comments=?\
                        where CartNumber=?");
 
         query.bindValue(0, cart.compType);
         query.bindValue(1, cart.quantity);
         query.bindValue(2, cart.cRoom);
         query.bindValue(3, cart.cPeriod);
-        query.bindValue(4, QDateTime::currentDateTime());
+        query.bindValue(4, cart.os);
+        query.bindValue(5, cart.lockType);
+        query.bindValue(6, cart.homeLoc);
+        query.bindValue(7, QDateTime::currentDateTime());
+        query.bindValue(8, cart.comments);
         query.bindValue(5, cart.cartNo);
     }
 
@@ -149,6 +166,10 @@ CartModel::Cart CartModel::getCart(int cartNo) {
         cartDetails.quantity = query.value(2).toInt();
         cartDetails.cRoom = query.value(3).toString();
         cartDetails.cPeriod = query.value(4).toInt();
+        cartDetails.os = query.value(7).toString();
+        cartDetails.lockType = query.value(8).toString();
+        cartDetails.homeLoc = query.value(9).toString();
+        cartDetails.comments = query.value(11).toString();
     }
     else {
         qDebug()<<query.lastError().text();

@@ -13,6 +13,10 @@ EditCart::EditCart(QWidget * parent) :
     quantField = new QLineEdit();
     cRoomField = new QLineEdit();
     cPeriodField = new QLineEdit();
+    homeLocationField = new QLineEdit();
+    lockTypeSelect = new QComboBox();
+    osSelect = new QComboBox();
+    commentsField = new QLineEdit();
 
     cancelButton = new QPushButton("Cancel");
     editButton = new QPushButton("Edit Cart");
@@ -23,6 +27,17 @@ EditCart::EditCart(QWidget * parent) :
     quantField->setPlaceholderText("Quantity");
     cRoomField->setPlaceholderText("Current Room");
     cPeriodField->setPlaceholderText("Current Period(s)");
+    homeLocationField->setPlaceholderText("Home Location");
+    commentsField->setPlaceholderText("Comments");
+
+    lockTypeSelect->addItem("Key");
+    lockTypeSelect->addItem("Circular Key");
+    lockTypeSelect->addItem("Combination");
+    osSelect->addItem("Windows");
+    osSelect->addItem("Chrome OS");
+    osSelect->addItem("Linux");
+    osSelect->addItem("Mac OSX");
+
 
     //Add widget to layouts
     fieldLayout->addWidget(cNumLabel);
@@ -30,6 +45,10 @@ EditCart::EditCart(QWidget * parent) :
     fieldLayout->addWidget(quantField);
     fieldLayout->addWidget(cRoomField);
     fieldLayout->addWidget(cPeriodField);
+    fieldLayout->addWidget(homeLocationField);
+    fieldLayout->addWidget(lockTypeSelect);
+    fieldLayout->addWidget(osSelect);
+    fieldLayout->addWidget(commentsField);
 
     buttonLayout->addWidget(cancelButton);
     buttonLayout->addWidget(editButton);
@@ -56,6 +75,11 @@ void EditCart::editCartAction() {
     cartDetails.quantity = quantField->text().toInt();
     cartDetails.cRoom = cRoomField->text();
     cartDetails.cPeriod = cPeriodField->text().toInt();
+    cartDetails.homeLoc = homeLocationField->text();
+    cartDetails.lockType = lockTypeSelect->currentText();
+    cartDetails.os = osSelect->currentText();
+    cartDetails.comments = commentsField->text();
+
 
     cartModel->editCart(cartDetails);
     QDialog::done(QDialog::Accepted);

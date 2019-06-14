@@ -35,16 +35,11 @@ LaptopModel::Laptop LaptopModel::getLaptop(QString asset, QString gName) {
         laptop.Brand = query.value(1).toString();
         laptop.GenericName = query.value(2).toString();
         laptop.Model = query.value(3).toString();
-        laptop.OS = query.value(4).toString();
-        laptop.CartNumber = query.value(5).toInt();
-        laptop.Status = query.value(6).toString();
-        laptop.IsDeployed = query.value(7).toBool();
-        /*laptop.Serial = query.value(4).toString();
+        laptop.Serial = query.value(4).toString();
         laptop.OS = query.value(5).toString();
         laptop.CartNumber = query.value(6).toInt();
         laptop.Status = query.value(7).toString();
         laptop.IsDeployed = query.value(8).toBool();
-        */
     } else {
         qDebug()<<query.lastError().text();
     }
@@ -89,17 +84,12 @@ void LaptopModel::addLaptop(Laptop laptop) {
     query.bindValue(1, laptop.Brand);
     query.bindValue(2, laptop.GenericName);
     query.bindValue(3, laptop.Model);
-    //query.bindValue(4, laptop.Serial);
-    query.bindValue(4, laptop.OS);
-    query.bindValue(5, laptop.CartNumber);
-    query.bindValue(6, laptop.Status);
-    query.bindValue(7, laptop.IsDeployed);
-    /*
+    query.bindValue(4, laptop.Serial);
     query.bindValue(5, laptop.OS);
     query.bindValue(6, laptop.CartNumber);
     query.bindValue(7, laptop.Status);
     query.bindValue(8, laptop.IsDeployed);
-    */
+
     if (query.exec()) {
         qDebug()<<"Add query success";
     } else {
@@ -123,17 +113,12 @@ void LaptopModel::editLaptop(Laptop laptop) {
     query.bindValue(1, laptop.Brand);
     query.bindValue(2, laptop.GenericName);
     query.bindValue(3, laptop.Model);
-    //query.bindValue(4, laptop.Serial);
-    query.bindValue(4, laptop.OS);
-    query.bindValue(5, laptop.CartNumber);
-    query.bindValue(6, laptop.Status);
-    query.bindValue(7, laptop.IsDeployed);
-    /*
+    query.bindValue(4, laptop.Serial);
     query.bindValue(5, laptop.OS);
     query.bindValue(6, laptop.CartNumber);
     query.bindValue(7, laptop.Status);
     query.bindValue(8, laptop.IsDeployed);
-    */
+
     if (query.exec()) {
         qDebug()<<"Edit query success";
     } else {

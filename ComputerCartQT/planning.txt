@@ -11,13 +11,13 @@ CREATE TABLE ComputerCarts (
     LastUpdate DATETIME,
     FOREIGN KEY(FutureResId) REFERENCES reservations(ResId)
 
-    ADD THIS COLUMN ->Comments TEXT DEFAULT NULL
-    ADD THIS COLUMN ->HomeLocation TEXT DEFAULT NULL
-    ADD THIS COLUMN ->LockType TEXT DEFAULT NULL
+    Comments TEXT DEFAULT NULL
+    HomeLocation TEXT DEFAULT NULL
+    LockType TEXT DEFAULT NULL
         Key
         Circular Key
         Combination
-    ADD THIS COLUMN -> OS TEXT DEFAULT NOT NULL
+    OS TEXT DEFAULT NOT NULL
         Windows
         ChromeOS
         Linux
