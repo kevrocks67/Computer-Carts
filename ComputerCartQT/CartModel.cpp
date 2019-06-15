@@ -120,7 +120,7 @@ void CartModel::editCart(Cart &cart) {
     QSqlQuery query;
 
     if(cart.cartNo) {
-        query.prepare("UPDATE computercarts set ComputerType=?,\
+        query.prepare("UPDATE ComputerCarts SET ComputerType=?,\
                                                 Quantity=?,\
                                                 CurrentLocation=?,\
                                                 CurrentLocTime=?,\
@@ -140,7 +140,7 @@ void CartModel::editCart(Cart &cart) {
         query.bindValue(6, cart.homeLoc);
         query.bindValue(7, QDateTime::currentDateTime());
         query.bindValue(8, cart.comments);
-        query.bindValue(5, cart.cartNo);
+        query.bindValue(9, cart.cartNo);
     }
 
     if (query.exec()) {
@@ -165,7 +165,7 @@ CartModel::Cart CartModel::getCart(int cartNo) {
         cartDetails.compType  = query.value(1).toString();
         cartDetails.quantity = query.value(2).toInt();
         cartDetails.cRoom = query.value(3).toString();
-        cartDetails.cPeriod = query.value(4).toInt();
+        cartDetails.cPeriod = query.value(4).toString();
         cartDetails.os = query.value(7).toString();
         cartDetails.lockType = query.value(8).toString();
         cartDetails.homeLoc = query.value(9).toString();

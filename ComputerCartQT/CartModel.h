@@ -25,9 +25,9 @@ class CartModel : public QSqlQueryModel {
             QString compType;
             int quantity;
             QString cRoom;
-            int cPeriod;
+            QString cPeriod;
             int resId;
-            bool status;
+            bool cartStatus;
             QString homeLoc;
             QString lockType;
             QString os;

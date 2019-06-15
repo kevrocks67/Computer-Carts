@@ -69,7 +69,7 @@ void AddCart::addCartAction() {
     cartDetails.compType = typeField->text();
     cartDetails.quantity = quantField->text().toInt();
     cartDetails.cRoom = cRoomField->text();
-    cartDetails.cPeriod = cPeriodField->text().toInt();
+    cartDetails.cPeriod = cPeriodField->text();
     cartDetails.homeLoc = homeLocationField->text();
     cartDetails.lockType = lockTypeSelect->currentText();
     cartDetails.os = osSelect->currentText();

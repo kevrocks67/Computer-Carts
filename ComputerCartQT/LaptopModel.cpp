@@ -31,6 +31,7 @@ LaptopModel::Laptop LaptopModel::getLaptop(QString asset, QString gName) {
     query.bindValue(0, asset);
     query.bindValue(1, gName);
     if (query.exec()) {
+        query.first();
         laptop.AssetID = query.value(0).toString();
         laptop.Brand = query.value(1).toString();
         laptop.GenericName = query.value(2).toString();
@@ -79,7 +80,7 @@ QStringList LaptopModel::getGNames() {
 void LaptopModel::addLaptop(Laptop laptop) {
     QSqlQuery query;
     query.prepare("INSERT INTO Laptops "
-                  "VALUES(?, ?, ?, ?, ?, ?, ?, ?)");
+                  "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
     query.bindValue(0, laptop.AssetID);
     query.bindValue(1, laptop.Brand);
     query.bindValue(2, laptop.GenericName);
@@ -99,7 +100,7 @@ void LaptopModel::addLaptop(Laptop laptop) {
 
 void LaptopModel::editLaptop(Laptop laptop) {
     QSqlQuery query;
-    query.prepare("UPDATE Laptops set AssetID=?,\
+    query.prepare("UPDATE Laptops SET AssetID=?,\
                                       Brand=?,\
                                       GenericName=?,\
                                       Model=?,\
@@ -108,7 +109,7 @@ void LaptopModel::editLaptop(Laptop laptop) {
                                       CartNumber=?,\
                                       Status=?,\
                                       IsDeployed=?\
-                   WHERE AssetID=? AND GenericName=?)");
+                   WHERE AssetID=? AND GenericName=?");
     query.bindValue(0, laptop.AssetID);
     query.bindValue(1, laptop.Brand);
     query.bindValue(2, laptop.GenericName);
@@ -118,6 +119,8 @@ void LaptopModel::editLaptop(Laptop laptop) {
     query.bindValue(6, laptop.CartNumber);
     query.bindValue(7, laptop.Status);
     query.bindValue(8, laptop.IsDeployed);
+    query.bindValue(9, laptop.AssetID);
+    query.bindValue(10, laptop.GenericName);
 
     if (query.exec()) {
         qDebug()<<"Edit query success";

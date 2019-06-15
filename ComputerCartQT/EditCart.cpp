@@ -74,12 +74,11 @@ void EditCart::editCartAction() {
     cartDetails.compType = typeField->text();
     cartDetails.quantity = quantField->text().toInt();
     cartDetails.cRoom = cRoomField->text();
-    cartDetails.cPeriod = cPeriodField->text().toInt();
+    cartDetails.cPeriod = cPeriodField->text();
     cartDetails.homeLoc = homeLocationField->text();
     cartDetails.lockType = lockTypeSelect->currentText();
     cartDetails.os = osSelect->currentText();
     cartDetails.comments = commentsField->text();
-
 
     cartModel->editCart(cartDetails);
     QDialog::done(QDialog::Accepted);
@@ -100,7 +99,7 @@ void EditCart::setCartNum(int c) {
      typeField->setText(cartToEdit.compType);
      quantField->setText(QString::number(cartToEdit.quantity));
      cRoomField->setText(cartToEdit.cRoom);
-     cPeriodField->setText(QString::number(cartToEdit.cPeriod));
+     cPeriodField->setText(cartToEdit.cPeriod);
 }
 
 EditCart::~EditCart(){

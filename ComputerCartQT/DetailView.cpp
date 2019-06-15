@@ -97,7 +97,7 @@ void DetailView::getDetails(int cartNo) {
     compTypeLabel->setText("Cart Type: "+cart.compType);
     quantLabel->setText("Quantity: "+QString::number(cart.quantity));
     cRoomLabel->setText("Current Location: "+cart.cRoom);
-    cPeriodLabel->setText("Needed For Period: "+QString::number(cart.cPeriod));
+    cPeriodLabel->setText("Needed For Period: "+cart.cPeriod);
     laptopModel->getLaptops(cartNo);
     laptops->setCartNum(cartNo);
     laptops->setCartNum("Cart Number: "+QString::number(cartNo));
