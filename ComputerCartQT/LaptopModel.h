@@ -38,6 +38,7 @@ class LaptopModel : public QSqlQueryModel {
         void deleteLaptop(QString asset, QString gName);
         QStringList getBrands();
         QStringList getGNames();
+        QStringList getCarts();
     private slots:
     signals:
     private:

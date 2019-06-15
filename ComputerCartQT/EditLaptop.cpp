@@ -90,12 +90,18 @@ void EditLaptop::setWidgetProperties() {
 
     QStringList brands = model->getBrands();
     QStringList gNames = model->getGNames();
+    QStringList carts = model->getCarts();
+
     for(QString brand: brands) {
         brandField->addItem(brand);
     }
     for(QString gName: gNames) {
         genericNField->addItem(gName);
     }
+    for(QString cart: carts) {
+        cartNumberSelect->addItem(cart);
+    }
+
     osSelect->addItem("Win7");
     osSelect->addItem("Win10");
     osSelect->addItem("Chrome OS");
@@ -111,7 +117,7 @@ void EditLaptop::editLaptopAction() {
     laptop.Model = modelField->text();
     laptop.Serial = serialField->text();
     laptop.OS = osSelect->currentText();
-    laptop.CartNumber = cartNum;
+    laptop.CartNumber = cartNumberSelect->currentText().toInt();
     if (workingStatusButton->isChecked()) {
         laptop.Status = "Working";
     }
@@ -132,13 +138,13 @@ void EditLaptop::editLaptopAction() {
 
 void EditLaptop::setLapDetails(QString asset, QString gName) {
     assetField->setText(asset);
-    //genericNField->setCurrentText(gName);
+    genericNField->setCurrentText(gName);
 
     LaptopModel::Laptop laptopToEdit = model->getLaptop(asset, gName);
 
     brandField->setCurrentText(laptopToEdit.Brand);
     modelField->setText(laptopToEdit.Model);
-    //serialField->setText(laptopToEdit.Serial);
+    serialField->setText(laptopToEdit.Serial);
     osSelect->setCurrentText(laptopToEdit.OS);
     cartNumberSelect->setCurrentText(QString::number(laptopToEdit.CartNumber));
 

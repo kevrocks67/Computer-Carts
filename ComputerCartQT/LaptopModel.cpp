@@ -77,6 +77,15 @@ QStringList LaptopModel::getGNames() {
     return names;
 }
 
+QStringList LaptopModel::getCarts() {
+    QStringList carts;
+    QSqlQuery query("SELECT Distinct CartNumber from ComputerCarts");
+    while(query.next()) {
+        carts << query.value(0).toString();
+    }
+    return carts;
+}
+
 void LaptopModel::addLaptop(Laptop laptop) {
     QSqlQuery query;
     query.prepare("INSERT INTO Laptops "
