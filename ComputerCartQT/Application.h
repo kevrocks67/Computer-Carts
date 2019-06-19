@@ -3,6 +3,7 @@
 #include <QApplication>
 #include "MainWindow.h"
 #include "CartModel.h"
+#include "LaptopModel.h"
 
 class MainWindow;
 class CartModel;
@@ -19,4 +20,5 @@ class Application : public QApplication {
     private:
         MainWindow *mainWindow;
         CartModel *cModel;
+        LaptopModel *lModel;
 };

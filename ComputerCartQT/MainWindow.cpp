@@ -1,7 +1,7 @@
 #include "MainWindow.h"
 #include "Palette.h"
 
-MainWindow::MainWindow(CartModel& cModel) :
+MainWindow::MainWindow(CartModel& cModel, LaptopModel& lModel) :
     cartModel(cModel) {
         //Initialize classes for signal/slot usage
         newCart = new AddCart();
@@ -14,11 +14,15 @@ MainWindow::MainWindow(CartModel& cModel) :
         centralWidget = new QWidget(this);
         mainLayout = new QVBoxLayout(centralWidget);
 
+
         //Initialize and create widgets
         createToolbar();
 
         cView = new CartView();
         cView->setModel(&cModel);
+
+        lView = new LaptopView();
+        lView->setModel(&lModel);
 
         //Add widgets to layouts
         mainLayout->addWidget(toolbar);
@@ -27,8 +31,14 @@ MainWindow::MainWindow(CartModel& cModel) :
         //Load user preferences
         loadSettings();
 
+        //Tabbed view setup
+        tabs = new QTabWidget();
+        laptopWidget = new Laptops(lModel, *lView);
+        tabs->addTab(centralWidget,tr("Carts"));
+        tabs->addTab(laptopWidget, tr("Laptops"));
+
         //Set MainWindow properties
-        setCentralWidget(centralWidget);
+        setCentralWidget(tabs);
         show();
         raise();
 

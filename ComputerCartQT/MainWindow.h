@@ -6,12 +6,16 @@
 #include "EditCart.h"
 #include "DeleteCart.h"
 #include "DetailView.h"
+#include "Laptops.h"
+#include "LaptopModel.h"
+#include "LaptopView.h"
 #include "Settings.h"
 
 #include <QDebug>
 #include <QMainWindow>
 #include <QPushButton>
 #include <QSettings>
+#include <QTabWidget>
 #include <QToolBar>
 #include <QToolButton>
 #include <QVBoxLayout>
@@ -19,12 +23,14 @@
 
 class CartModel;
 class CartView;
+class LaptopModel;
+class LaptopView;
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
 
     public:
-        MainWindow(CartModel&);
+        MainWindow(CartModel&, LaptopModel&);
         virtual ~MainWindow();
     signals:
     public slots:
@@ -43,6 +49,7 @@ class MainWindow : public QMainWindow {
         //Class declarations
         CartModel& cartModel;
         CartView *cView;
+        LaptopView *lView;
         AddCart *newCart;
         EditCart *editCart;
         DeleteCart *deleteCart;
@@ -51,7 +58,9 @@ class MainWindow : public QMainWindow {
 
         //Widget declarations
         QWidget *centralWidget;
+        Laptops *laptopWidget;
         QVBoxLayout *mainLayout;
+        QTabWidget *tabs;
         QToolBar *toolbar;
         QToolButton *addTool;
         QToolButton *editTool;

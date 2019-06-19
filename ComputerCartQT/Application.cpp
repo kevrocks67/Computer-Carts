@@ -3,9 +3,11 @@
 Application::Application(int& argc, char** argv) :
     QApplication(argc, argv),
     mainWindow(nullptr),
-    cModel(nullptr) {
+    cModel(nullptr),
+    lModel(nullptr) {
         cModel = new CartModel();
-        mainWindow = new MainWindow(*cModel);
+        lModel = new LaptopModel();
+        mainWindow = new MainWindow(*cModel, *lModel);
     }
 
 int main(int argc, char* argv[]) {
@@ -29,5 +31,6 @@ int main(int argc, char* argv[]) {
 Application::~Application() {
     delete mainWindow;
     delete cModel;
+    delete lModel;
 }
 
