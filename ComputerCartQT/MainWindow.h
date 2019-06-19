@@ -13,6 +13,7 @@
 
 #include <QDebug>
 #include <QMainWindow>
+#include <QMessageBox>
 #include <QPushButton>
 #include <QSettings>
 #include <QTabWidget>

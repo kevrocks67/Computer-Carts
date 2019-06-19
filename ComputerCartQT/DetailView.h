@@ -50,17 +50,11 @@ class DetailView : public QDialog {
         QLabel *quantLabel;
         QLabel *cRoomLabel;
         QLabel *cPeriodLabel;
+        QLabel *osLabel;
         QLabel *homeLabel;
         QLabel *lockTypeLabel;
+        QLabel *commentLabel;
         QTextEdit *commentBox;
         QPushButton *laptopsButton;
-
-        //Laptop Widget widgets
-        /*QVBoxLayout *lapMainLayout;
-        QLabel *cartNum;
-        QToolBar *laptopToolbar;
-        QToolButton *addLapTool;
-        QToolButton *editLapTool;
-        QToolButton *removeLapTool;*/
 };
 #endif //DETAILVIEW_H

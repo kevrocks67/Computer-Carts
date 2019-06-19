@@ -14,7 +14,6 @@ MainWindow::MainWindow(CartModel& cModel, LaptopModel& lModel) :
         centralWidget = new QWidget(this);
         mainLayout = new QVBoxLayout(centralWidget);
 
-
         //Initialize and create widgets
         createToolbar();
 
@@ -192,10 +191,17 @@ void MainWindow::showDetails(const QModelIndex &index) {
     int row = index.row();
     QModelIndex cartIndex (cartModel.index(row, 0));
     int cart = cartModel.data(cartIndex).toInt();
-    //Pass cart number to data fill function
-    detailView->getDetails(cart);
-    //Execute detailView
-    detailView->exec();
+    if (cart > 0) {
+        //Pass cart number to data fill function
+        detailView->getDetails(cart);
+        //Execute detailView
+        detailView->exec();
+    } else {
+        QMessageBox::information(
+            this,
+            tr("Cart 0"),
+            tr("This cart is reserved for laptops with no assigned cart") );
+    }
 }
 
 void MainWindow::loadSettings() {

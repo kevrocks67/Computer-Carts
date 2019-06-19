@@ -21,8 +21,10 @@ DetailView::DetailView(QWidget * parent) :
     quantLabel = new QLabel();
     cRoomLabel = new QLabel();
     cPeriodLabel = new QLabel();
+    osLabel = new QLabel();
     homeLabel = new QLabel();
     lockTypeLabel = new QLabel();
+    commentLabel = new QLabel("Comments");
     commentBox = new QTextEdit();
     laptopsButton = new QPushButton("View Laptops In This Cart");
 
@@ -40,7 +42,10 @@ DetailView::DetailView(QWidget * parent) :
     cartLayout->addWidget(quantLabel);
     cartLayout->addWidget(cRoomLabel);
     cartLayout->addWidget(cPeriodLabel);
+    cartLayout->addWidget(osLabel);
     cartLayout->addWidget(homeLabel);
+    cartLayout->addWidget(lockTypeLabel);
+    cartLayout->addWidget(commentLabel);
     cartLayout->addWidget(commentBox);
     cartLayout->addWidget(laptopsButton);
 
@@ -72,7 +77,13 @@ void DetailView::getDetails(int cartNo) {
     compTypeLabel->setText("Cart Type: "+cart.compType);
     quantLabel->setText("Quantity: "+QString::number(cart.quantity));
     cRoomLabel->setText("Current Location: "+cart.cRoom);
-    cPeriodLabel->setText("Needed For Period: "+cart.cPeriod);
+    cPeriodLabel->setText("Needed For Periods: "+cart.cPeriod);
+    osLabel->setText("OS: "+cart.os);
+    homeLabel->setText("Home Location: "+cart.homeLoc);
+    lockTypeLabel->setText("Lock Type: "+cart.lockType);
+    commentBox->setText(cart.comments);
+
+
     laptopModel->getLaptops(cartNo);
     laptops->setCartNum(cartNo);
     laptops->setCartNum("Cart Number: "+QString::number(cartNo));
