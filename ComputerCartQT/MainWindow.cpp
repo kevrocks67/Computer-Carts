@@ -132,8 +132,10 @@ void MainWindow::removeAction() {
         QModelIndex modelIndex (cartModel.index(row, 0));
         int cart = cartModel.data(modelIndex).toInt();
         //Send cart number to modal for display and action
-        deleteCart->setCartNum(cart);
-        deleteCart->exec();
+        if(cart > 0) {
+            deleteCart->setCartNum(cart);
+            deleteCart->exec();
+        }
     } else {
         qDebug()<<"No cart selected";
     }
@@ -147,8 +149,10 @@ void MainWindow::editAction() {
         QModelIndex modelIndex (cartModel.index(row, 0));
         int cart = cartModel.data(modelIndex).toInt();
         //Send cart number to modal for display and action
-        editCart->setCartNum(cart);
-        editCart->exec();
+        if(cart > 0) {
+            editCart->setCartNum(cart);
+            editCart->exec();
+        }
     } else {
         qDebug()<<"No cart selected";
     }

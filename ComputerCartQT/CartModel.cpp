@@ -39,7 +39,6 @@ CartModel::CartModel(void) {
                            "\tLastUpdate DATETIME,\n"
                            "\tComments TEXT DEFAULT NULL\n);");
             qDebug()<<"Table 'ComputerCarts' has been created";
-            qDebug()<<query.lastError().text();
 
             qDebug()<<"Creating table 'Reservations'";
             query.exec("CREATE TABLE Reservations (\n"
@@ -67,6 +66,9 @@ CartModel::CartModel(void) {
 
             qDebug()<<"Enabling properties";
             query.exec("PRAGMA foreign_keys = ON;");
+
+            qDebug()<<"Adding Cart Number 0";
+            query.exec("INSERT INTO ComputerCarts (CartNumber, ComputerType, OS) VALUES (0, \"Several\", \"Several\")");
 
             qDebug()<<"carts.db is ready for use";
         }
