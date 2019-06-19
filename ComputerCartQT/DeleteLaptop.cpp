@@ -14,17 +14,22 @@ DeleteLaptop::DeleteLaptop(LaptopModel &lapModel) :
     deleteMessage = new QLabel("Are you sure you want to delete this laptop?");
     detailsLabel = new QLabel();
 
-    //Add widget to layouts
+    //ButtonLayout Widgets
     buttonLayout->addWidget(cancelButton);
     buttonLayout->addWidget(delButton);
 
+    //TextLayout Widgets
     textLayout->addWidget(deleteMessage);
     textLayout->addWidget(detailsLabel);
 
+    //MainLayout setup
     mainLayout->addLayout(textLayout);
     mainLayout->addLayout(buttonLayout);
+
+    //Parent properties
     setLayout(mainLayout);
     setModal(true);
+    setAttribute(Qt::WA_DeleteOnClose, true);
 
     //Signals and slots
     connect(cancelButton, SIGNAL(clicked()),

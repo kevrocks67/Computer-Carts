@@ -16,7 +16,7 @@ class LaptopModel : public QSqlQueryModel {
     Q_OBJECT
 
     public:
-        explicit LaptopModel(void);
+        explicit LaptopModel(QString connString);
         virtual ~LaptopModel();
         struct Laptop {
             QString AssetID;

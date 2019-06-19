@@ -50,7 +50,9 @@ class EditLaptop : public QDialog {
         QComboBox *genericNField;
         QLineEdit *modelField;
         QLineEdit *serialField;
+        QLabel *osLabel;
         QComboBox *osSelect;
+        QLabel *cartNumSelectLabel;
         QComboBox *cartNumberSelect;
 
         QGroupBox *statusGroup;

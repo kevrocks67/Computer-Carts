@@ -1,8 +1,8 @@
 #include "LaptopModel.h"
 #include <QModelIndex>
 #include <QSqlRecord>
-LaptopModel::LaptopModel(void){
-     QSqlDatabase cartdb = QSqlDatabase::addDatabase("QSQLITE", "LaptopModelConnection");
+LaptopModel::LaptopModel(QString connString){
+     QSqlDatabase cartdb = QSqlDatabase::addDatabase("QSQLITE", connString);
 
      //PLACEHOLDER DB AND TABLE
      cartdb.setDatabaseName("carts.db");

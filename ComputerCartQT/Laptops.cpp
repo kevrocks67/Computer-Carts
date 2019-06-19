@@ -1,7 +1,7 @@
 #include "Laptops.h"
 #include <QDebug>
 
-Laptops::Laptops(LaptopModel &laptopModel, LaptopView &laptopView) :
+Laptops::Laptops(LaptopModel &laptopModel, LaptopView &laptopView, bool IsCart) :
     model(laptopModel), view(laptopView) {
 
         mainLayout = new QVBoxLayout;
@@ -10,6 +10,7 @@ Laptops::Laptops(LaptopModel &laptopModel, LaptopView &laptopView) :
         addTool = new QToolButton();
         editTool = new QToolButton();
         removeTool = new QToolButton();
+        cartNum = new QLabel();
 
         addTool->setText("Add");
         editTool->setText("Edit");
@@ -21,23 +22,32 @@ Laptops::Laptops(LaptopModel &laptopModel, LaptopView &laptopView) :
         toolbar->addWidget(editTool);
         toolbar->addWidget(removeTool);
 
-        cartNum = new QLabel();
 
         mainLayout = new QVBoxLayout();
-        mainLayout->addWidget(toolbar);
-        mainLayout->addWidget(cartNum);
-        mainLayout->addWidget(&laptopView);
+        if(IsCart) {
+            mainLayout->addWidget(toolbar);
+            mainLayout->addWidget(cartNum);
+            mainLayout->addWidget(&laptopView);
+
+            connect(addTool, SIGNAL(clicked()),
+                    this, SLOT(addActionCart()));
+            connect(editTool, SIGNAL(clicked()),
+                    this, SLOT(editActionCart()));
+            connect(removeTool, SIGNAL(clicked()),
+                    this, SLOT(deleteActionCart()));
+        } else {
+            mainLayout->addWidget(toolbar);
+            mainLayout->addWidget(&laptopView);
+
+            connect(addTool, SIGNAL(clicked()),
+                    this, SLOT(addAction()));
+            connect(editTool, SIGNAL(clicked()),
+                    this, SLOT(editAction()));
+            connect(removeTool, SIGNAL(clicked()),
+                    this, SLOT(deleteAction()));
+        }
 
         setLayout(mainLayout);
-
-
-        //Slots and signals
-        connect(addTool, SIGNAL(clicked()),
-                this, SLOT(addActionCart()));
-        connect(editTool, SIGNAL(clicked()),
-                this, SLOT(editActionCart()));
-        connect(removeTool, SIGNAL(clicked()),
-                this, SLOT(deleteActionCart()));
 }
 
 void Laptops::updateTable() {

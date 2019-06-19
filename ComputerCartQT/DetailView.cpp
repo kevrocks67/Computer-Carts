@@ -28,36 +28,11 @@ DetailView::DetailView(QWidget * parent) :
 
     //Cart Tab Widget Properties
     commentBox->setReadOnly(true);
-/*
-    //Laptop Widget
-    addLapTool = new QToolButton();
-    editLapTool = new QToolButton();
-    removeLapTool = new QToolButton();
 
-    addLapTool->setText("Add");
-    editLapTool->setText("Edit");
-    removeLapTool->setText("Remove");
-
-    laptopToolbar = new QToolBar();
-    laptopToolbar->setAllowedAreas(Qt::TopToolBarArea);
-    laptopToolbar->addWidget(addLapTool);
-    laptopToolbar->addWidget(editLapTool);
-    laptopToolbar->addWidget(removeLapTool);
-
-    cartNum = new QLabel();
-
-    */
-    //lapMainLayout = new QVBoxLayout();
     laptopView = new LaptopView();
-    laptopModel = new LaptopModel();
+    laptopModel = new LaptopModel("DetailViewLaptops");
     laptopView->setModel(laptopModel);
-    laptops = new Laptops(*laptopModel, *laptopView);
-    /*
-    lapMainLayout->addWidget(laptopToolbar);
-    lapMainLayout->addWidget(cartNum);
-    lapMainLayout->addWidget(laptopView);
-    laptopWidget->setLayout(lapMainLayout);
-    */
+    laptops = new Laptops(*laptopModel, *laptopView, true);
 
     //Add widgets to Cart Widget
     cartLayout->addWidget(cartNumLabel);

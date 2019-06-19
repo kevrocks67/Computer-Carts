@@ -19,7 +19,7 @@ class Laptops : public QWidget {
     Q_OBJECT
 
     public:
-        explicit Laptops(LaptopModel &laptopModel, LaptopView &laptopView);
+        explicit Laptops(LaptopModel &laptopModel, LaptopView &laptopView, bool IsCart);
         virtual ~Laptops();
     public slots:
         void setCartNum(int cartno);

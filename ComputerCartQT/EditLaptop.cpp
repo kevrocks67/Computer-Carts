@@ -2,6 +2,41 @@
 
 EditLaptop::EditLaptop(LaptopModel &lapModel):
     model(&lapModel) {
+        createWidgets();
+        setWidgetProperties();
+
+        fieldLayout->addWidget(assetField);
+        fieldLayout->addWidget(brandLabel);
+        fieldLayout->addWidget(brandField);
+        fieldLayout->addWidget(genericNLabel);
+        fieldLayout->addWidget(genericNField);
+        fieldLayout->addWidget(modelField);
+        fieldLayout->addWidget(serialField);
+        fieldLayout->addWidget(osLabel);
+        fieldLayout->addWidget(osSelect);
+        fieldLayout->addWidget(cartNumSelectLabel);
+        fieldLayout->addWidget(cartNumberSelect);
+        fieldLayout->addWidget(statusGroup);
+        fieldLayout->addWidget(isDeployedGroup);
+
+        //ButtonLayout Widgets
+        buttonLayout->addWidget(editButton);
+        buttonLayout->addWidget(cancelButton);
+
+        //MainLayout setup
+        mainLayout->addLayout(fieldLayout);
+        mainLayout->addLayout(buttonLayout);
+
+        //Parent properties
+        setLayout(mainLayout);
+        setModal(true);
+        setAttribute(Qt::WA_DeleteOnClose, true);
+
+        //Signals and Slots
+        connect(cancelButton, SIGNAL(clicked()),
+                SLOT(close()));
+        connect(editButton, SIGNAL(clicked()),
+                SLOT(editLaptopAction()));
 }
 
 
@@ -10,13 +45,7 @@ EditLaptop::EditLaptop(LaptopModel &lapModel, int cartNo):
         createWidgets();
         setWidgetProperties();
 
-        statusLayout->addWidget(workingStatusButton);
-        statusLayout->addWidget(brokenStatusButton);
-        statusGroup->setLayout(statusLayout);
-
-        deployedLayout->addWidget(deployedButton);
-        deployedLayout->addWidget(notDeployedButton);
-        isDeployedGroup->setLayout(deployedLayout);
+        cartNumLabel->setText("Cart No: "+QString::number(cartNum));
 
         fieldLayout->addWidget(cartNumLabel);
         fieldLayout->addWidget(assetField);
@@ -26,24 +55,31 @@ EditLaptop::EditLaptop(LaptopModel &lapModel, int cartNo):
         fieldLayout->addWidget(genericNField);
         fieldLayout->addWidget(modelField);
         fieldLayout->addWidget(serialField);
+        fieldLayout->addWidget(osLabel);
         fieldLayout->addWidget(osSelect);
+        fieldLayout->addWidget(cartNumSelectLabel);
         fieldLayout->addWidget(cartNumberSelect);
         fieldLayout->addWidget(statusGroup);
         fieldLayout->addWidget(isDeployedGroup);
+
+        //ButtonLayout Widgets
         buttonLayout->addWidget(editButton);
         buttonLayout->addWidget(cancelButton);
 
+        //MainLayout setup
         mainLayout->addLayout(fieldLayout);
         mainLayout->addLayout(buttonLayout);
+
+        //Parent properties
         setLayout(mainLayout);
         setModal(true);
         setAttribute(Qt::WA_DeleteOnClose, true);
 
+        //Signals and Slots
         connect(cancelButton, SIGNAL(clicked()),
                 SLOT(close()));
         connect(editButton, SIGNAL(clicked()),
                 SLOT(editLaptopAction()));
-
 }
 
 void EditLaptop::createWidgets() {
@@ -61,7 +97,9 @@ void EditLaptop::createWidgets() {
         genericNField = new QComboBox();
         modelField = new QLineEdit();
         serialField = new QLineEdit();
+        osLabel = new QLabel("OS");
         osSelect = new QComboBox();
+        cartNumSelectLabel = new QLabel("Cart Number");
         cartNumberSelect = new QComboBox();
 
         statusGroup = new QGroupBox(tr("Status"));
@@ -77,7 +115,6 @@ void EditLaptop::createWidgets() {
 }
 
 void EditLaptop::setWidgetProperties() {
-    cartNumLabel->setText("Cart No: "+QString::number(cartNum));
     assetField->setPlaceholderText("Asset Tag");
     modelField->setPlaceholderText("Model (Optional)");
     serialField->setPlaceholderText("Serial Number (Optional)");
@@ -107,6 +144,14 @@ void EditLaptop::setWidgetProperties() {
     osSelect->addItem("Chrome OS");
     osSelect->addItem("Linux");
     osSelect->addItem("Mac OSX");
+
+    statusLayout->addWidget(workingStatusButton);
+    statusLayout->addWidget(brokenStatusButton);
+    statusGroup->setLayout(statusLayout);
+
+    deployedLayout->addWidget(deployedButton);
+    deployedLayout->addWidget(notDeployedButton);
+    isDeployedGroup->setLayout(deployedLayout);
 }
 
 void EditLaptop::editLaptopAction() {

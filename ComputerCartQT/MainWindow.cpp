@@ -23,6 +23,7 @@ MainWindow::MainWindow(CartModel& cModel, LaptopModel& lModel) :
 
         lView = new LaptopView();
         lView->setModel(&lModel);
+        lModel.getLaptops();
 
         //Add widgets to layouts
         mainLayout->addWidget(toolbar);
@@ -33,7 +34,7 @@ MainWindow::MainWindow(CartModel& cModel, LaptopModel& lModel) :
 
         //Tabbed view setup
         tabs = new QTabWidget();
-        laptopWidget = new Laptops(lModel, *lView);
+        laptopWidget = new Laptops(lModel, *lView, false);
         tabs->addTab(centralWidget,tr("Carts"));
         tabs->addTab(laptopWidget, tr("Laptops"));
 

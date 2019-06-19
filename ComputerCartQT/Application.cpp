@@ -6,7 +6,7 @@ Application::Application(int& argc, char** argv) :
     cModel(nullptr),
     lModel(nullptr) {
         cModel = new CartModel();
-        lModel = new LaptopModel();
+        lModel = new LaptopModel("MainView");
         mainWindow = new MainWindow(*cModel, *lModel);
     }
 
