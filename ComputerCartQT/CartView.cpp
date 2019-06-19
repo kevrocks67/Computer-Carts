@@ -37,3 +37,10 @@ int CartView::getRow() {
     return currentRow;
 }
 
+void CartView::hideColumns(){
+    this->setColumnHidden(5,true);
+    this->setColumnHidden(6,true);
+    this->setColumnHidden(8,true);
+    this->setColumnHidden(11,true);
+}
+

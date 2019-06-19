@@ -20,6 +20,7 @@ MainWindow::MainWindow(CartModel& cModel, LaptopModel& lModel) :
 
         cView = new CartView();
         cView->setModel(&cModel);
+        cView->hideColumns();
 
         lView = new LaptopView();
         lView->setModel(&lModel);
@@ -178,6 +179,7 @@ void MainWindow::updateTable() {
     cartModel.query().clear();
     cartModel.setQuery(queryStr);
     cView->clearUserSelections();
+    cView->hideColumns();
 }
 
 void MainWindow::changeFont(const QFont &font) {

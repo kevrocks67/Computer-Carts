@@ -15,6 +15,7 @@ class CartView : public QTableView {
         void currentChanged(const QModelIndex &current, const QModelIndex &previous) override;
         void mouseDoubleClickEvent(QMouseEvent* event) override;
         void clearUserSelections();
+        void hideColumns();
     signals:
         void showDetailsEvent(const QModelIndex &index);
     public slots:

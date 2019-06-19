@@ -80,10 +80,10 @@ CartModel::CartModel(void) {
     setHeaderData(1, Qt::Horizontal, tr("Computer Type"));
     setHeaderData(2, Qt::Horizontal, tr("Quantity"));
     setHeaderData(3, Qt::Horizontal, tr("Current Room"));
-    setHeaderData(4, Qt::Horizontal, tr("Current Period"));
-    setHeaderData(5, Qt::Horizontal, tr("Future Reservation ID"));
-    setHeaderData(6, Qt::Horizontal, tr("Cart Status"));
-    setHeaderData(7, Qt::Horizontal, tr("Last Updated"));
+    setHeaderData(4, Qt::Horizontal, tr("Current Periods"));
+    setHeaderData(7, Qt::Horizontal, tr("OS"));
+    setHeaderData(9, Qt::Horizontal, tr("Home Location"));
+    setHeaderData(10, Qt::Horizontal, tr("Last Updated"));
 }
 
 
