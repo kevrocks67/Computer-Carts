@@ -47,4 +47,4 @@ class EditCart : public QDialog {
         QPushButton *editButton;
         int cartNo;
 };
-#endif //ADDCART_H
+#endif //EDITCART_H

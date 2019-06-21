@@ -118,7 +118,7 @@ void LaptopModel::editLaptop(Laptop laptop) {
                                       CartNumber=?,\
                                       Status=?,\
                                       IsDeployed=?\
-                   WHERE AssetID=? AND GenericName=?");
+                   WHERE AssetID=?");
     query.bindValue(0, laptop.AssetID);
     query.bindValue(1, laptop.Brand);
     query.bindValue(2, laptop.GenericName);
@@ -128,8 +128,7 @@ void LaptopModel::editLaptop(Laptop laptop) {
     query.bindValue(6, laptop.CartNumber);
     query.bindValue(7, laptop.Status);
     query.bindValue(8, laptop.IsDeployed);
-    query.bindValue(9, laptop.AssetID);
-    query.bindValue(10, laptop.GenericName);
+    query.bindValue(9, laptop.OldAssetID);
 
     if (query.exec()) {
         qDebug()<<"Edit query success";

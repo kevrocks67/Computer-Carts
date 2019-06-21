@@ -14,6 +14,7 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QPushButton>
+#include <QKeyEvent>
 
 class LaptopModel;
 
@@ -26,6 +27,7 @@ class AddLaptop : public QDialog {
         virtual ~AddLaptop();
     public slots:
     private slots:
+        void keyPressEvent(QKeyEvent *evt) override;
         void setWidgetProperties();
         void createWidgets();
         void addLaptopAction();

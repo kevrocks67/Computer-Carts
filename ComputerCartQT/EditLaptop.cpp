@@ -126,8 +126,7 @@ void EditLaptop::setWidgetProperties() {
     deployedButton->setChecked(true);
 
     QStringList brands = model->getBrands();
-    QStringList gNames = model->getGNames();
-    QStringList carts = model->getCarts();
+    QStringList gNames = model->getGNames(); QStringList carts = model->getCarts();
 
     for(QString brand: brands) {
         brandField->addItem(brand);
@@ -183,6 +182,7 @@ void EditLaptop::editLaptopAction() {
 
 void EditLaptop::setLapDetails(QString asset, QString gName) {
     assetField->setText(asset);
+    laptop.OldAssetID = asset;
     genericNField->setCurrentText(gName);
 
     LaptopModel::Laptop laptopToEdit = model->getLaptop(asset, gName);
@@ -206,6 +206,13 @@ void EditLaptop::setLapDetails(QString asset, QString gName) {
     }
 }
 
+void EditLaptop::keyPressEvent(QKeyEvent *evt) {
+    if(evt->key() == Qt::Key_Enter || evt->key() == Qt::Key_Return) {
+        return;
+    }
+}
+
 EditLaptop::~EditLaptop() {
+
 }
 

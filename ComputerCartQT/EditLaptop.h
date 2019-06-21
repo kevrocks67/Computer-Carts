@@ -14,6 +14,8 @@
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QPushButton>
+#include <QKeyEvent>
+#include <QDebug>
 
 class LaptopModel;
 class EditLaptop : public QDialog {
@@ -29,6 +31,7 @@ class EditLaptop : public QDialog {
         void setWidgetProperties();
         void createWidgets();
         void editLaptopAction();
+        void keyPressEvent(QKeyEvent *evt) override;
     signals:
     private:
         LaptopModel *model;

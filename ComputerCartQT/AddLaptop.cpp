@@ -1,5 +1,4 @@
 #include "AddLaptop.h"
-
 AddLaptop::AddLaptop(LaptopModel &lapModel):
     model(&lapModel) {
         createWidgets();
@@ -181,6 +180,11 @@ void AddLaptop::addLaptopAction() {
     QDialog::done(QDialog::Accepted);
 }
 
+void AddLaptop::keyPressEvent(QKeyEvent *evt) {
+    if(evt->key() == Qt::Key_Enter || evt->key() == Qt::Key_Return) {
+        return;
+    }
+}
 
 AddLaptop::~AddLaptop() {
 

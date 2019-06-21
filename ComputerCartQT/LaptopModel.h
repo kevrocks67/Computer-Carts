@@ -20,6 +20,7 @@ class LaptopModel : public QSqlQueryModel {
         virtual ~LaptopModel();
         struct Laptop {
             QString AssetID;
+            QString OldAssetID;
             QString Brand;
             QString GenericName;
             QString Model;
