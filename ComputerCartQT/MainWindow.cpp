@@ -40,6 +40,7 @@ MainWindow::MainWindow(CartModel& cModel, LaptopModel& lModel) :
 
         //Set MainWindow properties
         setCentralWidget(tabs);
+        setMinimumSize(1200, 800);
         show();
         raise();
 
@@ -100,7 +101,6 @@ void MainWindow::createToolbar() {
     toolbar->addSeparator();
     toolbar->addWidget(settingsTool);
     toolbar->addWidget(logoutTool);
-    toolbar->addSeparator();
 }
 
 void MainWindow::changeTheme(int styleName) {
