@@ -2,16 +2,40 @@
 #include <QModelIndex>
 #include <QSqlRecord>
 LaptopModel::LaptopModel(QString connString){
-     QSqlDatabase cartdb = QSqlDatabase::addDatabase("QSQLITE", connString);
+     QSqlDatabase cartdb;
 
-     //PLACEHOLDER DB AND TABLE
-     cartdb.setDatabaseName("carts.db");
+     QSettings settings("config.ini", QSettings::IniFormat);
+     QString dbDriver = settings.value("app/db_type").toString();
+     QString dbHost = settings.value("app/db_host").toString();
+     QString dbUser = settings.value("app/db_user").toString();
+     QString dbPass = settings.value("app/db_pass").toString();
 
-     if(!cartdb.open()){
-         qDebug()<<"DB did not open";
-     }
-     else{
-         qDebug()<<"DB has connected";
+     if(dbDriver != "")
+         cartdb = QSqlDatabase::addDatabase(dbDriver, connString);
+     else
+         cartdb = QSqlDatabase::addDatabase("QSQLITE", connString);
+
+     if(dbDriver == "QMYSQL"){
+         cartdb.setHostName(dbHost);
+         cartdb.setDatabaseName("ComputerCarts");
+         cartdb.setUserName(dbUser);
+         cartdb.setPassword(dbPass);
+
+         if(!cartdb.open()){
+             qDebug()<<"DB did not open";
+         }
+         else{
+             qDebug()<<"DB has connected";
+         }
+     } else {
+         cartdb.setDatabaseName("carts.db");
+
+         if(!cartdb.open()){
+             qDebug()<<"DB did not open";
+         }
+         else{
+             qDebug()<<"DB has connected";
+         }
      }
 
      setHeaderData(0, Qt::Horizontal, tr("AssetID"));
