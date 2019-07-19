@@ -4,10 +4,10 @@ CartModel::CartModel(void) {
     QSqlDatabase cartdb;
 
     QSettings settings("config.ini", QSettings::IniFormat);
-    QString dbDriver = settings.value("app/db_type").toString();
-    QString dbHost = settings.value("app/db_host").toString();
-    QString dbUser = settings.value("app/db_user").toString();
-    QString dbPass = settings.value("app/db_pass").toString();
+    QString dbDriver = settings.value("db/db_type").toString();
+    QString dbHost = settings.value("db/db_host").toString();
+    QString dbUser = settings.value("db/db_user").toString();
+    QString dbPass = settings.value("db/db_pass").toString();
 
     if(dbDriver != "")
         cartdb = QSqlDatabase::addDatabase(dbDriver);

@@ -30,11 +30,11 @@ Settings::Settings(QWidget * parent) :
     driverPicker->addItem("SQLite");
     driverPicker->addItem("MySQL");
 
-    if(settings.value("app/db_type").toString() == "QMYSQL") {
+    if(settings.value("db/db_type").toString() == "QMYSQL") {
         driverPicker->setCurrentText("MySQL");
-        hostField->setText(settings.value("app/db_host").toString());
-        userField->setText(settings.value("app/db_user").toString());
-        passField->setText(settings.value("app/db_pass").toString());
+        hostField->setText(settings.value("db/db_host").toString());
+        userField->setText(settings.value("db/db_user").toString());
+        passField->setText(settings.value("db/db_pass").toString());
     } else {
         driverPicker->setCurrentText("SQLite");
     }
@@ -109,13 +109,13 @@ void Settings::save() {
     QString driver = driverPicker->currentText();
 
     if(driver == "SQLite")
-        settings.setValue("app/db_type", "QSQLITE");
+        settings.setValue("db/db_type", "QSQLITE");
     else
-        settings.setValue("app/db_type", "QMYSQL");
+        settings.setValue("db/db_type", "QMYSQL");
 
-    settings.setValue("app/db_host", hostField->text());
-    settings.setValue("app/db_user", userField->text());
-    settings.setValue("app/db_pass", passField->text());
+    settings.setValue("db/db_host", hostField->text());
+    settings.setValue("db/db_user", userField->text());
+    settings.setValue("db/db_pass", passField->text());
 
     QDialog::done(QDialog::Accepted);
 }
