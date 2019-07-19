@@ -2,6 +2,7 @@
 
 Settings::Settings(QWidget * parent) :
     QDialog(parent) {
+    QSettings settings("config.ini", QSettings::IniFormat);
     //Initialize layouts
     mainLayout = new QVBoxLayout(this);
     //fieldLayout = new QVBoxLayout();
@@ -11,18 +12,44 @@ Settings::Settings(QWidget * parent) :
     cancelButton = new QPushButton("Cancel");
     saveButton = new QPushButton("Save Settings");
     changeFontButton = new QPushButton("Change Font");
-
     themePicker = new QComboBox();
+    driverPicker = new QComboBox();
+    hostLabel = new QLabel("Hostname/IP Address");
+    hostField = new QLineEdit();
+    userLabel = new QLabel("Username");
+    userField = new QLineEdit();
+    passLabel = new QLabel("Password");
+    passField = new QLineEdit();
+
+    //Set widget properties
     themePicker->addItem("Carbon");
     themePicker->addItem("Polar");
     themePicker->addItem("Stealth");
     themePicker->addItem("Sakura");
 
-    //Set widget properties
+    driverPicker->addItem("SQLite");
+    driverPicker->addItem("MySQL");
+
+    if(settings.value("app/db_type").toString() == "QMYSQL") {
+        driverPicker->setCurrentText("MySQL");
+        hostField->setText(settings.value("app/db_host").toString());
+        userField->setText(settings.value("app/db_user").toString());
+        passField->setText(settings.value("app/db_pass").toString());
+    } else {
+        driverPicker->setCurrentText("SQLite");
+    }
 
     //Add widget to layouts
     mainLayout->addWidget(changeFontButton);
     mainLayout->addWidget(themePicker);
+    mainLayout->addWidget(driverPicker);
+    mainLayout->addWidget(hostLabel);
+    mainLayout->addWidget(hostField);
+    mainLayout->addWidget(userLabel);
+    mainLayout->addWidget(userField);
+    mainLayout->addWidget(passLabel);
+    mainLayout->addWidget(passField);
+
     buttonLayout->addWidget(cancelButton);
     buttonLayout->addWidget(saveButton);
 
@@ -30,6 +57,8 @@ Settings::Settings(QWidget * parent) :
     mainLayout->addLayout(buttonLayout);
     setLayout(mainLayout);
     setModal(true);
+
+    checkDriver(driverPicker->currentIndex());
 
     //Signals and slots
     connect(cancelButton, SIGNAL(clicked()),
@@ -40,6 +69,20 @@ Settings::Settings(QWidget * parent) :
             SLOT(changeFontDialog()));
     connect(themePicker, SIGNAL(activated(int)),
             this, SIGNAL(themeChanged(int)));
+    connect(driverPicker, SIGNAL(activated(int)),
+            this, SLOT(checkDriver(int)));
+}
+
+void Settings::checkDriver(int choice) {
+    if(choice == 0) {
+        hostField->setEnabled(false);
+        userField->setEnabled(false);
+        passField->setEnabled(false);
+    } else {
+        hostField->setEnabled(true);
+        userField->setEnabled(true);
+        passField->setEnabled(true);
+    }
 }
 
 void Settings::changeFontDialog() {
@@ -62,6 +105,18 @@ QString Settings::getTheme() {
 }
 
 void Settings::save() {
+    QSettings settings("config.ini", QSettings::IniFormat);
+    QString driver = driverPicker->currentText();
+
+    if(driver == "SQLite")
+        settings.setValue("app/db_type", "QSQLITE");
+    else
+        settings.setValue("app/db_type", "QMYSQL");
+
+    settings.setValue("app/db_host", hostField->text());
+    settings.setValue("app/db_user", userField->text());
+    settings.setValue("app/db_pass", passField->text());
+
     QDialog::done(QDialog::Accepted);
 }
 

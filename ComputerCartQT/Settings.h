@@ -14,6 +14,8 @@
 #include <QFontDialog>
 #include <QComboBox>
 #include <QString>
+#include <QLineEdit>
+#include <QSettings>
 
 class Settings : public QDialog {
     Q_OBJECT
@@ -27,6 +29,7 @@ class Settings : public QDialog {
     private slots:
         void save();
         void changeFontDialog();
+        void checkDriver(int choice);
     signals:
         void fontChanged(const QFont &font);
         void themeChanged(int);
@@ -38,5 +41,12 @@ class Settings : public QDialog {
 
         QPushButton *changeFontButton;
         QComboBox *themePicker;
+        QComboBox *driverPicker;
+        QLabel *hostLabel;
+        QLineEdit *hostField;
+        QLabel *userLabel;
+        QLineEdit *userField;
+        QLabel *passLabel;
+        QLineEdit *passField;
 };
 #endif //SETTINGS_H
