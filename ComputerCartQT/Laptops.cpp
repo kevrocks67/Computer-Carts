@@ -7,17 +7,21 @@ Laptops::Laptops(LaptopModel &laptopModel, LaptopView &laptopView, bool IsCart) 
         mainLayout = new QVBoxLayout;
 
         //Initialize widgets
+        refreshTool = new QToolButton();
         addTool = new QToolButton();
         editTool = new QToolButton();
         removeTool = new QToolButton();
         cartNum = new QLabel();
 
+        refreshTool->setIcon(QIcon("res/refresh-button.png"));
+        refreshTool->setIconSize(QSize(65, 65));
         addTool->setText("Add");
         editTool->setText("Edit");
         removeTool->setText("Remove");
 
         toolbar = new QToolBar();
         toolbar->setAllowedAreas(Qt::TopToolBarArea);
+        toolbar->addWidget(refreshTool);
         toolbar->addWidget(addTool);
         toolbar->addWidget(editTool);
         toolbar->addWidget(removeTool);
@@ -39,6 +43,8 @@ Laptops::Laptops(LaptopModel &laptopModel, LaptopView &laptopView, bool IsCart) 
             mainLayout->addWidget(toolbar);
             mainLayout->addWidget(&laptopView);
 
+            connect(refreshTool, SIGNAL(clicked()),
+                    this, SLOT(updateTable()));
             connect(addTool, SIGNAL(clicked()),
                     this, SLOT(addAction()));
             connect(editTool, SIGNAL(clicked()),
@@ -48,6 +54,7 @@ Laptops::Laptops(LaptopModel &laptopModel, LaptopView &laptopView, bool IsCart) 
         }
 
         setLayout(mainLayout);
+        updateTable();
 }
 
 void Laptops::updateTable() {
@@ -55,6 +62,15 @@ void Laptops::updateTable() {
      model.query().clear();
      model.getLaptops();
      view.clearUserSelections();
+
+     model.setHeaderData(0, Qt::Horizontal, tr("AssetID"));
+     model.setHeaderData(1, Qt::Horizontal, tr("Brand"));
+     model.setHeaderData(2, Qt::Horizontal, tr("Generic Name"));
+     model.setHeaderData(3, Qt::Horizontal, tr("Model"));
+     model.setHeaderData(4, Qt::Horizontal, tr("OS"));
+     model.setHeaderData(5, Qt::Horizontal, tr("Cart Number"));
+     model.setHeaderData(6, Qt::Horizontal, tr("Status"));
+     model.setHeaderData(7, Qt::Horizontal, tr("IsDeployed"));
 }
 
 void Laptops::updateTableCart() {

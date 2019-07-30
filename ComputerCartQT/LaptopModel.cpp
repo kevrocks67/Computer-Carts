@@ -1,6 +1,7 @@
 #include "LaptopModel.h"
 #include <QModelIndex>
 #include <QSqlRecord>
+
 LaptopModel::LaptopModel(QString connString){
      QSqlDatabase cartdb;
 

@@ -44,8 +44,9 @@ MainWindow::MainWindow(CartModel& cModel, LaptopModel& lModel) :
         show();
         raise();
 
-
         //Check for dialog open action
+        connect(refreshTool, SIGNAL(clicked()),
+                this, SLOT(updateTable()));
         connect(addTool, SIGNAL(clicked()),
                 this, SLOT(addAction()));
         connect(editTool, SIGNAL(clicked()),
@@ -80,6 +81,7 @@ MainWindow::MainWindow(CartModel& cModel, LaptopModel& lModel) :
 void MainWindow::createToolbar() {
     //Initialize widgets
     toolbar = new QToolBar();
+    refreshTool = new QToolButton;
     addTool = new QToolButton();
     removeTool = new QToolButton();
     editTool = new QToolButton();
@@ -87,6 +89,8 @@ void MainWindow::createToolbar() {
     settingsTool = new QToolButton();
 
     //Set widget properties
+    refreshTool->setIcon(QIcon("res/refresh-button.png"));
+    refreshTool->setIconSize(QSize(65, 65));
     addTool->setText("Add");
     removeTool->setText("Remove");
     editTool->setText("Edit");
@@ -95,6 +99,8 @@ void MainWindow::createToolbar() {
     settingsTool->setText("Settings");
 
     toolbar->setAllowedAreas(Qt::TopToolBarArea);
+
+    toolbar->addWidget(refreshTool);
     toolbar->addWidget(addTool);
     toolbar->addWidget(removeTool);
     toolbar->addWidget(editTool);
@@ -179,6 +185,15 @@ void MainWindow::updateTable() {
     cartModel.setQuery(queryStr);
     cView->clearUserSelections();
     cView->hideColumns();
+    cartModel.setHeaderData(0, Qt::Horizontal, tr("Cart Number"));
+    cartModel.setHeaderData(1, Qt::Horizontal, tr("Computer Type"));
+    cartModel.setHeaderData(2, Qt::Horizontal, tr("Quantity"));
+    cartModel.setHeaderData(3, Qt::Horizontal, tr("Current Room"));
+    cartModel.setHeaderData(4, Qt::Horizontal, tr("Current Periods"));
+    cartModel.setHeaderData(7, Qt::Horizontal, tr("OS"));
+    cartModel.setHeaderData(9, Qt::Horizontal, tr("Home Location"));
+    cartModel.setHeaderData(10, Qt::Horizontal, tr("Last Updated"));
+
 }
 
 void MainWindow::changeFont(const QFont &font) {

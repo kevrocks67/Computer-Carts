@@ -63,6 +63,9 @@ class MainWindow : public QMainWindow {
         QVBoxLayout *mainLayout;
         QTabWidget *tabs;
         QToolBar *toolbar;
+
+        QToolButton *refreshTool;
+
         QToolButton *addTool;
         QToolButton *editTool;
         QToolButton *removeTool;

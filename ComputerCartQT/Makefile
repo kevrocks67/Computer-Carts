@@ -971,7 +971,6 @@ moc_Application.cpp: Application.h \
 		CartModel.h \
 		CartView.h \
 		EditCart.h \
-		DeleteCart.h \
 		DetailView.h \
 		Laptops.h \
 		LaptopModel.h \
@@ -1005,7 +1004,6 @@ moc_MainWindow.cpp: MainWindow.h \
 		CartModel.h \
 		CartView.h \
 		EditCart.h \
-		DeleteCart.h \
 		DetailView.h \
 		Laptops.h \
 		LaptopModel.h \
@@ -1113,7 +1111,6 @@ Application.o: Application.cpp Application.h \
 		CartModel.h \
 		CartView.h \
 		EditCart.h \
-		DeleteCart.h \
 		DetailView.h \
 		Laptops.h \
 		LaptopModel.h \
@@ -1139,7 +1136,6 @@ MainWindow.o: MainWindow.cpp MainWindow.h \
 		CartModel.h \
 		CartView.h \
 		EditCart.h \
-		DeleteCart.h \
 		DetailView.h \
 		Laptops.h \
 		LaptopModel.h \

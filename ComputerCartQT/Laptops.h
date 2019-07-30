@@ -45,6 +45,7 @@ class Laptops : public QWidget {
         QVBoxLayout *mainLayout;
         QLabel *cartNum;
         QToolBar *toolbar;
+        QToolButton *refreshTool;
         QToolButton *addTool;
         QToolButton *editTool;
         QToolButton *removeTool;
