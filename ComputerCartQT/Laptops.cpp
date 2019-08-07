@@ -63,14 +63,15 @@ void Laptops::updateTable() {
      model.getLaptops();
      view.clearUserSelections();
 
-     model.setHeaderData(0, Qt::Horizontal, tr("AssetID"));
+     model.setHeaderData(0, Qt::Horizontal, tr("Asset Tag"));
      model.setHeaderData(1, Qt::Horizontal, tr("Brand"));
      model.setHeaderData(2, Qt::Horizontal, tr("Generic Name"));
      model.setHeaderData(3, Qt::Horizontal, tr("Model"));
-     model.setHeaderData(4, Qt::Horizontal, tr("OS"));
-     model.setHeaderData(5, Qt::Horizontal, tr("Cart Number"));
-     model.setHeaderData(6, Qt::Horizontal, tr("Status"));
-     model.setHeaderData(7, Qt::Horizontal, tr("IsDeployed"));
+     model.setHeaderData(4, Qt::Horizontal, tr("Serial No"));
+     model.setHeaderData(5, Qt::Horizontal, tr("OS"));
+     model.setHeaderData(6, Qt::Horizontal, tr("Cart Number"));
+     model.setHeaderData(7, Qt::Horizontal, tr("Status"));
+     model.setHeaderData(8, Qt::Horizontal, tr("IsDeployed"));
 }
 
 void Laptops::updateTableCart() {
