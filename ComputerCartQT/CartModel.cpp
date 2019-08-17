@@ -114,7 +114,6 @@ CartModel::CartModel(void) {
 
 
 CartModel::~CartModel(){
-
 }
 
 void CartModel::addCart(Cart &cart) {

@@ -121,4 +121,6 @@ void Settings::save() {
 }
 
 Settings::~Settings(){
+    if(mainLayout != nullptr)
+        delete mainLayout;
 }

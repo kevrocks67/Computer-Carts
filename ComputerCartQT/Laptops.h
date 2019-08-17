@@ -15,6 +15,9 @@
 #include <QToolButton>
 #include <QVBoxLayout>
 
+#include <QPointer>
+#include <QScopedPointer>
+
 class Laptops : public QWidget {
     Q_OBJECT
 

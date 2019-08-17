@@ -30,7 +30,6 @@ AddLaptop::AddLaptop(LaptopModel &lapModel):
         //Parent properties
         setLayout(mainLayout);
         setModal(true);
-        setAttribute(Qt::WA_DeleteOnClose, true);
 
         //Signals and Slots
         connect(cancelButton, SIGNAL(clicked()),
@@ -187,7 +186,10 @@ void AddLaptop::keyPressEvent(QKeyEvent *evt) {
 }
 
 AddLaptop::~AddLaptop() {
-
+    if(model != nullptr)
+        delete model;
+    if(mainLayout != nullptr)
+        delete mainLayout;
 }
 
 

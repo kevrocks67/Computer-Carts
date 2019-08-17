@@ -92,4 +92,9 @@ void DetailView::getDetails(int cartNo) {
 }
 
 DetailView::~DetailView(){
+    delete laptops;
+    delete cartModel;
+    delete laptopView;
+    delete laptopModel;
+    delete mainLayout;
 }

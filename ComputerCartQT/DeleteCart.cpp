@@ -49,4 +49,8 @@ void DeleteCart::setCartNum(int c) {
 }
 
 DeleteCart::~DeleteCart(){
+    if(cartModel != nullptr)
+        delete cartModel;
+    if(mainLayout != nullptr)
+        delete mainLayout;
 }

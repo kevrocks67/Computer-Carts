@@ -30,7 +30,6 @@ EditLaptop::EditLaptop(LaptopModel &lapModel):
         //Parent properties
         setLayout(mainLayout);
         setModal(true);
-        setAttribute(Qt::WA_DeleteOnClose, true);
 
         //Signals and Slots
         connect(cancelButton, SIGNAL(clicked()),
@@ -213,6 +212,6 @@ void EditLaptop::keyPressEvent(QKeyEvent *evt) {
 }
 
 EditLaptop::~EditLaptop() {
-
+    delete model;
 }
 

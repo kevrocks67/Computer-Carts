@@ -43,4 +43,3 @@ void CartView::hideColumns(){
     this->setColumnHidden(8,true);
     this->setColumnHidden(11,true);
 }
-

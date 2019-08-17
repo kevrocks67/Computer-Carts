@@ -21,7 +21,8 @@ CREATE DATABASE ComputerCarts;
 ```
 USE ComputerCarts;
 ```
-5. Copy/paste the provided schema (carts.sql) into the interpreter to create the necessary tables
+5. Copy/paste the provided schema **(carts.sql)** into the interpreter to create the necessary
+    tables
 6. Create a user account you can use with the app for database ComputerCarts
 ```
 CREATE USER 'SomeUsername' IDENTIFIED BY 'SomeSecurePassword';

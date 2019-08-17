@@ -51,4 +51,6 @@ void DeleteLaptop::setLapDetails(QString asset, QString gName) {
 }
 
 DeleteLaptop::~DeleteLaptop(){
+    if(mainLayout !=  nullptr)
+        delete mainLayout;
 }

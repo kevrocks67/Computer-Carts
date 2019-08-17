@@ -7,11 +7,18 @@ Laptops::Laptops(LaptopModel &laptopModel, LaptopView &laptopView, bool IsCart) 
         mainLayout = new QVBoxLayout;
 
         //Initialize widgets
+
         refreshTool = new QToolButton();
         addTool = new QToolButton();
         editTool = new QToolButton();
         removeTool = new QToolButton();
         cartNum = new QLabel();
+
+        //refreshTool(new QToolButton());
+        //addTool(new QToolButton());
+        //editTool(new QToolButton());
+        //removeTool(new QToolButton());
+        //cartNum(new QLabel());
 
         refreshTool->setIcon(QIcon("res/refresh-button.png"));
         refreshTool->setIconSize(QSize(65, 65));
@@ -20,6 +27,8 @@ Laptops::Laptops(LaptopModel &laptopModel, LaptopView &laptopView, bool IsCart) 
         removeTool->setText("Remove");
 
         toolbar = new QToolBar();
+        //toolbar(new QToolBar());
+
         toolbar->setAllowedAreas(Qt::TopToolBarArea);
         toolbar->addWidget(refreshTool);
         toolbar->addWidget(addTool);
@@ -28,6 +37,8 @@ Laptops::Laptops(LaptopModel &laptopModel, LaptopView &laptopView, bool IsCart) 
 
 
         mainLayout = new QVBoxLayout();
+        //mainLayout(new QVBoxLayout());
+
         if(IsCart) {
             mainLayout->addWidget(toolbar);
             mainLayout->addWidget(cartNum);
@@ -176,4 +187,5 @@ void Laptops::deleteActionCart() {
 }
 
 Laptops::~Laptops(){
+    delete mainLayout;
 }

@@ -29,8 +29,11 @@ int main(int argc, char* argv[]) {
 }
 
 Application::~Application() {
-    delete mainWindow;
-    delete cModel;
-    delete lModel;
+    if(cModel != nullptr)
+        delete cModel;
+    if(lModel != nullptr)
+        delete lModel;
+    if(mainWindow != nullptr)
+        delete mainWindow;
 }
 

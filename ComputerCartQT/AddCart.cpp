@@ -85,4 +85,8 @@ void AddCart::setCartNum(int c) {
 }
 
 AddCart::~AddCart(){
+    if(cartModel != nullptr)
+        delete cartModel;
+    if(mainLayout != nullptr)
+        delete mainLayout;
 }

@@ -241,5 +241,14 @@ void MainWindow::saveSettings() {
 }
 
 MainWindow::~MainWindow(){
-    saveSettings();
+   /* delete cView;
+    delete lView;
+    delete newCart;
+    delete editCart;
+    delete deleteCart;
+    delete detailView;
+    delete settingsView;
+    delete laptopWidget;
+    */
+    delete mainLayout;
 }
