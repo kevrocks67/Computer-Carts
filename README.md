@@ -47,7 +47,9 @@ FLUSH PRIVILEGES;
 ![Settings Panel](Screenshots/settings.png)
 
 ## Video
-<iframe width="560" height="315" src="https://www.youtube.com/embed/HYUVkvoEL8I" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=HYUVkvoEL8I
+" target="_blank"><img src="http://img.youtube.com/vi/HYUVkvoEL8I/0.jpg"
+alt="Walkthrough Video" width="240" height="180" border="10" /></a>
 
 ## Credits
 Themes come from the [Phantom Style](https://github.com/randrew/phantomstyle) project
