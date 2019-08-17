@@ -7,6 +7,7 @@
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QLineEdit>
+#include <QComboBox>
 #include <QPushButton>
 #include <QTableWidget>
 #include <QVBoxLayout>
@@ -37,8 +38,13 @@ class EditCart : public QDialog {
         QLineEdit *quantField;
         QLineEdit *cRoomField;
         QLineEdit *cPeriodField;
+        QLineEdit *homeLocationField;
+        QComboBox *lockTypeSelect;
+        QComboBox *osSelect;
+        QLineEdit *commentsField;
+
         QPushButton *cancelButton;
         QPushButton *editButton;
         int cartNo;
 };
-#endif //ADDCART_H
+#endif //EDITCART_H

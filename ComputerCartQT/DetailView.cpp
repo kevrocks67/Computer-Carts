@@ -8,6 +8,7 @@ DetailView::DetailView(QWidget * parent) :
     tabWidget = new QTabWidget;
     cartWidget = new QWidget;
     resWidget = new QWidget;
+    //laptopWidget = new QWidget;
     cartLayout = new QVBoxLayout;
     resLayout = new QVBoxLayout;
     closeButton = new QPushButton("Close");
@@ -20,10 +21,20 @@ DetailView::DetailView(QWidget * parent) :
     quantLabel = new QLabel();
     cRoomLabel = new QLabel();
     cPeriodLabel = new QLabel();
+    osLabel = new QLabel();
+    homeLabel = new QLabel();
+    lockTypeLabel = new QLabel();
+    commentLabel = new QLabel("Comments");
     commentBox = new QTextEdit();
+    laptopsButton = new QPushButton("View Laptops In This Cart");
 
     //Cart Tab Widget Properties
     commentBox->setReadOnly(true);
+
+    laptopView = new LaptopView();
+    laptopModel = new LaptopModel("DetailViewLaptops");
+    laptopView->setModel(laptopModel);
+    laptops = new Laptops(*laptopModel, *laptopView, true);
 
     //Add widgets to Cart Widget
     cartLayout->addWidget(cartNumLabel);
@@ -31,7 +42,12 @@ DetailView::DetailView(QWidget * parent) :
     cartLayout->addWidget(quantLabel);
     cartLayout->addWidget(cRoomLabel);
     cartLayout->addWidget(cPeriodLabel);
+    cartLayout->addWidget(osLabel);
+    cartLayout->addWidget(homeLabel);
+    cartLayout->addWidget(lockTypeLabel);
+    cartLayout->addWidget(commentLabel);
     cartLayout->addWidget(commentBox);
+    cartLayout->addWidget(laptopsButton);
 
     cartWidget->setLayout(cartLayout);
 
@@ -47,9 +63,10 @@ DetailView::DetailView(QWidget * parent) :
     //Slots and signals
     connect(closeButton, SIGNAL(clicked()),
             SLOT(close()));
-}
-
-DetailView::~DetailView(){
+    connect(laptopsButton, SIGNAL(clicked()),
+            this, SLOT(close()));
+    connect(laptopsButton, SIGNAL(clicked()),
+            laptops, SLOT(show()));
 }
 
 void DetailView::getDetails(int cartNo) {
@@ -60,5 +77,24 @@ void DetailView::getDetails(int cartNo) {
     compTypeLabel->setText("Cart Type: "+cart.compType);
     quantLabel->setText("Quantity: "+QString::number(cart.quantity));
     cRoomLabel->setText("Current Location: "+cart.cRoom);
-    cPeriodLabel->setText("Needed For Period: "+QString::number(cart.cPeriod));
+    cPeriodLabel->setText("Needed For Periods: "+cart.cPeriod);
+    osLabel->setText("OS: "+cart.os);
+    homeLabel->setText("Home Location: "+cart.homeLoc);
+    lockTypeLabel->setText("Lock Type: "+cart.lockType);
+    commentBox->setText(cart.comments);
+
+
+    laptopModel->getLaptops(cartNo);
+    laptops->setCartNum(cartNo);
+    laptops->setCartNum("Cart Number: "+QString::number(cartNo));
+    laptopView->repaint();
+    laptops->repaint();
+}
+
+DetailView::~DetailView(){
+    delete laptops;
+    delete cartModel;
+    delete laptopView;
+    delete laptopModel;
+    delete mainLayout;
 }

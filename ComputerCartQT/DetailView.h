@@ -2,6 +2,9 @@
 #define DETAILVIEW_H
 
 #include "CartModel.h"
+#include "Laptops.h"
+#include "LaptopView.h"
+#include "LaptopModel.h"
 
 #include <QApplication>
 #include <QDialog>
@@ -11,6 +14,8 @@
 #include <QTextEdit>
 #include <QVBoxLayout>
 #include <QWidget>
+#include <QToolBar>
+#include <QToolButton>
 
 class CartModel;
 
@@ -25,15 +30,19 @@ class DetailView : public QDialog {
     private slots:
     private:
         CartModel *cartModel;
+        LaptopView *laptopView;
+        LaptopModel *laptopModel;
 
         //Main Widgets
         QVBoxLayout *mainLayout;
         QTabWidget *tabWidget;
         QWidget *cartWidget;
         QWidget *resWidget;
+        //QWidget *laptopWidget;
         QVBoxLayout *cartLayout;
         QVBoxLayout *resLayout;
         QPushButton *closeButton;
+        Laptops *laptops;
 
         //Cart Tab Widgets
         QLabel *cartNumLabel;
@@ -41,6 +50,11 @@ class DetailView : public QDialog {
         QLabel *quantLabel;
         QLabel *cRoomLabel;
         QLabel *cPeriodLabel;
+        QLabel *osLabel;
+        QLabel *homeLabel;
+        QLabel *lockTypeLabel;
+        QLabel *commentLabel;
         QTextEdit *commentBox;
+        QPushButton *laptopsButton;
 };
 #endif //DETAILVIEW_H

@@ -13,14 +13,6 @@ DeleteCart::DeleteCart(QWidget * parent) :
     deleteMessage = new QLabel("Are you sure you want to delete cart no: ");
     cartNum = new QLabel("NULL");
 
-    //Set widget properties
-    QFont sansFont("Helvetica [Cronyx]", 14);
-
-    deleteMessage->setFont(sansFont);
-    cartNum->setFont(sansFont);
-    cancelButton->setFont(sansFont);
-    delButton->setFont(sansFont);
-
     //Add widget to layouts
     buttonLayout->addWidget(cancelButton);
     buttonLayout->addWidget(delButton);
@@ -57,4 +49,8 @@ void DeleteCart::setCartNum(int c) {
 }
 
 DeleteCart::~DeleteCart(){
+    if(cartModel != nullptr)
+        delete cartModel;
+    if(mainLayout != nullptr)
+        delete mainLayout;
 }

@@ -6,12 +6,17 @@
 #include "EditCart.h"
 #include "DeleteCart.h"
 #include "DetailView.h"
-#include "Session.h"
+#include "Laptops.h"
+#include "LaptopModel.h"
+#include "LaptopView.h"
+#include "Settings.h"
 
-#include <QComboBox>
 #include <QDebug>
 #include <QMainWindow>
+#include <QMessageBox>
 #include <QPushButton>
+#include <QSettings>
+#include <QTabWidget>
 #include <QToolBar>
 #include <QToolButton>
 #include <QVBoxLayout>
@@ -19,13 +24,14 @@
 
 class CartModel;
 class CartView;
-class Session;
+class LaptopModel;
+class LaptopView;
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
 
     public:
-        MainWindow(Session&, CartModel&);
+        MainWindow(CartModel&, LaptopModel&);
         virtual ~MainWindow();
     signals:
     public slots:
@@ -33,31 +39,39 @@ class MainWindow : public QMainWindow {
         void editAction();
         void removeAction();
     private slots:
+        void createToolbar();
         void updateTable();
         void changeTheme(int styleName);
         void showDetails(const QModelIndex &index);
+        void changeFont(const QFont &font);
+        void loadSettings();
+        void saveSettings();
     private:
         //Class declarations
-        Session& mySession;
         CartModel& cartModel;
         CartView *cView;
+        LaptopView *lView;
         AddCart *newCart;
         EditCart *editCart;
         DeleteCart *deleteCart;
         DetailView *detailView;
+        Settings *settingsView;
 
         //Widget declarations
         QWidget *centralWidget;
+        Laptops *laptopWidget;
         QVBoxLayout *mainLayout;
+        QTabWidget *tabs;
         QToolBar *toolbar;
+
+        QToolButton *refreshTool;
+
         QToolButton *addTool;
+        QToolButton *editTool;
         QToolButton *removeTool;
         QToolButton *logoutTool;
         QToolButton *settingsTool;
 
-        QToolButton *editTool;
         QToolButton *addResTool;
         QToolButton *editResTool;
-        QToolButton *detailsTool;
-        QComboBox *themePicker;
 };

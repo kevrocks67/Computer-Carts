@@ -3,3 +3,5 @@ moc_*.cpp
 moc_*.h
 *.pyc
 .qmake.stash
+config.ini
+*.swp

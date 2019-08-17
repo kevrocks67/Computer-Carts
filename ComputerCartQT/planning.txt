@@ -1,18 +1,31 @@
+PRAGMA foreign_keys = ON;
+
 CREATE TABLE ComputerCarts (
-    CartNumber INTEGER PRIMARY KEY AUTOINCREMENT,
+    CartNumber INTEGER PRIMARY KEY,
     ComputerType TEXT NOT NULL,
     Quantity INTEGER DEFAULT NULL,
     CurrentLocation TEXT DEFAULT NULL,
     CurrentLocTime TEXT DEFAULT NULL,
     FutureResId INTEGER DEFAULT NULL,
-    FOREIGN KEY(FutureResId) REFERENCES reservations(ResId),
     CartStatus BOOLEAN DEFAULT NULL,
     LastUpdate DATETIME,
+    FOREIGN KEY(FutureResId) REFERENCES reservations(ResId)
 
-    ADD THIS COLUMN ->Comments TEXT DEFAULT NULL
+    Comments TEXT DEFAULT NULL
+    HomeLocation TEXT DEFAULT NULL
+    LockType TEXT DEFAULT NULL
+        Key
+        Circular Key
+        Combination
+    OS TEXT DEFAULT NOT NULL
+        Windows
+        ChromeOS
+        Linux
+        MacOSX
+        Multiple
 );
 
-CREATE TABLE reservations (
+CREATE TABLE Reservations (
     ResId INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     CartNumber INTEGER DEFAULT NULL,
     Location TEXT NOT NULL,
@@ -21,6 +34,25 @@ CREATE TABLE reservations (
     Teacher TEXT DEFAULT NULL,
     Comments TEXT DEFAULT NULL
 );
+
+
+CREATE TABLE Laptops (
+    AssetID TEXT type UNIQUE DEFAULT NULL,
+    Brand TEXT NOT NULL,
+    GenericName TEXT NOT NULL,
+    Model TEXT DEFAULT NULL,
+    Serial TEXT DEFAULT NULL,
+    OS TEXT NOT NULL,
+    CartNumber INTEGER DEFAULT NULL,
+    Status TEXT,
+    IsDeployed BOOLEAN NOT NULL,
+    FOREIGN KEY(CartNumber) REFERENCES ComputerCarts(CartNumber)
+);
+
+Get all laptops -> select * foom laptops where CartNumber=?
+Add interface to select
+    Get unique values from each column (brand, genricname, model)
+
 
 If CartNumber == '' -> Unassigned list
 Else getDetails(FutureResId)-> Display reservation details and modal with comments
@@ -46,7 +78,7 @@ Check if period has passed by comparing currentTime > periodTime -> updateFuture
     Check every 10 mins if app open
     Manual refresh/check button
 
-
+Update readme, move stuff to a blog post or another folder
 
 //OLD IDEA
 Future date and time, Support for multiple dates and times
@@ -64,3 +96,4 @@ FutureLocTime TEXT DEFAULT NULL,
 select * from reservations where CartNumber=cartNo ORDER by date,time; -> next location
 select * from reservations where CartNumber=cartNo ORDER by date ASC; -> get date of 1st entry
 select * from reservations where CartNumber=cartNo AND date=dateFromAbove ORDER by time; -> the next
+

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QDebug>
+#include <QSettings>
 #include <QSql>
 #include <QSqlDatabase>
 #include <QSqlQuery>
@@ -25,9 +26,13 @@ class CartModel : public QSqlQueryModel {
             QString compType;
             int quantity;
             QString cRoom;
-            int cPeriod;
+            QString cPeriod;
             int resId;
-            bool status;
+            bool cartStatus;
+            QString homeLoc;
+            QString lockType;
+            QString os;
+            QString comments;
         } cart;
 
     public slots:

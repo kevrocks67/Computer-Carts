@@ -13,24 +13,28 @@ AddCart::AddCart(QWidget * parent) :
     quantField = new QLineEdit();
     cRoomField = new QLineEdit();
     cPeriodField = new QLineEdit();
+    homeLocationField = new QLineEdit();
+    lockTypeSelect = new QComboBox();
+    osSelect = new QComboBox();
+    commentsField = new QLineEdit();
 
     cancelButton = new QPushButton("Cancel");
     addButton = new QPushButton("Add Cart");
 
     //Set widget properties
-    QFont sansFont("Helvetica [Cronyx]", 14);
-
-    cNumLabel->setFont(sansFont);
     typeField->setPlaceholderText("Computer Type");
-    typeField->setFont(sansFont);
     quantField->setPlaceholderText("Quantity");
-    quantField->setFont(sansFont);
     cRoomField->setPlaceholderText("Current Room");
-    cRoomField->setFont(sansFont);
     cPeriodField->setPlaceholderText("Current Period(s)");
-    cPeriodField->setFont(sansFont);
-    cancelButton->setFont(sansFont);
-    addButton->setFont(sansFont);
+    homeLocationField->setPlaceholderText("Home Location");
+    commentsField->setPlaceholderText("Comments");
+    lockTypeSelect->addItem("Key");
+    lockTypeSelect->addItem("Circular Key");
+    lockTypeSelect->addItem("Combination");
+    osSelect->addItem("Windows");
+    osSelect->addItem("Chrome OS");
+    osSelect->addItem("Linux");
+    osSelect->addItem("Mac OSX");
 
     //Add widget to layouts
     fieldLayout->addWidget(cNumLabel);
@@ -38,6 +42,10 @@ AddCart::AddCart(QWidget * parent) :
     fieldLayout->addWidget(quantField);
     fieldLayout->addWidget(cRoomField);
     fieldLayout->addWidget(cPeriodField);
+    fieldLayout->addWidget(homeLocationField);
+    fieldLayout->addWidget(lockTypeSelect);
+    fieldLayout->addWidget(osSelect);
+    fieldLayout->addWidget(commentsField);
 
     buttonLayout->addWidget(cancelButton);
     buttonLayout->addWidget(addButton);
@@ -48,8 +56,6 @@ AddCart::AddCart(QWidget * parent) :
     setModal(true);
 
     //Signals and slots
-    /*connect(addButton, SIGNAL(clicked()),
-            CartModel, SLOT(add()));*/
     connect(cancelButton, SIGNAL(clicked()),
             SLOT(close()));
     connect(addButton, SIGNAL(clicked()),
@@ -59,11 +65,15 @@ AddCart::AddCart(QWidget * parent) :
 void AddCart::addCartAction() {
     qDebug()<<"AddCart::addCartAction";
 
-//    cartDetails.cartNo = cNumLabel->text().toInt();
+    cartDetails.cartNo = cNumLabel->text().toInt();
     cartDetails.compType = typeField->text();
     cartDetails.quantity = quantField->text().toInt();
     cartDetails.cRoom = cRoomField->text();
-    cartDetails.cPeriod = cPeriodField->text().toInt();
+    cartDetails.cPeriod = cPeriodField->text();
+    cartDetails.homeLoc = homeLocationField->text();
+    cartDetails.lockType = lockTypeSelect->currentText();
+    cartDetails.os = osSelect->currentText();
+    cartDetails.comments = commentsField->text();
 
     cartModel->addCart(cartDetails);
     QDialog::done(QDialog::Accepted);
@@ -73,10 +83,10 @@ void AddCart::setCartNum(int c) {
     //Set modal text
     cNumLabel->setText(QString::number(c));
 }
-/*
-void AddCart::GetOptions(int Opt1) {
-    Opt1 = 1337;
-}*/
 
 AddCart::~AddCart(){
+    if(cartModel != nullptr)
+        delete cartModel;
+    if(mainLayout != nullptr)
+        delete mainLayout;
 }

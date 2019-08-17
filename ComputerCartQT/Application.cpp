@@ -1,23 +1,17 @@
 #include "Application.h"
 
-//TODO Add config file for font, theme, and possibly language
-
 Application::Application(int& argc, char** argv) :
     QApplication(argc, argv),
     mainWindow(nullptr),
-    mySession(nullptr),
-    cModel(nullptr) {
-
-    mySession = new Session();
-    //QSqlDatabase cartdb = QSqlDatabase::addDatabase("QSQLITE");
-    //cartdb.setDatabaseName("carts.db");
-    //cModel = new CartModel(0,cartdb);
-    cModel = new CartModel();
-    mainWindow = new MainWindow(*mySession, *cModel);
-
+    cModel(nullptr),
+    lModel(nullptr) {
+        cModel = new CartModel();
+        lModel = new LaptopModel("MainView");
+        mainWindow = new MainWindow(*cModel, *lModel);
     }
 
 int main(int argc, char* argv[]) {
+    //Default font
     QFont sansFont("Helvetica [Cronxy]", 14);
 
     #if QT_VERSION >= QT_VERSION_CHECK(5, 6, 0)
@@ -27,7 +21,7 @@ int main(int argc, char* argv[]) {
     Application::setAttribute(Qt::AA_UseHighDpiPixmaps);
     Application::setOrganizationName("Columbia Secondary School");
     Application::setApplicationName("CCMS");
-    Application::setApplicationVersion("0.1");
+    Application::setApplicationVersion("0.2");
     Application::setFont(sansFont);
 
     Application app(argc, argv);
@@ -35,8 +29,11 @@ int main(int argc, char* argv[]) {
 }
 
 Application::~Application() {
-    delete mainWindow;
-    delete mySession;
-    delete cModel;
+    if(cModel != nullptr)
+        delete cModel;
+    if(lModel != nullptr)
+        delete lModel;
+    if(mainWindow != nullptr)
+        delete mainWindow;
 }
 

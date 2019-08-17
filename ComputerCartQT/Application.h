@@ -2,11 +2,10 @@
 
 #include <QApplication>
 #include "MainWindow.h"
-#include "Session.h"
 #include "CartModel.h"
+#include "LaptopModel.h"
 
 class MainWindow;
-class Session;
 class CartModel;
 
 class Application : public QApplication {
@@ -20,6 +19,6 @@ class Application : public QApplication {
     private slots:
     private:
         MainWindow *mainWindow;
-        Session *mySession;
         CartModel *cModel;
+        LaptopModel *lModel;
 };

@@ -13,24 +13,31 @@ EditCart::EditCart(QWidget * parent) :
     quantField = new QLineEdit();
     cRoomField = new QLineEdit();
     cPeriodField = new QLineEdit();
+    homeLocationField = new QLineEdit();
+    lockTypeSelect = new QComboBox();
+    osSelect = new QComboBox();
+    commentsField = new QLineEdit();
 
     cancelButton = new QPushButton("Cancel");
     editButton = new QPushButton("Edit Cart");
 
     //Set widget properties
-    QFont sansFont("Helvetica [Cronyx]", 14);
 
-    cNumLabel->setFont(sansFont);
     typeField->setPlaceholderText("Computer Type");
-    typeField->setFont(sansFont);
     quantField->setPlaceholderText("Quantity");
-    quantField->setFont(sansFont);
     cRoomField->setPlaceholderText("Current Room");
-    cRoomField->setFont(sansFont);
     cPeriodField->setPlaceholderText("Current Period(s)");
-    cPeriodField->setFont(sansFont);
-    cancelButton->setFont(sansFont);
-    editButton->setFont(sansFont);
+    homeLocationField->setPlaceholderText("Home Location");
+    commentsField->setPlaceholderText("Comments");
+
+    lockTypeSelect->addItem("Key");
+    lockTypeSelect->addItem("Circular Key");
+    lockTypeSelect->addItem("Combination");
+    osSelect->addItem("Windows");
+    osSelect->addItem("Chrome OS");
+    osSelect->addItem("Linux");
+    osSelect->addItem("Mac OSX");
+
 
     //Add widget to layouts
     fieldLayout->addWidget(cNumLabel);
@@ -38,6 +45,10 @@ EditCart::EditCart(QWidget * parent) :
     fieldLayout->addWidget(quantField);
     fieldLayout->addWidget(cRoomField);
     fieldLayout->addWidget(cPeriodField);
+    fieldLayout->addWidget(homeLocationField);
+    fieldLayout->addWidget(lockTypeSelect);
+    fieldLayout->addWidget(osSelect);
+    fieldLayout->addWidget(commentsField);
 
     buttonLayout->addWidget(cancelButton);
     buttonLayout->addWidget(editButton);
@@ -63,7 +74,11 @@ void EditCart::editCartAction() {
     cartDetails.compType = typeField->text();
     cartDetails.quantity = quantField->text().toInt();
     cartDetails.cRoom = cRoomField->text();
-    cartDetails.cPeriod = cPeriodField->text().toInt();
+    cartDetails.cPeriod = cPeriodField->text();
+    cartDetails.homeLoc = homeLocationField->text();
+    cartDetails.lockType = lockTypeSelect->currentText();
+    cartDetails.os = osSelect->currentText();
+    cartDetails.comments = commentsField->text();
 
     cartModel->editCart(cartDetails);
     QDialog::done(QDialog::Accepted);
@@ -84,8 +99,11 @@ void EditCart::setCartNum(int c) {
      typeField->setText(cartToEdit.compType);
      quantField->setText(QString::number(cartToEdit.quantity));
      cRoomField->setText(cartToEdit.cRoom);
-     cPeriodField->setText(QString::number(cartToEdit.cPeriod));
+     cPeriodField->setText(cartToEdit.cPeriod);
 }
 
 EditCart::~EditCart(){
+    if(cartModel != nullptr)
+        qDebug()<<"EditCart deleting cartModel";
+        delete cartModel;
 }
