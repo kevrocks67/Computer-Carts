@@ -15,6 +15,7 @@
 #include <QComboBox>
 #include <QString>
 #include <QLineEdit>
+#include <QPointer>
 #include <QSettings>
 
 class Settings : public QDialog {
@@ -34,19 +35,19 @@ class Settings : public QDialog {
         void fontChanged(const QFont &font);
         void themeChanged(int);
     private:
-        QVBoxLayout *mainLayout;
-        QHBoxLayout *buttonLayout;
-        QPushButton *cancelButton;
-        QPushButton *saveButton;
+        QPointer<QVBoxLayout> mainLayout;
+        QPointer<QHBoxLayout> buttonLayout;
+        QPointer<QPushButton> cancelButton;
+        QPointer<QPushButton> saveButton;
 
-        QPushButton *changeFontButton;
-        QComboBox *themePicker;
-        QComboBox *driverPicker;
-        QLabel *hostLabel;
-        QLineEdit *hostField;
-        QLabel *userLabel;
-        QLineEdit *userField;
-        QLabel *passLabel;
-        QLineEdit *passField;
+        QPointer<QPushButton> changeFontButton;
+        QPointer<QComboBox> themePicker;
+        QPointer<QComboBox> driverPicker;
+        QPointer<QLabel> hostLabel;
+        QPointer<QLineEdit> hostField;
+        QPointer<QLabel> userLabel;
+        QPointer<QLineEdit> userField;
+        QPointer<QLabel> passLabel;
+        QPointer<QLineEdit> passField;
 };
 #endif //SETTINGS_H

@@ -10,13 +10,12 @@
 #include <QApplication>
 #include <QWidget>
 #include <QLabel>
+#include <QPointer>
 #include <QString>
 #include <QToolBar>
 #include <QToolButton>
 #include <QVBoxLayout>
 
-#include <QPointer>
-#include <QScopedPointer>
 
 class Laptops : public QWidget {
     Q_OBJECT
@@ -41,16 +40,16 @@ class Laptops : public QWidget {
         LaptopView& view;
         int cartNo;
 
-        AddLaptop *addLaptop;
-        EditLaptop *editLaptop;
-        DeleteLaptop *deleteLaptop;
+        QPointer<AddLaptop> addLaptop;
+        QPointer<EditLaptop> editLaptop;
+        QPointer<DeleteLaptop> deleteLaptop;
 
-        QVBoxLayout *mainLayout;
-        QLabel *cartNum;
-        QToolBar *toolbar;
-        QToolButton *refreshTool;
-        QToolButton *addTool;
-        QToolButton *editTool;
-        QToolButton *removeTool;
+        QPointer<QVBoxLayout> mainLayout;
+        QPointer<QLabel> cartNum;
+        QPointer<QToolBar> toolbar;
+        QPointer<QToolButton> refreshTool;
+        QPointer<QToolButton> addTool;
+        QPointer<QToolButton> editTool;
+        QPointer<QToolButton> removeTool;
 };
 #endif //LAPTOPS_H

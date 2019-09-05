@@ -13,6 +13,7 @@
 #include <QRadioButton>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
+#include <QPointer>
 #include <QPushButton>
 #include <QKeyEvent>
 #include <QDebug>
@@ -34,39 +35,41 @@ class EditLaptop : public QDialog {
         void keyPressEvent(QKeyEvent *evt) override;
     signals:
     private:
-        LaptopModel *model;
+        QPointer<LaptopModel> model;
+
         int cartNum;
         LaptopModel::Laptop laptop;
 
-        QVBoxLayout *mainLayout;
-        QVBoxLayout *fieldLayout;
-        QHBoxLayout *buttonLayout;
 
-        QPushButton *editButton;
-        QPushButton *cancelButton;
+        QPointer<QVBoxLayout> mainLayout;
+        QPointer<QVBoxLayout> fieldLayout;
+        QPointer<QHBoxLayout> buttonLayout;
 
-        QLabel    *cartNumLabel;
-        QLineEdit *assetField;
-        QLabel *brandLabel;
-        QComboBox *brandField;
-        QLabel * genericNLabel;
-        QComboBox *genericNField;
-        QLineEdit *modelField;
-        QLineEdit *serialField;
-        QLabel *osLabel;
-        QComboBox *osSelect;
-        QLabel *cartNumSelectLabel;
-        QComboBox *cartNumberSelect;
+        QPointer<QPushButton> editButton;
+        QPointer<QPushButton> cancelButton;
 
-        QGroupBox *statusGroup;
-        QHBoxLayout *statusLayout;
-        QRadioButton *workingStatusButton;
-        QRadioButton *brokenStatusButton;
+        QPointer<QLabel> cartNumLabel;
+        QPointer<QLineEdit> assetField;
+        QPointer<QLabel> brandLabel;
+        QPointer<QComboBox> brandField;
+        QPointer<QLabel>  genericNLabel;
+        QPointer<QComboBox> genericNField;
+        QPointer<QLineEdit> modelField;
+        QPointer<QLineEdit> serialField;
+        QPointer<QLabel> osLabel;
+        QPointer<QComboBox> osSelect;
+        QPointer<QLabel> cartNumSelectLabel;
+        QPointer<QComboBox> cartNumberSelect;
 
-        QGroupBox *isDeployedGroup;
-        QHBoxLayout *deployedLayout;
-        QRadioButton *deployedButton;
-        QRadioButton *notDeployedButton;
+        QPointer<QGroupBox> statusGroup;
+        QPointer<QHBoxLayout> statusLayout;
+        QPointer<QRadioButton> workingStatusButton;
+        QPointer<QRadioButton> brokenStatusButton;
+
+        QPointer<QGroupBox> isDeployedGroup;
+        QPointer<QHBoxLayout> deployedLayout;
+        QPointer<QRadioButton> deployedButton;
+        QPointer<QRadioButton> notDeployedButton;
 
 };
 #endif //EDITLAPTOP_H

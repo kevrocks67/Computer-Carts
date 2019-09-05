@@ -1,8 +1,6 @@
 #include "CartModel.h"
 
 CartModel::CartModel(void) {
-    QSqlDatabase cartdb;
-
     QSettings settings("config.ini", QSettings::IniFormat);
     QString dbDriver = settings.value("db/db_type").toString();
     QString dbHost = settings.value("db/db_host").toString();
@@ -114,6 +112,7 @@ CartModel::CartModel(void) {
 
 
 CartModel::~CartModel(){
+    cartdb.close();
 }
 
 void CartModel::addCart(Cart &cart) {

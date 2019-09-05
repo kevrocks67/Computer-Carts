@@ -29,7 +29,6 @@ DeleteLaptop::DeleteLaptop(LaptopModel &lapModel) :
     //Parent properties
     setLayout(mainLayout);
     setModal(true);
-    setAttribute(Qt::WA_DeleteOnClose, true);
 
     //Signals and slots
     connect(cancelButton, SIGNAL(clicked()),
@@ -51,6 +50,4 @@ void DeleteLaptop::setLapDetails(QString asset, QString gName) {
 }
 
 DeleteLaptop::~DeleteLaptop(){
-    if(mainLayout !=  nullptr)
-        delete mainLayout;
 }

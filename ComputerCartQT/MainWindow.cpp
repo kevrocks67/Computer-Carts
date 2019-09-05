@@ -4,26 +4,29 @@
 MainWindow::MainWindow(CartModel& cModel, LaptopModel& lModel) :
     cartModel(cModel) {
         //Initialize classes for signal/slot usage
-        newCart = new AddCart();
-        editCart = new EditCart();
-        deleteCart = new DeleteCart();
-        detailView = new DetailView();
-        settingsView = new Settings();
+        newCart = new AddCart(this);
+        editCart = new EditCart(this);
+        deleteCart = new DeleteCart(this);
+        detailView = new DetailView(this);
+        settingsView = new Settings(this);
 
-        //Initialize layouts
-        centralWidget = new QWidget(this);
-        mainLayout = new QVBoxLayout(centralWidget);
 
         //Initialize and create widgets
+        tabs = new QTabWidget(this);
+        cartWidget = new QWidget(this);
+
         createToolbar();
 
-        cView = new CartView();
+        cView = new CartView(this);
         cView->setModel(&cModel);
         cView->hideColumns();
 
-        lView = new LaptopView();
+        lView = new LaptopView(this);
         lView->setModel(&lModel);
         lModel.getLaptops();
+
+        //Initialize layouts
+        mainLayout = new QVBoxLayout(cartWidget);
 
         //Add widgets to layouts
         mainLayout->addWidget(toolbar);
@@ -33,9 +36,8 @@ MainWindow::MainWindow(CartModel& cModel, LaptopModel& lModel) :
         loadSettings();
 
         //Tabbed view setup
-        tabs = new QTabWidget();
         laptopWidget = new Laptops(lModel, *lView, false);
-        tabs->addTab(centralWidget,tr("Carts"));
+        tabs->addTab(cartWidget,tr("Carts"));
         tabs->addTab(laptopWidget, tr("Laptops"));
 
         //Set MainWindow properties
@@ -241,14 +243,4 @@ void MainWindow::saveSettings() {
 }
 
 MainWindow::~MainWindow(){
-   /* delete cView;
-    delete lView;
-    delete newCart;
-    delete editCart;
-    delete deleteCart;
-    delete detailView;
-    delete settingsView;
-    delete laptopWidget;
-    */
-    delete mainLayout;
 }

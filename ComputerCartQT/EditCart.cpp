@@ -103,7 +103,4 @@ void EditCart::setCartNum(int c) {
 }
 
 EditCart::~EditCart(){
-    if(cartModel != nullptr)
-        qDebug()<<"EditCart deleting cartModel";
-        delete cartModel;
 }

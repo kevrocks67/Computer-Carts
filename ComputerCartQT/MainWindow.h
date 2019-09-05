@@ -14,6 +14,7 @@
 #include <QDebug>
 #include <QMainWindow>
 #include <QMessageBox>
+#include <QPointer>
 #include <QPushButton>
 #include <QSettings>
 #include <QTabWidget>
@@ -49,29 +50,30 @@ class MainWindow : public QMainWindow {
     private:
         //Class declarations
         CartModel& cartModel;
-        CartView *cView;
-        LaptopView *lView;
-        AddCart *newCart;
-        EditCart *editCart;
-        DeleteCart *deleteCart;
-        DetailView *detailView;
-        Settings *settingsView;
+
+        QPointer<CartView> cView;
+        QPointer<LaptopView> lView;
+        QPointer<AddCart> newCart;
+        QPointer<EditCart> editCart;
+        QPointer<DeleteCart> deleteCart;
+        QPointer<DetailView> detailView;
+        QPointer<Settings> settingsView;
 
         //Widget declarations
-        QWidget *centralWidget;
-        Laptops *laptopWidget;
-        QVBoxLayout *mainLayout;
-        QTabWidget *tabs;
-        QToolBar *toolbar;
+        QPointer<QWidget> cartWidget;
+        QPointer<Laptops> laptopWidget;
+        QPointer<QVBoxLayout> mainLayout;
+        QPointer<QTabWidget> tabs;
+        QPointer<QToolBar> toolbar;
 
-        QToolButton *refreshTool;
+        QPointer<QToolButton> refreshTool;
 
-        QToolButton *addTool;
-        QToolButton *editTool;
-        QToolButton *removeTool;
-        QToolButton *logoutTool;
-        QToolButton *settingsTool;
+        QPointer<QToolButton> addTool;
+        QPointer<QToolButton> editTool;
+        QPointer<QToolButton> removeTool;
+        QPointer<QToolButton> logoutTool;
+        QPointer<QToolButton> settingsTool;
 
-        QToolButton *addResTool;
-        QToolButton *editResTool;
+        QPointer<QToolButton> addResTool;
+        QPointer<QToolButton> editResTool;
 };

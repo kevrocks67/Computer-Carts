@@ -8,6 +8,7 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QComboBox>
+#include <QPointer>
 #include <QPushButton>
 #include <QTableWidget>
 #include <QVBoxLayout>
@@ -28,23 +29,24 @@ class EditCart : public QDialog {
     private slots:
         void editCartAction();
     private:
-        CartModel  *cartModel;
-        CartModel::Cart cartDetails;
-        QVBoxLayout *mainLayout;
-        QVBoxLayout *fieldLayout;
-        QHBoxLayout *buttonLayout;
-        QLabel *cNumLabel;
-        QLineEdit *typeField;
-        QLineEdit *quantField;
-        QLineEdit *cRoomField;
-        QLineEdit *cPeriodField;
-        QLineEdit *homeLocationField;
-        QComboBox *lockTypeSelect;
-        QComboBox *osSelect;
-        QLineEdit *commentsField;
-
-        QPushButton *cancelButton;
-        QPushButton *editButton;
         int cartNo;
+        CartModel::Cart cartDetails;
+
+        QPointer<CartModel> cartModel;
+        QPointer<QVBoxLayout> mainLayout;
+        QPointer<QVBoxLayout> fieldLayout;
+        QPointer<QHBoxLayout> buttonLayout;
+        QPointer<QLabel> cNumLabel;
+        QPointer<QLineEdit> typeField;
+        QPointer<QLineEdit> quantField;
+        QPointer<QLineEdit> cRoomField;
+        QPointer<QLineEdit> cPeriodField;
+        QPointer<QLineEdit> homeLocationField;
+        QPointer<QComboBox> lockTypeSelect;
+        QPointer<QComboBox> osSelect;
+        QPointer<QLineEdit> commentsField;
+
+        QPointer<QPushButton> cancelButton;
+        QPointer<QPushButton> editButton;
 };
 #endif //EDITCART_H

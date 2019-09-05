@@ -71,7 +71,6 @@ AddLaptop::AddLaptop(LaptopModel &lapModel, int cartNo):
         //Parent properties
         setLayout(mainLayout);
         setModal(true);
-        setAttribute(Qt::WA_DeleteOnClose, true);
 
         //Signals and Slots
         connect(cancelButton, SIGNAL(clicked()),

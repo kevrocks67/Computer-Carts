@@ -44,5 +44,6 @@ class LaptopModel : public QSqlQueryModel {
     private slots:
     signals:
     private:
+        QSqlDatabase cartdb;
 };
 

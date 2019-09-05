@@ -75,13 +75,19 @@ Settings::Settings(QWidget * parent) :
 
 void Settings::checkDriver(int choice) {
     if(choice == 0) {
+        hostLabel->setEnabled(false);
         hostField->setEnabled(false);
+        userLabel->setEnabled(false);
         userField->setEnabled(false);
+        passLabel->setEnabled(false);
         passField->setEnabled(false);
     } else {
+        hostLabel->setEnabled(true);
         hostField->setEnabled(true);
         userField->setEnabled(true);
+        userLabel->setEnabled(true);
         passField->setEnabled(true);
+        passLabel->setEnabled(true);
     }
 }
 

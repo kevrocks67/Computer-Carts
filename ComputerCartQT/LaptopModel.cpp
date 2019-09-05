@@ -3,8 +3,6 @@
 #include <QSqlRecord>
 
 LaptopModel::LaptopModel(QString connString){
-     QSqlDatabase cartdb;
-
      QSettings settings("config.ini", QSettings::IniFormat);
      QString dbDriver = settings.value("db/db_type").toString();
      QString dbHost = settings.value("db/db_host").toString();
@@ -172,6 +170,7 @@ void LaptopModel::deleteLaptop(QString asset, QString gName) {
 }
 
 LaptopModel::~LaptopModel(){
+    cartdb.close();
 }
 
 

@@ -9,6 +9,7 @@
 #include <QApplication>
 #include <QDialog>
 #include <QLabel>
+#include <QPointer>
 #include <QPushButton>
 #include <QTabWidget>
 #include <QTextEdit>
@@ -29,32 +30,32 @@ class DetailView : public QDialog {
         void getDetails(int cartNo);
     private slots:
     private:
-        CartModel *cartModel;
-        LaptopView *laptopView;
-        LaptopModel *laptopModel;
+        QPointer<CartModel> cartModel;
+        QPointer<LaptopView> laptopView;
+        QPointer<LaptopModel> laptopModel;
 
         //Main Widgets
-        QVBoxLayout *mainLayout;
-        QTabWidget *tabWidget;
-        QWidget *cartWidget;
-        QWidget *resWidget;
+        QPointer<QVBoxLayout> mainLayout;
+        QPointer<QTabWidget> tabWidget;
+        QPointer<QWidget> cartWidget;
+        QPointer<QWidget> resWidget;
         //QWidget *laptopWidget;
-        QVBoxLayout *cartLayout;
-        QVBoxLayout *resLayout;
-        QPushButton *closeButton;
-        Laptops *laptops;
+        QPointer<QVBoxLayout> cartLayout;
+        QPointer<QVBoxLayout> resLayout;
+        QPointer<QPushButton> closeButton;
+        QPointer<Laptops> laptops;
 
         //Cart Tab Widgets
-        QLabel *cartNumLabel;
-        QLabel *compTypeLabel;
-        QLabel *quantLabel;
-        QLabel *cRoomLabel;
-        QLabel *cPeriodLabel;
-        QLabel *osLabel;
-        QLabel *homeLabel;
-        QLabel *lockTypeLabel;
-        QLabel *commentLabel;
-        QTextEdit *commentBox;
-        QPushButton *laptopsButton;
+        QPointer<QLabel> cartNumLabel;
+        QPointer<QLabel> compTypeLabel;
+        QPointer<QLabel> quantLabel;
+        QPointer<QLabel> cRoomLabel;
+        QPointer<QLabel> cPeriodLabel;
+        QPointer<QLabel> osLabel;
+        QPointer<QLabel> homeLabel;
+        QPointer<QLabel> lockTypeLabel;
+        QPointer<QLabel> commentLabel;
+        QPointer<QTextEdit> commentBox;
+        QPointer<QPushButton> laptopsButton;
 };
 #endif //DETAILVIEW_H

@@ -1,9 +1,11 @@
 #ifndef DELETECART_H
 #define DELETECART_H
+
 #include "CartModel.h"
 #include <QApplication>
 #include <QHBoxLayout>
 #include <QLabel>
+#include <QPointer>
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <QWidget>
@@ -23,14 +25,15 @@ class DeleteCart : public QDialog {
     private slots:
         void delCartAction();
     private:
-        CartModel *cartModel;
-        QVBoxLayout *mainLayout;
-        QHBoxLayout *textLayout;
-        QHBoxLayout *buttonLayout;
-        QLabel *deleteMessage;
-        QLabel *cartNum;
-        QPushButton *cancelButton;
-        QPushButton *delButton;
         int cartNo;
+
+        QPointer<CartModel> cartModel;
+        QPointer<QVBoxLayout> mainLayout;
+        QPointer<QHBoxLayout> textLayout;
+        QPointer<QHBoxLayout> buttonLayout;
+        QPointer<QLabel> deleteMessage;
+        QPointer<QLabel> cartNum;
+        QPointer<QPushButton> cancelButton;
+        QPointer<QPushButton> delButton;
 };
 #endif //DELETECART_H

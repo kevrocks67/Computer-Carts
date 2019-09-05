@@ -8,6 +8,7 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QComboBox>
+#include <QPointer>
 #include <QPushButton>
 #include <QTableWidget>
 #include <QVBoxLayout>
@@ -24,26 +25,26 @@ class AddCart : public QDialog {
         explicit AddCart(QWidget * parent=0);
         virtual ~AddCart();
     public slots:
-        //void GetOptions(int Opt1);
         void setCartNum(int c);
     private slots:
         void addCartAction();
     private:
-        CartModel *cartModel;
         CartModel::Cart cartDetails;
-        QVBoxLayout *mainLayout;
-        QVBoxLayout *fieldLayout;
-        QHBoxLayout *buttonLayout;
-        QLabel *cNumLabel;
-        QLineEdit *typeField;
-        QLineEdit *quantField;
-        QLineEdit *cRoomField;
-        QLineEdit *cPeriodField;
-        QLineEdit *homeLocationField;
-        QComboBox *lockTypeSelect;
-        QComboBox *osSelect;
-        QLineEdit *commentsField;
-        QPushButton *cancelButton;
-        QPushButton *addButton;
+
+        QPointer<CartModel> cartModel;
+        QPointer<QVBoxLayout> mainLayout;
+        QPointer<QVBoxLayout> fieldLayout;
+        QPointer<QHBoxLayout> buttonLayout;
+        QPointer<QLabel> cNumLabel;
+        QPointer<QLineEdit> typeField;
+        QPointer<QLineEdit> quantField;
+        QPointer<QLineEdit> cRoomField;
+        QPointer<QLineEdit> cPeriodField;
+        QPointer<QLineEdit> homeLocationField;
+        QPointer<QComboBox> lockTypeSelect;
+        QPointer<QComboBox> osSelect;
+        QPointer<QLineEdit> commentsField;
+        QPointer<QPushButton> cancelButton;
+        QPointer<QPushButton> addButton;
 };
 #endif //ADDCART_H

@@ -6,6 +6,7 @@
 #include <QLabel>
 #include <QString>
 #include <QPushButton>
+#include <QPointer>
 #include <QVBoxLayout>
 #include <QWidget>
 #include <QDialog>
@@ -27,12 +28,12 @@ class DeleteLaptop : public QDialog {
         QString asset;
         QString gName;
 
-        QVBoxLayout *mainLayout;
-        QVBoxLayout *textLayout;
-        QHBoxLayout *buttonLayout;
-        QLabel *deleteMessage;
-        QLabel *detailsLabel;
-        QPushButton *cancelButton;
-        QPushButton *delButton;
+        QPointer<QVBoxLayout> mainLayout;
+        QPointer<QVBoxLayout> textLayout;
+        QPointer<QHBoxLayout> buttonLayout;
+        QPointer<QLabel> deleteMessage;
+        QPointer<QLabel> detailsLabel;
+        QPointer<QPushButton> cancelButton;
+        QPointer<QPushButton> delButton;
 };
 #endif //DELETELAPTOP_H
