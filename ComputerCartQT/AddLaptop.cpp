@@ -34,7 +34,7 @@ AddLaptop::AddLaptop(LaptopModel &lapModel):
         //Signals and Slots
         connect(cancelButton, SIGNAL(clicked()),
                 SLOT(close()));
-        connect(addButton, SIGNAL(clicked()),
+        connect(addButton, SIGNAL(clicked(bool)),
                 SLOT(addLaptopAction()));
 }
 
@@ -56,7 +56,7 @@ AddLaptop::AddLaptop(LaptopModel &lapModel, int cartNo):
         fieldLayout->addWidget(modelField);
         fieldLayout->addWidget(serialField);
         fieldLayout->addWidget(osSelect);
-        fieldLayout->addWidget(cartNumberSelect);
+        //fieldLayout->addWidget(cartNumberSelect);
         fieldLayout->addWidget(statusGroup);
         fieldLayout->addWidget(isDeployedGroup);
 
@@ -75,8 +75,8 @@ AddLaptop::AddLaptop(LaptopModel &lapModel, int cartNo):
         //Signals and Slots
         connect(cancelButton, SIGNAL(clicked()),
                 SLOT(close()));
-        connect(addButton, SIGNAL(clicked()),
-                SLOT(addLaptopAction()));
+        connect(addButton, SIGNAL(clicked(bool)),
+                SLOT(addLaptopActionCart()));
 
 }
 
@@ -161,16 +161,42 @@ void AddLaptop::addLaptopAction() {
     laptop.Serial = serialField->text();
     laptop.OS = osSelect->currentText();
     laptop.CartNumber = cartNumberSelect->currentText().toInt();
+
     if (workingStatusButton->isChecked()) {
         laptop.Status = "Working";
-    }
-    else {
+    } else {
         laptop.Status = "Broken";
     }
+
     if (deployedButton->isChecked()) {
         laptop.IsDeployed = true;
+    } else {
+        laptop.IsDeployed = false;
     }
-    else {
+
+    model->addLaptop(laptop);
+    QDialog::done(QDialog::Accepted);
+}
+
+void AddLaptop::addLaptopActionCart() {
+    qDebug()<<"AddLaptop::addLaptopAction";
+    laptop.AssetID = assetField->text();
+    laptop.Brand = brandField->currentText();
+    laptop.GenericName = genericNField->currentText();
+    laptop.Model = modelField->text();
+    laptop.Serial = serialField->text();
+    laptop.OS = osSelect->currentText();
+    laptop.CartNumber = cartNum;
+
+    if (workingStatusButton->isChecked()) {
+        laptop.Status = "Working";
+    } else {
+        laptop.Status = "Broken";
+    }
+
+    if (deployedButton->isChecked()) {
+        laptop.IsDeployed = true;
+    } else {
         laptop.IsDeployed = false;
     }
 
@@ -185,10 +211,4 @@ void AddLaptop::keyPressEvent(QKeyEvent *evt) {
 }
 
 AddLaptop::~AddLaptop() {
-    if(model != nullptr)
-        delete model;
-    if(mainLayout != nullptr)
-        delete mainLayout;
 }
-
-

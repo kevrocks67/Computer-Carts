@@ -32,6 +32,7 @@ class AddLaptop : public QDialog {
         void setWidgetProperties();
         void createWidgets();
         void addLaptopAction();
+        void addLaptopActionCart();
     signals:
     private:
         QPointer<LaptopModel> model;
