@@ -27,7 +27,9 @@ USE ComputerCarts;
 ```
 CREATE USER 'SomeUsername' IDENTIFIED BY 'SomeSecurePassword';
 GRANT USAGE ON ComputerCarts.* TO 'SomeUsername'@'%' IDENTIFIED BY 'SomeSecurePassword';
-GRANT SELECT, UPDATE, INSERT ON ComputerCarts, Laptops, Reservations TO 'SomeUsername'@'%';
+GRANT SELECT, UPDATE, INSERT, DELETE ON ComputerCarts TO 'SomeUsername'@'%';
+GRANT SELECT, UPDATE, INSERT, DELETE ON Laptops TO 'SomeUsername'@'%';
+GRANT SELECT, UPDATE, INSERT, DELETE ON Reservations TO 'SomeUsername'@'%';
 ```
 7. Confirm the permission changes
 ```
