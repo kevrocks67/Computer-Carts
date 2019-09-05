@@ -5,7 +5,7 @@ CartView::CartView(QWidget * parent):
         this->setAlternatingRowColors(true);
         this->setSelectionBehavior(QAbstractItemView::SelectRows);
         this->setSelectionMode(QAbstractItemView::SingleSelection);
-        this->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+        this->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
         this->verticalHeader()->setVisible(false);
 }
 

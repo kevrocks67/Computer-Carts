@@ -5,7 +5,7 @@ LaptopView::LaptopView(QWidget * parent):
         this->setAlternatingRowColors(true);
         this->setSelectionBehavior(QAbstractItemView::SelectRows);
         this->setSelectionMode(QAbstractItemView::SingleSelection);
-        this->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+        this->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
 }
 
 void LaptopView::currentChanged(const QModelIndex &current, const QModelIndex &previous) {
