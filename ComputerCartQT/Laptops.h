@@ -40,6 +40,7 @@ class Laptops : public QWidget {
         void deleteAction();
         void deleteActionCart();
         void search(const QString &query);
+        void setSearchColumn(int index);
     private:
         LaptopModel& model;
         LaptopView& view;

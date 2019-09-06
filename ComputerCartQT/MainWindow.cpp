@@ -30,7 +30,6 @@ MainWindow::MainWindow(CartModel& cModel, LaptopModel& lModel) :
         proxy = new QSortFilterProxyModel();
         proxy->setSourceModel(&cModel);
         proxy->setFilterCaseSensitivity(Qt::CaseInsensitive);
-        proxy->setFilterKeyColumn(-1);
 
         cView->setModel(proxy);
         cView->hideColumns();
@@ -97,6 +96,8 @@ MainWindow::MainWindow(CartModel& cModel, LaptopModel& lModel) :
         //Search Bar
         connect(searchBar, SIGNAL(textChanged(QString)),
                 SLOT(search(QString)));
+        connect(columnSelect, SIGNAL(activated(int)),
+                SLOT(setSearchColumn(int)));
 }
 
 void MainWindow::createToolbar() {
@@ -265,6 +266,22 @@ void MainWindow::saveSettings() {
 
 void MainWindow::search(const QString &query) {
     proxy->setFilterFixedString(query);
+}
+
+void MainWindow::setSearchColumn(int index) {
+    if(index == 0) {
+        proxy->setFilterKeyColumn(-1);
+    } else if (index == 1) {
+        proxy->setFilterKeyColumn(0);
+    } else if (index == 2) {
+        proxy->setFilterKeyColumn(1);
+    } else if (index == 3) {
+        proxy->setFilterKeyColumn(3);
+    } else if (index == 4) {
+        proxy->setFilterKeyColumn(7);
+    } else if (index == 5) {
+        proxy->setFilterKeyColumn(9);
+    }
 }
 
 MainWindow::~MainWindow(){

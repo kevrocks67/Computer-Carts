@@ -22,7 +22,6 @@ Laptops::Laptops(LaptopModel &laptopModel, LaptopView &laptopView, bool isCart) 
         proxy = new QSortFilterProxyModel();
         proxy->setSourceModel(&model);
         proxy->setFilterCaseSensitivity(Qt::CaseInsensitive);
-        proxy->setFilterKeyColumn(-1);
         view.setModel(proxy);
 
 
@@ -79,6 +78,8 @@ Laptops::Laptops(LaptopModel &laptopModel, LaptopView &laptopView, bool isCart) 
                 this, SLOT(updateTable()));
         connect(searchBar, SIGNAL(textChanged(QString)),
                 this, SLOT(search(QString)));
+        connect(columnSelect, SIGNAL(activated(int)),
+                this, SLOT(setSearchColumn(int)));
 
         setLayout(mainLayout);
         updateTable();
@@ -204,6 +205,18 @@ void Laptops::deleteActionCart() {
 
 void Laptops::search(const QString &query) {
     proxy->setFilterFixedString(query);
+}
+
+void Laptops::setSearchColumn(int index) {
+    if(index == 0) {
+        proxy->setFilterKeyColumn(-1);
+    } else if (index == 1) {
+        proxy->setFilterKeyColumn(0);
+    } else if (index == 2) {
+        proxy->setFilterKeyColumn(4);
+    } else if (index == 3) {
+        proxy->setFilterKeyColumn(5);
+    }
 }
 
 Laptops::~Laptops(){

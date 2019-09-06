@@ -48,6 +48,7 @@ class MainWindow : public QMainWindow {
         void changeTheme(int styleName);
         void showDetails(const QModelIndex &index);
         void search(const QString &query);
+        void setSearchColumn(int index);
         void changeFont(const QFont &font);
         void loadSettings();
         void saveSettings();
