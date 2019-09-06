@@ -14,11 +14,25 @@ MainWindow::MainWindow(CartModel& cModel, LaptopModel& lModel) :
         //Initialize and create widgets
         tabs = new QTabWidget(this);
         cartWidget = new QWidget(this);
+        searchBar = new QLineEdit();
+        columnSelect = new QComboBox();
+
+        searchBar->setPlaceholderText("Search");
+        columnSelect->addItems(QStringList()<<"All"<<"Cart Number"<<"Computer Type"
+                <<"Current Room"<<"OS"<<"Home Location");
 
         createToolbar();
 
         cView = new CartView(this);
-        cView->setModel(&cModel);
+        //cView->setModel(&cModel);
+
+        //Proxy model for searching
+        proxy = new QSortFilterProxyModel();
+        proxy->setSourceModel(&cModel);
+        proxy->setFilterCaseSensitivity(Qt::CaseInsensitive);
+        proxy->setFilterKeyColumn(-1);
+
+        cView->setModel(proxy);
         cView->hideColumns();
 
         lView = new LaptopView(this);
@@ -28,7 +42,9 @@ MainWindow::MainWindow(CartModel& cModel, LaptopModel& lModel) :
         //Initialize layouts
         mainLayout = new QVBoxLayout(cartWidget);
 
+
         //Add widgets to layouts
+
         mainLayout->addWidget(toolbar);
         mainLayout->addWidget(cView);
 
@@ -78,6 +94,9 @@ MainWindow::MainWindow(CartModel& cModel, LaptopModel& lModel) :
 
         connect(settingsView, SIGNAL(fontChanged(const QFont)),
                 this, SLOT(changeFont(const QFont)));
+        //Search Bar
+        connect(searchBar, SIGNAL(textChanged(QString)),
+                SLOT(search(QString)));
 }
 
 void MainWindow::createToolbar() {
@@ -109,6 +128,8 @@ void MainWindow::createToolbar() {
     toolbar->addSeparator();
     toolbar->addWidget(settingsTool);
     toolbar->addWidget(logoutTool);
+    toolbar->addWidget(searchBar);
+    toolbar->addWidget(columnSelect);
 }
 
 void MainWindow::changeTheme(int styleName) {
@@ -240,6 +261,10 @@ void MainWindow::saveSettings() {
 
     settings.setValue("app/font", this->font());
     settings.setValue("app/theme", settingsView->getTheme());
+}
+
+void MainWindow::search(const QString &query) {
+    proxy->setFilterFixedString(query);
 }
 
 MainWindow::~MainWindow(){
