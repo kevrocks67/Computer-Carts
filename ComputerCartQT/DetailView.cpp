@@ -4,29 +4,29 @@
 DetailView::DetailView(QWidget * parent) :
     QDialog(parent) {
 
-    mainLayout = new QVBoxLayout;
-    tabWidget = new QTabWidget;
-    cartWidget = new QWidget;
-    resWidget = new QWidget;
+    mainLayout = new QVBoxLayout(this);
+    tabWidget = new QTabWidget(this);
+    cartWidget = new QWidget(this);
+    resWidget = new QWidget(this);
     //laptopWidget = new QWidget;
-    cartLayout = new QVBoxLayout;
-    resLayout = new QVBoxLayout;
-    closeButton = new QPushButton("Close");
+    cartLayout = new QVBoxLayout();
+    resLayout = new QVBoxLayout();
+    closeButton = new QPushButton("Close", this);
 
     closeButton->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Minimum);
 
     //Cart Tab Widgets
-    cartNumLabel = new QLabel();
-    compTypeLabel = new QLabel();
-    quantLabel = new QLabel();
-    cRoomLabel = new QLabel();
-    cPeriodLabel = new QLabel();
-    osLabel = new QLabel();
-    homeLabel = new QLabel();
-    lockTypeLabel = new QLabel();
-    commentLabel = new QLabel("Comments");
-    commentBox = new QTextEdit();
-    laptopsButton = new QPushButton("View Laptops In This Cart");
+    cartNumLabel = new QLabel(this);
+    compTypeLabel = new QLabel(this);
+    quantLabel = new QLabel(this);
+    cRoomLabel = new QLabel(this);
+    cPeriodLabel = new QLabel(this);
+    osLabel = new QLabel(this);
+    homeLabel = new QLabel(this);
+    lockTypeLabel = new QLabel(this);
+    commentLabel = new QLabel("Comments", this);
+    commentBox = new QTextEdit(this);
+    laptopsButton = new QPushButton("View Laptops In This Cart", this);
 
     //Cart Tab Widget Properties
     commentBox->setReadOnly(true);
@@ -92,4 +92,5 @@ void DetailView::getDetails(int cartNo) {
 }
 
 DetailView::~DetailView(){
+    delete resLayout;
 }

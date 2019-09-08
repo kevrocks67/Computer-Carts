@@ -4,7 +4,7 @@
 Laptops::Laptops(LaptopModel &laptopModel, LaptopView &laptopView, bool isCart) :
     model(laptopModel), view(laptopView) {
 
-        mainLayout = new QVBoxLayout;
+        mainLayout = new QVBoxLayout(this);
 
         //Initialize widgets
 
@@ -14,12 +14,12 @@ Laptops::Laptops(LaptopModel &laptopModel, LaptopView &laptopView, bool isCart) 
         removeTool = new QToolButton();
         cartNum = new QLabel();
 
-        searchBar = new QLineEdit();
-        columnSelect = new QComboBox();
+        searchBar = new QLineEdit(this);
+        columnSelect = new QComboBox(this);
         searchBar->setPlaceholderText("Search");
         columnSelect->addItems(QStringList()<<"All"<<"Asset Tag"<<"Serial Num"<<"OS");
 
-        proxy = new QSortFilterProxyModel();
+        proxy = new QSortFilterProxyModel(this);
         proxy->setSourceModel(&model);
         proxy->setFilterCaseSensitivity(Qt::CaseInsensitive);
         view.setModel(proxy);
@@ -49,7 +49,7 @@ Laptops::Laptops(LaptopModel &laptopModel, LaptopView &laptopView, bool isCart) 
         toolbar->addWidget(columnSelect);
 
 
-        mainLayout = new QVBoxLayout();
+        //mainLayout = new QVBoxLayout(this);
         //mainLayout(new QVBoxLayout());
 
         if(isCart) {

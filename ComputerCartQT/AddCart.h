@@ -22,7 +22,7 @@ class AddCart : public QDialog {
     Q_OBJECT
 
     public:
-        explicit AddCart(QWidget * parent=0);
+        explicit AddCart(QWidget * parent=nullptr);
         virtual ~AddCart();
     public slots:
         void setCartNum(int c);

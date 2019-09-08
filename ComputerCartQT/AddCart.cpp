@@ -8,18 +8,18 @@ AddCart::AddCart(QWidget * parent) :
     buttonLayout = new QHBoxLayout();
 
     //Initialize widgets
-    cNumLabel = new QLabel("Cart Number: 1");
-    typeField = new QLineEdit();
-    quantField = new QLineEdit();
-    cRoomField = new QLineEdit();
-    cPeriodField = new QLineEdit();
-    homeLocationField = new QLineEdit();
-    lockTypeSelect = new QComboBox();
-    osSelect = new QComboBox();
-    commentsField = new QLineEdit();
+    cNumLabel = new QLabel("Cart Number: 1", this);
+    typeField = new QLineEdit(this);
+    quantField = new QLineEdit(this);
+    cRoomField = new QLineEdit(this);
+    cPeriodField = new QLineEdit(this);
+    homeLocationField = new QLineEdit(this);
+    lockTypeSelect = new QComboBox(this);
+    osSelect = new QComboBox(this);
+    commentsField = new QLineEdit(this);
 
-    cancelButton = new QPushButton("Cancel");
-    addButton = new QPushButton("Add Cart");
+    cancelButton = new QPushButton("Cancel", this);
+    addButton = new QPushButton("Add Cart", this);
 
     //Set widget properties
     typeField->setPlaceholderText("Computer Type");

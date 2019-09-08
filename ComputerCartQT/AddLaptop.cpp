@@ -55,8 +55,11 @@ AddLaptop::AddLaptop(LaptopModel &lapModel, int cartNo):
         fieldLayout->addWidget(genericNField);
         fieldLayout->addWidget(modelField);
         fieldLayout->addWidget(serialField);
+        fieldLayout->addWidget(osLabel);
         fieldLayout->addWidget(osSelect);
         //fieldLayout->addWidget(cartNumberSelect);
+        cartNumSelectLabel->hide();
+        cartNumberSelect->hide();
         fieldLayout->addWidget(statusGroup);
         fieldLayout->addWidget(isDeployedGroup);
 
@@ -81,35 +84,35 @@ AddLaptop::AddLaptop(LaptopModel &lapModel, int cartNo):
 }
 
 void AddLaptop::createWidgets() {
-        mainLayout = new QVBoxLayout();
+        mainLayout = new QVBoxLayout(this);
         fieldLayout = new QVBoxLayout();
         buttonLayout = new QHBoxLayout();
         statusLayout = new QHBoxLayout();
         deployedLayout = new QHBoxLayout();
 
-        cartNumLabel = new QLabel();
-        assetField = new QLineEdit();
-        brandLabel = new QLabel("Brand");
-        brandField = new QComboBox();
-        genericNLabel = new QLabel("Generic Name");
-        genericNField = new QComboBox();
-        modelField = new QLineEdit();
-        serialField = new QLineEdit();
-        osLabel = new QLabel("OS");
-        osSelect = new QComboBox();
-        cartNumSelectLabel = new QLabel("Cart Number");
-        cartNumberSelect = new QComboBox();
+        cartNumLabel = new QLabel(this);
+        assetField = new QLineEdit(this);
+        brandLabel = new QLabel("Brand", this);
+        brandField = new QComboBox(this);
+        genericNLabel = new QLabel("Generic Name", this);
+        genericNField = new QComboBox(this);
+        modelField = new QLineEdit(this);
+        serialField = new QLineEdit(this);
+        osLabel = new QLabel("OS", this);
+        osSelect = new QComboBox(this);
+        cartNumSelectLabel = new QLabel("Cart Number", this);
+        cartNumberSelect = new QComboBox(this);
 
-        statusGroup = new QGroupBox(tr("Status"));
-        workingStatusButton = new QRadioButton(tr("Working"));
-        brokenStatusButton = new QRadioButton(tr("Broken"));
+        statusGroup = new QGroupBox(tr("Status"), this);
+        workingStatusButton = new QRadioButton(tr("Working"), this);
+        brokenStatusButton = new QRadioButton(tr("Broken"), this);
 
-        isDeployedGroup = new QGroupBox(tr("Is Deployed"));
-        deployedButton = new QRadioButton(tr("True"));
-        notDeployedButton = new QRadioButton(tr("False"));
+        isDeployedGroup = new QGroupBox(tr("Is Deployed"), this);
+        deployedButton = new QRadioButton(tr("True"), this);
+        notDeployedButton = new QRadioButton(tr("False"), this);
 
-        addButton = new QPushButton("Add");
-        cancelButton = new QPushButton("Cancel");
+        addButton = new QPushButton("Add", this);
+        cancelButton = new QPushButton("Cancel", this);
 }
 
 void AddLaptop::setWidgetProperties() {
@@ -211,4 +214,17 @@ void AddLaptop::keyPressEvent(QKeyEvent *evt) {
 }
 
 AddLaptop::~AddLaptop() {
+    /*
+    if(!fieldLayout.isNull()) {
+        fieldLayout.clear();
+    }
+    if(!buttonLayout.isNull()) {
+        buttonLayout.clear();
+    }
+    if(!statusLayout.isNull()) {
+        statusLayout.clear();
+    }
+    if(!deployedLayout.isNull()) {
+        deployedLayout.clear();
+    }*/
 }

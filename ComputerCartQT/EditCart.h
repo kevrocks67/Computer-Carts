@@ -22,7 +22,7 @@ class EditCart : public QDialog {
     Q_OBJECT
 
     public:
-        explicit EditCart(QWidget * parent=0);
+        explicit EditCart(QWidget * parent=nullptr);
         virtual ~EditCart();
     public slots:
         void setCartNum(int c);

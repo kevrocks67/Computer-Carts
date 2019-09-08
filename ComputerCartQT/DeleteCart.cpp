@@ -8,10 +8,10 @@ DeleteCart::DeleteCart(QWidget * parent) :
     buttonLayout = new QHBoxLayout();
 
     //Initialize widgets
-    cancelButton = new QPushButton("Cancel");
-    delButton = new QPushButton("Delete Cart");
-    deleteMessage = new QLabel("Are you sure you want to delete cart no: ");
-    cartNum = new QLabel("NULL");
+    cancelButton = new QPushButton("Cancel", this);
+    delButton = new QPushButton("Delete Cart", this);
+    deleteMessage = new QLabel("Are you sure you want to delete cart no: ", this);
+    cartNum = new QLabel("NULL", this);
 
     //Add widget to layouts
     buttonLayout->addWidget(cancelButton);

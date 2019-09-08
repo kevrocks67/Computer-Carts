@@ -14,8 +14,8 @@ MainWindow::MainWindow(CartModel& cModel, LaptopModel& lModel) :
         //Initialize and create widgets
         tabs = new QTabWidget(this);
         cartWidget = new QWidget(this);
-        searchBar = new QLineEdit();
-        columnSelect = new QComboBox();
+        searchBar = new QLineEdit(this);
+        columnSelect = new QComboBox(this);
 
         searchBar->setPlaceholderText("Search");
         columnSelect->addItems(QStringList()<<"All"<<"Cart Number"<<"Computer Type"
@@ -27,7 +27,7 @@ MainWindow::MainWindow(CartModel& cModel, LaptopModel& lModel) :
         //cView->setModel(&cModel);
 
         //Proxy model for searching
-        proxy = new QSortFilterProxyModel();
+        proxy = new QSortFilterProxyModel(this);
         proxy->setSourceModel(&cModel);
         proxy->setFilterCaseSensitivity(Qt::CaseInsensitive);
 
@@ -103,7 +103,7 @@ MainWindow::MainWindow(CartModel& cModel, LaptopModel& lModel) :
 void MainWindow::createToolbar() {
     //Initialize widgets
     toolbar = new QToolBar();
-    refreshTool = new QToolButton;
+    refreshTool = new QToolButton();
     addTool = new QToolButton();
     removeTool = new QToolButton();
     editTool = new QToolButton();
@@ -250,7 +250,7 @@ void MainWindow::loadSettings() {
 
     QApplication::setPalette(namedColorSchemePalette(theme));
     //settingsView->setSettingsTheme(getThemeValue(theme));
-    settingsView->setSettingsTheme((int) theme);
+    settingsView->setSettingsTheme(static_cast<int>(theme));
     this->setFont(settings.value("app/font").value<QFont>());
 }
 

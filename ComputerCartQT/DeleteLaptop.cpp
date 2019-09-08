@@ -9,10 +9,10 @@ DeleteLaptop::DeleteLaptop(LaptopModel &lapModel) :
     buttonLayout = new QHBoxLayout();
 
     //Initialize widgets
-    cancelButton = new QPushButton("Cancel");
-    delButton = new QPushButton("Delete Laptop");
-    deleteMessage = new QLabel("Are you sure you want to delete this laptop?");
-    detailsLabel = new QLabel();
+    cancelButton = new QPushButton("Cancel", this);
+    delButton = new QPushButton("Delete Laptop", this);
+    deleteMessage = new QLabel("Are you sure you want to delete this laptop?", this);
+    detailsLabel = new QLabel(this);
 
     //ButtonLayout Widgets
     buttonLayout->addWidget(cancelButton);
@@ -50,4 +50,12 @@ void DeleteLaptop::setLapDetails(QString asset, QString gName) {
 }
 
 DeleteLaptop::~DeleteLaptop(){
+    /*
+    if(!textLayout.isNull()) {
+        textLayout.clear();
+    }
+
+    if(!buttonLayout.isNull()){
+        buttonLayout.clear();
+    }*/
 }
