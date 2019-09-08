@@ -24,7 +24,7 @@ class DetailView : public QDialog {
     Q_OBJECT
 
     public:
-        explicit DetailView(QWidget * parent=0);
+        explicit DetailView(QWidget * parent=nullptr);
         virtual ~DetailView();
     public slots:
         void getDetails(int cartNo);
@@ -35,11 +35,12 @@ class DetailView : public QDialog {
         QPointer<LaptopModel> laptopModel;
 
         //Main Widgets
+         //QWidget *laptopWidget;
         QPointer<QVBoxLayout> mainLayout;
         QPointer<QTabWidget> tabWidget;
         QPointer<QWidget> cartWidget;
         QPointer<QWidget> resWidget;
-        //QWidget *laptopWidget;
+
         QPointer<QVBoxLayout> cartLayout;
         QPointer<QVBoxLayout> resLayout;
         QPointer<QPushButton> closeButton;

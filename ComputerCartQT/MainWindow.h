@@ -11,12 +11,15 @@
 #include "LaptopView.h"
 #include "Settings.h"
 
+#include <QComboBox>
 #include <QDebug>
+#include <QLineEdit>
 #include <QMainWindow>
 #include <QMessageBox>
 #include <QPointer>
 #include <QPushButton>
 #include <QSettings>
+#include <QSortFilterProxyModel>
 #include <QTabWidget>
 #include <QToolBar>
 #include <QToolButton>
@@ -44,6 +47,8 @@ class MainWindow : public QMainWindow {
         void updateTable();
         void changeTheme(int styleName);
         void showDetails(const QModelIndex &index);
+        void search(const QString &query);
+        void setSearchColumn(int index);
         void changeFont(const QFont &font);
         void loadSettings();
         void saveSettings();
@@ -76,4 +81,8 @@ class MainWindow : public QMainWindow {
 
         QPointer<QToolButton> addResTool;
         QPointer<QToolButton> editResTool;
+
+        QPointer<QLineEdit> searchBar;
+        QPointer<QSortFilterProxyModel> proxy;
+        QPointer<QComboBox> columnSelect;
 };

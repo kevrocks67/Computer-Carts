@@ -1,10 +1,10 @@
 #include "Laptops.h"
 #include <QDebug>
 
-Laptops::Laptops(LaptopModel &laptopModel, LaptopView &laptopView, bool IsCart) :
+Laptops::Laptops(LaptopModel &laptopModel, LaptopView &laptopView, bool isCart) :
     model(laptopModel), view(laptopView) {
 
-        mainLayout = new QVBoxLayout;
+        mainLayout = new QVBoxLayout(this);
 
         //Initialize widgets
 
@@ -13,6 +13,17 @@ Laptops::Laptops(LaptopModel &laptopModel, LaptopView &laptopView, bool IsCart) 
         editTool = new QToolButton();
         removeTool = new QToolButton();
         cartNum = new QLabel();
+
+        searchBar = new QLineEdit(this);
+        columnSelect = new QComboBox(this);
+        searchBar->setPlaceholderText("Search");
+        columnSelect->addItems(QStringList()<<"All"<<"Asset Tag"<<"Serial Num"<<"OS");
+
+        proxy = new QSortFilterProxyModel(this);
+        proxy->setSourceModel(&model);
+        proxy->setFilterCaseSensitivity(Qt::CaseInsensitive);
+        view.setModel(proxy);
+
 
         //refreshTool(new QToolButton());
         //addTool(new QToolButton());
@@ -34,12 +45,14 @@ Laptops::Laptops(LaptopModel &laptopModel, LaptopView &laptopView, bool IsCart) 
         toolbar->addWidget(addTool);
         toolbar->addWidget(editTool);
         toolbar->addWidget(removeTool);
+        toolbar->addWidget(searchBar);
+        toolbar->addWidget(columnSelect);
 
 
-        mainLayout = new QVBoxLayout();
+        //mainLayout = new QVBoxLayout(this);
         //mainLayout(new QVBoxLayout());
 
-        if(IsCart) {
+        if(isCart) {
             mainLayout->addWidget(toolbar);
             mainLayout->addWidget(cartNum);
             mainLayout->addWidget(&laptopView);
@@ -54,8 +67,6 @@ Laptops::Laptops(LaptopModel &laptopModel, LaptopView &laptopView, bool IsCart) 
             mainLayout->addWidget(toolbar);
             mainLayout->addWidget(&laptopView);
 
-            connect(refreshTool, SIGNAL(clicked()),
-                    this, SLOT(updateTable()));
             connect(addTool, SIGNAL(clicked()),
                     this, SLOT(addAction()));
             connect(editTool, SIGNAL(clicked()),
@@ -63,6 +74,12 @@ Laptops::Laptops(LaptopModel &laptopModel, LaptopView &laptopView, bool IsCart) 
             connect(removeTool, SIGNAL(clicked()),
                     this, SLOT(deleteAction()));
         }
+        connect(refreshTool, SIGNAL(clicked()),
+                this, SLOT(updateTable()));
+        connect(searchBar, SIGNAL(textChanged(QString)),
+                this, SLOT(search(QString)));
+        connect(columnSelect, SIGNAL(activated(int)),
+                this, SLOT(setSearchColumn(int)));
 
         setLayout(mainLayout);
         updateTable();
@@ -183,6 +200,22 @@ void Laptops::deleteActionCart() {
         deleteLaptop->exec();
     }  else {
         qDebug()<<"No cart selected";
+    }
+}
+
+void Laptops::search(const QString &query) {
+    proxy->setFilterFixedString(query);
+}
+
+void Laptops::setSearchColumn(int index) {
+    if(index == 0) {
+        proxy->setFilterKeyColumn(-1);
+    } else if (index == 1) {
+        proxy->setFilterKeyColumn(0);
+    } else if (index == 2) {
+        proxy->setFilterKeyColumn(4);
+    } else if (index == 3) {
+        proxy->setFilterKeyColumn(5);
     }
 }
 

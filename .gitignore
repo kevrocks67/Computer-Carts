@@ -5,3 +5,4 @@ moc_*.h
 .qmake.stash
 config.ini
 *.swp
+*.user

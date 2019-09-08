@@ -17,7 +17,7 @@ class DeleteCart : public QDialog {
     Q_OBJECT
 
     public:
-        explicit DeleteCart(QWidget * parent=0);
+        explicit DeleteCart(QWidget * parent=nullptr);
         virtual ~DeleteCart();
         void setCartNum(int c);
     public slots:

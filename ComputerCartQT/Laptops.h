@@ -9,9 +9,13 @@
 
 #include <QApplication>
 #include <QWidget>
+#include <QComboBox>
 #include <QLabel>
+#include <QLineEdit>
 #include <QPointer>
 #include <QString>
+#include <QStringList>
+#include <QSortFilterProxyModel>
 #include <QToolBar>
 #include <QToolButton>
 #include <QVBoxLayout>
@@ -21,7 +25,7 @@ class Laptops : public QWidget {
     Q_OBJECT
 
     public:
-        explicit Laptops(LaptopModel &laptopModel, LaptopView &laptopView, bool IsCart);
+        explicit Laptops(LaptopModel &laptopModel, LaptopView &laptopView, bool isCart);
         virtual ~Laptops();
     public slots:
         void setCartNum(int cartno);
@@ -35,6 +39,8 @@ class Laptops : public QWidget {
         void editActionCart();
         void deleteAction();
         void deleteActionCart();
+        void search(const QString &query);
+        void setSearchColumn(int index);
     private:
         LaptopModel& model;
         LaptopView& view;
@@ -51,5 +57,8 @@ class Laptops : public QWidget {
         QPointer<QToolButton> addTool;
         QPointer<QToolButton> editTool;
         QPointer<QToolButton> removeTool;
+        QPointer<QLineEdit> searchBar;
+        QPointer<QSortFilterProxyModel> proxy;
+        QPointer<QComboBox> columnSelect;
 };
 #endif //LAPTOPS_H

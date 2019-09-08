@@ -14,11 +14,24 @@ MainWindow::MainWindow(CartModel& cModel, LaptopModel& lModel) :
         //Initialize and create widgets
         tabs = new QTabWidget(this);
         cartWidget = new QWidget(this);
+        searchBar = new QLineEdit(this);
+        columnSelect = new QComboBox(this);
+
+        searchBar->setPlaceholderText("Search");
+        columnSelect->addItems(QStringList()<<"All"<<"Cart Number"<<"Computer Type"
+                <<"Current Room"<<"OS"<<"Home Location");
 
         createToolbar();
 
         cView = new CartView(this);
-        cView->setModel(&cModel);
+        //cView->setModel(&cModel);
+
+        //Proxy model for searching
+        proxy = new QSortFilterProxyModel(this);
+        proxy->setSourceModel(&cModel);
+        proxy->setFilterCaseSensitivity(Qt::CaseInsensitive);
+
+        cView->setModel(proxy);
         cView->hideColumns();
 
         lView = new LaptopView(this);
@@ -28,7 +41,9 @@ MainWindow::MainWindow(CartModel& cModel, LaptopModel& lModel) :
         //Initialize layouts
         mainLayout = new QVBoxLayout(cartWidget);
 
+
         //Add widgets to layouts
+
         mainLayout->addWidget(toolbar);
         mainLayout->addWidget(cView);
 
@@ -78,12 +93,17 @@ MainWindow::MainWindow(CartModel& cModel, LaptopModel& lModel) :
 
         connect(settingsView, SIGNAL(fontChanged(const QFont)),
                 this, SLOT(changeFont(const QFont)));
+        //Search Bar
+        connect(searchBar, SIGNAL(textChanged(QString)),
+                SLOT(search(QString)));
+        connect(columnSelect, SIGNAL(activated(int)),
+                SLOT(setSearchColumn(int)));
 }
 
 void MainWindow::createToolbar() {
     //Initialize widgets
     toolbar = new QToolBar();
-    refreshTool = new QToolButton;
+    refreshTool = new QToolButton();
     addTool = new QToolButton();
     removeTool = new QToolButton();
     editTool = new QToolButton();
@@ -109,6 +129,8 @@ void MainWindow::createToolbar() {
     toolbar->addSeparator();
     toolbar->addWidget(settingsTool);
     toolbar->addWidget(logoutTool);
+    toolbar->addWidget(searchBar);
+    toolbar->addWidget(columnSelect);
 }
 
 void MainWindow::changeTheme(int styleName) {
@@ -228,7 +250,7 @@ void MainWindow::loadSettings() {
 
     QApplication::setPalette(namedColorSchemePalette(theme));
     //settingsView->setSettingsTheme(getThemeValue(theme));
-    settingsView->setSettingsTheme((int) theme);
+    settingsView->setSettingsTheme(static_cast<int>(theme));
     this->setFont(settings.value("app/font").value<QFont>());
 }
 
@@ -240,6 +262,26 @@ void MainWindow::saveSettings() {
 
     settings.setValue("app/font", this->font());
     settings.setValue("app/theme", settingsView->getTheme());
+}
+
+void MainWindow::search(const QString &query) {
+    proxy->setFilterFixedString(query);
+}
+
+void MainWindow::setSearchColumn(int index) {
+    if(index == 0) {
+        proxy->setFilterKeyColumn(-1);
+    } else if (index == 1) {
+        proxy->setFilterKeyColumn(0);
+    } else if (index == 2) {
+        proxy->setFilterKeyColumn(1);
+    } else if (index == 3) {
+        proxy->setFilterKeyColumn(3);
+    } else if (index == 4) {
+        proxy->setFilterKeyColumn(7);
+    } else if (index == 5) {
+        proxy->setFilterKeyColumn(9);
+    }
 }
 
 MainWindow::~MainWindow(){

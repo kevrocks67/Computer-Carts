@@ -22,7 +22,7 @@ class Settings : public QDialog {
     Q_OBJECT
 
     public:
-        explicit Settings(QWidget * parent=0);
+        explicit Settings(QWidget * parent=nullptr);
         virtual ~Settings();
     public slots:
         void setSettingsTheme(int theme);

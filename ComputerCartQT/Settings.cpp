@@ -9,17 +9,17 @@ Settings::Settings(QWidget * parent) :
     buttonLayout = new QHBoxLayout();
 
     //Initialize widgets
-    cancelButton = new QPushButton("Cancel");
-    saveButton = new QPushButton("Save Settings");
-    changeFontButton = new QPushButton("Change Font");
-    themePicker = new QComboBox();
-    driverPicker = new QComboBox();
-    hostLabel = new QLabel("Hostname/IP Address");
-    hostField = new QLineEdit();
-    userLabel = new QLabel("Username");
-    userField = new QLineEdit();
-    passLabel = new QLabel("Password");
-    passField = new QLineEdit();
+    cancelButton = new QPushButton("Cancel", this);
+    saveButton = new QPushButton("Save Settings", this);
+    changeFontButton = new QPushButton("Change Font", this);
+    themePicker = new QComboBox(this);
+    driverPicker = new QComboBox(this);
+    hostLabel = new QLabel("Hostname/IP Address", this);
+    hostField = new QLineEdit(this);
+    userLabel = new QLabel("Username", this);
+    userField = new QLineEdit(this);
+    passLabel = new QLabel("Password", this);
+    passField = new QLineEdit(this);
 
     //Set widget properties
     themePicker->addItem("Carbon");
