@@ -7,6 +7,8 @@ CartView::CartView(QWidget * parent):
         this->setSelectionMode(QAbstractItemView::SingleSelection);
         this->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
         this->verticalHeader()->setVisible(false);
+        this->setSortingEnabled(true);
+        this->sortByColumn(0, Qt::AscendingOrder);
 }
 
 void CartView::currentChanged(const QModelIndex &current, const QModelIndex &previous) {
