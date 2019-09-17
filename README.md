@@ -7,8 +7,17 @@ Columbia Secondary School.
 ## Build/Install Instructions (Linux)
 1. Install Qt build dependencies
 2. Change into the ComputerCartQT directory
-3. Run `make -j $(nproc)`
-4. ./ComputerCartQT
+3. Run `qmake` to create Makefile for your computers architecture
+4. Run `make -j $(nproc)`
+5. ./ComputerCartQT
+
+### Ubuntu
+1. `apt install git qt5-default qt5-qmake g++ make`
+2. `git clone https://github.com/kevrocks67/Computer-Carts.git`
+3. `cd Computer-Carts/ComputerCartQT`
+4. `qmake && make -j $(nproc)`
+5. `./ComputerCartQT`
+
 
 ## Setting up to use SQL (Linux)
 1. Install mariadb/mysql and start the mysql service
