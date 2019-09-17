@@ -22,7 +22,7 @@ qmake && make -j$(nproc)
 
 ### Ubuntu
 ```bash
-sudo apt install git qt5-default qt5-qmake g++ make
+sudo apt install git qt5-default qt5-qmake libqt5sql5-mysql g++ make
 git clone https://github.com/kevrocks67/Computer-Carts.git
 cd Computer-Carts/ComputerCartQT
 qmake && make -j$(nproc)
