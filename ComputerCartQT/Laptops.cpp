@@ -17,6 +17,7 @@ Laptops::Laptops(LaptopModel &laptopModel, LaptopView &laptopView, bool isCart) 
         searchBar = new QLineEdit(this);
         columnSelect = new QComboBox(this);
         searchBar->setPlaceholderText("Search");
+        searchBar->setClearButtonEnabled(true);
         columnSelect->addItems(QStringList()<<"All"<<"Asset Tag"<<"Serial Num"<<"OS");
 
         proxy = new QSortFilterProxyModel(this);

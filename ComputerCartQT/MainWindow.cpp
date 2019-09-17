@@ -18,6 +18,7 @@ MainWindow::MainWindow(CartModel& cModel, LaptopModel& lModel) :
         columnSelect = new QComboBox(this);
 
         searchBar->setPlaceholderText("Search");
+        searchBar->setClearButtonEnabled(true);
         columnSelect->addItems(QStringList()<<"All"<<"Cart Number"<<"Computer Type"
                 <<"Current Room"<<"OS"<<"Home Location");
 
