@@ -11,12 +11,31 @@ Columbia Secondary School.
 4. Run `make -j $(nproc)`
 5. ./ComputerCartQT
 
-### Ubuntu
+### Arch
 ```bash
-apt install git qt5-default qt5-qmake g++ make
+sudo pacman -S qt5-base qt5-tools
 git clone https://github.com/kevrocks67/Computer-Carts.git
 cd Computer-Carts/ComputerCartQT
-qmake && make -j $(nproc)
+qmake && make -j$(nproc)
+./ComputerCartQT
+```
+
+### Ubuntu
+```bash
+sudo apt install git qt5-default qt5-qmake g++ make
+git clone https://github.com/kevrocks67/Computer-Carts.git
+cd Computer-Carts/ComputerCartQT
+qmake && make -j$(nproc)
+./ComputerCartQT
+```
+
+### CentOS/Fedora
+```bash
+sudo yum install qt5-qtbase qt5-qtbase-common qt5-qtbase-devel qt5-qtbase-gui \
+qt5-qtbase-mysql git make gcc-c++
+git clone https://github.com/kevrocks67/Computer-Carts.git
+cd Computer-Carts/ComputerCartQT
+qmake-qt5 && make -j$(nproc)
 ./ComputerCartQT
 ```
 
