@@ -92,5 +92,12 @@ void DetailView::getDetails(int cartNo) {
 }
 
 DetailView::~DetailView(){
-    delete resLayout;
+    if (resLayout != nullptr)
+        delete resLayout;
+    if (cartModel != nullptr)
+        delete cartModel;
+    if (laptopView != nullptr)
+        delete laptopView;
+    if (laptopModel != nullptr)
+        delete laptopModel;
 }
