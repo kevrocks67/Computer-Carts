@@ -14,13 +14,6 @@ MainWindow::MainWindow(CartModel& cModel, LaptopModel& lModel) :
         //Initialize and create widgets
         tabs = new QTabWidget(this);
         cartWidget = new QWidget(this);
-        searchBar = new QLineEdit(this);
-        columnSelect = new QComboBox(this);
-
-        searchBar->setPlaceholderText("Search");
-        searchBar->setClearButtonEnabled(true);
-        columnSelect->addItems(QStringList()<<"All"<<"Cart Number"<<"Computer Type"
-                <<"Current Room"<<"OS"<<"Home Location");
 
         createToolbar();
 
@@ -31,6 +24,7 @@ MainWindow::MainWindow(CartModel& cModel, LaptopModel& lModel) :
         proxy = new QSortFilterProxyModel(this);
         proxy->setSourceModel(&cModel);
         proxy->setFilterCaseSensitivity(Qt::CaseInsensitive);
+        proxy->setFilterKeyColumn(-1);
 
         cView->setModel(proxy);
         cView->hideColumns();
@@ -42,9 +36,7 @@ MainWindow::MainWindow(CartModel& cModel, LaptopModel& lModel) :
         //Initialize layouts
         mainLayout = new QVBoxLayout(cartWidget);
 
-
         //Add widgets to layouts
-
         mainLayout->addWidget(toolbar);
         mainLayout->addWidget(cView);
 
@@ -110,6 +102,9 @@ void MainWindow::createToolbar() {
     editTool = new QToolButton();
     logoutTool = new QToolButton();
     settingsTool = new QToolButton();
+    searchBar = new QLineEdit(this);
+    columnSelect = new QComboBox(this);
+
 
     //Set widget properties
     refreshTool->setIcon(QIcon("res/refresh-button.png"));
@@ -120,6 +115,12 @@ void MainWindow::createToolbar() {
     logoutTool->setText("Logout");
     logoutTool->setEnabled(false);
     settingsTool->setText("Settings");
+
+    //Search Bar properties
+    searchBar->setPlaceholderText("Search");
+    searchBar->setClearButtonEnabled(true);
+    columnSelect->addItems(QStringList()<<"All"<<"Cart Number"<<"Computer Type"
+            <<"Current Room"<<"OS"<<"Home Location");
 
     toolbar->setAllowedAreas(Qt::TopToolBarArea);
 
