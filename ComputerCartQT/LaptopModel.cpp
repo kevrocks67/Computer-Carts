@@ -141,6 +141,7 @@ void LaptopModel::addLaptop(Laptop laptop) {
     } else {
         qDebug()<<query.lastError().text();
     }
+    emit updateCart();
 }
 
 void LaptopModel::editLaptop(Laptop laptop) {
@@ -201,6 +202,7 @@ void LaptopModel::deleteLaptop(QString asset, QString gName) {
     updateCartQuery.exec();
 
     qDebug()<<"Deleted laptop asset: "+asset;
+    emit updateCart();
 }
 
 LaptopModel::~LaptopModel(){

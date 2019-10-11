@@ -66,6 +66,10 @@ MainWindow::MainWindow(CartModel& cModel, LaptopModel& lModel) :
         connect(settingsTool, SIGNAL(clicked()),
                 settingsView, SLOT(exec()));
 
+        //Update table when laptop modified
+        connect(&lModel, SIGNAL(updateCart()),
+                this, SLOT(updateTable()));
+
         //Check for dialog close
         connect(newCart, SIGNAL(accepted()),
                 this, SLOT(updateTable()));

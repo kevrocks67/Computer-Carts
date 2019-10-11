@@ -44,6 +44,7 @@ class LaptopModel : public QSqlQueryModel {
         QStringList getCarts();
     private slots:
     signals:
+        void updateCart();
     private:
         QSqlDatabase cartdb;
 };
