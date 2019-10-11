@@ -97,6 +97,7 @@ QStringList LaptopModel::getGNames() {
     while(query.next()) {
         names << query.value(0).toString();
     }
+
     return names;
 }
 
@@ -110,9 +111,10 @@ QStringList LaptopModel::getCarts() {
 }
 
 void LaptopModel::addLaptop(Laptop laptop) {
-    QSqlQuery query;
+    QSqlQuery query, updateCartQuery;
     query.prepare("INSERT INTO Laptops "
                   "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
     query.bindValue(0, laptop.AssetID);
     query.bindValue(1, laptop.Brand);
     query.bindValue(2, laptop.GenericName);
@@ -125,13 +127,25 @@ void LaptopModel::addLaptop(Laptop laptop) {
 
     if (query.exec()) {
         qDebug()<<"Add query success";
+
+        //Update LastUpdate time for parent cart
+        updateCartQuery.prepare("UPDATE ComputerCarts SET LastUpdate=? WHERE CartNumber=?");
+        updateCartQuery.bindValue(0, QDateTime::currentDateTime());
+        updateCartQuery.bindValue(1, laptop.CartNumber);
+
+        if (updateCartQuery.exec()) {
+            qDebug() << "Updated cart LastUpdate";
+        } else {
+            qDebug()<<query.lastError().text();
+        }
     } else {
         qDebug()<<query.lastError().text();
     }
 }
 
 void LaptopModel::editLaptop(Laptop laptop) {
-    QSqlQuery query;
+    QSqlQuery query, updateCartQuery;
+
     query.prepare("UPDATE Laptops SET AssetID=?,\
                                       Brand=?,\
                                       GenericName=?,\
@@ -155,17 +169,37 @@ void LaptopModel::editLaptop(Laptop laptop) {
 
     if (query.exec()) {
         qDebug()<<"Edit query success";
+
+        //Update LastUpdate time for parent cart
+        updateCartQuery.prepare("UPDATE ComputerCarts SET LastUpdate=? WHERE CartNumber=?");
+        updateCartQuery.bindValue(0, QDateTime::currentDateTime());
+        updateCartQuery.bindValue(1, laptop.CartNumber);
+        updateCartQuery.exec();
     } else {
         qDebug()<<query.lastError().text();
     }
 }
 
 void LaptopModel::deleteLaptop(QString asset, QString gName) {
-    QSqlQuery query;
+    QSqlQuery query, getCartQuery, updateCartQuery;
     query.prepare("DELETE FROM Laptops WHERE AssetID=? AND GenericName=?");
     query.bindValue(0, asset);
     query.bindValue(1, gName);
     query.exec();
+
+    //Get cart number of laptop
+    getCartQuery.prepare("SELECT CartNumber FROM Laptops WHERE AssetID=? AND GenericName=?");
+    getCartQuery.bindValue(0, asset);
+    getCartQuery.bindValue(1, gName);
+    getCartQuery.exec();
+    int cartNum = getCartQuery.next();
+
+    //Update LastUpdate time for parent cart
+    updateCartQuery.prepare("UPDATE ComputerCarts SET LastUpdate=? WHERE CartNumber=?");
+    updateCartQuery.bindValue(0, QDateTime::currentDateTime());
+    updateCartQuery.bindValue(1, cartNum);
+    updateCartQuery.exec();
+
     qDebug()<<"Deleted laptop asset: "+asset;
 }
 

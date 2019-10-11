@@ -49,14 +49,6 @@ CREATE TABLE Laptops (
     FOREIGN KEY(CartNumber) REFERENCES ComputerCarts(CartNumber)
 );
 
-Get all laptops -> select * foom laptops where CartNumber=?
-Add interface to select
-    Get unique values from each column (brand, genricname, model)
-
-
-If CartNumber == '' -> Unassigned list
-Else getDetails(FutureResId)-> Display reservation details and modal with comments
-
 select * from reservations where CartNumber=cartNo ORDER by date, time); -> next reservation
     getResId -> update table computercarts where CartNumber=cartNo value of FutureResId
 
@@ -77,8 +69,6 @@ by checking time
 Check if period has passed by comparing currentTime > periodTime -> updateFutureResId
     Check every 10 mins if app open
     Manual refresh/check button
-
-Update readme, move stuff to a blog post or another folder
 
 //OLD IDEA
 Future date and time, Support for multiple dates and times
