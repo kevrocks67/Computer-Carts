@@ -23,6 +23,7 @@ Laptops::Laptops(LaptopModel &laptopModel, LaptopView &laptopView, bool isCart) 
         proxy = new QSortFilterProxyModel(this);
         proxy->setSourceModel(&model);
         proxy->setFilterCaseSensitivity(Qt::CaseInsensitive);
+        proxy->setFilterKeyColumn(-1);
         view.setModel(proxy);
 
 
