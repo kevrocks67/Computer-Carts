@@ -100,6 +100,10 @@ void EditCart::setCartNum(int c) {
      quantField->setText(QString::number(cartToEdit.quantity));
      cRoomField->setText(cartToEdit.cRoom);
      cPeriodField->setText(cartToEdit.cPeriod);
+     homeLocationField->setText(cartDetails.homeLoc);
+     lockTypeSelect->setCurrentText(cartDetails.lockType);
+     osSelect->setCurrentText(cartDetails.os);
+     commentsField->setText(cartDetails.comments);
 }
 
 EditCart::~EditCart(){
