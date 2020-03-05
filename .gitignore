@@ -6,6 +6,8 @@ moc_*.h
 config.ini
 *.swp
 *.user
-ComputerCartQT
+ComputerCartQT/ComputerCartQT
 Makefile
-
+.clangd
+compile_commands.json
+tags
