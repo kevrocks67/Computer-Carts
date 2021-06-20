@@ -110,44 +110,59 @@ QStringList LaptopModel::getCarts() {
     return carts;
 }
 
-void LaptopModel::addLaptop(Laptop laptop) {
-    QSqlQuery query, updateCartQuery;
-    query.prepare("INSERT INTO Laptops "
+int LaptopModel::getLaptopQuantity(int cartno) {
+    QSqlQuery query;
+    int quantity = -1;
+    query.prepare("SELECT COUNT(*) from Laptops WHERE CartNumber=?");
+    query.bindValue(0, cartno);
+    query.exec();
+    while(query.next()) {
+        quantity = query.value(0).toInt();
+    }
+    return quantity;
+}
+
+void LaptopModel::addLaptop(LaptopModel::Laptop laptop) {
+    QSqlQuery addQuery, updateCartQuery;
+    addQuery.prepare("INSERT INTO Laptops "
                   "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-    query.bindValue(0, laptop.AssetID);
-    query.bindValue(1, laptop.Brand);
-    query.bindValue(2, laptop.GenericName);
-    query.bindValue(3, laptop.Model);
-    query.bindValue(4, laptop.Serial);
-    query.bindValue(5, laptop.OS);
-    query.bindValue(6, laptop.CartNumber);
-    query.bindValue(7, laptop.Status);
-    query.bindValue(8, laptop.IsDeployed);
+    addQuery.bindValue(0, laptop.AssetID);
+    addQuery.bindValue(1, laptop.Brand);
+    addQuery.bindValue(2, laptop.GenericName);
+    addQuery.bindValue(3, laptop.Model);
+    addQuery.bindValue(4, laptop.Serial);
+    addQuery.bindValue(5, laptop.OS);
+    addQuery.bindValue(6, laptop.CartNumber);
+    addQuery.bindValue(7, laptop.Status);
+    addQuery.bindValue(8, laptop.IsDeployed);
 
-    if (query.exec()) {
+    if (addQuery.exec()) {
         qDebug()<<"Add query success";
 
+        int laptopQuant = getLaptopQuantity(laptop.CartNumber);
+
         //Update LastUpdate time for parent cart
-        updateCartQuery.prepare("UPDATE ComputerCarts SET LastUpdate=? WHERE CartNumber=?");
-        updateCartQuery.bindValue(0, QDateTime::currentDateTime());
-        updateCartQuery.bindValue(1, laptop.CartNumber);
+        updateCartQuery.prepare("UPDATE ComputerCarts SET Quantity=?,LastUpdate=? WHERE CartNumber=?");
+        updateCartQuery.bindValue(0, laptopQuant);
+        updateCartQuery.bindValue(1, QDateTime::currentDateTime());
+        updateCartQuery.bindValue(2, laptop.CartNumber);
 
         if (updateCartQuery.exec()) {
             qDebug() << "Updated cart LastUpdate";
         } else {
-            qDebug()<<query.lastError().text();
+            qDebug()<<addQuery.lastError().text();
         }
     } else {
-        qDebug()<<query.lastError().text();
+        qDebug()<<addQuery.lastError().text();
     }
     emit updateCart();
 }
 
-void LaptopModel::editLaptop(Laptop laptop) {
-    QSqlQuery query, updateCartQuery;
+void LaptopModel::editLaptop(LaptopModel::Laptop laptop) {
+    QSqlQuery editQuery, updateCartQuery, updateOldCartQuery;
 
-    query.prepare("UPDATE Laptops SET AssetID=?,\
+    editQuery.prepare("UPDATE Laptops SET AssetID=?,\
                                       Brand=?,\
                                       GenericName=?,\
                                       Model=?,\
@@ -157,48 +172,69 @@ void LaptopModel::editLaptop(Laptop laptop) {
                                       Status=?,\
                                       IsDeployed=?\
                    WHERE AssetID=?");
-    query.bindValue(0, laptop.AssetID);
-    query.bindValue(1, laptop.Brand);
-    query.bindValue(2, laptop.GenericName);
-    query.bindValue(3, laptop.Model);
-    query.bindValue(4, laptop.Serial);
-    query.bindValue(5, laptop.OS);
-    query.bindValue(6, laptop.CartNumber);
-    query.bindValue(7, laptop.Status);
-    query.bindValue(8, laptop.IsDeployed);
-    query.bindValue(9, laptop.OldAssetID);
+    editQuery.bindValue(0, laptop.AssetID);
+    editQuery.bindValue(1, laptop.Brand);
+    editQuery.bindValue(2, laptop.GenericName);
+    editQuery.bindValue(3, laptop.Model);
+    editQuery.bindValue(4, laptop.Serial);
+    editQuery.bindValue(5, laptop.OS);
+    editQuery.bindValue(6, laptop.CartNumber);
+    editQuery.bindValue(7, laptop.Status);
+    editQuery.bindValue(8, laptop.IsDeployed);
+    editQuery.bindValue(9, laptop.OldAssetID);
 
-    if (query.exec()) {
+    if (editQuery.exec()) {
         qDebug()<<"Edit query success";
 
-        //Update LastUpdate time for parent cart
-        updateCartQuery.prepare("UPDATE ComputerCarts SET LastUpdate=? WHERE CartNumber=?");
-        updateCartQuery.bindValue(0, QDateTime::currentDateTime());
-        updateCartQuery.bindValue(1, laptop.CartNumber);
+        //Update Quantity and LastUpdate time for parent cart
+        int laptopQuant = getLaptopQuantity(laptop.CartNumber);
+
+        updateCartQuery.prepare("UPDATE ComputerCarts SET Quantity=?,LastUpdate=? WHERE CartNumber=?");
+        updateCartQuery.bindValue(0, laptopQuant);
+        updateCartQuery.bindValue(1, QDateTime::currentDateTime());
+        updateCartQuery.bindValue(2, laptop.CartNumber);
         updateCartQuery.exec();
+
+        if (laptop.CartNumber != laptop.OldCartNumber) {
+            int laptopQuantOld = getLaptopQuantity(laptop.OldCartNumber);
+            updateOldCartQuery.prepare("UPDATE ComputerCarts SET Quantity=?,LastUpdate=? WHERE CartNumber=?");
+            updateOldCartQuery.bindValue(0, laptopQuantOld);
+            updateOldCartQuery.bindValue(1, QDateTime::currentDateTime());
+            updateOldCartQuery.bindValue(2, laptop.OldCartNumber);
+            updateOldCartQuery.exec();
+        }
     } else {
-        qDebug()<<query.lastError().text();
+        qDebug()<<editQuery.lastError().text();
     }
+    emit updateCart();
 }
 
 void LaptopModel::deleteLaptop(QString asset, QString gName) {
-    QSqlQuery query, getCartQuery, updateCartQuery;
-    query.prepare("DELETE FROM Laptops WHERE AssetID=? AND GenericName=?");
-    query.bindValue(0, asset);
-    query.bindValue(1, gName);
-    query.exec();
+    QSqlQuery deleteQuery, getCartQuery, updateCartQuery;
+    int cartNum = -1;
 
     //Get cart number of laptop
     getCartQuery.prepare("SELECT CartNumber FROM Laptops WHERE AssetID=? AND GenericName=?");
     getCartQuery.bindValue(0, asset);
     getCartQuery.bindValue(1, gName);
     getCartQuery.exec();
-    int cartNum = getCartQuery.next();
+    while(getCartQuery.next()) {
+        cartNum = getCartQuery.value(0).toInt();
+    }
+
+    //Delete the laptop
+    deleteQuery.prepare("DELETE FROM Laptops WHERE AssetID=? AND GenericName=?");
+    deleteQuery.bindValue(0, asset);
+    deleteQuery.bindValue(1, gName);
+    deleteQuery.exec();
 
     //Update LastUpdate time for parent cart
-    updateCartQuery.prepare("UPDATE ComputerCarts SET LastUpdate=? WHERE CartNumber=?");
-    updateCartQuery.bindValue(0, QDateTime::currentDateTime());
-    updateCartQuery.bindValue(1, cartNum);
+    int laptopQuant = getLaptopQuantity(cartNum);
+
+    updateCartQuery.prepare("UPDATE ComputerCarts SET Quantity=?,LastUpdate=? WHERE CartNumber=?");
+    updateCartQuery.bindValue(0, laptopQuant);
+    updateCartQuery.bindValue(1, QDateTime::currentDateTime());
+    updateCartQuery.bindValue(2, cartNum);
     updateCartQuery.exec();
 
     qDebug()<<"Deleted laptop asset: "+asset;

@@ -184,6 +184,7 @@ void EditLaptop::setLapDetails(QString asset, QString gName) {
     genericNField->setCurrentText(gName);
 
     LaptopModel::Laptop laptopToEdit = model->getLaptop(asset, gName);
+    laptop.OldCartNumber = laptopToEdit.CartNumber;
 
     brandField->setCurrentText(laptopToEdit.Brand);
     modelField->setText(laptopToEdit.Model);

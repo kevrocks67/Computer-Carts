@@ -29,6 +29,7 @@ class LaptopModel : public QSqlQueryModel {
             QString Serial;
             QString OS;
             int CartNumber;
+            int OldCartNumber;
             QString Status;
             bool IsDeployed;
         };
@@ -36,12 +37,13 @@ class LaptopModel : public QSqlQueryModel {
         LaptopModel::Laptop getLaptop(QString asset, QString gName);
         void getLaptops();
         void getLaptops(int cartno);
-        void addLaptop(Laptop laptop);
-        void editLaptop(Laptop laptop);
+        void addLaptop(LaptopModel::Laptop laptop);
+        void editLaptop(LaptopModel::Laptop laptop);
         void deleteLaptop(QString asset, QString gName);
         QStringList getBrands();
         QStringList getGNames();
         QStringList getCarts();
+        int getLaptopQuantity(int cartno);
     private slots:
     signals:
         void updateCart();
