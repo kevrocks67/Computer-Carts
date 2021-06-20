@@ -6,12 +6,12 @@ EditLaptop::EditLaptop(LaptopModel &lapModel):
         setWidgetProperties();
 
         fieldLayout->addWidget(assetField);
+        fieldLayout->addWidget(serialField);
         fieldLayout->addWidget(brandLabel);
         fieldLayout->addWidget(brandField);
         fieldLayout->addWidget(genericNLabel);
         fieldLayout->addWidget(genericNField);
         fieldLayout->addWidget(modelField);
-        fieldLayout->addWidget(serialField);
         fieldLayout->addWidget(osLabel);
         fieldLayout->addWidget(osSelect);
         fieldLayout->addWidget(cartNumSelectLabel);
