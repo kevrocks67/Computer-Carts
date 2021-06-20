@@ -8,9 +8,8 @@ EditCart::EditCart(QWidget * parent) :
     buttonLayout = new QHBoxLayout();
 
     //Initialize widgets
-    cNumLabel = new QLabel("Cart Number: 1", this);
+    cNumLabel = new QLabel(this);
     typeField = new QLineEdit(this);
-    quantField = new QLineEdit(this);
     cRoomField = new QLineEdit(this);
     cPeriodField = new QLineEdit(this);
     homeLocationField = new QLineEdit(this);
@@ -24,7 +23,6 @@ EditCart::EditCart(QWidget * parent) :
     //Set widget properties
 
     typeField->setPlaceholderText("Computer Type");
-    quantField->setPlaceholderText("Quantity");
     cRoomField->setPlaceholderText("Current Room");
     cPeriodField->setPlaceholderText("Current Period(s)");
     homeLocationField->setPlaceholderText("Home Location");
@@ -42,7 +40,6 @@ EditCart::EditCart(QWidget * parent) :
     //Add widget to layouts
     fieldLayout->addWidget(cNumLabel);
     fieldLayout->addWidget(typeField);
-    fieldLayout->addWidget(quantField);
     fieldLayout->addWidget(cRoomField);
     fieldLayout->addWidget(cPeriodField);
     fieldLayout->addWidget(homeLocationField);
@@ -72,7 +69,7 @@ void EditCart::editCartAction() {
 
     cartDetails.cartNo = cNumLabel->text().toInt();
     cartDetails.compType = typeField->text();
-    cartDetails.quantity = quantField->text().toInt();
+    cartDetails.quantity = 0;
     cartDetails.cRoom = cRoomField->text();
     cartDetails.cPeriod = cPeriodField->text();
     cartDetails.homeLoc = homeLocationField->text();
@@ -97,7 +94,6 @@ void EditCart::setCartNum(int c) {
      CartModel::Cart cartToEdit = cartModel->getCart(c);
 
      typeField->setText(cartToEdit.compType);
-     quantField->setText(QString::number(cartToEdit.quantity));
      cRoomField->setText(cartToEdit.cRoom);
      cPeriodField->setText(cartToEdit.cPeriod);
      homeLocationField->setText(cartToEdit.homeLoc);

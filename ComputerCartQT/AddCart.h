@@ -35,7 +35,6 @@ class AddCart : public QDialog {
         QPointer<QHBoxLayout> buttonLayout;
         QPointer<QLabel> cNumLabel;
         QPointer<QLineEdit> typeField;
-        QPointer<QLineEdit> quantField;
         QPointer<QLineEdit> cRoomField;
         QPointer<QLineEdit> cPeriodField;
         QPointer<QLineEdit> homeLocationField;
