@@ -1,6 +1,6 @@
 #pragma once
 
-#include "phantomstyle.h"
+#include <phantomstyle.h>
 #include <QString>
 
 enum ThemeType : int {
