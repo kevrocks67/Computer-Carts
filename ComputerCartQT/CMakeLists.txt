@@ -13,7 +13,12 @@ find_package(Qt5 COMPONENTS
     Gui REQUIRED
 )
 
-include_directories(phantom)
+FILE(
+    COPY res/refresh-button.png
+    DESTINATION "${CMAKE_BINARY_DIR}/res"
+)
+
+include_directories(phantomstyle/src/phantom)
 
 add_executable(ComputerCartQT
     AddCart.cpp

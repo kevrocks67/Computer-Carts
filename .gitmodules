@@ -1,0 +1,3 @@
+[submodule "ComputerCartQT/phantomstyle"]
+	path = ComputerCartQT/phantomstyle
+	url = https://github.com/randrew/phantomstyle.git
