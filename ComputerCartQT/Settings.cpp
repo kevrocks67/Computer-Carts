@@ -20,6 +20,7 @@ Settings::Settings(QWidget * parent) :
     userField = new QLineEdit(this);
     passLabel = new QLabel("Password", this);
     passField = new QLineEdit(this);
+    showPassCheck = new QCheckBox("Show Password", this);
 
     //Set widget properties
     themePicker->addItem("Carbon");
@@ -29,6 +30,8 @@ Settings::Settings(QWidget * parent) :
 
     driverPicker->addItem("SQLite");
     driverPicker->addItem("MySQL");
+
+    passField->setEchoMode(QLineEdit::Password);
 
     if(settings.value("db/db_type").toString() == "QMYSQL") {
         driverPicker->setCurrentText("MySQL");
@@ -49,6 +52,7 @@ Settings::Settings(QWidget * parent) :
     mainLayout->addWidget(userField);
     mainLayout->addWidget(passLabel);
     mainLayout->addWidget(passField);
+    mainLayout->addWidget(showPassCheck);
 
     buttonLayout->addWidget(cancelButton);
     buttonLayout->addWidget(saveButton);
@@ -71,6 +75,8 @@ Settings::Settings(QWidget * parent) :
             this, SIGNAL(themeChanged(int)));
     connect(driverPicker, SIGNAL(activated(int)),
             this, SLOT(checkDriver(int)));
+    connect(showPassCheck, SIGNAL(stateChanged(int)),
+            this, SLOT(showPassAction(int)));
 }
 
 void Settings::checkDriver(int choice) {
@@ -81,6 +87,7 @@ void Settings::checkDriver(int choice) {
         userField->setEnabled(false);
         passLabel->setEnabled(false);
         passField->setEnabled(false);
+        showPassCheck->setEnabled(false);
     } else {
         hostLabel->setEnabled(true);
         hostField->setEnabled(true);
@@ -88,13 +95,14 @@ void Settings::checkDriver(int choice) {
         userLabel->setEnabled(true);
         passField->setEnabled(true);
         passLabel->setEnabled(true);
+        showPassCheck->setEnabled(true);
     }
 }
 
 void Settings::changeFontDialog() {
     bool ok;
     QFont font = QFontDialog::getFont(&ok, this->font());
-    QFont orig_font = this->font();
+    //QFont orig_font = this->font();
     if (ok) {
         emit fontChanged(font);
     } else {
@@ -108,6 +116,17 @@ void Settings::setSettingsTheme(int theme) {
 
 QString Settings::getTheme() {
     return themePicker->currentText();
+}
+
+/* Check if the Show Password checkbox is checked and toggle
+ * between password and cleartext modes
+*/
+void Settings::showPassAction(int checked) {
+    if (checked) {
+        passField->setEchoMode(QLineEdit::Normal);
+    } else {
+        passField->setEchoMode(QLineEdit::Password);
+    }
 }
 
 void Settings::save() {

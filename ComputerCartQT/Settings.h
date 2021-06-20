@@ -13,6 +13,7 @@
 #include <QFont>
 #include <QFontDialog>
 #include <QComboBox>
+#include <QCheckBox>
 #include <QString>
 #include <QLineEdit>
 #include <QPointer>
@@ -31,6 +32,7 @@ class Settings : public QDialog {
         void save();
         void changeFontDialog();
         void checkDriver(int choice);
+        void showPassAction(int checked);
     signals:
         void fontChanged(const QFont &font);
         void themeChanged(int);
@@ -49,5 +51,6 @@ class Settings : public QDialog {
         QPointer<QLineEdit> userField;
         QPointer<QLabel> passLabel;
         QPointer<QLineEdit> passField;
+        QPointer<QCheckBox> showPassCheck;
 };
 #endif //SETTINGS_H
