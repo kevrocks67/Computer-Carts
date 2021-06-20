@@ -65,23 +65,32 @@ AddCart::AddCart(QWidget * parent) :
 void AddCart::addCartAction() {
     qDebug()<<"AddCart::addCartAction";
 
-    cartDetails.cartNo = cNumLabel->text().toInt();
-    cartDetails.compType = typeField->text();
-    cartDetails.quantity = quantField->text().toInt();
-    cartDetails.cRoom = cRoomField->text();
-    cartDetails.cPeriod = cPeriodField->text();
-    cartDetails.homeLoc = homeLocationField->text();
-    cartDetails.lockType = lockTypeSelect->currentText();
-    cartDetails.os = osSelect->currentText();
-    cartDetails.comments = commentsField->text();
+    CartModel::Cart cart;
+    cart.cartNo = cNumLabel->text().toInt();
+    cart.compType = typeField->text();
+    cart.quantity = quantField->text().toInt();
+    cart.cRoom = cRoomField->text();
+    cart.cPeriod = cPeriodField->text();
+    cart.homeLoc = homeLocationField->text();
+    cart.lockType = lockTypeSelect->currentText();
+    cart.os = osSelect->currentText();
+    cart.comments = commentsField->text();
 
-    cartModel->addCart(cartDetails);
+    cartModel->addCart(cart);
     QDialog::done(QDialog::Accepted);
 }
 
 void AddCart::setCartNum(int c) {
     //Set modal text
     cNumLabel->setText(QString::number(c));
+    typeField->clear();
+    quantField->clear();
+    cRoomField->clear();
+    cPeriodField->clear();
+    homeLocationField->clear();
+    lockTypeSelect->setCurrentIndex(0);
+    osSelect->setCurrentIndex(0);
+    commentsField->clear();
 }
 
 AddCart::~AddCart(){
