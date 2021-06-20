@@ -11,3 +11,6 @@ Makefile
 .clangd
 compile_commands.json
 tags
+*.plist
+build
+.cache
