@@ -50,7 +50,7 @@ MainWindow::MainWindow(CartModel& cModel, LaptopModel& lModel) :
 
         //Set MainWindow properties
         setCentralWidget(tabs);
-        setMinimumSize(1200, 800);
+        setMinimumSize(1200, 600);
         show();
         raise();
 
