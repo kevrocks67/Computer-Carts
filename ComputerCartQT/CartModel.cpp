@@ -115,7 +115,7 @@ CartModel::~CartModel(){
     cartdb.close();
 }
 
-void CartModel::addCart(Cart &cart) {
+void CartModel::addCart(CartModel::Cart &cart) {
     QSqlQuery query;
 
     query.prepare("INSERT INTO ComputerCarts "
@@ -142,7 +142,7 @@ void CartModel::addCart(Cart &cart) {
 
 }
 
-void CartModel::editCart(Cart &cart) {
+void CartModel::editCart(CartModel::Cart &cart) {
     QSqlQuery query;
 
     if(cart.cartNo) {

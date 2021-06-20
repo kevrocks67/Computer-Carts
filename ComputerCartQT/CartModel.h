@@ -33,11 +33,11 @@ class CartModel : public QSqlQueryModel {
             QString lockType;
             QString os;
             QString comments;
-        } cart;
+        };
 
     public slots:
-        void addCart(Cart &cart);
-        void editCart(Cart &cart);
+        void addCart(CartModel::Cart &cart);
+        void editCart(CartModel::Cart &cart);
         void deleteCart(int cartNo);
         CartModel::Cart getCart(int cartNo);
     private slots:
