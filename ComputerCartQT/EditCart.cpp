@@ -15,7 +15,7 @@ EditCart::EditCart(QWidget * parent) :
     homeLocationField = new QLineEdit(this);
     lockTypeSelect = new QComboBox(this);
     osSelect = new QComboBox(this);
-    commentsField = new QLineEdit(this);
+    commentsField = new QTextEdit(this);
 
     cancelButton = new QPushButton("Cancel", this);
     editButton = new QPushButton("Edit Cart", this);
@@ -75,7 +75,7 @@ void EditCart::editCartAction() {
     cartDetails.homeLoc = homeLocationField->text();
     cartDetails.lockType = lockTypeSelect->currentText();
     cartDetails.os = osSelect->currentText();
-    cartDetails.comments = commentsField->text();
+    cartDetails.comments = commentsField->toPlainText();
 
     cartModel->editCart(cartDetails);
     QDialog::done(QDialog::Accepted);

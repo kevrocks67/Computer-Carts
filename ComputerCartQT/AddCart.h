@@ -7,6 +7,7 @@
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QLineEdit>
+#include <QTextEdit>
 #include <QComboBox>
 #include <QPointer>
 #include <QPushButton>
@@ -40,7 +41,7 @@ class AddCart : public QDialog {
         QPointer<QLineEdit> homeLocationField;
         QPointer<QComboBox> lockTypeSelect;
         QPointer<QComboBox> osSelect;
-        QPointer<QLineEdit> commentsField;
+        QPointer<QTextEdit> commentsField;
         QPointer<QPushButton> cancelButton;
         QPointer<QPushButton> addButton;
 };

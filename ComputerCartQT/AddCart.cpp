@@ -15,7 +15,7 @@ AddCart::AddCart(QWidget * parent) :
     homeLocationField = new QLineEdit(this);
     lockTypeSelect = new QComboBox(this);
     osSelect = new QComboBox(this);
-    commentsField = new QLineEdit(this);
+    commentsField = new QTextEdit(this);
 
     cancelButton = new QPushButton("Cancel", this);
     addButton = new QPushButton("Add Cart", this);
@@ -71,7 +71,7 @@ void AddCart::addCartAction() {
     cart.homeLoc = homeLocationField->text();
     cart.lockType = lockTypeSelect->currentText();
     cart.os = osSelect->currentText();
-    cart.comments = commentsField->text();
+    cart.comments = commentsField->toPlainText();
 
     cartModel->addCart(cart);
     QDialog::done(QDialog::Accepted);
