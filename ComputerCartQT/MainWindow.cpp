@@ -95,6 +95,9 @@ MainWindow::MainWindow(CartModel& cModel, LaptopModel& lModel) :
                 SLOT(search(QString)));
         connect(columnSelect, SIGNAL(activated(int)),
                 SLOT(setSearchColumn(int)));
+
+        connect(&cModel, SIGNAL(errorMsg(QString)),
+                this, SLOT(displayError(QString)));
 }
 
 void MainWindow::createToolbar() {
@@ -288,6 +291,21 @@ void MainWindow::setSearchColumn(int index) {
     } else if (index == 5) {
         proxy->setFilterKeyColumn(9);
     }
+}
+
+void MainWindow::displayError(QString error) {
+    QString msg;
+    if (error.contains("UNIQUE")) {
+        msg = "Duplicate entry\n\n" + error;
+    } else {
+        msg = error;
+    }
+
+    QMessageBox::information(
+        this,
+        "SQL Error",
+        msg
+    );
 }
 
 MainWindow::~MainWindow(){

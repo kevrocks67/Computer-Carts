@@ -1,4 +1,5 @@
 #include "LaptopModel.h"
+#include <QMessageBox>
 #include <QModelIndex>
 #include <QSqlRecord>
 
@@ -151,10 +152,11 @@ void LaptopModel::addLaptop(LaptopModel::Laptop laptop) {
         if (updateCartQuery.exec()) {
             qDebug() << "Updated cart LastUpdate";
         } else {
-            qDebug()<<addQuery.lastError().text();
+            qDebug() << updateCartQuery.lastError().text();
         }
     } else {
-        qDebug()<<addQuery.lastError().text();
+        qDebug() << addQuery.lastError().text();
+        emit errorMsg(addQuery.lastError().text());
     }
     emit updateCart();
 }
@@ -204,7 +206,8 @@ void LaptopModel::editLaptop(LaptopModel::Laptop laptop) {
             updateOldCartQuery.exec();
         }
     } else {
-        qDebug()<<editQuery.lastError().text();
+        qDebug() << editQuery.lastError().text();
+        emit errorMsg(editQuery.lastError().text());
     }
     emit updateCart();
 }
@@ -226,18 +229,21 @@ void LaptopModel::deleteLaptop(QString asset, QString gName) {
     deleteQuery.prepare("DELETE FROM Laptops WHERE AssetID=? AND GenericName=?");
     deleteQuery.bindValue(0, asset);
     deleteQuery.bindValue(1, gName);
-    deleteQuery.exec();
+    if (deleteQuery.exec()){
+        //Update LastUpdate time for parent cart
+        int laptopQuant = getLaptopQuantity(cartNum);
 
-    //Update LastUpdate time for parent cart
-    int laptopQuant = getLaptopQuantity(cartNum);
+        updateCartQuery.prepare("UPDATE ComputerCarts SET Quantity=?,LastUpdate=? WHERE CartNumber=?");
+        updateCartQuery.bindValue(0, laptopQuant);
+        updateCartQuery.bindValue(1, QDateTime::currentDateTime());
+        updateCartQuery.bindValue(2, cartNum);
+        updateCartQuery.exec();
 
-    updateCartQuery.prepare("UPDATE ComputerCarts SET Quantity=?,LastUpdate=? WHERE CartNumber=?");
-    updateCartQuery.bindValue(0, laptopQuant);
-    updateCartQuery.bindValue(1, QDateTime::currentDateTime());
-    updateCartQuery.bindValue(2, cartNum);
-    updateCartQuery.exec();
+        qDebug()<<"Deleted laptop asset: "+asset;
+    } else {
+        emit errorMsg(deleteQuery.lastError().text());
+    }
 
-    qDebug()<<"Deleted laptop asset: "+asset;
     emit updateCart();
 }
 

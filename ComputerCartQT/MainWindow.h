@@ -52,6 +52,7 @@ class MainWindow : public QMainWindow {
         void changeFont(const QFont &font);
         void loadSettings();
         void saveSettings();
+        void displayError(QString);
     private:
         //Class declarations
         CartModel& cartModel;

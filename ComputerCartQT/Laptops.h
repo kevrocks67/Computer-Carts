@@ -30,6 +30,7 @@ class Laptops : public QWidget {
     public slots:
         void setCartNum(int cartno);
         void setCartNum(QString label);
+        void displayError(QString);
     private slots:
         void updateTable();
         void updateTableCart();

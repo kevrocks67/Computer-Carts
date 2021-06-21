@@ -42,6 +42,7 @@ class CartModel : public QSqlQueryModel {
         CartModel::Cart getCart(int cartNo);
     private slots:
     signals:
+        void errorMsg(QString);
     private:
         QSqlDatabase cartdb;
 };

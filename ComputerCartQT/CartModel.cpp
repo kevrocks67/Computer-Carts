@@ -138,6 +138,7 @@ void CartModel::addCart(CartModel::Cart &cart) {
     }
     else {
         qDebug()<<query.lastError().text();
+        emit errorMsg(query.lastError().text());
     }
 
 }
@@ -174,6 +175,7 @@ void CartModel::editCart(CartModel::Cart &cart) {
     }
     else {
         qDebug()<<query.lastError().text();
+        emit errorMsg(query.lastError().text());
     }
 }
 
@@ -199,6 +201,7 @@ CartModel::Cart CartModel::getCart(int cartNo) {
     }
     else {
         qDebug()<<query.lastError().text();
+        emit errorMsg(query.lastError().text());
     }
     return cartDetails;
 }
@@ -216,5 +219,6 @@ void CartModel::deleteCart(int cartNo) {
     }
     else {
         qDebug()<<query.lastError().text();
+        emit errorMsg(query.lastError().text());
     }
 }

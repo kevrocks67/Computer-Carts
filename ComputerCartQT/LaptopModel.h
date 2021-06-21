@@ -47,6 +47,7 @@ class LaptopModel : public QSqlQueryModel {
     private slots:
     signals:
         void updateCart();
+        void errorMsg(QString);
     private:
         QSqlDatabase cartdb;
 };

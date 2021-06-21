@@ -1,5 +1,6 @@
 #include "Laptops.h"
 #include <QDebug>
+#include <QMessageBox>
 
 Laptops::Laptops(LaptopModel &laptopModel, LaptopView &laptopView, bool isCart) :
     model(laptopModel), view(laptopView) {
@@ -82,6 +83,9 @@ Laptops::Laptops(LaptopModel &laptopModel, LaptopView &laptopView, bool isCart) 
                 this, SLOT(search(QString)));
         connect(columnSelect, SIGNAL(activated(int)),
                 this, SLOT(setSearchColumn(int)));
+
+        connect(&model, SIGNAL(errorMsg(QString)),
+                this, SLOT(displayError(QString)));
 
         setLayout(mainLayout);
         updateTable();
@@ -220,6 +224,22 @@ void Laptops::setSearchColumn(int index) {
         proxy->setFilterKeyColumn(5);
     }
 }
+
+void Laptops::displayError(QString error) {
+    QString msg;
+    if (error.contains("UNIQUE")) {
+        msg = "Duplicate entry\n\n" + error;
+    } else {
+        msg = error;
+    }
+
+    QMessageBox::information(
+        this,
+        "SQL Error",
+        msg
+    );
+}
+
 
 Laptops::~Laptops(){
     delete mainLayout;
