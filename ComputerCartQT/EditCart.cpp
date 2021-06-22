@@ -69,7 +69,6 @@ void EditCart::editCartAction() {
 
     cartDetails.cartNo = cNumLabel->text().toInt();
     cartDetails.compType = typeField->text();
-    cartDetails.quantity = 0;
     cartDetails.cRoom = cRoomField->text();
     cartDetails.cPeriod = cPeriodField->text();
     cartDetails.homeLoc = homeLocationField->text();
@@ -93,6 +92,7 @@ void EditCart::setCartNum(int c) {
 
      CartModel::Cart cartToEdit = cartModel->getCart(c);
 
+     cartDetails.quantity = cartToEdit.quantity;
      typeField->setText(cartToEdit.compType);
      cRoomField->setText(cartToEdit.cRoom);
      cPeriodField->setText(cartToEdit.cPeriod);
