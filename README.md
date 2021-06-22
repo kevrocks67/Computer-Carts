@@ -7,36 +7,37 @@ Columbia Secondary School.
 ## Build/Install Instructions (Linux)
 1. Install Qt build dependencies
 2. Change into the ComputerCartQT directory
-3. Run `qmake` to create Makefile for your computers architecture
+3. Make a build folder and run `cmake ..` inside of it
 4. Run `make -j $(nproc)`
 5. ./ComputerCartQT
 
 ### Arch
 ```bash
 sudo pacman -S qt5-base qt5-tools
-git clone https://github.com/kevrocks67/Computer-Carts.git
+git clone --recurse-submodules https://github.com/kevrocks67/Computer-Carts.git
 cd Computer-Carts/ComputerCartQT
-qmake && make -j$(nproc)
+mkdir build && cd build
+cmake .. && make -j$(nproc)
 ./ComputerCartQT
 ```
 
 ### Ubuntu
 ```bash
 sudo apt install git qt5-default qt5-qmake libqt5sql5-mysql g++ make
-git clone https://github.com/kevrocks67/Computer-Carts.git
+git clone --recurse-submodules https://github.com/kevrocks67/Computer-Carts.git
 cd Computer-Carts/ComputerCartQT
-qmake && make -j$(nproc)
-./ComputerCartQT
+mkdir build && cd build
+cmake .. && make -j$(nproc)
 ```
 
 ### CentOS/Fedora
 ```bash
 sudo yum install qt5-qtbase qt5-qtbase-common qt5-qtbase-devel qt5-qtbase-gui \
 qt5-qtbase-mysql git make gcc-c++
-git clone https://github.com/kevrocks67/Computer-Carts.git
+git clone --recurse-submodules https://github.com/kevrocks67/Computer-Carts.git
 cd Computer-Carts/ComputerCartQT
-qmake-qt5 && make -j$(nproc)
-./ComputerCartQT
+mkdir build && cd build
+cmake .. && make -j$(nproc)
 ```
 
 ## Setting up to use SQL (Linux)
